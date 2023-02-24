@@ -1,4 +1,5 @@
 const fs = require('fs');
+const cookieParser = require('cookie-parser');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -15,8 +16,14 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+const nlpRouter = require('./public/assets/js/nlp');
 
 app.use(express.static('public/assets'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use('/api/nlp', nlpRouter);
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
@@ -28,3 +35,5 @@ app.post('/record', upload.single('audio'), (req, res) => res.json({ success: tr
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
+
+module.exports = app;

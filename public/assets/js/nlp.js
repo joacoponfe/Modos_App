@@ -8,8 +8,9 @@ const router = express.Router();
 
 router.post('/s-analyzer', function(req, res, next) {
     const { review } = req.body;
+    console.log(review);
     const lexedReview = aposToLexForm(review); // convert contractions to standard lexicon (I'm -> I am, you're -> you are)
-    const casedReview = lexedReview.toLowerCase(); // converto lowercase
+    const casedReview = lexedReview.toLowerCase(); // convert to lowercase
     const alphaOnlyReview = casedReview.replace(/[^a-zA-Z\s]+/g, '');  // remove numerical tokens and/or characters that are NOT a-z or A-Z)
     const { WordTokenizer } = natural;
     const tokenizer = new WordTokenizer();
