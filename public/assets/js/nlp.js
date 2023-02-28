@@ -2,13 +2,11 @@ const express = require('express');
 const natural = require('natural');
 const aposToLexForm = require('apos-to-lex-form');
 const SW = require('stopword');
-
 const router = express.Router();
 
-
 router.post('/s-analyzer', function(req, res, next) {
+    console.log('ffff');
     const { review } = req.body;
-    console.log(review);
     const lexedReview = aposToLexForm(review); // convert contractions to standard lexicon (I'm -> I am, you're -> you are)
     const casedReview = lexedReview.toLowerCase(); // convert to lowercase
     const alphaOnlyReview = casedReview.replace(/[^a-zA-Z\s]+/g, '');  // remove numerical tokens and/or characters that are NOT a-z or A-Z)
@@ -25,5 +23,4 @@ router.post('/s-analyzer', function(req, res, next) {
 
     res.status(200).json({ analysis });
 });
-
 module.exports = router;
