@@ -24,7 +24,7 @@ const submitReview = (e) => {
     const prompt = document.getElementById('prompt');
     const outline = document.querySelector(':focus');
 
-    fetch('/text_input', options)
+    fetch('api/nlp/s-analyzer', options)
       .then(res => res.json()) // Convert to JSON
       .then(({ analysis }) => {
         if (analysis < 0) {
