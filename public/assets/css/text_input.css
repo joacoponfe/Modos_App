@@ -14,3 +14,12 @@ input {
     box-sizing: border-box;
     border-radius: 4px;
 }
+
+textarea {
+    padding: 10px 10px;
+    border: 1px solid #888;
+    background-color: transparent;
+    margin: 28px 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
