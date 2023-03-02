@@ -1,7 +1,7 @@
 const myTags = [
     'alegría', 'esperanza', 'contento', 'paz',
     'bueno', 'soleado', 'armonioso', 'dulce',
-    'aire', 'fresco', 'fresco', 'alegre',
+    'aire', 'fresco', 'fresco', 'alegre', 'shoe', 'paz', 'aire', 'paz', 'paz'
 ];
 
 var tagCloud = TagCloud('.content', myTags,{

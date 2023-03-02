@@ -11,12 +11,9 @@ const sendButton = document.getElementById("sendButton");
 const submitReview = (e) => {
     e.preventDefault();
     const text = document.getElementById('text_input').value;
-    const formData = new FormData();
-    formData.append('text', text);
     const options = {
         method: 'POST',
         body: JSON.stringify({ text }),
-        //body: formData,
         headers: new Headers({ 'Content-type': 'application/json' })
         //headers: {"Content-type": "application/json;charset=UTF-8"}
     }

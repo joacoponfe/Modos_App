@@ -40,6 +40,7 @@ app.get('/', (req, res) => {
 app.use(express.static('uploads'));
 
 app.post('/record', upload.single('audio'), (req, res) => res.json({ success: true }));
+
 //app.post('/text_input', function(req, res, next) {
 //  const review  = req.body;
 //  console.log(review['text']);
