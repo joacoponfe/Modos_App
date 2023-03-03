@@ -20,9 +20,11 @@ router.post('/s-analyzer', function(req, res, next) {
     translate(originalText, {from: 'es', to: 'en'})
     .then(function(result) {
         console.log('Translated: ', result.text);
+        //console.log('Translated from auto corrected: ', res.from.text.autoCorrected);
         console.log('Suggestions: ', result.from.text.value);
         const corrected = result.from.text.value.replace(/[\[\]]+/g,'');
         console.log('Corrected: ', corrected);
+        //console.log('Did you mean: ', res.from.text.didYouMean);
         // If Google Translate provides spell-corrected text...
         if (corrected !== "") {
             var doc = lorca(corrected);
@@ -42,6 +44,10 @@ router.post('/s-analyzer', function(req, res, next) {
         console.log('Tokenized: ', tokenizedText);
         const filteredText = removeStopwords(tokenizedText, spa);  // Remove stopwords (in spanish)
         console.log('Filtered stopwords: ', filteredText);
+
+        // Save filtered Text to JSON file.
+        
+
         analysis = analyzer.getSentiment(filteredText);            // Get sentiment analysis
         console.log('Sentiment analysis result: ', analysis);
         //analysis = -1;
@@ -69,40 +75,6 @@ router.post('/s-analyzer', function(req, res, next) {
     })
     .then(() => res.status(200).json({ analysis }))
  
- 
-    // .then((res) => {
-    //     console.log('Translated: ', res.text);
-    //     console.log('Suggestions: ', res.from.text.value);
-    // })
-    // .then((newres) => {
-    //     console.log('Translated: ', newres);
-    // });
-
-    // translate(review['text'], {from: 'es', to: 'en'}).then(res => {
-    //     console.log('Translated: ', res.text);
-    //     //console.log('Translated from auto corrected: ', res.from.text.autoCorrected);
-    //     console.log('Suggestions: ', res.from.text.value);
-    //     const corrected = res.from.text.value.replace(/[\[\]]+/g,'');
-    //     console.log('Corrected: ', corrected);
-    //     //console.log('Did you mean: ', res.from.text.didYouMean);
-    //     // Procesamiento en español
-    //     // Si existe la corrección, utilizar.
-    //     if (corrected !== "") {
-    //         var words = corrected.split(" ");  // Use spell corrected text.
-    //         var lowerCaseText = corrected.toLowerCase();
-    //     }
-    //     else {
-    //         var words = review['text'].split(" "); // Use original text (without spell correction).
-    //         var lowerCaseText = review['text'].toLowerCase();
-    //     }
-    //     console.log('Words: ', words);
-    //     console.log('Lowercase: ', lowerCaseText);
-    //     const alphaOnlyText = lowerCaseText.replace(/[^a-zA-Z\sáÁéÉíÍóÓúÚñÑ]+/g, '');  // remove numerical tokens and/or characters that are NOT a-z or A-Z)
-    //     console.log('Alpha only: ', alphaOnlyText);
-    //     const tokenizedText = tokenizer.tokenize(alphaOnlyText);
-    //     console.log('Tokenized: ', tokenizedText);
-    //     const filteredText = removeStopwords(tokenizedText, spa);
-    //     console.log('Filtered stopwords: ', filteredText);
     //     var analysis = analyzer.getSentiment(filteredText);
     //     console.log('Sentiment analysis result: ', analysis);
     // }).catch(err => {
@@ -128,22 +100,7 @@ router.post('/s-analyzer', function(req, res, next) {
     //    }  
     //}
     //console.log('Spell corrected: ', spell_corrected);
-    // const lexedReview = aposToLexForm(review['text']); // convert contractions to standard lexicon (I'm -> I am, you're -> you are)
-    // console.log('Lexed: ', lexedReview);
-    // const casedReview = lexedReview.toLowerCase(); // convert to lowercase
-    // console.log('Lowercase: ', casedReview);
-    // const alphaOnlyReview = casedReview.replace(/[^a-zA-Z\sáÁéÉíÍóÓúÚñÑ]+/g, '');  // remove numerical tokens and/or characters that are NOT a-z or A-Z)
-    // console.log('Alpha only: ', alphaOnlyReview);
-    // //const { WordTokenizer } = natural;
-    // const { AggressiveTokenizerEs } = natural;
-    // //const tokenizer = new WordTokenizer();
-    // const tokenizer = new AggressiveTokenizerEs();
-    // const tokenizedReview = tokenizer.tokenize(alphaOnlyReview);
-    // console.log('Tokenized: ', tokenizedReview);
-    // // FALTA SPELL CHECK EN ESPAÑOL
-    // //console.log(spa); //print stopwords in spanish
-    // const filteredReview = removeStopwords(tokenizedReview, spa);
-    // console.log('Filtered stopwords: ', filteredReview);
+    
     // // STEMMING? (si usamos el paquete SentimentAnalyzer, este lo hace automáticamente)
     //const { SentimentAnalyzer, PorterStemmer } = natural;
     //const analyzer = new SentimentAnalyzer('Spanish', PorterStemmer, 'afinn');
@@ -151,4 +108,5 @@ router.post('/s-analyzer', function(req, res, next) {
     // console.log('Sentiment analysis result: ', analysis)
     // res.status(200).json({ analysis });
 });
+
 module.exports = router;

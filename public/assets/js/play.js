@@ -3,6 +3,7 @@ const playButton = document.getElementById('playButton');
 const playButtonImage = playButton.firstElementChild;
 //const recordedAudioContainer = document.getElementById('recordedAudioContainer');
 
+
 const sound    = document.createElement('audio');
 sound.id       = 'audio-player';
 //sound.controls = 'controls';

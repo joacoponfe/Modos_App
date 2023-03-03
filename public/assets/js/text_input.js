@@ -41,9 +41,9 @@ const submitReview = (e) => {
         }
       })
       .catch(err => {
-        //emojiSection.innerHTML = 'Ocurrió un error.'
-        emojiSection.innerHTML = text_input.value
-        //console.log(err);
+        emojiSection.innerHTML = 'Ocurrió un error.'
+        //emojiSection.innerHTML = text_input.value
+        console.log(err);
       })
 }
 

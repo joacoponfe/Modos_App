@@ -1,7 +1,7 @@
 const myTags = [
     'alegría', 'esperanza', 'contento', 'paz',
     'bueno', 'soleado', 'armonioso', 'dulce',
-    'aire', 'fresco', 'fresco', 'alegre', 'shoe', 'paz', 'aire', 'paz', 'paz'
+    'aire', 'aire', 'alegría', 'paz', 'aire', 'paz', 'paz'
 ];
 
 var tagCloud = TagCloud('.content', myTags,{
@@ -25,6 +25,6 @@ var tagCloud = TagCloud('.content', myTags,{
 });
 
 //To change the color of text randomly
-var colors = ['#34A853', '#FBBC05', '#4285F4', '#7FBC00', 'FFBA01', '01A6F0'];
+var colors = ['#34A853', '#FBBC05', '#4285F4', '#7FBC00', 'FFBA01', '01A6F0', '#F00105', '#AB0C76'];
 var random_color = colors[Math.floor(Math.random() * colors.length)];
 document.querySelector('.content').style.color = random_color;
