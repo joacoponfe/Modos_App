@@ -15,3 +15,6 @@ def analyze_text(text):
     hate_speech_values = hate_speech_output.probas
 
     return sentiment_values, emotion_values, hate_speech_values
+
+s, e, h = analyze_text("hoy me desperté sintiéndome genial")
+print(s, e, h)

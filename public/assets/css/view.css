@@ -15,10 +15,10 @@ body {
   }
 
 .caja-padre{
-  width: 40%;
+  width: 30%;
   min-width: 300px;
   position: relative;
-  transform: translate(-50%,-100%);
+  transform: translate(-50%,-85%);
   left: 70%;
   top: 20%;
 }
@@ -55,7 +55,7 @@ h2{
 
 .menu{
   position: relative;
-  font-size: 0.35vmax;
+  font-size: 0.25vmax;
   width: 100em;
   border: 1px solid darkslategrey;
   border-radius: 20px;
@@ -66,10 +66,10 @@ h2{
   position: relative;
   box-shadow: inset -100em 0 0 0 #f7f7f7;
   width: 100%;
-  height: 10px;
+  height: 20px;
   border-radius: 20px;
   background: linear-gradient(450deg, cyan, yellow, red);
-  font-size: 0.35vmax;
+  font-size: 0.25vmax;
 }
 
 #alegria-menu{
@@ -153,9 +153,9 @@ h2{
   display: flex;
   justify-content: center;
   position: relative;
-  font-size: 0.35vmax;
+  font-size: 0.25vmax;
   width: 100em;
-  height: 20px;
+  height: 30px;
   border: 1px solid darkslategrey;
   border-radius: 20px;
   background-color: None;
@@ -164,7 +164,7 @@ h2{
 
 .positive{
   width: 0%;
-  background-color: lightblue;
+  background-color: #c9c9c9;
   float: left;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -184,7 +184,7 @@ h2{
 
 .neutral{
   width: 0%;
-  background-color: lightblue;
+  background-color: #c9c9c9;
   float: left;
   font-size: 3.2em;
   line-height: 1.1em;
@@ -202,7 +202,7 @@ h2{
 
 .negative{
   width: 0%;
-  background-color:lightblue;
+  background-color: #c9c9c9;
   float: left;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -214,26 +214,5 @@ h2{
 @keyframes negative-bar {
   100%{
     width: 25%;
-  }
-}
-
-/*.bar-wrap div{
-  position: relative;
-  /*box-shadow: inset -100em 0 0 0 #f7f7f7;*/
-  /*width: 100%;
-  height: 15px;
-  border-radius: 20px;
-  background: darkslateblue;
-  font-size: 0.35vmax;
-}*/
-
-/*#valence-menu{
-  animation: valence-bar 5s forwards;
-}
-
-@keyframes valence-bar {
-  100%{
-    /*box-shadow: inset -95em 0 0 0 #f7f7f7; /* acá va el porcentaje */
-    /*width: 30%;
   }
 }
