@@ -1,8 +1,17 @@
 const myTags = [
     'alegría', 'esperanza', 'contento', 'paz',
     'bueno', 'soleado', 'armonioso', 'dulce',
-    'aire', 'aire', 'alegría', 'paz', 'aire', 'paz', 'paz'
+    'aire', 'aire', 'alegría', 'paz',
+    'aire', 'paz', 'paz', 'yendo',
+    'árboles', 'vida', 'cajas', 'violeta',
+    'castillo', 'monitores', 'papeles', 'impresora',
+    'auriculares', 'billetera', 'magnífico', 'teclas',
+    'piano', 'treinta', 'treinta', 'dieciocho',
+    'televisor', 'computadora', 'escritorio', 'escritorio',
+    'mate', 'silla', 'silla', 'billetera', 'parlante', 'parlante', 'dios', 'guerra',
+    'guerra', 'silla', 'termo'
 ];
+
 
 var tagCloud = TagCloud('.content', myTags,{
 

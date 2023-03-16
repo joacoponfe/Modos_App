@@ -78,7 +78,7 @@ h2{
 
 @keyframes alegria-bar {
   100%{
-    box-shadow: inset -10em 0 0 0 #f7f7f7; /* acá va el porcentaje */
+    box-shadow: inset -20em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -168,7 +168,7 @@ h2{
   float: left;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  font-size: 3.2em;
+  font-size: 4em;
   line-height: 1.1em;
   border-right-style: solid;
   border-right-width: 1px;
@@ -186,7 +186,7 @@ h2{
   width: 0%;
   background-color: #c9c9c9;
   float: left;
-  font-size: 3.2em;
+  font-size: 4em;
   line-height: 1.1em;
   border-right-style: solid;
   border-right-width: 1px;
@@ -206,7 +206,7 @@ h2{
   float: left;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  font-size: 3.2em;
+  font-size: 4em;
   line-height: 1.1em;
   animation: negative-bar 5s forwards;
 }

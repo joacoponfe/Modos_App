@@ -98,6 +98,7 @@
     return target;
   }
 
+
   /**
    * TagCloud.js (c) 2016-2019 @ Cong Min
    * MIT License - https://github.com/mcc108/TagCloud
@@ -119,7 +120,7 @@
       
       // Create an empty object to use as the counter
       var wordCounts = {};
-      
+
       // Loop through each word in the texts array
       for (var i = 0; i < self.texts.length; i++) {
         var word = self.texts[i];
@@ -136,6 +137,28 @@
 
       console.log('self.texts: ', self.texts);
       console.log('wordCounts: ', wordCounts);
+
+      // Sort words by count
+      var sortedWordCounts = Object.keys(wordCounts).map(function(key) {
+        return [key, wordCounts[key]];
+      });
+
+      sortedWordCounts.sort(function(first, second) {
+        return second[1] - first[1];
+      })
+      
+      console.log('sortedWordCounts: ', sortedWordCounts);
+
+      // Create a new array with only the first "maxWords" items
+      const maxWords = 30;
+      var slicedWordCounts = sortedWordCounts.slice(0, maxWords);
+      console.log('slicedWordCounts: ', slicedWordCounts);
+
+      // Get list of words that will appear on wordcloud
+      self.wordArray = slicedWordCounts.map(function(x) {
+        return x[0];
+      });
+      console.log('self.wordArray: ', self.wordArray);
 
       // Remove duplicate words
       self.uniqueWords = [...new Set(self.texts)];
@@ -222,7 +245,8 @@
 
         self.items = [];
         //self.texts.forEach(function (text, index) {
-        self.uniqueWords.forEach(function(text, index) {
+        //self.uniqueWords.forEach(function(text, index) {
+        self.wordArray.forEach(function(text, index) {
           console.log(text, index, self.fontSizes[text]);
           var item = self._createTextItem(text, index);
 
@@ -276,7 +300,8 @@
         var random = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
         var self = this;
         //var textsLength = self.texts.length; // if random `true`, It means that a random appropriate place is generated, and the position will be independent of `index`
-        var textsLength = self.uniqueWords.length;
+        //var textsLength = self.uniqueWords.length;
+        var textsLength = self.wordArray.length;
 
         if (random) index = Math.floor(Math.random() * (textsLength + 1));
         var phi = Math.acos(-1 + (2 * index + 1) / textsLength);
@@ -442,7 +467,8 @@
         }); // remove redundant self.items
 
         //var textsLength = self.texts.length;
-        var textsLength = self.uniqueWords.length;
+        //var textsLength = self.uniqueWords.length;
+        var textsLength = self.wordArray.length;
         var itemsLength = self.items.length;
 
         if (textsLength < itemsLength) {
