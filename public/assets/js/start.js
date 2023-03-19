@@ -41,10 +41,10 @@ function generateID() {
 
     // const name_input = document.getElementById("name_input").value;
     // const ID = `ID_IONIAN_6_${name_input}`;
-    alert(`¡Hola ${userData.name}, empecemos!`);
-    window.location.href = "play.html";
+    //alert(`¡Hola ${userData.name}, empecemos!`);
+    //window.location.href = "form.html";
 }
 
-sendButton.addEventListener('click', generateID);
+//sendButton.addEventListener('click', generateID);
 
 module.exports = { userData };
