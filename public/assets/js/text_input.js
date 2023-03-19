@@ -8,6 +8,19 @@ const sendButton = document.getElementById("sendButton");
 //   window.location.href = "start.html";
 //}
 
+var timeleft = 180; // 3 minutos
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("countdown").innerHTML = "Tiempo finalizado.";
+  } else {
+    if(timeleft <= 60){
+    document.getElementById("countdown").innerHTML = "Quedan " + timeleft + " segundos para escribir";
+    }
+  }
+  timeleft -= 1;
+}, 1000);
+
 const submitReview = (e) => {
     e.preventDefault();
     const text = document.getElementById('text_input').value;

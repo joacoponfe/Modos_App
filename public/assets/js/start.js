@@ -45,6 +45,6 @@ function generateID() {
     window.location.href = "play.html";
 }
 
-//sendButton.addEventListener('click', generateID);
+sendButton.addEventListener('click', generateID);
 
 module.exports = { userData };
