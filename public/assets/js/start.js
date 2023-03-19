@@ -1,9 +1,11 @@
-const name_input = document.getElementById("name_input").value;
+const initials_input = document.getElementById("initials_input").value;
+const DNI_input = document.getElementById("DNI_input").value;
 const sendButton = document.getElementById("sendButton");
 
 function generateID() {
     console.log(userData);
-    userData.name = document.getElementById("name_input").value;
+    userData.initials = document.getElementById("initials_input").value;
+    userData.DNI = document.getElementById("DNI_input").value;
     userData.timestamp = Date.now();
     userData.mode = "IONIAN";
     userData.version = "1";
@@ -43,6 +45,6 @@ function generateID() {
     window.location.href = "play.html";
 }
 
-sendButton.addEventListener('click', generateID);
+//sendButton.addEventListener('click', generateID);
 
 module.exports = { userData };

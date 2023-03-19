@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link href="/css/form.css" rel="stylesheet" />
+</head>
+<body class="pt-5">
+  <h3 class="text-center">Por favor completá el siguiente cuestionario</h3>
+  <div class="form">
+    <form action="consigna.html">
+        <label for="age">Edad:</label>
+        <input type="number" id="age" placeholder = "18" style="width: 100px" minlength="1" maxlength="3" pattern=".{1,3}" title="Ingresar una edad válida" required/><br>
+        <p align="left">¿Cuál es tu género?</p>
+        <div class="likert">
+            <label><input name="sex" type="radio" value="F" required/><span>Femenino</span></label>
+            <label><input name="sex" type="radio" value="M" required/><span>Masculino</span></label>
+            <label><input name="sex" type="radio" value="O" required/><span>Otro</span></label>
+            <label><input name="sex" type="radio" value="X" required/><span>Prefiero no decir</span></label>
+        </div><br>
+        <p align="left">¿Cuál es el mayor nivel educativo que completaste?</p>
+        <div class="likert">
+            <label><input name="education" type="radio" value="P"/><span>Primario</span></label>
+            <label><input name="education" type="radio" value="S"/><span>Secundario</span></label>
+            <label><input name="education" type="radio" value="T"/><span>Terciario</span></label>
+            <label><input name="education" type="radio" value="U"/><span>Universitario</span></label>
+            <label><input name="education" type="radio" value="PG"/><span>Posgrado</span></label>
+        </div><br>
+        <p align="left">¿Cuántos años de educación formal tenés?</p>
+        <p align="left" style="font-size:14px">Contá a partir de la escuela primaria. Por ejemplo, si completaste 7 años de primaria y 2 de secundaria, poné 9.</p>
+        <p align="left" style="font-size:14px">Si hiciste 7 de primaria, 5 de secundaria, 5 de universidad y 4 de doctorado, poné 21.</p>
+        <input type="number" id="education_num" placeholder = "9" style="width: 100px" minlength="1" maxlength="3" pattern=".{1,3}" title="Ingresar años de educación" required/><br>
+        <p align="left">¿Qué nivel de formación musical tenés?</p>
+        <div class="likert">
+            <label><input name="musical-knowledge" type="radio" value="1" required/><span>Muy baja</span></label>
+            <label><input name="musical-knowledge" type="radio" value="2" required/><span>Baja</span></label>
+            <label><input name="musical-knowledge" type="radio" value="3" required/><span>Normal</span></label>
+            <label><input name="musical-knowledge" type="radio" value="4" required/><span>Alta</span></label>
+            <label><input name="musical-knowledge" type="radio" value="5" required/><span>Muy alta</span></label>
+        </div><br>
+        <p align="left">¿Estás familiarizado/a con el concepto de modos en música?</p>
+        <div class="likert">
+            <label><input name="knows-modes" type="radio" value="no" required/><span>No</span></label>
+            <label><input name="knows-modes" type="radio" value="yes" required/><span>Sí</span></label>
+        </div><br>
+        <input type="submit" id="sendButton" value="Enviar">
+    </form>
+  </div>
+</body>
+</html>
