@@ -13,6 +13,8 @@ var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
     document.getElementById("countdown").innerHTML = "Tiempo finalizado.";
+    // tiempito
+    window.location.href = "finalize1.html";
   } else {
     if(timeleft <= 60){
     document.getElementById("countdown").innerHTML = "Quedan " + timeleft + " segundos para escribir";
