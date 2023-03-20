@@ -62,8 +62,20 @@ const submitReview = (e) => {
       })
 }
 
-function saveText(){
+const saveText = (e) => {
+  e.preventDefault();
+  
+  const text = document.getElementById('text_input').value;
+  const options = {
+      method: 'POST',
+      body: JSON.stringify({ text }),
+      headers: new Headers({ 'Content-type': 'application/json' })
+      //headers: {"Content-type": "application/json;charset=UTF-8"}
+  
+  }
+  console.log(options);
   window.location.href = "finalize1.html"
+  
 }
 
 //document.getElementById('text_input').addEventListener('keyup', submitReview);

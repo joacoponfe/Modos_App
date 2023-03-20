@@ -2,26 +2,27 @@ const initials_input = document.getElementById("initials_input").value;
 const DNI_input = document.getElementById("DNI_input").value;
 const sendButton = document.getElementById("sendButton");
 
-function generateID() {
-    console.log(userData);
-    userData.initials = document.getElementById("initials_input").value;
-    userData.DNI = document.getElementById("DNI_input").value;
-    userData.timestamp = Date.now();
-    userData.mode = "IONIAN";
-    userData.version = "1";
-    console.log(userData);
+const generateID =(e) => {
+    e.preventDefault();
+    // userData.initials = document.getElementById("initials_input").value;
+    // userData.DNI = document.getElementById("DNI_input").value;
+    // userData.timestamp = Date.now();
+    // userData.mode = "IONIAN";
+    // userData.version = "1";
+    // console.log(userData);
     
     // Create a JavaScript object with the user data
-    //const userData = {
-    //    name: document.getElementById("name_input").value,
-    //    timestamp: Date.now(),
-    //    mode: "IONIAN",
-    //    version: "1"
-    //};
+    const userData = {
+        initials: document.getElementById("initials_input").value,
+        DNI: document.getElementById("DNI_input").value,
+        timestamp: Date.now(),
+        mode: "IONIAN",
+        version: "1"
+    };
     
     // Convert the object to JSON format
-    //const jsonData = JSON.stringify(userData);
-    //console.log(jsonData);
+    const jsonData = JSON.stringify(userData);
+    console.log(jsonData);
 
     // // Send a POST request with the JSON data as the body
     // fetch('/start', {
@@ -42,9 +43,9 @@ function generateID() {
     // const name_input = document.getElementById("name_input").value;
     // const ID = `ID_IONIAN_6_${name_input}`;
     //alert(`¡Hola ${userData.name}, empecemos!`);
-    //window.location.href = "form.html";
+    window.location.href = "form.html";
 }
 
-//sendButton.addEventListener('click', generateID);
+sendButton.addEventListener('click', generateID);
 
-module.exports = { userData };
+// module.exports = { userData };
