@@ -1,6 +1,6 @@
 const sound = document.createElement('audio');
 sound.id       = 'audio-player';
-sound.src      = 'music/D1.mp3';
+sound.src      = 'music/F2.mp3';
 sound.type     = 'audio/mpeg';
 
 var timeleft = 10;
@@ -19,5 +19,5 @@ var downloadTimer = setInterval(function(){
 
 sound.onended = function() {
   //alert("Espere a la instrucción del guía para continuar.");
-  window.location.href = "text_input.html";
+  window.location.href = "text_input2.html";
 };

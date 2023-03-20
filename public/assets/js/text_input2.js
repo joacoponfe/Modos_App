@@ -63,7 +63,7 @@ const submitReview = (e) => {
 }
 
 function saveText(){
-  window.location.href = "finalize1.html"
+  window.location.href = "finalize2.html"
 }
 
 //document.getElementById('text_input').addEventListener('keyup', submitReview);
