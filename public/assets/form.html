@@ -19,7 +19,6 @@
         <div class="likert">
             <label><input id="sex" name="sex" type="radio" value="F" required/><span>Femenino</span></label>
             <label><input id="sex" name="sex" type="radio" value="M" required/><span>Masculino</span></label>
-            <label><input id="sex" name="sex" type="radio" value="O" required/><span>Otro</span></label>
             <label><input id="sex" name="sex" type="radio" value="X" required/><span>Prefiero no decir</span></label>
         </div><br>
         <p align="left">¿Cuál es el mayor nivel educativo que completaste?</p>
@@ -34,18 +33,26 @@
         <p align="left" style="font-size:14px">Contá a partir de la escuela primaria. Por ejemplo, si completaste 7 años de primaria y 2 de secundaria, poné 9.</p>
         <p align="left" style="font-size:14px">Si hiciste 7 de primaria, 5 de secundaria, 5 de universidad y 4 de doctorado, poné 21.</p>
         <input type="number" id="education_num" placeholder = "9" style="width: 100px" minlength="1" maxlength="3" pattern=".{1,3}" title="Ingresar años de educación" required/><br>
-        <p align="left">¿Qué nivel de formación musical tenés?</p>
+        <p align="left">¿Qué nivel de formación tenés en armonía y escalas musicales?</p>
         <div class="likert">
-            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="1" required/><span>Muy baja</span></label>
-            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="2" required/><span>Baja</span></label>
-            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="3" required/><span>Normal</span></label>
-            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="4" required/><span>Alta</span></label>
-            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="5" required/><span>Muy alta</span></label>
+            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="1" required/><span>Nulo</span></label>
+            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="2" required/><span>Bajo</span></label>
+            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="3" required/><span>Medio</span></label>
+            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="4" required/><span>Alto</span></label>
+            <label><input id="musical-knowledge" name="musical-knowledge" type="radio" value="5" required/><span>Experto</span></label>
+        </div><br>
+        <p align="left">¿Tocás algún instrumento?</p>
+        <div class="likert">
+          <label><input id="instrument" name="instrument" type="radio" value="no" required/><span>No</span></label>
+          <label><input id="instrument" name="instrument" type="radio" value="yes" required/><span>Sí</span></label>
         </div><br>
         <p align="left">¿Estás familiarizado/a con el concepto de modos en música?</p>
         <div class="likert">
-            <label><input id="knows-mode" name="knows-modes" type="radio" value="no" required/><span>No</span></label>
-            <label><input id="knows-mode" name="knows-modes" type="radio" value="yes" required/><span>Sí</span></label>
+            <label><input id="knows-mode" name="knows-modes" type="radio" value="1" required/><span>Nada</span></label>
+            <label><input id="knows-mode" name="knows-modes" type="radio" value="2" required/><span>Poco</span></label>
+            <label><input id="knows-mode" name="knows-modes" type="radio" value="3" required/><span>Medio</span></label>
+            <label><input id="knows-mode" name="knows-modes" type="radio" value="4" required/><span>Bastante</span></label>
+            <label><input id="knows-mode" name="knows-modes" type="radio" value="4" required/><span>Mucho</span></label>
         </div><br>
         <input type="submit" id="sendButton" value="Siguiente">
     </form>
