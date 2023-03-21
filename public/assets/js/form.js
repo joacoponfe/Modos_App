@@ -9,10 +9,18 @@ const saveFile =(e) => {
     const musical_knowledge = document.getElementById('musical-knowledge');
     const knows_mode = document.getElementById('knows-mode');
 
-    const data = {"age":age.value, "sex":sex.value, "education":education.value, "education_num":education_num.value, 
+    const formData = {"age":age.value, "sex":sex.value, "education":education.value, "education_num":education_num.value, 
     "musical_knowledge":musical_knowledge.value, "knows_mode":knows_mode.value};
 
-    console.log(data)
+    console.log(formData)
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify({ formData }),
+        headers: new Headers({ 'Content-type': 'application/json' })
+        //headers: {"Content-type": "application/json;charset=UTF-8"}
+    }
+    const response = fetch("/api", options);
     location.href = "consigna.html";
 }
 

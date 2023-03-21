@@ -19,7 +19,13 @@ const generateID =(e) => {
         mode: "IONIAN",
         version: "1"
     };
-    
+    const options = {
+        method: 'POST',
+        body: JSON.stringify({ userData }),
+        headers: new Headers({ 'Content-type': 'application/json' })
+        //headers: {"Content-type": "application/json;charset=UTF-8"}
+    }
+    const response = fetch("/api", options);
     // Convert the object to JSON format
     const jsonData = JSON.stringify(userData);
     console.log(jsonData);

@@ -23,6 +23,17 @@ var downloadTimer = setInterval(function(){
   timeleft -= 1;
 }, 1000);
 
+const text = document.getElementById('text_input').value;
+const options = {
+method: "POST",
+headers: {
+  "Content-Type": "application/json",
+},
+body: JSON.stringify({ text }),
+};
+const response = fetch("/api", options);
+
+
 const submitReview = (e) => {
     e.preventDefault();
     const text = document.getElementById('text_input').value;
@@ -35,7 +46,7 @@ const submitReview = (e) => {
     const emojiSection = document.getElementById('emojiSection');
     const prompt = document.getElementById('prompt');
     const outline = document.querySelector(':focus');
-
+    
     fetch('api/nlp/s-analyzer', options)
       .then(res => res.json()) // Convert to JSON
       .then(({ analysis }) => {
@@ -71,12 +82,13 @@ const saveText = (e) => {
       body: JSON.stringify({ text }),
       headers: new Headers({ 'Content-type': 'application/json' })
       //headers: {"Content-type": "application/json;charset=UTF-8"}
-  
   }
+  const response = fetch("/api", options);
   console.log(options);
   window.location.href = "finalize2.html"
   
 }
+
 
 //document.getElementById('text_input').addEventListener('keyup', submitReview);
 //document.getElementById('sendButton').addEventListener('click', submitReview);

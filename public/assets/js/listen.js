@@ -3,7 +3,7 @@ sound.id       = 'audio-player';
 sound.src      = 'music/D1.mp3';
 sound.type     = 'audio/mpeg';
 
-var timeleft = 10;
+var timeleft = 5;
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
