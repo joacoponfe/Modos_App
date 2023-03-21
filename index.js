@@ -6,6 +6,12 @@ const natural = require('natural');
 const aposToLexForm = require('apos-to-lex-form');
 const SW = require('stopword');
 const bodyParser = require('body-parser');
+const Datastore = require("nedb")
+
+const database = new Datastore('database.db');
+database.loadDatabase(); 
+
+
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -23,6 +29,12 @@ const port = process.env.PORT || 3000;
 const nlpRouter = require('./public/assets/js/nlp');
 
 const app = express();
+// parse requests of content-type - application/json
+app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(express.static('public/assets'));
 app.use(logger('dev'));
@@ -41,6 +53,29 @@ app.use(express.static('uploads'));
 
 app.post('/record', upload.single('audio'), (req, res) => res.json({ success: true }));
 
+app.use(express.static("public"));
+app.use(express.json({ limit: "1mb" }));
+
+app.post("/api", (request, response) => {
+  console.log("I got a request!");
+  console.log(request.body);
+  const data = request.body;
+  response.json(data);
+  database.insert(data);
+  });
+// app.post("/text_input", (request, response) => {
+//   console.log("I got a request!");
+//   console.log(request.body);
+//   const data = request.body;
+//   database.insert({data:"data"});
+
+//   response.json({
+//     status: "success",
+//     latitude: data.lat,
+//     longitude: data.lon,
+
+//   });
+// });
 //app.post('/text_input', function(req, res, next) {
 //  const review  = req.body;
 //  console.log(review['text']);
