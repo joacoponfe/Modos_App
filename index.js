@@ -9,7 +9,8 @@ const bodyParser = require('body-parser');
 const Datastore = require("nedb")
 
 const database = new Datastore('database.db');
-database.loadDatabase(); 
+database.loadDatabase();
+
 
 
 
