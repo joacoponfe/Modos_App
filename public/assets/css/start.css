@@ -10,7 +10,7 @@ body {
 
 .form {
     display:flex;
-    justify-content: center;
+    justify-content:center;
 }
 
 input[type="text"]{

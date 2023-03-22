@@ -38,7 +38,7 @@ input[type="submit"]
   }
 
 .likert {
-    --likert-rows: 5;
+    --likert-rows: 6;
     display: inline-grid;
     max-width: 900px;
     grid-auto-rows: 1fr;
