@@ -75,7 +75,7 @@ const submitReview = (e) => {
 
 const saveText = (e) => {
   e.preventDefault();
-  
+  const text_end = Date.now();
   const text = document.getElementById('text_input').value;
   const options = {
       method: 'POST',
@@ -89,7 +89,13 @@ const saveText = (e) => {
   
 }
 
+var eventHandler = function(event){
+  const text_start = Date.now();
+  //alert(`Text start timestamp: ${text_start}`);
+  document.getElementById('text_input').removeEventListener('keypress', eventHandler);
+}
 
-//document.getElementById('text_input').addEventListener('keyup', submitReview);
+document.getElementById('text_input').addEventListener('keypress', eventHandler);
+
 //document.getElementById('sendButton').addEventListener('click', submitReview);
 document.getElementById('sendButton').addEventListener('click', saveText);

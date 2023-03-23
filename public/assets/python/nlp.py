@@ -1,10 +1,12 @@
 from autocorrect import Speller
-from spellchecker import SpellChecker
+#from spellchecker import SpellChecker
 from pysentimiento import create_analyzer
 from spanlp.palabrota import Palabrota
 from spanlp.domain.countries import Country
 from spanlp.domain.strategies import JaccardIndex
 from spanlp.domain.strategies import CosineSimilarity
+import nltk
+nltk.download('stopwords')
 from nltk import corpus
 import regex as re
 import spacy
@@ -74,6 +76,7 @@ finalWords = contentWords
 while("" in finalWords):
     finalWords.remove("")
 
+
 print(f'Original text: {textRaw}')
 print(f'Spell corrected: {textSpellCheck}')
 print(f'Sentiment analysis: {sentiment_values}')
@@ -84,3 +87,13 @@ print(f'Clean text: {textClean}')
 print(f'Lemmatized: {lemmatizedText}')
 print(f'Content words: {contentWords}')
 print(f'Final words: {finalWords}')
+
+lines = [f'Original text: {textRaw}', f'Spell corrected: {textSpellCheck}', 
+         f'Sentiment analysis: {sentiment_values}', f'Emotion Values: {emotion_values}',
+           f'Hate Speech: {hate_speech_values}', f'Censored text: {textCensored}', 
+           f'Clean text: {textClean}', f'Lemmatized: {lemmatizedText}',
+             f'Content words: {contentWords}', f'Final words: {finalWords}']
+with open('output.txt', 'w') as f:
+    for line in lines:
+        f.write(line)
+        f.write('\n')

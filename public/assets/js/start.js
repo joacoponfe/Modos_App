@@ -52,6 +52,13 @@ const generateID =(e) => {
     window.location.href = "form.html";
 }
 
-sendButton.addEventListener('click', generateID);
+const form = document.getElementById("form");
+
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    console.log([...data]);
+});
+//sendButton.addEventListener('click', generateID);
 
 // module.exports = { userData };
