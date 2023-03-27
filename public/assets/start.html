@@ -22,7 +22,7 @@
     datos se recopilen y utilicen bajo estas condiciones.</p><br><br>
   <h4 class="text-center" style="max-width:700px; margin-left:auto; margin-right:auto">Para participar, escribí las iniciales de tu nombre y apellido y los últimos tres números de tu DNI:</h4>
   <div class="form">
-    <form id="form">
+    <form id="form" autocomplete="off">
       <input type="text" name="initials" id="initials_input" placeholder = "AAA" style="width: 100px" minlength="2" maxlength="3" oninput="this.value = this.value.replace(/[^aA-zZ]/g, '').toUpperCase();" pattern=".{2,3}" title="Ingresar 2 o 3 letras" required/>
       <input type="text" name="DNI" id="DNI_input" placeholder = "000" style="width: 100px;" minlength="3" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern=".{3,3}" title="Ingresar 3 números" required/>
       <br><br>
