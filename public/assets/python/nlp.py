@@ -36,7 +36,7 @@ def remove_stopwords(words, stopwords):
             words_clean.append(w.lower())
         return words_clean
 
-textRaw = 'Una niña va a su primer día de jardín de infantes. El día es cálido y soleado. Todo es brillante y lleno de entusiasmo. El ambiente es totalmente amigable y habrá posibilidad de relacionarse afectuosamente con compañeros. La emoción del primer día es muy positiva.'
+textRaw = 'Una calle de piedra con algunas personas pasando y caminando, el ambiente era gris pero no triste mas de una tarde normal. Cerca habia un canal y se veian algunos musicos en la calle, habia un poco de frio y llevaba una bufanda. La gente no iba muy apurada pero cada uno concentrado en sus cosas, se formaban algunos grupos donde discutian de forma amistosa.'
 
 # SPELLING CORRECTION
 spell = Speller('es') # Está bueno, pero le faltan las tildes
@@ -76,6 +76,11 @@ finalWords = contentWords
 while("" in finalWords):
     finalWords.remove("")
 
+contentWordsSTR = ''
+for word in contentWords:
+    contentWordsSTR += word + ' '
+
+sentiment_values, emotion_values, hate_speech_values = analyze_text(contentWordsSTR)
 
 print(f'Original text: {textRaw}')
 print(f'Spell corrected: {textSpellCheck}')
@@ -86,6 +91,7 @@ print(f'Censored text: {textCensored}')
 print(f'Clean text: {textClean}')
 print(f'Lemmatized: {lemmatizedText}')
 print(f'Content words: {contentWords}')
+#print(f'Content words STRING: {contentWordsSTR}')
 print(f'Final words: {finalWords}')
 
 lines = [f'Original text: {textRaw}', f'Spell corrected: {textSpellCheck}', 

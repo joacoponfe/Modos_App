@@ -13,8 +13,9 @@ var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
     document.getElementById("countdown").innerHTML = "Tiempo finalizado.";
+    document.getElementById('text_input').disabled = true;
     // tiempito
-    window.location.href = "finalize1.html";
+    //window.location.href = "finalize1.html";
   } else {
     if(timeleft <= 60){
     document.getElementById("countdown").innerHTML = "Quedan " + timeleft + " segundos para escribir";
