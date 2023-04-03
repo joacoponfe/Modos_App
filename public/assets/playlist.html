@@ -1,0 +1,30 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/css/playlist.css">
+<div id="player">
+  <audio id="audio" src=""></audio>
+  <div id="controls">
+    <button id="prev"><i class="bi bi-rewind-fill"></i></button>
+    <button id="play-pause"><i class="bi bi-play-fill"></i></button>
+    <button id="next"><i class="bi bi-fast-forward-fill"></i></button>
+    <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+  </div>
+  <div id="progress-bar">
+    <div class="progress"></div>
+  </div>
+  <div id="time">
+    <span id="current-time">0:00</span>
+    <span id="duration">0:00</span>
+  </div>
+  <div id="playlist">
+    <ul id="songs">
+      <li data-src="https://www.playurbanomp3.com/Albums/2020/Camilo%20-%20Por%20Primera%20Vez%202020/10%20-%20Camilo,%20Shakira,%20Pedro%20Cap%c3%b3%20-%20Tutu%20-%20Remix.mp3" class="active-song">Rock y metal argentino</li>
+      <li data-src="https://www.playurbanomp3.com/Canciones/Don%20Omar/05.%20Don%20Omar%20-%20Aunque%20Te%20Fuiste%20(WwW.PlayUrbano.Com).mp3">Rock y metal internacional</li>
+      <li data-src="https://www.playurbanomp3.com/Canciones/Don%20Omar/Don%20Omar,%20Rakim%20&%20Ken-Y%20-%20Si%20La%20Ves%20(WwW.PlayUrbano.Com).mp3">Clásica</li>
+      <li data-src="https://www.playurbanomp3.com/Canciones/Don%20Omar/Don%20Omar,%20Wisin%20&%20Yandel%20-%20My%20Space%20(WwW.PlayUrbano.Com).mp3">Blues, jazz y fusión</li>
+      <li data-src="https://www.playurbanomp3.com/Canciones/Don%20Omar/Don%20Omar%20-%20Angelito%20Vuela%20(WwW.PlayUrbano.Com).mp3">Pop</li>
+    </ul>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="/js/playlist.js"></script>

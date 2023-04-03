@@ -12,36 +12,10 @@
     </style>
 </head>
 <body>
-
     <div class="wrapper">
         <div class="section">
-            <div class="container">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div class="container" id="container">
+            Presioná uno de los botones de la izquierda para visualizar el contenido.
             </div>
         </div>
         <!--Top menu -->
@@ -49,41 +23,42 @@
             <div class="profile">
                 <!--<img src="https://1.bp.blogspot.com/-vhmWFWO2r8U/YLjr2A57toI/AAAAAAAACO4/0GBonlEZPmAiQW4uvkCTm5LvlJVd_-l_wCNcBGAsYHQ/s16000/team-1-2.jpg" alt="profile_picture">-->
                 <h3>ABC000</h3>
+                <h3>Modo Jónico</h3>
             </div>
             <!--menu item-->
             <ul>
                 <li>
-                    <a href="#" class="active">
+                    <a href="#" id="music" class="" data-content="music">
                         <span class="icon"><i class="fa fa-music"></i></span>
                         <span class="item">Melodía</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" id="wordcloud" class="" data-content="wordcloud">
                         <span class="icon"><i class="fa fa-cloud"></i></span>
                         <span class="item">Conceptos predominantes</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" id="thermometer" class="" data-content="thermometer">
                         <span class="icon"><i class="fa fa-thermometer-three-quarters"></i></span>
                         <span class="item">Termómetros emocionales</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" id="images" class="" data-content="images">
                         <span class="icon"><i class="fas fa-image"></i></span>
                         <span class="item">Imágenes</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-people-carry"></i></span>
+                    <a href="#" id="you-and-others" class="" data-content="you-and-others">
+                        <span class="icon"><i class="fas fa-users"></i></span>
                         <span class="item">Vos y el resto</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" id="songs" class="" data-content="songs">
                         <span class="icon"><i class="fa fa-play-circle"></i></span>
                         <span class="item">Canciones representativas</span>
                     </a>
@@ -93,9 +68,8 @@
         </div>
 
     </div>
-    
-  <script>
 
-  </script>
+<script src="/js/TagCloud.js"> </script>
+<script src="/js/totems_main.js"></script>
 </body>
 </html>
