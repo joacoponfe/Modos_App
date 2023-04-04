@@ -85,17 +85,17 @@ buttons.forEach(button => {
             };
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
-            document.getElementById('container').innerHTML = 'Themometer content goes here';
+            document.getElementById('container').innerHTML = '<h2>Termómetro emocional</h2><br>';
             button.setAttribute('class', "active");
         } else if (content === 'images') {
-            document.getElementById('container').innerHTML = 'Imagen generada con inteligencia artificial a partir de tu texto <br>';
+            document.getElementById('container').innerHTML = '<h2>Imagen</h2><br>';
             document.getElementById('container').appendChild(image);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
-            document.getElementById('container').innerHTML = 'You and others content goes here';
+            document.getElementById('container').innerHTML = '<h2>Vos y el resto</h2><br>';
             button.setAttribute('class', "active");
         } else if (content === 'songs') {
-            document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
+            document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2><iframe src="playlist.html"  width="100%" height="1000px" style="border:none;"></iframe>';
             button.setAttribute('class', "active");
         }
     });
