@@ -15,9 +15,7 @@ const generateID =(e) => {
     const userData = {
         initials: document.getElementById("initials_input").value,
         DNI: document.getElementById("DNI_input").value,
-        timestamp: Date.now(),
-        mode: "IONIAN",
-        version: "1"
+        timestamp: Date.now()
     };
     const options = {
         method: 'POST',
@@ -29,6 +27,9 @@ const generateID =(e) => {
     // Convert the object to JSON format
     const jsonData = JSON.stringify(userData);
     console.log(jsonData);
+
+
+    
 
     // // Send a POST request with the JSON data as the body
     // fetch('/start', {
@@ -58,6 +59,28 @@ form.addEventListener('submit', function (e) {
     e.preventDefault();
     const data = new FormData(form);
     console.log([...data]);
+
+    async function query(id_data) {
+        const response = await fetch(
+            "http://localhost:9000/profiles_api/receive_id/",
+            {
+                headers: new Headers({ 'Content-type': 'application/json' }),
+                method: "POST",
+                body: JSON.stringify({ 'userData':'aleli' }),
+            }
+        );
+        const result = await response.json();
+        return result;
+    }
+
+    query([...data]).then((response) => {
+        console.log(JSON.stringify(response));
+    });
+
+
+
+
+    window.location.href = "form.html";
 });
 //sendButton.addEventListener('click', generateID);
 
