@@ -1,12 +1,7 @@
-const sendButton = document.getElementById("sendButton");
+var text_page_load = Date.now();
+var text_start;
 
-//function generateUID() {
-    // Generate unique identifier from user's name and the selected track.
-//    const text_input = document.getElementById("text_input").value;
-    //const ID = `ID_IONIAN_6_${name_input}`
-//    alert(`¡Gracias por participar!`);
-//   window.location.href = "start.html";
-//}
+const sendButton = document.getElementById("sendButton");
 
 var timeleft = 180; // 3 minutos
 var downloadTimer = setInterval(function(){
@@ -24,60 +19,68 @@ var downloadTimer = setInterval(function(){
   timeleft -= 1;
 }, 1000);
 
-const text = document.getElementById('text_input').value;
-const options = {
-method: "POST",
-headers: {
-  "Content-Type": "application/json",
-},
-body: JSON.stringify({ text }),
-};
-const response = fetch("/api", options);
+// const text = document.getElementById('text_input').value;
+// const options = {
+// method: "POST",
+// headers: {
+//   "Content-Type": "application/json",
+// },
+// body: JSON.stringify({ text }),
+// };
+// const response = fetch("/api", options);
 
-
-const submitReview = (e) => {
-    e.preventDefault();
-    const text = document.getElementById('text_input').value;
-    const options = {
-        method: 'POST',
-        body: JSON.stringify({ text }),
-        headers: new Headers({ 'Content-type': 'application/json' })
-        //headers: {"Content-type": "application/json;charset=UTF-8"}
-    }
-    const emojiSection = document.getElementById('emojiSection');
-    const prompt = document.getElementById('prompt');
-    const outline = document.querySelector(':focus');
+// const submitReview = (e) => {
+//     e.preventDefault();
+//     const text = document.getElementById('text_input').value;
+//     const options = {
+//         method: 'POST',
+//         body: JSON.stringify({ text }),
+//         headers: new Headers({ 'Content-type': 'application/json' })
+//         //headers: {"Content-type": "application/json;charset=UTF-8"}
+//     }
+//     const emojiSection = document.getElementById('emojiSection');
+//     const prompt = document.getElementById('prompt');
+//     const outline = document.querySelector(':focus');
     
-    fetch('api/nlp/s-analyzer', options)
-      .then(res => res.json()) // Convert to JSON
-      .then(({ analysis }) => {
-        if (analysis < 0) {
-            emojiSection.innerHTML = '<img src = "https://img.icons8.com/cotton/256/angry-face-icon--v2.png">';
-            prompt.style.color = 'red';
-            outline.style.borderColor = 'red';
-        };
-        if (analysis === 0) {
-            emojiSection.innerHTML = '<img src="https://img.icons8.com/officel/80/000000/neutral-emoticon.png">';
-            prompt.style.color = '#00367c';
-            outline.style.borderColor = '#00367c';
-        }
-        if (analysis > 0) {
-            emojiSection.innerHTML = '<img src="https://img.icons8.com/color/96/000000/happy.png">';
-            prompt.style.color = 'green';
-            outline.style.borderColor = 'green';
-        }
-      })
-      .catch(err => {
-        emojiSection.innerHTML = 'Ocurrió un error.'
-        //emojiSection.innerHTML = text_input.value
-        console.log(err);
-      })
-}
+//     fetch('api/nlp/s-analyzer', options)
+//       .then(res => res.json()) // Convert to JSON
+//       .then(({ analysis }) => {
+//         if (analysis < 0) {
+//             emojiSection.innerHTML = '<img src = "https://img.icons8.com/cotton/256/angry-face-icon--v2.png">';
+//             prompt.style.color = 'red';
+//             outline.style.borderColor = 'red';
+//         };
+//         if (analysis === 0) {
+//             emojiSection.innerHTML = '<img src="https://img.icons8.com/officel/80/000000/neutral-emoticon.png">';
+//             prompt.style.color = '#00367c';
+//             outline.style.borderColor = '#00367c';
+//         }
+//         if (analysis > 0) {
+//             emojiSection.innerHTML = '<img src="https://img.icons8.com/color/96/000000/happy.png">';
+//             prompt.style.color = 'green';
+//             outline.style.borderColor = 'green';
+//         }
+//       })
+//       .catch(err => {
+//         emojiSection.innerHTML = 'Ocurrió un error.'
+//         //emojiSection.innerHTML = text_input.value
+//         console.log(err);
+//       })
+// }
 
 const saveText = (e) => {
   e.preventDefault();
-  const text_end = Date.now();
+  const text_submit = Date.now();
   const text = document.getElementById('text_input').value;
+  object = {};
+  object['text_input'] = text;
+  object['text_page_load'] = text_page_load;
+  object['text_start'] = text_start;
+  object['text_submit'] = text_submit;
+
+  const textJSON = JSON.stringify(object);
+  console.log(textJSON);
+  
   const options = {
       method: 'POST',
       body: JSON.stringify({ text }),
@@ -86,12 +89,12 @@ const saveText = (e) => {
   }
   const response = fetch("/api", options);
   console.log(options);
-  window.location.href = "finalize1.html"
+  //window.location.href = "finalize1.html"
   
 }
 
 var eventHandler = function(event){
-  const text_start = Date.now();
+  text_start = Date.now();
   //alert(`Text start timestamp: ${text_start}`);
   document.getElementById('text_input').removeEventListener('keypress', eventHandler);
 }
