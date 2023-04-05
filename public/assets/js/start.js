@@ -57,30 +57,42 @@ const form = document.getElementById("form");
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    const data = new FormData(form);
-    console.log([...data]);
+    
+    const formData = new FormData(form);
+
+    console.log([...formData]);
+    
+    // Convert formData to JSON format
+    const object = {};
+    formData.forEach(function(value, key){
+        object[key] = value;
+    });
+    
+    const formJSON = JSON.stringify(object);
+    console.log(formJSON);
 
     async function query(id_data) {
         const response = await fetch(
-            "http://localhost:9000/profiles_api/receive_id/",
+            "http://localhost:8000/profiles_api/receive_id/",
             {
                 headers: new Headers({ 'Content-type': 'application/json' }),
                 method: "POST",
-                body: JSON.stringify({ 'userData':'aleli' }),
+                //body: JSON.stringify({ 'userData':'alelo' }),
+                body: id_data,
             }
         );
-        const result = await response.json();
+        //const result = await response.json();
+        const result = await response;
         return result;
     }
 
-    query([...data]).then((response) => {
-        console.log(JSON.stringify(response));
+    query(formJSON).then((response) => {
+        //console.log(JSON.stringify(response));
+        //console.log(response.json());
+        response.json().then(body => console.log(body));
     });
 
-
-
-
-    window.location.href = "form.html";
+    //window.location.href = "form.html";
 });
 //sendButton.addEventListener('click', generateID);
 
