@@ -1,4 +1,4 @@
-var text_page_load = Date.now();
+var text_page_load = new Date().toISOString().slice(0, 19).replace('T', ' ');
 var text_start;
 
 const sendButton = document.getElementById("sendButton");
@@ -19,58 +19,9 @@ var downloadTimer = setInterval(function(){
   timeleft -= 1;
 }, 1000);
 
-// const text = document.getElementById('text_input').value;
-// const options = {
-// method: "POST",
-// headers: {
-//   "Content-Type": "application/json",
-// },
-// body: JSON.stringify({ text }),
-// };
-// const response = fetch("/api", options);
-
-// const submitReview = (e) => {
-//     e.preventDefault();
-//     const text = document.getElementById('text_input').value;
-//     const options = {
-//         method: 'POST',
-//         body: JSON.stringify({ text }),
-//         headers: new Headers({ 'Content-type': 'application/json' })
-//         //headers: {"Content-type": "application/json;charset=UTF-8"}
-//     }
-//     const emojiSection = document.getElementById('emojiSection');
-//     const prompt = document.getElementById('prompt');
-//     const outline = document.querySelector(':focus');
-    
-//     fetch('api/nlp/s-analyzer', options)
-//       .then(res => res.json()) // Convert to JSON
-//       .then(({ analysis }) => {
-//         if (analysis < 0) {
-//             emojiSection.innerHTML = '<img src = "https://img.icons8.com/cotton/256/angry-face-icon--v2.png">';
-//             prompt.style.color = 'red';
-//             outline.style.borderColor = 'red';
-//         };
-//         if (analysis === 0) {
-//             emojiSection.innerHTML = '<img src="https://img.icons8.com/officel/80/000000/neutral-emoticon.png">';
-//             prompt.style.color = '#00367c';
-//             outline.style.borderColor = '#00367c';
-//         }
-//         if (analysis > 0) {
-//             emojiSection.innerHTML = '<img src="https://img.icons8.com/color/96/000000/happy.png">';
-//             prompt.style.color = 'green';
-//             outline.style.borderColor = 'green';
-//         }
-//       })
-//       .catch(err => {
-//         emojiSection.innerHTML = 'Ocurrió un error.'
-//         //emojiSection.innerHTML = text_input.value
-//         console.log(err);
-//       })
-// }
-
 const saveText = (e) => {
   e.preventDefault();
-  const text_submit = Date.now();
+  const text_submit = new Date().toISOString().slice(0, 19).replace('T', ' ');
   const text = document.getElementById('text_input').value;
   object = {};
   object['text_input'] = text;
@@ -80,26 +31,35 @@ const saveText = (e) => {
 
   const textJSON = JSON.stringify(object);
   console.log(textJSON);
-  
-  const options = {
-      method: 'POST',
-      body: JSON.stringify({ text }),
-      headers: new Headers({ 'Content-type': 'application/json' })
-      //headers: {"Content-type": "application/json;charset=UTF-8"}
-  }
-  const response = fetch("/api", options);
-  console.log(options);
+
+  async function query(text_data) {
+    const response = await fetch(
+        "http://localhost:8000/profiles_api/receive_form/",
+        {
+            headers: new Headers({ 'Content-type': 'application/json' }),
+            method: "POST",
+            body: text_data,
+        }
+    );
+    //const result = await response.json();
+    const result = await response;
+    return result;
+}
+
+query(textJSON).then((response) => {
+    //console.log(JSON.stringify(response));
+    //console.log(response.json());
+    response.json().then(body => console.log(body));
+});
   //window.location.href = "finalize1.html"
   
 }
 
 var eventHandler = function(event){
-  text_start = Date.now();
+  text_start = new Date().toISOString().slice(0, 19).replace('T', ' ');
   //alert(`Text start timestamp: ${text_start}`);
   document.getElementById('text_input').removeEventListener('keypress', eventHandler);
 }
 
 document.getElementById('text_input').addEventListener('keypress', eventHandler);
-
-//document.getElementById('sendButton').addEventListener('click', submitReview);
 document.getElementById('sendButton').addEventListener('click', saveText);
