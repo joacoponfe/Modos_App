@@ -30,8 +30,13 @@ form.addEventListener('submit', function (e) {
     query(formJSON).then((response) => {
         //console.log(JSON.stringify(response));
         //console.log(response.json());
-        response.json().then(body => console.log(body));
+        response.json().then(body => console.log(body) || body)
+        .then(body => localStorage.setItem('id_participant', body['id_participant']) || body)
+        .then(body => localStorage.setItem('id_exists', body['id_exists']) || body)
+        .then(body => localStorage.setItem('id_melody_set', body['id_melody_set']) || body)
+        .then(body => window.location.href = "form.html?" + body['id_participant']);
     });
+    
 
-    //window.location.href = "form.html";
+    //window.location.href = "form.html?" + ;
 });

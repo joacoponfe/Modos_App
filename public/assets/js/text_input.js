@@ -24,6 +24,10 @@ const saveText = (e) => {
   const text_submit = new Date().toISOString().slice(0, 19).replace('T', ' ');
   const text = document.getElementById('text_input').value;
   object = {};
+  object['id_participant'] = id_participant;
+  object['id_melody'] = id_melody;
+  object['iteration'] = iteration;
+  object['melody_order'] = melody_order;
   object['text_input'] = text;
   object['text_page_load'] = text_page_load;
   object['text_start'] = text_start;
@@ -34,7 +38,7 @@ const saveText = (e) => {
 
   async function query(text_data) {
     const response = await fetch(
-        "http://localhost:8000/profiles_api/receive_form/",
+        "http://localhost:8000/profiles_api/receive_text/",
         {
             headers: new Headers({ 'Content-type': 'application/json' }),
             method: "POST",
