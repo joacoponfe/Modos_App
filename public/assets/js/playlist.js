@@ -11,12 +11,14 @@ const currentTime = document.querySelector("#current-time");
 const duration = document.querySelector("#duration");
 
 let currentSong = 0;
+audio.src = playlist.children[currentSong].getAttribute("data-src");
 
 playlist.addEventListener("click", (e) => {
   if (e.target.tagName === "LI") {
     currentSong = Array.from(playlist.children).indexOf(e.target);
     audio.src = e.target.getAttribute("data-src");
     audio.play();
+    playPause.innerHTML = '<i class="bi bi-pause-fill"></i>';
     setActiveSong(currentSong);
   }
 });

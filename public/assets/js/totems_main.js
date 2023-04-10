@@ -85,7 +85,7 @@ buttons.forEach(button => {
             };
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
-            document.getElementById('container').innerHTML = '<h2>Termómetro emocional</h2><br>';
+            document.getElementById('container').innerHTML = '<h2>Termómetro emocional</h2><iframe src="thermometer.html"  width="100%" height="1000px" style="border:none;"></iframe>';
             button.setAttribute('class', "active");
         } else if (content === 'images') {
             document.getElementById('container').innerHTML = '<h2>Imagen</h2><br>';
