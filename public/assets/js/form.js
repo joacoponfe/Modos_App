@@ -6,6 +6,7 @@ form.addEventListener('submit', function (e) {
     //console.log([...data]);
     // Convert formData to JSON format
     const object = {};
+    object['id_participant'] = 'AAA000' // GET FROM CACHE?
     formData.forEach(function(value, key){
         object[key] = value;
     });
@@ -15,7 +16,7 @@ form.addEventListener('submit', function (e) {
 
     async function query(form_data) {
         const response = await fetch(
-            "http://localhost:8000/profiles_api/receive_id/",
+            "http://localhost:8000/profiles_api/receive_form/",
             {
                 headers: new Headers({ 'Content-type': 'application/json' }),
                 method: "POST",
