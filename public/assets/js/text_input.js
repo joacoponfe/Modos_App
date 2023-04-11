@@ -3,12 +3,18 @@ var text_start;
 
 const sendButton = document.getElementById("sendButton");
 
+// Get variables from localStorage
+var id_participant = localStorage.getItem('id_participant');
+var id_melody = localStorage.getItem('id_melody');
+var iteration = localStorage.getItem('iteration');
+var melody_order = 1;
+
 var timeleft = 180; // 3 minutos
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
-    document.getElementById("countdown").innerHTML = "Tiempo finalizado.";
-    document.getElementById('text_input').disabled = true;
+    document.getElementById("countdown").innerHTML = " finalizado.";
+    document.getElementById('text_input').disabled = truTiempoe;
     // tiempito
     //window.location.href = "finalize1.html";
   } else {

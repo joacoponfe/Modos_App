@@ -34,7 +34,8 @@ form.addEventListener('submit', function (e) {
         .then(body => localStorage.setItem('id_participant', body['id_participant']) || body)
         .then(body => localStorage.setItem('id_exists', body['id_exists']) || body)
         .then(body => localStorage.setItem('id_melody_set', body['id_melody_set']) || body)
-        .then(body => window.location.href = "form.html?" + body['id_participant']);
+        //.then(body => window.location.href = "form.html?" + body['id_participant']);
+        .then(body => window.location.href = "form.html");
     });
     
 
