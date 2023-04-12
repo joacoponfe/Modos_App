@@ -1,3 +1,9 @@
+import { getCookie } from "./cookies.js";
+
+const id_melody_set = getCookie('id_melody_set');
+const iteration = getCookie('iteration');
+const melody_order = 2;
+
 const sound = document.createElement('audio');
 sound.id       = 'audio-player';
 sound.src      = 'music/Li3.mp3';
