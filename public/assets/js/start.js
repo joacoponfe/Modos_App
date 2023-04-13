@@ -34,10 +34,10 @@ form.addEventListener('submit', function (e) {
         //console.log(JSON.stringify(response));
         //console.log(response.json());
         response.json().then(body => console.log(body) || body)
-        .then(body => setCookie('id_participant', body['id_participant'], 1))
-        .then(body => setCookie('id_exists', body['id_exists'], 1))
-        .then(body => setCookie('id_melody_set', body['id_melody_set'], 1))
-        .then(body => setCookie('iteration', body['iteration'], 1))
+        .then(body => setCookie('id_participant', body['id_participant'], 1) || body)
+        .then(body => setCookie('id_exists', body['id_exists'], 1) || body)
+        .then(body => setCookie('id_melody_set', body['id_melody_set'], 1) || body)
+        .then(body => setCookie('iteration', body['iteration'], 1) || body)
         .then(body => window.location.href = "form.html?" + getCookie('id_participant'))
     });
     

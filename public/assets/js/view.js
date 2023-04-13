@@ -1,3 +1,33 @@
+// Create request object
+const object = {};
+object['id_melody_mode'] = 'jonico';
+
+const requestJSON = JSON.stringify(object);
+console.log(requestJSON);
+
+async function query(id_melody_mode) {
+    const response = await fetch(
+        "http://localhost:8000/collective_api/mode_data/",
+        {
+            headers: new Headers({ 'Content-type': 'application/json' }),
+            method: "POST",
+            body: id_melody_mode,
+        }
+    );
+    //const result = await response.json();
+    const result = await response;
+    return result;
+}
+
+query(requestJSON).then((response) => {
+    //console.log(JSON.stringify(response));
+    //console.log(response.json());
+    response.json().then(body => console.log(body) || body)
+    .then(body => myTags = body['word_list'] || body)
+    .then(body => num_participants = body['num_participants'] || body)
+    .then(body => last_refresh = body['last_refresh']|| body)
+});
+
 const myTags = [
     'alegría', 'esperanza', 'contento', 'paz',
     'bueno', 'soleado', 'armonioso', 'dulce',

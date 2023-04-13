@@ -1,3 +1,5 @@
+import { getCookie } from "./cookies.js";
+
 var text_page_load = new Date().toISOString().slice(0, 19).replace('T', ' ');
 var text_start;
 
@@ -23,11 +25,11 @@ const saveText = (e) => {
   e.preventDefault();
   const text_submit = new Date().toISOString().slice(0, 19).replace('T', ' ');
   const text = document.getElementById('text_input').value;
-  object = {};
-  object['id_participant'] = id_participant;
-  object['id_melody'] = id_melody;
-  object['iteration'] = iteration;
-  object['melody_order'] = melody_order;
+  const object = {};
+  object['id_participant'] = getCookie('id_participant');
+  object['id_melody'] = getCookie('id_melody');
+  object['iteration'] = getCookie('iteration');
+  object['melody_order'] = 1;
   object['text_input'] = text;
   object['text_page_load'] = text_page_load;
   object['text_start'] = text_start;
