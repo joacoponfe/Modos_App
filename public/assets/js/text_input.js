@@ -1,4 +1,5 @@
 import { getCookie } from "./cookies.js";
+import { url } from "./config.js";
 
 var text_page_load = new Date().toISOString().slice(0, 19).replace('T', ' ');
 var text_start;
@@ -40,7 +41,8 @@ const saveText = (e) => {
 
   async function query(text_data) {
     const response = await fetch(
-        "http://localhost:8000/profiles_api/receive_text/",
+        //"http://localhost:8000/profiles_api/receive_text/",
+        url + "/profiles_api/receive_text/",
         {
             headers: new Headers({ 'Content-type': 'application/json' }),
             method: "POST",

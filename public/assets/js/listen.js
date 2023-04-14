@@ -13,8 +13,8 @@ const melody_order = 1;
 fetch('melody_set.csv')
   .then(response => response.text())
   .then(text => {
-    let column_name = "_".concat(id_melody_set)
-    let row_number = (2 * iteration - 2) + melody_order - 1
+    let column_name = "_".concat(id_melody_set);
+    let row_number = (2 * iteration - 2) + melody_order - 1;
     const data = Papa.parse(text, { header: true }).data;
     const id_melody = data[row_number][column_name];
     setCookie('id_melody', id_melody);

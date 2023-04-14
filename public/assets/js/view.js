@@ -1,3 +1,5 @@
+import { url } from "./config.js";
+
 // Create request object
 const object = {};
 object['id_melody_mode'] = 'jonico';
@@ -7,7 +9,8 @@ console.log(requestJSON);
 
 async function query(id_melody_mode) {
     const response = await fetch(
-        "http://localhost:8000/collective_api/mode_data/",
+        //"http://localhost:8000/collective_api/mode_data/",
+        url + "/collective_api/mode_data/",
         {
             headers: new Headers({ 'Content-type': 'application/json' }),
             method: "POST",

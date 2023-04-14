@@ -1,14 +1,6 @@
 const form = document.getElementById("form");
 import { getCookie } from "./cookies.js";
-
-// // Get variables from localStorage
-// var id_participant = localStorage.getItem('id_participant');
-// var id_exists = localStorage.getItem('id_exists');
-// var id_melody_set = localStorage.getItem('id_melody_set');
-
-// console.log(id_participant);
-// console.log(id_exists);
-// console.log(id_melody_set);
+import { url } from "./config.js";
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -27,7 +19,8 @@ form.addEventListener('submit', function (e) {
 
     async function query(form_data) {
         const response = await fetch(
-            "http://localhost:8000/profiles_api/receive_form/",
+            //"http://localhost:8000/profiles_api/receive_form/",
+            url + "/profiles_api/receive_form/",
             {
                 headers: new Headers({ 'Content-type': 'application/json' }),
                 method: "POST",
