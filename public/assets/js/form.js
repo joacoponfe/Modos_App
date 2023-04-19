@@ -36,7 +36,7 @@ form.addEventListener('submit', function (e) {
         //console.log(JSON.stringify(response));
         //console.log(response.json());
         response.json().then(body => console.log(body)|| body)
-        .then(body => window.location.href = "consigna.html");
+        .then(body => window.location.href = "volume.html");
     });
 
 });

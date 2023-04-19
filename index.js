@@ -102,8 +102,14 @@ app.post("/api", (request, response) => {
 //  res.status(200).json({ analysis });
 //});
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+// app.listen(port, () => {
+//   console.log(`App listening at http://localhost:${port}`);
+// });
+
+app.listen(3000, '0.0.0.0', function() {
+  console.log('Listening to port:  ' + 3000);
 });
 
 module.exports = app;
+
+

@@ -25,6 +25,7 @@ fetch('melody_set.csv')
 const sound = document.createElement('audio');
 sound.id       = 'audio-player';
 sound.type     = 'audio/mpeg';
+sound.volume   = getCookie("userVolume");
 
 var timeleft = 5;
 var downloadTimer = setInterval(function(){
