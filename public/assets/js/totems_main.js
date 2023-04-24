@@ -1,3 +1,10 @@
+import { getCookie } from "./cookies.js";
+import { url } from "./config.js";
+
+// Get cookies
+const id_participant = getCookie('id_participant');
+const current_mode = 1;
+
 // Create an audio element
 const audioPlayer = document.createElement('audio');
 // Set the source of the audio file

@@ -1,3 +1,7 @@
+import { getCookie } from "./cookies.js";
+import { setCookie } from "./cookies.js";
+import { url } from "./config.js";
+
 const form = document.getElementById("form");
 
 form.addEventListener('submit', function (e) {
@@ -15,7 +19,8 @@ form.addEventListener('submit', function (e) {
 
     async function query(id_data) {
         const response = await fetch(
-            "http://localhost:8000/profiles_api/receive_id/", // cambiar?
+            //"http://localhost:8000/profiles_api/receive_id/", // cambiar?
+            url + "/profiles_api/receive_id/",
             {
                 headers: new Headers({ 'Content-type': 'application/json' }),
                 method: "POST",
@@ -28,10 +33,18 @@ form.addEventListener('submit', function (e) {
     }
 
     query(formJSON).then((response) => {
-        //console.log(JSON.stringify(response));
-        //console.log(response.json());
-        response.json().then(body => console.log(body));
+        response.json().then(body => console.log(body) || body)
+        .then(body => checkID(body['id_participant'], body['id_exists']))
     });
-
-    //window.location.href = "form.html";
 });
+
+function checkID(id_participant, id_exists) {
+    console.log(id_exists);
+    if (id_exists) {
+        setCookie('id_participant', id_participant, 1);
+        window.location.href = "totems_main.html?" + getCookie('id_participant');
+    } else {
+        //window.location.href = "totems_main.html?" + getCookie('id_participant')
+        alert('Parece que este ID no existe.');
+    }
+  }

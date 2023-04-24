@@ -14,12 +14,13 @@
     <h4 class="text-center" style="max-width:900px; margin-left: auto; margin-right: auto;">El código tiene que ser idéntico al que pusiste al comenzar la experiencia.</h4>
     <div class="form">
       <form id="form" autocomplete="off">
-        <input type="text" id="initials_input" placeholder = "AAA" style="width: 100px" minlength="2" maxlength="3" oninput="this.value = this.value.replace(/[^aA-zZ]/g, '').toUpperCase();" pattern=".{2,3}" title="Ingresar 2 o 3 letras" required/>
-        <input type="text" id="DNI_input" placeholder = "000" style="width: 100px;" minlength="3" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern=".{3,3}" title="Ingresar 3 números" required/>
+        <input type="text" name="initials" id="initials_input" placeholder = "AAA" style="width: 100px" minlength="2" maxlength="3" oninput="this.value = this.value.replace(/[^aA-zZ]/g, '').toUpperCase();" pattern=".{2,3}" title="Ingresar 2 o 3 letras" required/>
+        <input type="text" name="DNI" id="DNI_input" placeholder = "000" style="width: 100px;" minlength="3" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern=".{3,3}" title="Ingresar 3 números" required/>
         <br><br>
         <input type="submit" id="sendButton" value="Siguiente">
       </form>
     </div>
-<script src="/js/totems_access.js"></script>
+<script src="/js/totems_access.js" type="module"></script>
+<script src="/js/cookies.js" type="module"></script>
 </body>
 </html>

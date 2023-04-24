@@ -1,7 +1,8 @@
-const form = document.getElementById("form");
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
 import { url } from "./config.js";
+
+const form = document.getElementById("form");
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -12,7 +13,6 @@ form.addEventListener('submit', function (e) {
     formData.forEach(function(value, key){
         object[key] = value;
     });
-    
     
     const formJSON = JSON.stringify(object);
     console.log(formJSON);

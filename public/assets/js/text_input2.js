@@ -1,4 +1,7 @@
 import { getCookie } from "./cookies.js";
+import { url } from "./config.js";
+
+console.log(getCookie("id_participant"));
 
 var text_page_load = new Date().toISOString().slice(0, 19).replace('T', ' ');
 var text_start;
@@ -40,7 +43,8 @@ const saveText = (e) => {
 
   async function query(text_data) {
     const response = await fetch(
-        "http://localhost:8000/profiles_api/receive_text/",
+        //"http://localhost:8000/profiles_api/receive_text/",
+        url + "/profiles_api/receive_text/",
         {
             headers: new Headers({ 'Content-type': 'application/json' }),
             method: "POST",
@@ -57,7 +61,7 @@ query(textJSON).then((response) => {
     //console.log(response.json());
     response.json().then(body => console.log(body));
 });
-  //window.location.href = "finalize1.html"
+  //window.location.href = "finalize2.html"
   
 }
 
@@ -69,83 +73,3 @@ var eventHandler = function(event){
 
 document.getElementById('text_input').addEventListener('keypress', eventHandler);
 document.getElementById('sendButton').addEventListener('click', saveText);
-
-// const text = document.getElementById('text_input').value;
-// const options = {
-// method: "POST",
-// headers: {
-//   "Content-Type": "application/json",
-// },
-// body: JSON.stringify({ text }),
-// };
-// const response = fetch("/api", options);
-
-
-// const submitReview = (e) => {
-//     e.preventDefault();
-
-//     const text = document.getElementById('text_input').value;
-//     const options = {
-//         method: 'POST',
-//         body: JSON.stringify({ text }),
-//         headers: new Headers({ 'Content-type': 'application/json' })
-//         //headers: {"Content-type": "application/json;charset=UTF-8"}
-//     }
-//     const emojiSection = document.getElementById('emojiSection');
-//     const prompt = document.getElementById('prompt');
-//     const outline = document.querySelector(':focus');
-    
-//     fetch('api/nlp/s-analyzer', options)
-//       .then(res => res.json()) // Convert to JSON
-//       .then(({ analysis }) => {
-//         if (analysis < 0) {
-//             emojiSection.innerHTML = '<img src = "https://img.icons8.com/cotton/256/angry-face-icon--v2.png">';
-//             prompt.style.color = 'red';
-//             outline.style.borderColor = 'red';
-//         };
-//         if (analysis === 0) {
-//             emojiSection.innerHTML = '<img src="https://img.icons8.com/officel/80/000000/neutral-emoticon.png">';
-//             prompt.style.color = '#00367c';
-//             outline.style.borderColor = '#00367c';
-//         }
-//         if (analysis > 0) {
-//             emojiSection.innerHTML = '<img src="https://img.icons8.com/color/96/000000/happy.png">';
-//             prompt.style.color = 'green';
-//             outline.style.borderColor = 'green';
-//         }
-//       })
-//       .catch(err => {
-//         emojiSection.innerHTML = 'Ocurrió un error.'
-//         //emojiSection.innerHTML = text_input.value
-//         console.log(err);
-//       })
-// }
-
-// const saveText = (e) => {
-//   e.preventDefault();
-//   const text_end = Date.now();
-//   const text = document.getElementById('text_input').value;
-//   const options = {
-//       method: 'POST',
-//       body: JSON.stringify({ text }),
-//       headers: new Headers({ 'Content-type': 'application/json' })
-//       //headers: {"Content-type": "application/json;charset=UTF-8"}
-//   }
-//   const response = fetch("/api", options);
-//   console.log(options);
-//   window.location.href = "finalize2.html"
-  
-// }
-
-// var eventHandler = function(event){
-//   const text_start = Date.now();
-//   //alert(`Text start timestamp: ${text_start}`);
-//   document.getElementById('text_input').removeEventListener('keypress', eventHandler);
-// }
-
-// document.getElementById('text_input').addEventListener('keypress', eventHandler);
-
-
-// //document.getElementById('text_input').addEventListener('keyup', submitReview);
-// //document.getElementById('sendButton').addEventListener('click', submitReview);
-// document.getElementById('sendButton').addEventListener('click', saveText);
