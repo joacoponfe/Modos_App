@@ -1,9 +1,81 @@
 import { getCookie } from "./cookies.js";
 import { url } from "./config.js";
 
+// Get document elements
+const mode_1 = document.getElementById("mode_1");
+const mode_2 = document.getElementById("mode_2");
+const id_string = document.getElementById("id_string");
+
 // Get cookies
 const id_participant = getCookie('id_participant');
 const current_mode = 1;
+
+// Pull info from database from user's last iteration (last two modes they listened to)
+const object = {};
+object['id_participant'] = id_participant;
+const idJSON = JSON.stringify(object);
+console.log(idJSON);
+
+async function query(id_data) {
+    const response = await fetch(
+        //"http://localhost:8000/profiles_api/receive_id/",
+        url + "/profiles_api/get_totems_data/",
+        {
+            headers: new Headers({ 'Content-type': 'application/json' }),
+            method: "POST",
+            body: id_data,
+        }
+    );
+    const result = await response;
+    return result;
+};
+
+const res = await query(idJSON);
+const userData = await res.json();
+console.log(userData);
+
+async function get_melody_mode(id_melody) {
+    const response = await fetch(
+        url + "/profiles_api/get_melody_mode/",
+        {
+            headers: new Headers({ 'Content-type': 'application/json' }),
+            method: "POST",
+            body: id_melody,
+        }
+    );
+    const result = await response;
+    return result;
+};
+
+// Set participant ID in HTML page
+id_string.innerHTML = id_participant;
+
+// Get melody mode strings and update texts in html page
+const id_melodies = userData['id_melody'];
+const id_melody_1_JSON = JSON.stringify({"id_melody": id_melodies[0]});
+const id_melody_2_JSON = JSON.stringify({"id_melody": id_melodies[1]});
+const response1 = await get_melody_mode(id_melody_1_JSON);
+const response2 = await get_melody_mode(id_melody_2_JSON);
+const id_melody_1_mode = await response1.json();
+const id_melody_2_mode = await response2.json();
+
+const id_melody_modes = {'1': id_melody_1_mode, '2': id_melody_2_mode};
+
+// Correct for tildes
+for (let x in id_melody_modes){
+    let id_melody_mode = id_melody_modes[x];
+    if (id_melody_mode['id_melody_mode'] === "jonico"){
+        id_melody_mode['id_melody_mode'] = "jónico";
+    }   else if (id_melody_mode['id_melody_mode'] === "dorico"){
+        id_melody_mode['id_melody_mode'] = "dórico";
+    }   else if (id_melody_mode['id_melody_mode'] === "eolico"){
+        id_melody_mode['id_melody_mode'] = 'eólico';
+    };
+};
+
+mode_1.innerHTML = "Modo " + id_melody_1_mode['id_melody_mode'];
+mode_2.innerHTML = "Modo " + id_melody_2_mode['id_melody_mode'];
+
 
 // Create an audio element
 const audioPlayer = document.createElement('audio');
@@ -108,3 +180,14 @@ buttons.forEach(button => {
     });
 });
 
+// Set data according to selected mode
+function setData(id_mode){
+    const text_path_folder = userData['text_path_folder'][id_mode];
+    const image_path_folder = userData['image_path_folder'][id_mode];
+    const embedding_path_folder = userData['embedding_path_folder'][id_mode];
+    const id_melody = userData['id_melody'][id_mode];
+    console.log(image_path_folder);
+    //image.src = image_path_folder
+}
+
+setData(0);
