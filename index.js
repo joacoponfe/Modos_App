@@ -6,10 +6,6 @@ const natural = require('natural');
 const aposToLexForm = require('apos-to-lex-form');
 const SW = require('stopword');
 const bodyParser = require('body-parser');
-const Datastore = require("nedb")
-
-const database = new Datastore('database.db');
-database.loadDatabase();
 
 
 
@@ -62,7 +58,6 @@ app.post("/api", (request, response) => {
   console.log(request.body);
   const data = request.body;
   response.json(data);
-  database.insert(data);
   });
 // app.post("/text_input", (request, response) => {
 //   console.log("I got a request!");

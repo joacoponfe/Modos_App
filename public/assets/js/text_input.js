@@ -59,7 +59,7 @@ query(textJSON).then((response) => {
     //console.log(response.json());
     response.json().then(body => console.log(body));
 });
-  //window.location.href = "finalize1.html"
+  window.location.href = "finalize1.html"
   
 }
 
