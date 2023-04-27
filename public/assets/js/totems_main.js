@@ -182,12 +182,13 @@ buttons.forEach(button => {
 
 // Set data according to selected mode
 function setData(id_mode){
-    const text_path_folder = userData['text_path_folder'][id_mode];
-    const image_path_folder = userData['image_path_folder'][id_mode];
+    //const text_path_folder = userData['text_path_folder'][id_mode];
+    const word_lists = userData['word_lists'][id_mode];
+    const encoded_image = userData['encoded_images'][id_mode];
     const embedding_path_folder = userData['embedding_path_folder'][id_mode];
     const id_melody = userData['id_melody'][id_mode];
-    console.log(image_path_folder);
-    //image.src = image_path_folder
+    // Set image source
+    image.src = 'data:image/png;base64,'.concat(encoded_image);
 }
 
 setData(0);
