@@ -8,7 +8,7 @@ const id_string = document.getElementById("id_string");
 
 // Get cookies
 const id_participant = getCookie('id_participant');
-const current_mode = 1;
+var current_mode = 1;
 
 // Pull info from database from user's last iteration (last two modes they listened to)
 const object = {};
@@ -88,23 +88,9 @@ audioPlayer.controls = true;
 const wordCloud = document.createElement("span");
 wordCloud.classList.add('tagcloud');
 const tagContainer = '.tagcloud';
-
-const words = [
-    'alegría', 'esperanza', 'contento', 'paz',
-    'bueno', 'soleado', 'armonioso', 'dulce',
-    'aire', 'aire', 'alegría', 'paz',
-    'aire', 'paz', 'paz', 'yendo',
-    'árboles', 'vida', 'cajas', 'violeta',
-    'castillo', 'monitores', 'papeles', 'impresora',
-    'auriculares', 'billetera', 'magnífico', 'teclas',
-    'piano', 'treinta', 'treinta', 'dieciocho',
-    'televisor', 'computadora', 'escritorio', 'escritorio',
-    'mate', 'silla', 'silla', 'billetera', 'parlante', 'parlante', 'dios', 'guerra',
-    'guerra', 'silla', 'termo'
-];
-
 const options = {radius:200, maxSpeed:'fast', initSpeed:'fast', direction:135, keep:true};
-//const tagCloud = TagCloud(tagContainer, words, options);
+var words = userData['word_lists'][0];
+var tagcloud;
 
 // Create emotional thermometer element
 
@@ -158,9 +144,8 @@ buttons.forEach(button => {
         } else if (content === 'wordcloud') {
             document.getElementById('container').innerHTML = '<h2>Conceptos predominantes</h2><br>';
             document.getElementById('container').appendChild(wordCloud);
-            console.log(container);
             if (wordCloudButtonClicks === 1) {
-                var tagCloud = TagCloud(tagContainer, words, options);
+                tagcloud = TagCloud(tagContainer, words, options);  // Creates word cloud element
             };
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
@@ -181,14 +166,30 @@ buttons.forEach(button => {
 });
 
 // Set data according to selected mode
+//setData(0); // Defaults to first mode
+
 function setData(id_mode){
-    //const text_path_folder = userData['text_path_folder'][id_mode];
-    const word_lists = userData['word_lists'][id_mode];
-    const encoded_image = userData['encoded_images'][id_mode];
-    const embedding_path_folder = userData['embedding_path_folder'][id_mode];
-    const id_melody = userData['id_melody'][id_mode];
-    // Set image source
-    image.src = 'data:image/png;base64,'.concat(encoded_image);
+    var word_list = userData['word_lists'][id_mode];
+    var encoded_image = userData['encoded_images'][id_mode];
+    var embedding_path_folder = userData['embedding_path_folder'][id_mode];
+    var id_melody = userData['id_melody'][id_mode];
+    
+    audioPlayer.src = 'music/'.concat(id_melody,'.mp3') // Set melody
+    words = word_list  // Set word cloud
+    if (wordCloudButtonClicks >= 1) {
+        tagcloud.update(words);
+    };
+    
+    // Set emotional thermometer
+    image.src = 'data:image/png;base64,'.concat(encoded_image);     // Set image source
+    // Set embeddings
+    // Set playlist
+
 }
 
-setData(0);
+mode_1.onclick = function () {
+    setData(0);
+};
+mode_2.onclick = function () {
+    setData(1);
+};

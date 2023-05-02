@@ -34,6 +34,10 @@ const saveText = (e) => {
   object['text_input'] = text;
   object['text_page_load'] = text_page_load;
   object['text_start'] = text_start;
+  if (text_start === undefined){ // if text_start is undefined, set text_start as text_submit
+    object['text_start'] = text_submit; 
+  };
+  console.log(object['text_start']);
   object['text_submit'] = text_submit;
 
   const textJSON = JSON.stringify(object);
