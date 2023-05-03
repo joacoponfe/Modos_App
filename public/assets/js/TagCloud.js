@@ -180,7 +180,7 @@
 
       // Assign font sizes to each word
       self.fontSizes = {};
-      var maxSize = 80; // in px
+      var maxSize = 40; // in px
 
       for (let wordCount in wordCounts){
         const freq = wordCounts[wordCount];
@@ -493,6 +493,41 @@
         if (self.$container && self.$el) {
           self.$container.removeChild(self.$el);
         }
+      }
+    }, {
+      key: "replace",
+      value: function replace(texts) {
+        var self = this; // params
+
+        // Remove existing items from word cloud
+        var removeList = self.items;
+        removeList.forEach(function (item) {
+          self.$el.removeChild(item.el);
+        });
+
+        // Insert new words
+        self.texts = texts || []; // judging and processing items based on texts
+
+        // Remove duplicate words
+        self.uniqueWords = [...new Set(self.texts)];
+
+        self.uniqueWords.forEach(function (text, index) {
+          var item = self.items[index];
+
+          if (!item) {
+            // if not had, then create
+            item = self._createTextItem(text, index);
+
+            _extends(item, self._computePosition(index, true)); // random place
+
+
+            self.$el.appendChild(item.el);
+            self.items.push(item);
+          } // if had, replace text
+
+          item.el.innerText = text;
+        }); // remove redundant self.items
+
       }
     }, {
       key: "pause",

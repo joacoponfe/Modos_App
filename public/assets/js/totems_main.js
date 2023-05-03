@@ -106,12 +106,11 @@ const controls = document.createElement("div");
 const progressBar = document.createElement("div");
 
 
-// Get references to the buttons in the sidebar menu
+// Get references to the buttons in the sidebar menus
 const buttons = document.querySelectorAll('.sidebar a');
 
 // Add a counter for word cloud button clicks (to avoid rendering more than once)
 var wordCloudButtonClicks = 0;
-//console.log(wordCloudButtonClicks);
 
 // Add a click event listener to each button
 buttons.forEach(button => {
@@ -134,7 +133,6 @@ buttons.forEach(button => {
         if (content === 'wordcloud') {
             wordCloudButtonClicks++;
         }
-        //console.log(wordCloudButtonClicks);
 
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
@@ -144,9 +142,12 @@ buttons.forEach(button => {
         } else if (content === 'wordcloud') {
             document.getElementById('container').innerHTML = '<h2>Conceptos predominantes</h2><br>';
             document.getElementById('container').appendChild(wordCloud);
-            if (wordCloudButtonClicks === 1) {
-                tagcloud = TagCloud(tagContainer, words, options);  // Creates word cloud element
-            };
+            //if (wordCloudButtonClicks === 1) {
+            //    tagcloud = TagCloud(tagContainer, words, options);  // Creates word cloud element
+            //};
+            if (typeof tagcloud === "undefined") { // If object does not already exist
+                tagcloud = TagCloud(tagContainer, words, options);  // Creates word cloud element 
+             }
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
             document.getElementById('container').innerHTML = '<h2>Termómetro emocional</h2><iframe src="thermometer.html"  width="100%" height="1000px" style="border:none;"></iframe>';
@@ -166,7 +167,7 @@ buttons.forEach(button => {
 });
 
 // Set data according to selected mode
-//setData(0); // Defaults to first mode
+setData(0); // Defaults to first mode
 
 function setData(id_mode){
     var word_list = userData['word_lists'][id_mode];
@@ -175,9 +176,13 @@ function setData(id_mode){
     var id_melody = userData['id_melody'][id_mode];
     
     audioPlayer.src = 'music/'.concat(id_melody,'.mp3') // Set melody
+    
     words = word_list  // Set word cloud
     if (wordCloudButtonClicks >= 1) {
-        tagcloud.update(words);
+        if (typeof tagcloud != "undefined") {   // If object exists
+            tagcloud.destroy();                 // destroy it
+         }
+        tagcloud = TagCloud(tagContainer, words, options);  // and create new one
     };
     
     // Set emotional thermometer

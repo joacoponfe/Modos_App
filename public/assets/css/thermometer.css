@@ -155,7 +155,7 @@
     float: left;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    font-size: 4em;
+    font-size: 4.5em;
     line-height: 1.1em;
     border-right-style: solid;
     border-right-width: 1px;
@@ -173,7 +173,7 @@
     width: 0%;
     background-color: #c9c9c9;
     float: left;
-    font-size: 4em;
+    font-size: 4.5em;
     line-height: 1.1em;
     border-right-style: solid;
     border-right-width: 1px;
@@ -193,7 +193,7 @@
     float: left;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    font-size: 4em;
+    font-size: 4.5em;
     line-height: 1.1em;
     animation: negative-bar 5s forwards;
   }
