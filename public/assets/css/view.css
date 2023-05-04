@@ -132,11 +132,11 @@ img{
   }
 }
 
-#disgusto-menu{
-  animation: disgusto-bar 5s forwards;
+#asco-menu{
+  animation: asco-bar 5s forwards;
 }
 
-@keyframes disgusto-bar {
+@keyframes asco-bar {
   100%{
     box-shadow: inset -80em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;

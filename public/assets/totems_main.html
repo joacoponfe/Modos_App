@@ -16,6 +16,15 @@
         <div class="section">
             <div class="container" id="container">
             Presioná uno de los botones de la izquierda para visualizar el contenido.
+            <!--<button onclick="updateIframeContent()">Update iframe content</button>
+            <iframe id="container_frame" src="thermometer.html?cache-buster=123" width="100%" height="1000px" style="border:none;"></iframe>
+            <script>
+                function updateIframeContent() {
+                  var iframe = document.getElementById('container_frame');
+                  var iframeDoc = iframe.contentWindow.document;
+                  iframeDoc.getElementById('alegria-value').innerHTML = '1%';
+                }
+              </script>-->
             </div>
         </div>
         <!--Top menu -->
@@ -25,8 +34,8 @@
                 <h3 id="id_string">ABC000</h3>
             </div>
             <div class="tab">
-                <button id="mode_1"class="tablinks">Modo jónico</button>
-                <button id="mode_2" class="tablinks">Modo locrio</button>
+                <button id="mode_1"class="">Modo jónico</button>
+                <button id="mode_2" class="">Modo locrio</button>
             </div>            
             <!--menu item -->
             <ul>
@@ -75,7 +84,9 @@
         <p>Salir</p>
     </a>
 <script src="/js/TagCloud.js"> </script>
+<script src="/js/thermometer.js" type="module"></script>
 <script src="/js/totems_main.js" type="module"></script>
 <script src="/js/cookies.js" type="module"></script>
+
 </body>
 </html>
