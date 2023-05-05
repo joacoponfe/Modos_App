@@ -93,6 +93,10 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
 
 };
 
+function setPlaylistValues(playlistFrameDoc, id_mode){
+    /// Set playlist songs according to selected mode.
+
+};
 
 // Pull info from database from user's last iteration (last two modes they listened to)
 const object = {};
@@ -100,7 +104,7 @@ object['id_participant'] = id_participant;
 const idJSON = JSON.stringify(object);
 console.log(idJSON);
 
-async function query(id_data) {
+async function get_totems_data(id_data) {
     const response = await fetch(
         //"http://localhost:8000/profiles_api/receive_id/",
         url + "/profiles_api/get_totems_data/",
@@ -114,7 +118,7 @@ async function query(id_data) {
     return result;
 };
 
-const res = await query(idJSON);
+const res = await get_totems_data(idJSON);
 const userData = await res.json();
 console.log(userData);
 
@@ -163,8 +167,6 @@ mode_2.innerHTML = "Modo " + id_melody_2_mode['id_melody_mode'];
 
 // Create an audio element
 const audioPlayer = document.createElement('audio');
-// Set the source of the audio file
-audioPlayer.src = 'music/J1.mp3';
 // Set the controls attribute to display the audio player controls
 audioPlayer.controls = true;
 
@@ -181,9 +183,12 @@ var container_frame;
 
 // Create image element
 const image = document.createElement('img');
-image.src = "https://i.pinimg.com/originals/3c/f8/41/3cf8412096f10f0847e6e689fde63775.jpg";
+//image.src = "https://i.pinimg.com/originals/3c/f8/41/3cf8412096f10f0847e6e689fde63775.jpg";
+image.style.maxWidth = "100%";
+image.alt = "No se encontró la imagen."
 
 // Create playlist element
+var playlist_frame;
 const player = document.createElement("div");
 const audio = document.createElement("audio");
 const controls = document.createElement("div");
@@ -228,7 +233,7 @@ sidebarButtons.forEach(button => {
              }
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
-            document.getElementById('container').innerHTML = '<h2>Termómetro emocional</h2>'
+            document.getElementById('container').innerHTML = '<h2>Termómetro emocional</h2>';
             document.getElementById('container').appendChild(container_frame);
             container_frame.style.display = "block";
             button.setAttribute('class', "active");
@@ -240,10 +245,11 @@ sidebarButtons.forEach(button => {
             document.getElementById('container').innerHTML = '<h2>Vos y el resto</h2><br>';
             button.setAttribute('class', "active");
         } else if (content === 'songs') {
-            document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2><iframe src="playlist.html"  width="100%" height="1000px" style="border:none;"></iframe>';
-            document.getElementById('container').appendChild(container_frame);
-            container_frame.setAttribute("src", "playlist.html"); // Set iframe source as playlist.html
-            container_frame.removeAttribute("hidden"); // Make iframe visible 
+            document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
+            document.getElementById('container').appendChild(playlist_frame);
+            playlist_frame.style.display = "block";
+            //playlist_frame.setAttribute("src", "playlist.html"); // Set iframe source as playlist.html
+            //playlist_frame.removeAttribute("hidden"); // Make iframe visible 
             button.setAttribute('class', "active");
         }
     });
@@ -280,7 +286,7 @@ modeButtons.forEach(button => {
 });
 
 // Set data according to selected mode
-container_frame = setData(0); // Defaults to first mode
+setData(0); // Defaults to first mode
 
 function setData(id_mode){
     ///Updates information displayed on website according to the selected mode.
@@ -354,7 +360,50 @@ function setData(id_mode){
     
 
     image.src = 'data:image/png;base64,'.concat(encoded_image);                                             // Set image source
+    
     // Set embeddings
+    
     // Set playlist
-    return container_frame
+    if (typeof playlist_frame != "undefined") {                                                             // If playlist exists
+        playlist_frame.remove();                                                                            // destroy it
+        playlist_frame = document.createElement('iframe');                                                  // and create new one
+        playlist_frame.setAttribute("src", "playlist.html?cache-buster=123");
+        playlist_frame.style.width = "100%";
+        playlist_frame.style.height = "1000px";
+        playlist_frame.style.border = "none";
+        playlist_frame.style.display = "block";
+        playlist_frame.addEventListener('load', function() {
+            var playlistFrameDoc = playlist_frame.contentWindow.document;
+            setPlaylistValues(playlistFrameDoc, id_mode);
+        });
+        
+        var activeButton = null;                                                                            // Only render playlist if active sidebar button is "songs"
+        sidebarButtons.forEach(function(button) {
+            if (button.getAttribute("class") === "active") {
+              activeButton = button.getAttribute("id");
+            }
+        });
+          
+        if (activeButton) {
+            console.log('The active button is:', activeButton);
+          } else {
+            console.log('No button is currently active.');
+          }
+        if (activeButton === "songs"){
+            document.getElementById('container').appendChild(playlist_frame);
+        }
+        
+    } else {
+        playlist_frame = document.createElement('iframe');
+        playlist_frame.setAttribute("src", "playlist.html?cache-buster=123");
+        playlist_frame.style.width = "100%";
+        playlist_frame.style.height = "1000px";
+        playlist_frame.style.border = "none";
+        playlist_frame.style.display = "none";
+        playlist_frame.addEventListener('load', function() {
+            var playlistFrameDoc = playlist_frame.contentWindow.document;
+            setPlaylistValues(playlistFrameDoc, id_mode);
+        });
+    };
+
 };

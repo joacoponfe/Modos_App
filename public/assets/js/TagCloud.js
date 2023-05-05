@@ -135,8 +135,8 @@
         }
       }
 
-      console.log('self.texts: ', self.texts);
-      console.log('wordCounts: ', wordCounts);
+      //console.log('self.texts: ', self.texts);
+      //console.log('wordCounts: ', wordCounts);
 
       // Sort words by count
       var sortedWordCounts = Object.keys(wordCounts).map(function(key) {
@@ -147,22 +147,22 @@
         return second[1] - first[1];
       })
       
-      console.log('sortedWordCounts: ', sortedWordCounts);
+      //console.log('sortedWordCounts: ', sortedWordCounts);
 
       // Create a new array with only the first "maxWords" items
       const maxWords = 30;
       var slicedWordCounts = sortedWordCounts.slice(0, maxWords);
-      console.log('slicedWordCounts: ', slicedWordCounts);
+      //console.log('slicedWordCounts: ', slicedWordCounts);
 
       // Get list of words that will appear on wordcloud
       self.wordArray = slicedWordCounts.map(function(x) {
         return x[0];
       });
-      console.log('self.wordArray: ', self.wordArray);
+      //console.log('self.wordArray: ', self.wordArray);
 
       // Remove duplicate words
       self.uniqueWords = [...new Set(self.texts)];
-      console.log('self.uniqueWords: ', self.uniqueWords);
+      //console.log('self.uniqueWords: ', self.uniqueWords);
 
       // Get word with maximum frequency
       let maxFreq = 0;
@@ -175,8 +175,8 @@
         }
       }
 
-      console.log('maxFreq: ', maxFreq);
-      console.log('maxKey: ', maxKey);
+      //console.log('maxFreq: ', maxFreq);
+      //console.log('maxKey: ', maxKey);
 
       // Assign font sizes to each word
       self.fontSizes = {};
@@ -188,7 +188,7 @@
         self.fontSizes[wordCount] = fontSize;
       }
 
-      console.log('Font sizes: ', self.fontSizes);
+      //console.log('Font sizes: ', self.fontSizes);
 
       self.config = _objectSpread2(_objectSpread2({}, TagCloud._defaultConfig), options || {}); // calculate config
 
@@ -247,7 +247,7 @@
         //self.texts.forEach(function (text, index) {
         //self.uniqueWords.forEach(function(text, index) {
         self.wordArray.forEach(function(text, index) {
-          console.log(text, index, self.fontSizes[text]);
+          //console.log(text, index, self.fontSizes[text]);
           var item = self._createTextItem(text, index);
 
           $el.appendChild(item.el);
