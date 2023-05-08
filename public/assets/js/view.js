@@ -2,10 +2,9 @@ import { url } from "./config.js";
 
 // Create request object
 const object = {};
-object['id_melody_mode'] = 'mixolidio';
+object['id_melody_mode'] = 'jonico';
 
 const requestJSON = JSON.stringify(object);
-// console.log(requestJSON);
 
 async function query(id_melody_mode) {
     const response = await fetch(
@@ -17,49 +16,25 @@ async function query(id_melody_mode) {
             body: id_melody_mode,
         }
     );
-    //const result = await response.json();
     const result = await response;
     return result;
 }
-
-// query(requestJSON).then((response) => {
-    // console.log(JSON.stringify(response));
-    // console.log(response.json());
-    // response.json().then(body => console.log(body) || body)
-    // .then(body => myTags = body['word_list'] || body)
-    // .then(body => alegria = body['alegria'] || body)
-    // .then(body => sorpresa = body['sorpresa'] || body)
-    // .then(body => miedo = body['miedo'] || body)
-    // .then(body => asco = body['asco'] || body)
-    // .then(body => enojo = body['enojo'] || body)
-    // .then(body => pos = body['pos'] || body)
-    // .then(body => neu = body['neu'] || body)
-    // .then(body => neg = body['neg'] || body)
-
-    // .then(body => num_participants = body['num_participants'] || body)
-    // .then(body => last_refresh = body['last_refresh']|| body)
-// });
-
 const response = await query(requestJSON);
-const response_json =  await response.json()
-console.log(response_json)
+const modeData =  await response.json()
+console.log(modeData)
 
-const myTags = response_json['word_lists'] // Todavía no se puede usar, ya que tiene la frecuencia de cada palabra.
-
-// const myTags = [
-//     'alegría', 'esperanza', 'contento', 'paz',
-//     'bueno', 'soleado', 'armonioso', 'dulce',
-//     'aire', 'aire', 'alegría', 'paz',
-//     'aire', 'paz', 'paz', 'yendo',
-//     'árboles', 'vida', 'cajas', 'violeta',
-//     'castillo', 'monitores', 'papeles', 'impresora',
-//     'auriculares', 'billetera', 'magnífico', 'teclas',
-//     'piano', 'treinta', 'treinta', 'dieciocho',
-//     'televisor', 'computadora', 'escritorio', 'escritorio',
-//     'mate', 'silla', 'silla', 'billetera', 'parlante', 'parlante', 'dios', 'guerra',
-//     'guerra', 'silla', 'termo'
-// ];
-
+///Updates information displayed on website according to the selected mode.
+const myTags = modeData['word_lists'];                                                        // Get word list
+var alegria = modeData['alegria'];                                                             // Get "alegria"
+var tristeza = modeData['tristeza'];                                                           // Get "tristeza"
+var sorpresa = modeData['sorpresa'];                                                           // Get "sorpresa"
+var asco = modeData['asco'];                                                                   // Get "asco"
+var miedo = modeData['miedo'];                                                                 // Get "miedo"
+var enojo = modeData['enojo'];                                                                 // Get "enojo"
+var otro = modeData['otro'];                                                                   // Get "otro"
+var pos = modeData['pos'];                                                                     // Get "pos"
+var neu = modeData['neu'];                                                                     // Get "neu"
+var neg = modeData['neg'];                                                                     // Get "neg"
 
 var tagCloud = TagCloud('.content', myTags,{
 
@@ -87,3 +62,74 @@ var tagCloud = TagCloud('.content', myTags,{
 var colors = ['#044d59'];
 var random_color = colors[Math.floor(Math.random() * colors.length)];
 document.querySelector('.content').style.color = random_color;
+
+document.getElementById('alegria-value').innerHTML = (alegria * 100).toFixed(0).toString().concat("%");
+document.getElementById('tristeza-value').innerHTML = (tristeza * 100).toFixed(0).toString().concat("%");
+document.getElementById('sorpresa-value').innerHTML = (sorpresa * 100).toFixed(0).toString().concat("%");
+document.getElementById('asco-value').innerHTML = (asco * 100).toFixed(0).toString().concat("%");
+document.getElementById('miedo-value').innerHTML = (miedo * 100).toFixed(0).toString().concat("%");
+document.getElementById('enojo-value').innerHTML = (enojo * 100).toFixed(0).toString().concat("%");
+// document.getElementById('otro-value').innerHTML = (otro * 100).toFixed(0).toString().concat("%");
+document.getElementById('pos-value').innerHTML = (pos * 100).toFixed(0).toString().concat("%");
+document.getElementById('neu-value').innerHTML = (neu * 100).toFixed(0).toString().concat("%");
+document.getElementById('neg-value').innerHTML = (neg * 100).toFixed(0).toString().concat("%");
+
+// Get the style sheet containing the alegria-bar animation
+const stylesheet = document.styleSheets[1];
+
+// Find the animation rule we want to modify
+const emotionRuleNames = ['alegria-bar', 'tristeza-bar', 'sorpresa-bar', 'asco-bar', 'miedo-bar', 'enojo-bar'];
+const emotionPercentages = [alegria, tristeza, sorpresa, asco, miedo, enojo];
+for (var i = 0; i < emotionRuleNames.length; i++){
+    var emotionRuleName = emotionRuleNames[i];
+    var emotionPercentage = emotionPercentages[i];
+    var animationRule = null;
+    for (var j = 0; j < stylesheet.rules.length; j++) {
+        var rule = stylesheet.rules[j];
+        if (rule.type == CSSRule.KEYFRAMES_RULE && rule.name == emotionRuleName) {
+            animationRule = rule;
+            break; 
+        };
+    };
+
+    if (animationRule) {
+        // Modify the animation rule
+        var keyframes = animationRule.cssRules;
+        for (var k = 0; k < keyframes.length; k++){
+            var keyframe = keyframes[k];
+            if (keyframe.keyText == '100%'){
+                var shadow_inset = (1-emotionPercentage)*100;
+                keyframe.style.boxShadow = `inset -${shadow_inset}em 0 0 0 #f7f7f7`;
+            };
+        };
+    };
+
+};
+
+
+const sentimentRuleNames = ['positive-bar', 'neutral-bar', 'negative-bar'];
+const sentimentPercentages = [pos, neu, neg];
+for (var i = 0; i < sentimentRuleNames.length; i++){
+    var sentimentRuleName = sentimentRuleNames[i];
+    var sentimentPercentage = sentimentPercentages[i];
+    var animationRule = null;
+    for (var j = 0; j < stylesheet.rules.length; j++){
+        var rule = stylesheet.rules[j];
+        if (rule.type == CSSRule.KEYFRAMES_RULE && rule.name == sentimentRuleName) {
+            animationRule = rule;
+            break; 
+        };
+    };
+
+    if (animationRule) {
+        // Modify the animation rule
+        var keyframes = animationRule.cssRules;
+        for (var k = 0; k < keyframes.length; k++){
+            var keyframe = keyframes[k];
+            if (keyframe.keyText == '100%'){
+                var width = sentimentPercentage*100;
+                keyframe.style.width = `${width}%`;
+            };
+        };
+    };
+};
