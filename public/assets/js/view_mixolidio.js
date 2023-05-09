@@ -2,7 +2,7 @@ import { url } from "./config.js";
 
 // Create request object
 const object = {};
-object['id_melody_mode'] = 'jonico';
+object['id_melody_mode'] = 'mixolidio';
 
 const requestJSON = JSON.stringify(object);
 
@@ -47,18 +47,23 @@ var newNumber = num_participants;
 numberElement.textContent = newNumber;
 
 var tagCloud = TagCloud('.content', myTags,{
+
   // radius in px
   radius: 300,
+
   // animation speed
   // slow, normal, fast
   maxSpeed: 'fast',
   initSpeed: 'fast',
+
   // 0 = top
   // 90 = left
   // 135 = right-bottom
   direction: 135,
+  
   // interact with cursor move on mouse out
   keep: true
+  
 });
 
 //To change the color of text randomly
@@ -144,6 +149,6 @@ for (var i = 0; i < sentimentRuleNames.length; i++){
 // Call updateData function initially
 updateData();
 
-// Call updateData function every 5 minutes #Uncomment for periodic updating
+// Call updateData function every 5 minutes
 // setInterval(updateData, 5 * 60 * 1000);
 
