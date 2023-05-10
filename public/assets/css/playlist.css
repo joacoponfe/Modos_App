@@ -149,10 +149,11 @@
   .album-art {
     flex: 0 0 150px;
     height: 150px;
+    width: 150px;
     background-color: #f2f2f2;
     margin-right: 20px;
     border-radius: 5px;
-    background-image: url('https://upload.wikimedia.org/wikipedia/en/a/a2/Chvrches_-_Screen_Violence.png');
+    /*background-image: url('https://upload.wikimedia.org/wikipedia/en/a/a2/Chvrches_-_Screen_Violence.png');*/
     background-size: cover;
     background-position: center;
   }

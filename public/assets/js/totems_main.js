@@ -1,4 +1,5 @@
 import { getCookie } from "./cookies.js";
+import { setCookie } from "./cookies.js";
 import { url } from "./config.js";
 
 // Get cookies
@@ -147,11 +148,17 @@ const response2 = await get_melody_mode(id_melody_2_JSON);
 const id_melody_1_mode = await response1.json();
 const id_melody_2_mode = await response2.json();
 
-const id_melody_modes = {'1': id_melody_1_mode, '2': id_melody_2_mode};
+//const id_melody_modes = {'1': id_melody_1_mode, '2': id_melody_2_mode};
+const id_melody_modes = [id_melody_1_mode, id_melody_2_mode];
 
 // Correct for tildes
-for (let x in id_melody_modes){
-    let id_melody_mode = id_melody_modes[x];
+const id_melody_1_mode_tildes = Object.assign({}, id_melody_1_mode); // Create copies 
+const id_melody_2_mode_tildes = Object.assign({}, id_melody_2_mode);
+const id_melody_modes_tildes = [id_melody_1_mode_tildes, id_melody_2_mode_tildes];
+
+
+for (let x in id_melody_modes_tildes){
+    let id_melody_mode = id_melody_modes_tildes[x];
     if (id_melody_mode['id_melody_mode'] === "jonico"){
         id_melody_mode['id_melody_mode'] = "jónico";
     }   else if (id_melody_mode['id_melody_mode'] === "dorico"){
@@ -161,8 +168,8 @@ for (let x in id_melody_modes){
     };
 };
 
-mode_1.innerHTML = "Modo " + id_melody_1_mode['id_melody_mode'];
-mode_2.innerHTML = "Modo " + id_melody_2_mode['id_melody_mode'];
+mode_1.innerHTML = "Modo " + id_melody_1_mode_tildes['id_melody_mode'];
+mode_2.innerHTML = "Modo " + id_melody_2_mode_tildes['id_melody_mode'];
 
 
 // Create an audio element
@@ -289,7 +296,10 @@ modeButtons.forEach(button => {
 setData(0); // Defaults to first mode
 
 function setData(id_mode){
-    ///Updates information displayed on website according to the selected mode.
+    // Set id_melody_mode cookie (read by playlist.html)
+    setCookie('id_melody_mode', id_melody_modes[id_mode]['id_melody_mode']);
+    
+    // Updates information displayed on website according to the selected mode.
     var word_list = userData['word_lists'][id_mode];                                                        // Get word list
     var encoded_image = userData['encoded_images'][id_mode];                                                // Get encoded image
     var embedding_path_folder = userData['embedding_path_folder'][id_mode];                                 // Get embeddings video

@@ -1,4 +1,7 @@
 import { url } from "./config.js";
+import { getCookie } from "./cookies.js";
+
+const id_melody_mode = getCookie('id_melody_mode');
 
 const player = document.getElementById("player");
 const audio = document.getElementById("audio");
@@ -14,9 +17,18 @@ const duration = document.querySelector("#duration");
 
 // Metadata elements
 const songTitle = document.getElementById("song-title");
+const artistName = document.getElementById("artist-name");
+const albumName = document.getElementById("album-name");
+const releaseYear = document.getElementById("release-year");
+const albumArt = document.getElementById("album-art");
 
-let currentSong = 0;
-audio.src = playlist.children[currentSong].getAttribute("data-src");
+// Song elements
+const classicTrack = document.getElementById("clasica");
+const jazzTrack = document.getElementById("jazz");
+const metalargTrack = document.getElementById("metalarg");
+const metalintTrack = document.getElementById("metalint");
+const popTrack = document.getElementById("pop");
+
 
 playlist.addEventListener("click", (e) => {
   if (e.target.tagName === "LI") {
@@ -93,10 +105,38 @@ audio.addEventListener("ended", (e) => {
   setActiveSong(currentSong);
 });
 
-function setMetadata(genre) {
-  if (genre === 'clasica'){
-    songTitle.innerHTML = modeSongsData['titulos'][0];
+function setMetadata(index) {
+  songTitle.innerHTML = modeSongsData['titulos'][index];
+  artistName.innerHTML = modeSongsData['artistas'][index];
+  albumName.innerHTML = modeSongsData['albumes'][index];
+  releaseYear.innerHTML = modeSongsData['anios'][index];
+  albumArt.src = 'data:image/png;base64,'.concat(modeSongsData['encoded_images'][index]);
+};
+
+function setAudioFiles(id_mode) {
+  var id_mode_letter;
+  if (id_mode === 'jonico'){
+    id_mode_letter = 'j';
+  } if (id_mode === 'dorico') {
+    id_mode_letter = "d";
+  } if (id_mode === 'frigio') {
+    id_mode_letter = "f";
+  } if (id_mode === 'lidio') {
+    id_mode_letter = "li";
+  } if (id_mode === 'mixolidio') {
+    id_mode_letter = 'm';
+  } if (id_mode === 'eolico') {
+    id_mode_letter = 'e';
+  } if (id_mode === 'locrio') {
+    id_mode_letter = 'lo';
   }
+
+  const audioTracksDir = 'music/snippets/';
+  classicTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_clasica.wav'));
+  jazzTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_jazz.wav'));
+  metalargTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_metalarg.wav'));
+  metalintTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_metalint.wav'));
+  popTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_pop.wav'));
 }
 
 const setActiveSong = (index) => {
@@ -108,13 +148,11 @@ const setActiveSong = (index) => {
   activeSong.classList.add("active-song");
   console.log(activeSong.getAttribute("data-src"));
   console.log(activeSong.getAttribute("id"));
+  
   // set file metadata
   const genre = activeSong.getAttribute("id");
-  setMetadata(genre);
+  setMetadata(index);
 };
-
-
-
 
 
 // BACKEND REQUEST
@@ -132,10 +170,15 @@ return result;
 };
 
 const object = {};
-object['id_melody_mode'] = 'jonico';
+//const id_melody_mode = 'mixolidio';
+object['id_melody_mode'] = id_melody_mode;
 const modeJSON = JSON.stringify(object);
 console.log(modeJSON);
 const res = await get_mode_songs(modeJSON);
 const modeSongsData = await res.json();
-console.log(modeSongsData['titulos'][0]);
 
+// Initialization parameters
+setMetadata(0);
+setAudioFiles(id_melody_mode);
+let currentSong = 0;
+audio.src = playlist.children[currentSong].getAttribute("data-src");
