@@ -4,17 +4,14 @@ import { setCookie } from "./cookies.js";
 const id_melody_set = getCookie('id_melody_set');
 const iteration = getCookie('iteration');
 const melody_order = 2;
-
-// const id_melody_set = 3;
-// const iteration = 2;
-// const melody_order = 2;
+const iteration_mod = iteration % 3 || 3;  // This sets iteration interval between 1 and 3 always
 
 // Get id_melody and set sound source
 fetch('melody_set.csv')
   .then(response => response.text())
   .then(text => {
     let column_name = "_".concat(id_melody_set)
-    let row_number = (2 * iteration - 2) + melody_order - 1
+    let row_number = (2 * iteration_mod - 2) + melody_order - 1;
     const data = Papa.parse(text, { header: true }).data;
     const id_melody = data[row_number][column_name];
     setCookie('id_melody', id_melody);

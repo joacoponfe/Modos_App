@@ -24,7 +24,7 @@ async function updateData() {
     const response = await query(requestJSON);
     const modeData = await response.json();
     console.log(modeData);
-    console.log('me actualize!')
+    console.log('me actualicé!')
 
     
 ///Updates information displayed on website according to the selected mode.

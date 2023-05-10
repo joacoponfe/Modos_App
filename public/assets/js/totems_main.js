@@ -10,14 +10,14 @@ const mode_1 = document.getElementById("mode_1");
 const mode_2 = document.getElementById("mode_2");
 const id_string = document.getElementById("id_string");
 
-function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage, sorpresa_percentage, asco_percentage, miedo_percentage, enojo_percentage, otro_percentage, pos_percentage, neu_percentage, neg_percentage, decimal_places=1){
+function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage, sorpresa_percentage, asco_percentage, miedo_percentage, enojo_percentage, pos_percentage, neu_percentage, neg_percentage, decimal_places=0){
     var alegria_value = iframeDoc.getElementById('alegria-value');
     var tristeza_value = iframeDoc.getElementById("tristeza-value");
     var sorpresa_value = iframeDoc.getElementById("sorpresa-value");
     var asco_value = iframeDoc.getElementById("asco-value");
     var miedo_value = iframeDoc.getElementById("miedo-value");
     var enojo_value = iframeDoc.getElementById("enojo-value");
-    var otro_value = iframeDoc.getElementById("otro-value");
+    //var otro_value = iframeDoc.getElementById("otro-value");
     var pos_value = iframeDoc.getElementById("pos-value");
     var neu_value = iframeDoc.getElementById("neu-value");
     var neg_value = iframeDoc.getElementById("neg-value");
@@ -28,7 +28,7 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
     asco_value.innerHTML = (asco_percentage * 100).toFixed(decimal_places).toString().concat("%");
     miedo_value.innerHTML = (miedo_percentage * 100).toFixed(decimal_places).toString().concat("%");
     enojo_value.innerHTML = (enojo_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    otro_value.innerHTML = (otro_percentage * 100).toFixed(decimal_places).toString().concat("%");
+    //otro_value.innerHTML = (otro_percentage * 100).toFixed(decimal_places).toString().concat("%");
     pos_value.innerHTML = (pos_percentage * 100).toFixed(decimal_places).toString().concat("%");
     neu_value.innerHTML = (neu_percentage * 100).toFixed(decimal_places).toString().concat("%");
     neg_value.innerHTML = (neg_percentage * 100).toFixed(decimal_places).toString().concat("%");
@@ -37,8 +37,8 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
     var stylesheet = iframeDoc.styleSheets[1];
     
     // Find the animation rule we want to modify
-    const emotionRuleNames = ['alegria-bar', 'tristeza-bar', 'sorpresa-bar', 'asco-bar', 'miedo-bar', 'enojo-bar', 'otro-bar'];
-    const emotionPercentages = [alegria_percentage, tristeza_percentage, sorpresa_percentage, asco_percentage, miedo_percentage, enojo_percentage, otro_percentage];
+    const emotionRuleNames = ['alegria-bar', 'tristeza-bar', 'sorpresa-bar', 'asco-bar', 'miedo-bar', 'enojo-bar'];
+    const emotionPercentages = [alegria_percentage, tristeza_percentage, sorpresa_percentage, asco_percentage, miedo_percentage, enojo_percentage];
     for (var i = 0; i < emotionRuleNames.length; i++){
         var emotionRuleName = emotionRuleNames[i];
         var emotionPercentage = emotionPercentages[i];
@@ -94,10 +94,6 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
 
 };
 
-function setPlaylistValues(playlistFrameDoc, id_mode){
-    /// Set playlist songs according to selected mode.
-
-};
 
 // Pull info from database from user's last iteration (last two modes they listened to)
 const object = {};
@@ -310,7 +306,7 @@ function setData(id_mode){
     var asco = userData['asco'][id_mode];                                                                   // Get "asco"
     var miedo = userData['miedo'][id_mode];                                                                 // Get "miedo"
     var enojo = userData['enojo'][id_mode];                                                                 // Get "enojo"
-    var otro = userData['otro'][id_mode];                                                                   // Get "otro"
+    //var otro = userData['otro'][id_mode];                                                                   // Get "otro"
     var pos = userData['pos'][id_mode];                                                                     // Get "pos"
     var neu = userData['neu'][id_mode];                                                                     // Get "neu"
     var neg = userData['neg'][id_mode];                                                                     // Get "neg"
@@ -336,7 +332,7 @@ function setData(id_mode){
         container_frame.style.display = "block";
         container_frame.addEventListener('load', function() {
             var iframeDoc = container_frame.contentWindow.document;
-            setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, otro, pos, neu, neg);
+            setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg);
         });
         
         var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "thermometer"
@@ -364,7 +360,7 @@ function setData(id_mode){
         container_frame.style.display = "none";
         container_frame.addEventListener('load', function() {
             var iframeDoc = container_frame.contentWindow.document;
-            setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, otro, pos, neu, neg);
+            setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg);
         });
     };
     
@@ -382,10 +378,10 @@ function setData(id_mode){
         playlist_frame.style.height = "1000px";
         playlist_frame.style.border = "none";
         playlist_frame.style.display = "block";
-        playlist_frame.addEventListener('load', function() {
-            var playlistFrameDoc = playlist_frame.contentWindow.document;
-            setPlaylistValues(playlistFrameDoc, id_mode);
-        });
+        // playlist_frame.addEventListener('load', function() {
+        //     var playlistFrameDoc = playlist_frame.contentWindow.document;
+        //     setPlaylistValues(playlistFrameDoc, id_mode);
+        // });
         
         var activeButton = null;                                                                            // Only render playlist if active sidebar button is "songs"
         sidebarButtons.forEach(function(button) {
@@ -395,9 +391,9 @@ function setData(id_mode){
         });
           
         if (activeButton) {
-            console.log('The active button is:', activeButton);
+            //console.log('The active button is:', activeButton);
           } else {
-            console.log('No button is currently active.');
+            //console.log('No button is currently active.');
           }
         if (activeButton === "songs"){
             document.getElementById('container').appendChild(playlist_frame);
@@ -410,10 +406,10 @@ function setData(id_mode){
         playlist_frame.style.height = "1000px";
         playlist_frame.style.border = "none";
         playlist_frame.style.display = "none";
-        playlist_frame.addEventListener('load', function() {
-            var playlistFrameDoc = playlist_frame.contentWindow.document;
-            setPlaylistValues(playlistFrameDoc, id_mode);
-        });
+        // playlist_frame.addEventListener('load', function() {
+        //     var playlistFrameDoc = playlist_frame.contentWindow.document;
+        //     setPlaylistValues(playlistFrameDoc, id_mode);
+        // });
     };
 
 };

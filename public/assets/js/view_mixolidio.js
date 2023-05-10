@@ -24,11 +24,11 @@ async function updateData() {
     const response = await query(requestJSON);
     const modeData = await response.json();
     console.log(modeData);
-    console.log('me actualize!')
+    console.log('me actualicé!')
 
     
 ///Updates information displayed on website according to the selected mode.
-const myTags = modeData['word_lists'];                                                        // Get word list
+const myTags = modeData['word_lists'];                                                         // Get word list
 var alegria = modeData['alegria'];                                                             // Get "alegria"
 var tristeza = modeData['tristeza'];                                                           // Get "tristeza"
 var sorpresa = modeData['sorpresa'];                                                           // Get "sorpresa"
