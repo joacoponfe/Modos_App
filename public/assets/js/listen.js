@@ -24,7 +24,7 @@ sound.id       = 'audio-player';
 sound.type     = 'audio/mpeg';
 sound.volume   = getCookie("userVolume");
 
-var timeleft = 5;
+var timeleft = 3;
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
