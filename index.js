@@ -6,8 +6,7 @@ const natural = require('natural');
 const aposToLexForm = require('apos-to-lex-form');
 const SW = require('stopword');
 const bodyParser = require('body-parser');
-
-
+const favicon = require('serve-favicon');
 
 
 const storage = multer.diskStorage({
@@ -41,10 +40,12 @@ app.use(cookieParser());
 app.use('/api/nlp', nlpRouter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(favicon('./public/assets/favicon.ico'));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
   });
+
 
 app.use(express.static('uploads'));
 
@@ -58,44 +59,7 @@ app.post("/api", (request, response) => {
   console.log(request.body);
   const data = request.body;
   response.json(data);
-  });
-// app.post("/text_input", (request, response) => {
-//   console.log("I got a request!");
-//   console.log(request.body);
-//   const data = request.body;
-//   database.insert({data:"data"});
-
-//   response.json({
-//     status: "success",
-//     latitude: data.lat,
-//     longitude: data.lon,
-
-//   });
-// });
-//app.post('/text_input', function(req, res, next) {
-//  const review  = req.body;
-//  console.log(review['text']);
-//  const lexedReview = aposToLexForm(review['text']); // convert contractions to standard lexicon (I'm -> I am, you're -> you are)
-//  console.log(lexedReview);
-//  const casedReview = lexedReview.toLowerCase(); // convert to lowercase
-//  console.log(casedReview);
-//  const alphaOnlyReview = casedReview.replace(/[^a-zA-Z\s]+/g, '');  // remove numerical tokens and/or characters that are NOT a-z or A-Z)
-//  console.log(alphaOnlyReview);
-//  const { WordTokenizer } = natural;
-//  const tokenizer = new WordTokenizer();
-//  const tokenizedReview = tokenizer.tokenize(alphaOnlyReview);
-//  console.log(tokenizedReview);
-  // FALTA SPELL CHECK EN ESPAÑOL
-//  const filteredReview = SW.removeStopwords(tokenizedReview);
-//  console.log(filteredReview);
-  // STEMMING? (si usamos el paquete SentimentAnalyzer, este lo hace automáticamente)
-//  const { SentimentAnalyzer, PorterStemmer } = natural;
-//  const analyzer = new SentimentAnalyzer('Spanish', PorterStemmer, 'afinn');
-//  const analysis = analyzer.getSentiment(filteredReview);
-//  console.log(analysis)
-  //const analysis = 1;
-//  res.status(200).json({ analysis });
-//});
+});
 
 // app.listen(port, () => {
 //   console.log(`App listening at http://localhost:${port}`);
@@ -108,3 +72,13 @@ app.listen(3000, '0.0.0.0', function() {
 module.exports = app;
 
 
+// include and initialize the rollbar library with your access token
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: '26d5a5b7fc81436d8d00d2615067e63a',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
