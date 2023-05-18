@@ -8,7 +8,6 @@ const requestJSON = JSON.stringify(object);
 
 async function query(id_melody_mode) {
     const response = await fetch(
-        //"http://localhost:8000/profiles_api/mode_data/",
         url + "/profiles_api/mode_data/",
         {
             headers: new Headers({ 'Content-type': 'application/json' }),
@@ -21,7 +20,12 @@ async function query(id_melody_mode) {
 }
 
 async function updateData() {
-    const response = await query(requestJSON);
+    try {
+        const response = await query(requestJSON);
+    } catch (error) {
+        console.log(error);
+        //window.location.href = "server_down.html";
+    }
     const modeData = await response.json();
     console.log(modeData);
     console.log('me actualicé!')

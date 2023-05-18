@@ -19,7 +19,6 @@ form.addEventListener('submit', function (e) {
 
     async function query(form_data) {
         const response = await fetch(
-            //"http://localhost:8000/profiles_api/receive_form/",
             url + "/profiles_api/receive_form/",
             {
                 headers: new Headers({ 'Content-type': 'application/json' }),
@@ -36,7 +35,12 @@ form.addEventListener('submit', function (e) {
         //console.log(JSON.stringify(response));
         //console.log(response.json());
         response.json().then(body => console.log(body)|| body)
-        .then(body => window.location.href = "volume.html");
+        .then(body => window.location.href = "volume.html")
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        console.log("El servidor está caído.");
+        window.location.href = "server_down.html";   
     });
 
 });

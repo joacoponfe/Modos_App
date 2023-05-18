@@ -47,7 +47,6 @@ const saveText = (e) => {
 
   async function query(text_data) {
     const response = await fetch(
-        //"http://localhost:8000/profiles_api/receive_text/",
         url + "/profiles_api/receive_text/",
         {
             headers: new Headers({ 'Content-type': 'application/json' }),
@@ -55,18 +54,19 @@ const saveText = (e) => {
             body: text_data,
         }
     );
-    //const result = await response.json();
     const result = await response;
     return result;
 }
 
 query(textJSON).then((response) => {
-    //console.log(JSON.stringify(response));
-    //console.log(response.json());
-    response.json().then(body => console.log(body));
+  response.json().then(body => console.log(body))
+  .then(body => window.location.href = "finalize2.html")
+})
+.catch((error) => {
+  console.error('Error:', error);
+  console.log("El servidor está caído.");
+  window.location.href = "server_down.html";   
 });
-  window.location.href = "finalize2.html"
-  
 }
 
 var eventHandler = function(event){

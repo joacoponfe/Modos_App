@@ -19,7 +19,6 @@ form.addEventListener('submit', function (e) {
 
     async function query(id_data) {
         const response = await fetch(
-            //"http://localhost:8000/profiles_api/receive_id/", // cambiar?
             url + "/profiles_api/receive_id/",
             {
                 headers: new Headers({ 'Content-type': 'application/json' }),
@@ -27,7 +26,6 @@ form.addEventListener('submit', function (e) {
                 body: id_data,
             }
         );
-        //const result = await response.json();
         const result = await response;
         return result;
     }
@@ -35,6 +33,11 @@ form.addEventListener('submit', function (e) {
     query(formJSON).then((response) => {
         response.json().then(body => console.log(body) || body)
         .then(body => checkID(body['id_participant'], body['id_exists']))
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        console.log("El servidor está caído.");
+        window.location.href = "server_down_totems.html";   
     });
 });
 

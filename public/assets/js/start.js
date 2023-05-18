@@ -4,6 +4,17 @@ import { url } from "./config.js";
 
 const form = document.getElementById("form");
 
+fetch(url + "/profiles_api/hello/", {
+    method: "GET",
+    }).then(response => response)
+    .then(data => {
+        console.log("El servidor está corriendo.")
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      console.log("El servidor está caído.")   
+    });
+
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     const formData = new FormData(form);
@@ -33,7 +44,12 @@ form.addEventListener('submit', function (e) {
         .then(body => setCookie('id_participant', body['id_participant'], 1) || body)
         .then(body => setCookie('id_exists', body['id_exists'], 1) || body)
         .then(body => checkID(body['id_exists']))
-    });
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        console.log("El servidor está caído.");
+        window.location.href = "server_down.html";
+      });
     
 });
 

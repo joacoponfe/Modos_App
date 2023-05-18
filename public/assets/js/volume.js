@@ -1,6 +1,5 @@
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
-import { url } from "./config.js";
 
 const audio = document.getElementById("audio");
 const playPause = document.getElementById("play-pause");
