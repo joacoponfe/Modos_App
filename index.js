@@ -61,6 +61,12 @@ app.post("/api", (request, response) => {
   response.json(data);
 });
 
+// 404 PAGE
+app.use(function(req, res, next){
+  res.status(404).sendFile(path.join(__dirname, 'public/404_page.html'));
+});
+
+
 // app.listen(port, () => {
 //   console.log(`App listening at http://localhost:${port}`);
 // });
