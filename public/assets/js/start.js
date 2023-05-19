@@ -1,6 +1,7 @@
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
 import { url } from "./config.js";
+import { winstonLogger } from "./logger.js";
 
 const form = document.getElementById("form");
 
@@ -12,7 +13,8 @@ fetch(url + "/profiles_api/hello/", {
     })
     .catch((error) => {
       console.error('Error:', error);
-      console.log("El servidor está caído.")   
+      console.log("El servidor está caído.");
+      winstonLogger.info('Server down.')
     });
 
 form.addEventListener('submit', function (e) {

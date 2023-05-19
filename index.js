@@ -1,13 +1,21 @@
-const fs = require('fs');
-const cookieParser = require('cookie-parser');
-const multer = require('multer');
-const logger = require('morgan');
-const natural = require('natural');
-const aposToLexForm = require('apos-to-lex-form');
-const SW = require('stopword');
-const bodyParser = require('body-parser');
-const favicon = require('serve-favicon');
+// const cookieParser = require('cookie-parser');
+// const multer = require('multer');
+// const logger = require('morgan');
+// const bodyParser = require('body-parser');
+// const favicon = require('serve-favicon');
+//const path = require('path');
+//const express = require('express');
+//const nlpRouter = require('./public/assets/js/nlp');
 
+import cookieParser from "cookie-parser";
+import multer from "multer";
+import logger from "morgan";
+import bodyParser from "body-parser";
+import favicon from "serve-favicon";
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -19,10 +27,10 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-const path = require('path');
-const express = require('express');
+
+
+import express from "express";
 const port = process.env.PORT || 3000;
-const nlpRouter = require('./public/assets/js/nlp');
 
 const app = express();
 // parse requests of content-type - application/json
@@ -37,7 +45,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use('/api/nlp', nlpRouter);
+//app.use('/api/nlp', nlpRouter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon('./public/assets/favicon.ico'));
@@ -66,6 +74,16 @@ app.use(function(req, res, next){
   res.status(404).sendFile(path.join(__dirname, 'public/404_page.html'));
 });
 
+// LOGGING WITH WINSTON
+import winston from "winston";
+ 
+const winstonLogger = winston.createLogger({
+   transports: [
+       new winston.transports.Console()
+     ]
+ });
+
+export {winstonLogger};
 
 // app.listen(port, () => {
 //   console.log(`App listening at http://localhost:${port}`);
@@ -75,16 +93,16 @@ app.listen(3000, '0.0.0.0', function() {
   console.log('Listening to port:  ' + 3000);
 });
 
-module.exports = app;
+//module.exports = app;
+export {app};
 
+// // include and initialize the rollbar library with your access token
+// var Rollbar = require('rollbar')
+// var rollbar = new Rollbar({
+//   accessToken: '26d5a5b7fc81436d8d00d2615067e63a',
+//   captureUncaught: true,
+//   captureUnhandledRejections: true,
+// })
 
-// include and initialize the rollbar library with your access token
-var Rollbar = require('rollbar')
-var rollbar = new Rollbar({
-  accessToken: '26d5a5b7fc81436d8d00d2615067e63a',
-  captureUncaught: true,
-  captureUnhandledRejections: true,
-})
-
-// record a generic message and send it to Rollbar
-rollbar.log('Hello world!')
+// // record a generic message and send it to Rollbar
+// rollbar.log('Hello world!')
