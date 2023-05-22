@@ -1,0 +1,20 @@
+[0mGET /%C3%A7 [33m404[0m 4.233 ms - 1200[0m
+[0mGET / [36m304[0m 1.020 ms - -[0m
+[0mGET /index.html [36m304[0m 0.598 ms - -[0m
+[0mGET /server_dsown.html [33m404[0m 1.556 ms - 1200[0m
+127.0.0.1 - - [22/May/2023:14:15:16 +0000] "GET /server_dsown.html HTTP/1.1" 404 1200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:14:15:37 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:14:15:55 +0000] "GET /index.html HTTP/1.1" 304 - "http://localhost:3000/server_down.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:14:18:39 +0000] "GET /server_downw.html HTTP/1.1" 404 1200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:14:42:37 +0000] "GET /js/fs HTTP/1.1" 404 1200 "http://localhost:3000/js/logger.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:14:46:36 +0000] "GET /node_modules/fs HTTP/1.1" 404 1200 "http://localhost:3000/js/logger.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:14:55:43 +0000] "GET /index.js HTTP/1.1" 404 1200 "http://localhost:3000/js/logger.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:15:12:12 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:15:12:13 +0000] "GET /index.js HTTP/1.1" 404 1200 "http://localhost:3000/js/logger.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:15:13:58 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:15:13:58 +0000] "GET /index.js HTTP/1.1" 404 1200 "http://localhost:3000/js/logger.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:15:19:39 +0000] "GET /node_modules/fs HTTP/1.1" 404 1200 "http://localhost:3000/js/logger.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:15:20:46 +0000] "GET /index.html HTTP/1.1" 304 - "http://localhost:3000/server_down.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:17:00:00 +0000] "GET /index.html HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:17:18:21 +0000] "GET /images/0_QR.png HTTP/1.1" 404 1200 "http://localhost:3000/totems_main.html?ABC123" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [22/May/2023:17:21:08 +0000] "GET /music/snippets/lo_metalarg.wav HTTP/1.1" 206 1200 "http://localhost:3000/playlist.html?cache-buster=123" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"

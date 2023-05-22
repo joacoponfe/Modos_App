@@ -14,7 +14,6 @@ const requestJSON = JSON.stringify(object);
 
 async function query(id_participant) {
     const response = await fetch(
-        //"http://localhost:8000/profiles_api/id_melodies/",
         url + "/profiles_api/id_melodies/",
         {
             headers: new Headers({ 'Content-type': 'application/json' }),

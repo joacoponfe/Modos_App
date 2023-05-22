@@ -13,6 +13,7 @@ import logger from "morgan";
 import bodyParser from "body-parser";
 import favicon from "serve-favicon";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,7 +42,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static('public/assets'));
-app.use(logger('dev'));
+
+// Logger
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+// setup the logger
+//app.use(logger('dev'));
+app.use(logger('combined', { stream: accessLogStream }));
+export {accessLogStream};
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -73,17 +82,6 @@ app.post("/api", (request, response) => {
 app.use(function(req, res, next){
   res.status(404).sendFile(path.join(__dirname, 'public/404_page.html'));
 });
-
-// LOGGING WITH WINSTON
-import winston from "winston";
- 
-const winstonLogger = winston.createLogger({
-   transports: [
-       new winston.transports.Console()
-     ]
- });
-
-export {winstonLogger};
 
 // app.listen(port, () => {
 //   console.log(`App listening at http://localhost:${port}`);

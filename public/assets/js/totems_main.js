@@ -188,7 +188,12 @@ var container_frame;
 const image = document.createElement('img');
 //image.src = "https://i.pinimg.com/originals/3c/f8/41/3cf8412096f10f0847e6e689fde63775.jpg";
 image.style.maxWidth = "100%";
-image.alt = "No se encontró la imagen."
+image.alt = "No se encontró la imagen.";
+
+// Create QR code image element
+const qr_image = document.createElement('img');
+qr_image.style.maxWidth = "100%";
+qr_image.alt = "No se encontró el código QR.";
 
 // Create playlist element
 var playlist_frame;
@@ -250,6 +255,7 @@ sidebarButtons.forEach(button => {
         } else if (content === 'songs') {
             document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
             document.getElementById('container').appendChild(playlist_frame);
+            //document.getElementById('container').appendChild(qr_image);
             playlist_frame.style.display = "block";
             //playlist_frame.setAttribute("src", "playlist.html"); // Set iframe source as playlist.html
             //playlist_frame.removeAttribute("hidden"); // Make iframe visible 
@@ -367,6 +373,8 @@ function setData(id_mode){
 
     image.src = 'data:image/png;base64,'.concat(encoded_image);                                             // Set image source
     
+    //qr_image.src = 'images/'.concat(id_melody_modes[id_mode]['id_melody_mode'],'_QR.png');                  // Set QR code image source
+
     // Set embeddings
     
     // Set playlist
@@ -375,14 +383,10 @@ function setData(id_mode){
         playlist_frame = document.createElement('iframe');                                                  // and create new one
         playlist_frame.setAttribute("src", "playlist.html?cache-buster=123");
         playlist_frame.style.width = "100%";
-        playlist_frame.style.height = "1000px";
+        playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
         playlist_frame.style.display = "block";
-        // playlist_frame.addEventListener('load', function() {
-        //     var playlistFrameDoc = playlist_frame.contentWindow.document;
-        //     setPlaylistValues(playlistFrameDoc, id_mode);
-        // });
-        
+
         var activeButton = null;                                                                            // Only render playlist if active sidebar button is "songs"
         sidebarButtons.forEach(function(button) {
             if (button.getAttribute("class") === "active") {
@@ -403,13 +407,10 @@ function setData(id_mode){
         playlist_frame = document.createElement('iframe');
         playlist_frame.setAttribute("src", "playlist.html?cache-buster=123");
         playlist_frame.style.width = "100%";
-        playlist_frame.style.height = "1000px";
+        playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
         playlist_frame.style.display = "none";
-        // playlist_frame.addEventListener('load', function() {
-        //     var playlistFrameDoc = playlist_frame.contentWindow.document;
-        //     setPlaylistValues(playlistFrameDoc, id_mode);
-        // });
+
     };
 
 };

@@ -29,6 +29,9 @@ const metalargTrack = document.getElementById("metalarg");
 const metalintTrack = document.getElementById("metalint");
 const popTrack = document.getElementById("pop");
 
+// QR element
+const qr_image = document.getElementById("qr_image");
+
 
 playlist.addEventListener("click", (e) => {
   if (e.target.tagName === "LI") {
@@ -139,6 +142,10 @@ function setAudioFiles(id_mode) {
   popTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_pop.wav'));
 }
 
+function setQRCode(id_mode) {
+  qr_image.src = 'images/'.concat(id_mode,'_QR.png');
+}
+
 const setActiveSong = (index) => {
   // remove "active" class from previously active song
   playlist.querySelector(".active-song").classList.remove("active-song");
@@ -170,7 +177,6 @@ return result;
 };
 
 const object = {};
-//const id_melody_mode = 'mixolidio';
 object['id_melody_mode'] = id_melody_mode;
 const modeJSON = JSON.stringify(object);
 console.log(modeJSON);
@@ -180,5 +186,6 @@ const modeSongsData = await res.json();
 // Initialization parameters
 setMetadata(0);
 setAudioFiles(id_melody_mode);
+setQRCode(id_melody_mode);
 let currentSong = 0;
 audio.src = playlist.children[currentSong].getAttribute("data-src");
