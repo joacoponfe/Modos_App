@@ -77,3 +77,12 @@ var eventHandler = function(event){
 
 document.getElementById('text_input').addEventListener('keypress', eventHandler);
 document.getElementById('sendButton').addEventListener('click', saveText);
+
+// Make default text "Me imaginé..."
+document.querySelector('#text_input').addEventListener('input', function(e){
+  var defaultText = 'Me imaginé ',
+      defaultTextLength = defaultText.length;
+  if(this.selectionStart === this.selectionEnd && this.selectionStart < defaultTextLength) {
+      this.value = defaultText;
+  }
+});

@@ -114,6 +114,9 @@ function setMetadata(index) {
   albumName.innerHTML = modeSongsData['albumes'][index];
   releaseYear.innerHTML = modeSongsData['anios'][index];
   albumArt.src = 'data:image/png;base64,'.concat(modeSongsData['encoded_images'][index]);
+  // Send metadata to music bar on totems main page
+  const metadata = {'title': modeSongsData['titulos'][index], 'artist': modeSongsData['artistas'][index], 'album-art': 'data:image/png;base64,'.concat(modeSongsData['encoded_images'][index])};
+  window.parent.postMessage(metadata, '*');
 };
 
 function setAudioFiles(id_mode) {

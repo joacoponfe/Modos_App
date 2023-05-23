@@ -4,6 +4,7 @@ import { url } from "./config.js";
 
 // Get cookies
 const id_participant = getCookie('id_participant');
+const id_melody_mode = getCookie('id_melody_mode');
 
 // Get document elements, iframe and iframe document elements
 const mode_1 = document.getElementById("mode_1");
@@ -372,8 +373,6 @@ function setData(id_mode){
     
 
     image.src = 'data:image/png;base64,'.concat(encoded_image);                                             // Set image source
-    
-    //qr_image.src = 'images/'.concat(id_melody_modes[id_mode]['id_melody_mode'],'_QR.png');                  // Set QR code image source
 
     // Set embeddings
     
@@ -381,7 +380,7 @@ function setData(id_mode){
     if (typeof playlist_frame != "undefined") {                                                             // If playlist exists
         playlist_frame.remove();                                                                            // destroy it
         playlist_frame = document.createElement('iframe');                                                  // and create new one
-        playlist_frame.setAttribute("src", "playlist.html?cache-buster=123");
+        playlist_frame.setAttribute("src", "playlist.html");
         playlist_frame.style.width = "100%";
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
@@ -405,7 +404,7 @@ function setData(id_mode){
         
     } else {
         playlist_frame = document.createElement('iframe');
-        playlist_frame.setAttribute("src", "playlist.html?cache-buster=123");
+        playlist_frame.setAttribute("src", "playlist.html");
         playlist_frame.style.width = "100%";
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
@@ -414,3 +413,16 @@ function setData(id_mode){
     };
 
 };
+
+// Listen for messages from the iframe
+window.addEventListener('message', function(event) {
+    //console.log(event);
+    // Check if the message is coming from the iframe
+    if (event.origin === 'http://localhost:3000') {
+        // Update the value of the object in the main page based on the received message
+        var receivedValue = event.data;
+        console.log(receivedValue);
+        //var targetObject = document.getElementById('target-object');
+        //targetObject.value = receivedValue;
+    }
+});

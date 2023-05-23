@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/css/totems.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/totems.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Totem</title>
-    <style>
-
-    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -74,10 +72,39 @@
     <a href="totems_landing.html" class="float" id="exit">
         <p>Salir</p>
     </a>
+
+    <!-- Add the music bar at the bottom of the page -->
+    <div id="music-bar">
+		<div class="metadata">
+			<img class="album-art" id="album-art" src="images/logo_static.png" alt="Cargando...">
+			<div class="song-info">
+				<h1 class="song-title" id="song-title">Cargando...</h1>
+                <p></p>
+                <div class="album-artist-year">
+                    <span class="artist-name" id="artist-name">Artista</span><br>
+                    <!--<span class="album-name" id="album-name">Álbum</span><br>
+                    <span class="release-year" id="release-year">Año</span>-->
+                </div>
+		    </div>
+        </div>
+        <!-- <span id="current-time">0:00</span> -->
+        <div id="controls">
+            <button id="prev"><i class="bi bi-rewind-fill"></i></button>
+            <button id="play-pause"><i class="bi bi-play-fill"></i></button>
+            <button id="next"><i class="bi bi-fast-forward-fill"></i></button>
+            <button id="volume-icon"><i class="bi bi-volume-up"></i></button>
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+        </div>
+        <!-- <div id="progress-bar">
+            <div class="progress"></div>
+        </div> -->
+        <!-- <span id="duration">0:00</span> -->
+    </div>
+    
 <script src="/js/TagCloud.js"> </script>
 <script src="/js/thermometer.js" type="module"></script>
 <script src="/js/totems_main.js" type="module"></script>
 <script src="/js/cookies.js" type="module"></script>
-
+<!--<script src="/js/playlist.js" type="module"></script>-->
 </body>
 </html>
