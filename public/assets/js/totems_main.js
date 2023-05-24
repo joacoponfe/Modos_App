@@ -4,7 +4,7 @@ import { url } from "./config.js";
 
 // Get cookies
 const id_participant = getCookie('id_participant');
-const id_melody_mode = getCookie('id_melody_mode');
+//const id_melody_mode = getCookie('id_melody_mode');
 
 // Get document elements, iframe and iframe document elements
 const mode_1 = document.getElementById("mode_1");
@@ -95,7 +95,6 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
 
 };
 
-
 // Pull info from database from user's last iteration (last two modes they listened to)
 const object = {};
 object['id_participant'] = id_participant;
@@ -116,8 +115,8 @@ async function get_totems_data(id_data) {
     return result;
 };
 
-const res = await get_totems_data(idJSON);
-const userData = await res.json();
+const totemsData = await get_totems_data(idJSON);
+const userData = await totemsData.json();
 console.log(userData);
 
 async function get_melody_mode(id_melody) {
@@ -169,10 +168,185 @@ mode_1.innerHTML = "Modo " + id_melody_1_mode_tildes['id_melody_mode'];
 mode_2.innerHTML = "Modo " + id_melody_2_mode_tildes['id_melody_mode'];
 
 
-// Create an audio element
-const audioPlayer = document.createElement('audio');
-// Set the controls attribute to display the audio player controls
-audioPlayer.controls = true;
+// Get playlist elements
+//const audioPlayer = document.createElement('audio');
+const audio = document.getElementById("audio");
+const playPause = document.getElementById("play-pause");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+const playlist = document.getElementById("genres");
+const progressBar = document.getElementById("progress-bar");
+const progress = document.querySelector(".progress");
+const volume = document.getElementById("volume");
+const mute = document.getElementById("mute");
+
+//const currentTime = document.querySelector("#current-time");
+//const duration = document.querySelector("#duration");
+
+// Metadata elements
+const songTitle = document.getElementById("song-title");
+const artistName = document.getElementById("artist-name");
+const albumName = document.getElementById("album-name");
+const releaseYear = document.getElementById("release-year");
+const albumArt = document.getElementById("album-art");
+
+// Song elements
+const classicTrack = document.getElementById("clasica");
+const jazzTrack = document.getElementById("jazz");
+const metalargTrack = document.getElementById("metalarg");
+const metalintTrack = document.getElementById("metalint");
+const popTrack = document.getElementById("pop");
+
+
+
+// Playlist functions
+playPause.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      playPause.innerHTML = '<i class="bi bi-pause-fill"></i>';
+    } else {
+      audio.pause();
+      playPause.innerHTML = '<i class="bi bi-play-fill"></i>';
+    }
+});
+
+prev.addEventListener("click", () => {
+    currentSong--;
+    if (currentSong < 0) {
+      currentSong = playlist.children.length - 1;
+    }
+    audio.src = playlist.children[currentSong].getAttribute("data-src");
+    audio.play();
+    setActiveSong(currentSong);
+});
+  
+next.addEventListener("click", () => {
+    currentSong++;
+    if (currentSong === playlist.children.length) {
+      currentSong = 0;
+    }
+    audio.src = playlist.children[currentSong].getAttribute("data-src");
+    audio.play();
+    setActiveSong(currentSong);
+});
+
+volume.addEventListener("input", (e) => {
+    audio.volume = e.target.value;
+});
+
+mute.addEventListener("click", () => {
+    if (audio.muted) {
+        audio.muted = false;
+        mute.innerHTML = '<i class="bi bi-volume-up-fill"></i>'
+    } else {
+        audio.muted = true;
+        mute.innerHTML = '<i class="bi bi-volume-mute-fill"></i>'
+    }
+});
+
+audio.addEventListener("timeupdate", (e) => {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = `${percent}%`;
+    //currentTime.textContent = formatTime(audio.currentTime);
+    //duration.textContent = formatTime(audio.duration);
+});
+  
+function formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+progressBar.addEventListener("click", (e) => {
+    const percent =
+      (e.clientX - progressBar.offsetLeft) / progressBar.offsetWidth;
+    audio.currentTime = percent * audio.duration;
+    progress.style.width = `${percent}%`;
+});
+
+audio.addEventListener("ended", (e) => {
+    if (currentSong === playlist.children.length - 1) {
+      currentSong = 0;
+    } else {
+      currentSong++;
+    }
+    audio.src = playlist.children[currentSong].getAttribute("data-src");
+    audio.play();
+    setActiveSong(currentSong);
+});
+
+audio.addEventListener("playing", (e) => {
+    playPause.innerHTML = '<i class="bi bi-pause-fill"></i>';
+});
+
+function setMetadata(index) {
+    songTitle.innerHTML = modeSongsData['titulos'][index];
+    artistName.innerHTML = modeSongsData['artistas'][index];
+    //albumName.innerHTML = modeSongsData['albumes'][index];
+    //releaseYear.innerHTML = modeSongsData['anios'][index];
+    albumArt.src = 'data:image/png;base64,'.concat(modeSongsData['encoded_images'][index]);
+    // Send metadata to playlist page
+    const metadata = {'title': modeSongsData['titulos'][index], 'artist': modeSongsData['artistas'][index], 'album': modeSongsData['albumes'][index], 'year': modeSongsData['anios'][index], 'album-art': 'data:image/png;base64,'.concat(modeSongsData['encoded_images'][index])};
+    if (typeof playlist_frame != "undefined") { 
+        playlist_frame.contentWindow.postMessage(metadata, '*');
+    }
+};
+
+function setAudioFiles(id_mode) {
+    var id_mode_letter;
+    if (id_mode === 'jonico'){
+      id_mode_letter = 'j';
+    } if (id_mode === 'dorico') {
+      id_mode_letter = "d";
+    } if (id_mode === 'frigio') {
+      id_mode_letter = "f";
+    } if (id_mode === 'lidio') {
+      id_mode_letter = "li";
+    } if (id_mode === 'mixolidio') {
+      id_mode_letter = 'm';
+    } if (id_mode === 'eolico') {
+      id_mode_letter = 'e';
+    } if (id_mode === 'locrio') {
+      id_mode_letter = 'lo';
+    }
+  
+    const audioTracksDir = 'music/snippets/';
+    classicTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_clasica.wav'));
+    jazzTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_jazz.wav'));
+    metalargTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_metalarg.wav'));
+    metalintTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_metalint.wav'));
+    popTrack.setAttribute("data-src", audioTracksDir.concat(id_mode_letter, '_pop.wav'));
+};
+
+const setActiveSong = (index) => {
+    // remove "active" class from previously active song
+    playlist.querySelector(".active-song").classList.remove("active-song");
+  
+    // add "active" class to currently playing song
+    const activeSong = playlist.querySelectorAll("li")[index];
+    activeSong.classList.add("active-song");
+    console.log(activeSong.getAttribute("data-src"));
+    console.log(activeSong.getAttribute("id"));
+    
+    // set file metadata
+    const genre = activeSong.getAttribute("id");
+    setMetadata(index);
+};
+
+// BACKEND REQUEST
+async function get_mode_songs(request) {
+    const response = await fetch(
+      url + "/profiles_api/get_mode_songs/",
+      {
+        headers: new Headers({ 'Content-type': 'application/json' }),
+        method: "POST",
+        body: request,
+    }
+  );
+  const result = await response;
+  return result;
+};
+
 
 // Create Word Cloud element
 const wordCloud = document.createElement("span");
@@ -198,10 +372,10 @@ qr_image.alt = "No se encontró el código QR.";
 
 // Create playlist element
 var playlist_frame;
-const player = document.createElement("div");
-const audio = document.createElement("audio");
-const controls = document.createElement("div");
-const progressBar = document.createElement("div");
+//const player = document.createElement("div");
+//const audio = document.createElement("audio");
+//const controls = document.createElement("div");
+//const progressBar = document.createElement("div");
 
 // Get references to the buttons in the sidebar menus
 const sidebarButtons = document.querySelectorAll('.sidebar a');
@@ -232,7 +406,7 @@ sidebarButtons.forEach(button => {
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
             document.getElementById('container').innerHTML = "<h2>Melodía</h2><br>Volvé a escuchar la melodía<br>";
-            document.getElementById('container').appendChild(audioPlayer);
+            document.getElementById('container').appendChild(audio);
             button.setAttribute('class', "active");
         } else if (content === 'wordcloud') {
             document.getElementById('container').innerHTML = '<h2>Conceptos predominantes</h2><br>';
@@ -263,6 +437,15 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
         }
     });
+});
+
+document.getElementById('metadata-section').addEventListener('click', event => {
+    // Prevent the default link behavior   
+    event.preventDefault();
+    // Redirect to playlist page
+    document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
+    document.getElementById('container').appendChild(playlist_frame);
+    playlist_frame.style.display = "block";
 });
 
 // Get references to the mode tabs in the sidebar menu
@@ -297,8 +480,38 @@ modeButtons.forEach(button => {
 
 // Set data according to selected mode
 setData(0); // Defaults to first mode
+// Autoplay
+audio.autoplay = true;
 
-function setData(id_mode){
+let modeSongsData = [];
+let currentSong = 0;
+//audio.src = playlist.children[currentSong].getAttribute("data-src");
+
+async function getModeSongsData(id_mode){
+    // Get playlist songs for selected mode and their metadata
+    const object = {};
+    object['id_melody_mode'] = id_melody_modes[id_mode]['id_melody_mode'];
+    const modeJSON = JSON.stringify(object);
+    const modeSongs = await get_mode_songs(modeJSON);
+    const modeSongsData = await modeSongs.json();
+    return modeSongsData;
+}
+
+async function setData(id_mode){
+    
+    // Get playlist songs for selected mode
+    const object = {};
+    object['id_melody_mode'] = id_melody_modes[id_mode]['id_melody_mode'];
+    const modeJSON = JSON.stringify(object);
+    const modeSongs = await get_mode_songs(modeJSON);
+    modeSongsData = await modeSongs.json();
+    //console.log(modeSongsData);
+    // Initialization parameters
+    setMetadata(0);
+    setAudioFiles(id_melody_modes[id_mode]['id_melody_mode']);
+    currentSong = 0;
+    audio.src = playlist.children[currentSong].getAttribute("data-src");
+
     // Set id_melody_mode cookie (read by playlist.html)
     setCookie('id_melody_mode', id_melody_modes[id_mode]['id_melody_mode']);
     
@@ -318,7 +531,7 @@ function setData(id_mode){
     var neu = userData['neu'][id_mode];                                                                     // Get "neu"
     var neg = userData['neg'][id_mode];                                                                     // Get "neg"
     
-    audioPlayer.src = 'music/'.concat(id_melody,'.mp3')                                                     // Set melody to be played
+    //audio.src = 'music/'.concat(id_melody,'.mp3')                                                     // Set melody to be played
     
     words = word_list                                                                                       // Set word list
     if (wordCloudButtonClicks >= 1) {
@@ -380,7 +593,7 @@ function setData(id_mode){
     if (typeof playlist_frame != "undefined") {                                                             // If playlist exists
         playlist_frame.remove();                                                                            // destroy it
         playlist_frame = document.createElement('iframe');                                                  // and create new one
-        playlist_frame.setAttribute("src", "playlist.html");
+        playlist_frame.setAttribute("src", "playlist_mini.html");
         playlist_frame.style.width = "100%";
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
@@ -404,7 +617,7 @@ function setData(id_mode){
         
     } else {
         playlist_frame = document.createElement('iframe');
-        playlist_frame.setAttribute("src", "playlist.html");
+        playlist_frame.setAttribute("src", "playlist_mini.html");
         playlist_frame.style.width = "100%";
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
@@ -413,16 +626,3 @@ function setData(id_mode){
     };
 
 };
-
-// Listen for messages from the iframe
-window.addEventListener('message', function(event) {
-    //console.log(event);
-    // Check if the message is coming from the iframe
-    if (event.origin === 'http://localhost:3000') {
-        // Update the value of the object in the main page based on the received message
-        var receivedValue = event.data;
-        console.log(receivedValue);
-        //var targetObject = document.getElementById('target-object');
-        //targetObject.value = receivedValue;
-    }
-});
