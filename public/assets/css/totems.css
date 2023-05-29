@@ -66,8 +66,8 @@ body{
 }
 
 .wrapper .sidebar ul li a{
-    display: block;
-    padding: 20px 30px;
+    display: flex;
+    padding: 20px 0px;
     color: rgb(241, 237, 237);
     font-size: 25px;
     position: relative;
@@ -75,8 +75,10 @@ body{
 
 .wrapper .sidebar ul li a .icon{
     color: #dee4ec;
-    width: 30px;
-    display: inline-block;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapper .sidebar ul li a:hover,

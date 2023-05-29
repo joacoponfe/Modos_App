@@ -20,15 +20,10 @@ async function query(id_melody_mode) {
 }
 
 async function updateData() {
-    try {
         const response = await query(requestJSON);
-    } catch (error) {
-        console.log(error);
-        //window.location.href = "server_down.html";
-    }
-    const modeData = await response.json();
-    console.log(modeData);
-    console.log('me actualicé!')
+        const modeData = await response.json();
+        console.log(modeData);
+        console.log('me actualicé!');
 
     
 ///Updates information displayed on website according to the selected mode.
@@ -148,7 +143,7 @@ for (var i = 0; i < sentimentRuleNames.length; i++){
     };
 };
 
-}
+};
 
 // Call updateData function initially
 updateData();
