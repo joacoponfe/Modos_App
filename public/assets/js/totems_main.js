@@ -523,15 +523,15 @@ async function get_mode_sheet_music(melody){
     // melody should be a string that contains the id_melody_mode and melody number (1-7)
     // this function maps the melody number to the corresponding sheet music URL
     // define a dictionary object that maps melody numbers to sheet music URLs:
-    const sheetMusicURLs = {'jonico1': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '3': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '4': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '5': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '6': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '7': 'https://flat.io/score/5f9b0b7b1d0b1a0b}
+    // const sheetMusicURLs = {'jonico1': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+    //                         '': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+    //                         '3': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+    //                         '4': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+    //                         '5': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+    //                         '6': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+    //                         '7': 'https://flat.io/score/5f9b0b7b1d0b1a0b}
     // get the melody number from the melody string: 
-    const object = {}: 
+    // const object = {}: 
 }
 
 async function getModeSheetData(id_mode){
