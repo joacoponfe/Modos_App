@@ -147,7 +147,13 @@ for (var i = 0; i < sentimentRuleNames.length; i++){
 }
 
 // Call updateData function initially
-updateData();
+updateData().then((response) => {
+    console.log('Datos actualizados exitosamente.');
+})
+.catch((error) => {
+    console.log("El servidor está caído.");
+    window.location.href = "server_down.html";
+});
 
 // Call updateData function every 5 minutes
 // setInterval(updateData, 5 * 60 * 1000);
