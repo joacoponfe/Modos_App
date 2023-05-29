@@ -27,11 +27,10 @@ const qr_image = document.getElementById("qr_image");
 window.addEventListener('message', function(event) {
   if (event.origin === 'http://localhost:3000') {
     var metadata = event.data;
-    //console.log(metadata);
     setMetadata(metadata);
+    setActiveSong(metadata['index']);
   } 
 });
-
 
 function setMetadata(metadata) {
   songTitle.innerHTML = metadata['title'];
@@ -44,7 +43,37 @@ function setMetadata(metadata) {
   //window.parent.postMessage(metadata, '*');
 };
 
+const setActiveSong = (index) => {
+  // remove "active" class from previously active song
+  playlist.querySelector(".active-song").classList.remove("active-song");
+
+  // add "active" class to currently playing song
+  const activeSong = playlist.querySelectorAll("li")[index];
+  activeSong.classList.add("active-song");
+  //console.log(activeSong.getAttribute("data-src"));
+  //console.log(activeSong.getAttribute("id"));
+  
+  // set file metadata
+  //const genre = activeSong.getAttribute("id");
+  //setMetadata(index);
+};
 
 function setQRCode(id_mode) {
   qr_image.src = 'images/'.concat(id_mode,'_QR.png');
 }
+
+setQRCode(id_melody_mode);
+
+playlist.addEventListener("click", (e) => {
+  if (e.target.tagName === "LI") {
+    let currentSong = Array.from(playlist.children).indexOf(e.target);
+    //audio.src = e.target.getAttribute("data-src");
+    //audio.play();
+    //playPause.innerHTML = '<i class="bi bi-pause-fill"></i>';
+    setActiveSong(currentSong);
+    console.log(currentSong);
+    // send to parent window
+    const index = {'index': currentSong};
+    window.parent.postMessage(index, '*');
+  }
+});

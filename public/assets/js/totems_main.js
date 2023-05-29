@@ -286,11 +286,30 @@ function setMetadata(index) {
     //releaseYear.innerHTML = modeSongsData['anios'][index];
     albumArt.src = 'data:image/png;base64,'.concat(modeSongsData['encoded_images'][index]);
     // Send metadata to playlist page
-    const metadata = {'title': modeSongsData['titulos'][index], 'artist': modeSongsData['artistas'][index], 'album': modeSongsData['albumes'][index], 'year': modeSongsData['anios'][index], 'album-art': 'data:image/png;base64,'.concat(modeSongsData['encoded_images'][index])};
-    if (typeof playlist_frame != "undefined") { 
+    sendMetadata(index);
+};
+
+function sendMetadata(currentSong) {
+    // Sends metadata to playlist page.
+    const metadata = {'index' : currentSong, 'title': modeSongsData['titulos'][currentSong], 'artist': modeSongsData['artistas'][currentSong], 'album': modeSongsData['albumes'][currentSong], 'year': modeSongsData['anios'][currentSong], 'album-art': 'data:image/png;base64,'.concat(modeSongsData['encoded_images'][currentSong])};
+    console.log(metadata);
+    console.log(playlist_frame.contentWindow);
+    if (playlist_frame.contentWindow != null) { 
         playlist_frame.contentWindow.postMessage(metadata, '*');
     }
 };
+
+// Listen for messages from the playlist iframe window (song change)
+window.addEventListener('message', function(event) {
+    if (event.origin === 'http://localhost:3000') {
+      var index = event.data;
+      //console.log('Received message from playlist_mini.html: ' + index['index']);
+      currentSong = index['index'];
+      audio.src = playlist.children[currentSong].getAttribute("data-src");
+      audio.play();
+      setActiveSong(currentSong);
+    } 
+  });
 
 function setAudioFiles(id_mode) {
     var id_mode_letter;
@@ -430,11 +449,15 @@ sidebarButtons.forEach(button => {
         } else if (content === 'songs') {
             document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
             document.getElementById('container').appendChild(playlist_frame);
-            //document.getElementById('container').appendChild(qr_image);
             playlist_frame.style.display = "block";
+            playlist_frame.onload = function() {	
+                sendMetadata(currentSong);
+            };
             //playlist_frame.setAttribute("src", "playlist.html"); // Set iframe source as playlist.html
             //playlist_frame.removeAttribute("hidden"); // Make iframe visible 
             button.setAttribute('class', "active");
+            console.log(currentSong);
+            //sendMetadata(currentSong);
         }
     });
 });
@@ -499,19 +522,6 @@ async function getModeSongsData(id_mode){
 
 async function setData(id_mode){
     
-    // Get playlist songs for selected mode
-    const object = {};
-    object['id_melody_mode'] = id_melody_modes[id_mode]['id_melody_mode'];
-    const modeJSON = JSON.stringify(object);
-    const modeSongs = await get_mode_songs(modeJSON);
-    modeSongsData = await modeSongs.json();
-    //console.log(modeSongsData);
-    // Initialization parameters
-    setMetadata(0);
-    setAudioFiles(id_melody_modes[id_mode]['id_melody_mode']);
-    currentSong = 0;
-    audio.src = playlist.children[currentSong].getAttribute("data-src");
-
     // Set id_melody_mode cookie (read by playlist.html)
     setCookie('id_melody_mode', id_melody_modes[id_mode]['id_melody_mode']);
     
@@ -598,6 +608,7 @@ async function setData(id_mode){
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
         playlist_frame.style.display = "block";
+        
 
         var activeButton = null;                                                                            // Only render playlist if active sidebar button is "songs"
         sidebarButtons.forEach(function(button) {
@@ -613,6 +624,8 @@ async function setData(id_mode){
           }
         if (activeButton === "songs"){
             document.getElementById('container').appendChild(playlist_frame);
+            playlist_frame.style.display = "block";
+            //sendMetadata(currentSong);
         }
         
     } else {
@@ -622,7 +635,23 @@ async function setData(id_mode){
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
         playlist_frame.style.display = "none";
+        //document.getElementById('container').appendChild(playlist_frame);
 
     };
-
+    
+    console.log(playlist_frame.contentWindow);
+    
+    // Get playlist songs for selected mode
+    const object = {};
+    object['id_melody_mode'] = id_melody_modes[id_mode]['id_melody_mode'];
+    const modeJSON = JSON.stringify(object);
+    const modeSongs = await get_mode_songs(modeJSON);
+    modeSongsData = await modeSongs.json();
+    //console.log(modeSongsData);
+    
+    // Initialization parameters
+    currentSong = 0;
+    setMetadata(currentSong);
+    setAudioFiles(id_melody_modes[id_mode]['id_melody_mode']);
+    audio.src = playlist.children[currentSong].getAttribute("data-src");
 };

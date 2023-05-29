@@ -52,3 +52,6 @@
 127.0.0.1 - - [24/May/2023:15:31:22 +0000] "GET /null HTTP/1.1" 206 1200 "http://localhost:3000/totems_main.html?SSS967" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
 127.0.0.1 - - [24/May/2023:15:31:56 +0000] "GET /null HTTP/1.1" 206 1200 "http://localhost:3000/totems_main.html?SSS967" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
 127.0.0.1 - - [24/May/2023:17:40:31 +0000] "GET /undefined HTTP/1.1" 404 1200 "http://localhost:3000/playlist_mini.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [24/May/2023:18:17:30 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [29/May/2023:12:52:24 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+127.0.0.1 - - [29/May/2023:13:16:52 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
