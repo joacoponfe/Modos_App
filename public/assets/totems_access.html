@@ -9,14 +9,13 @@
     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <link href="/css/start.css" rel="stylesheet" />
 </head>
-<body class="pt-5">
-    <h3 class="text-center" style="max-width:900px; margin-left: auto; margin-right: auto;">Para develar los secretos de tu mente musical, escribí las iniciales de tu nombre y apellido y los tres últimos números de tu DNI.</h3><br>
-    <h4 class="text-center" style="max-width:900px; margin-left: auto; margin-right: auto;">El código tiene que ser idéntico al que pusiste al comenzar la experiencia.</h4>
+<body class="container">
+    <p class="centered-element-20" style="max-width:900px; margin-left: auto; margin-right: auto;">Para develar los secretos de tu mente musical, escribí las iniciales de tu nombre y apellido y los tres últimos números de tu DNI.</p><br>
+    <p class="centered-element-20" style="max-width:900px; margin-left: auto; margin-right: auto;">El código tiene que ser idéntico al que pusiste al comenzar la experiencia.</p>
     <div class="form">
       <form id="form" autocomplete="off">
         <input type="text" name="initials" id="initials_input" placeholder = "AAA" style="width: 100px" minlength="2" maxlength="3" oninput="this.value = this.value.replace(/[^aA-zZ]/g, '').toUpperCase();" pattern=".{2,3}" title="Ingresar 2 o 3 letras" required/>
         <input type="text" name="DNI" id="DNI_input" placeholder = "000" style="width: 100px;" minlength="3" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern=".{3,4}" title="Ingresar 3 o 4 números" required/>
-        <br><br>
         <input type="submit" id="sendButton" value="Siguiente">
       </form>
     </div>

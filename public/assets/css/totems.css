@@ -7,12 +7,19 @@
     font-family: var(--bs-font-sans-serif);
 }
 
+@font-face {
+    font-family: 'Rubik';
+    src: url('../fonts/Rubik-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
 body{
     background: #f5f6fa;
 }
 
 .wrapper .sidebar{
-    background: #1b8454;
+    background: var(--bs-dark);
     position: fixed;
     top: 0;
     left: 0;
@@ -136,12 +143,16 @@ body{
     --bs-gray-900: #212529;
     --bs-primary: #0d6efd;
     --bs-secondary: #6c757d;
+    --bs-highlight: #AEC90B;
+    --bs-highlight-hover: rgba(174,201,11,1);
     --bs-success: #198754;
     --bs-info: #0dcaf0;
     --bs-warning: #ffc107;
     --bs-danger: #dc3545;
     --bs-light: #f8f9fa;
-    --bs-dark: #212529;
+    --bs-dark: #162331;
+    --bs-dark-light: rgb(106, 150, 167);
+    --bs-dark-hover: rgba(255, 255, 255, 0.1);
     --bs-primary-rgb: 13, 110, 253;
     --bs-secondary-rgb: 108, 117, 125;
     --bs-success-rgb: 25, 135, 84;
@@ -154,7 +165,7 @@ body{
     --bs-black-rgb: 0, 0, 0;
     --bs-body-color-rgb: 33, 37, 41;
     --bs-body-bg-rgb: 255, 255, 255;
-    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-sans-serif: "Rubik";
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
     --bs-body-font-family: var(--bs-font-sans-serif);
@@ -163,7 +174,7 @@ body{
     --bs-body-line-height: 1.5;
     --bs-body-color: #212529;
     --bs-body-bg: #fff;
-  }
+}
 
 .tagcloud {
 /*font-family: 'Poppins', sans-serif;*/  
@@ -182,7 +193,7 @@ body{
 	height:60px;
 	bottom:175px;
 	right:40px;
-	background-color:#1b8454;
+	background-color: var(--bs-dark);
 	color:#FFF;
 	border-radius:50px;
 	text-align:center;
@@ -197,7 +208,7 @@ body{
     z-index: 0;
     left: 0px;
     width: 100%;
-    background-color: #1b8454;
+    background-color: var(--bs-dark);
     padding: 10px;
     /*box-shadow: inset 0 5px 0 rgba(255, 255, 255, 0.1);*/
     display: flex;
@@ -212,7 +223,7 @@ body{
 }
 
 #music-bar .metadata:hover{
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--bs-dark-hover);
 }
 
 #music-bar .metadata img {
@@ -247,7 +258,7 @@ body{
     left: 0px;
     width: 100%;
     height: 5px;
-    background-color: rgb(106, 167, 143);
+    background-color: var(--bs-dark-light);
     /*border-radius: 5px;*/
     overflow: hidden;
     /*margin: 20px 0;*/
@@ -297,7 +308,7 @@ body{
 }
   
 #play-pause:hover {
-    background-color: #444;
+    background-color: var(--bs-dark-hover);
 }
   
 #prev,
@@ -320,7 +331,7 @@ body{
 #prev:hover,
 #next:hover,
 #mute:hover {
-    background-color: #444;
+    background-color: var(--bs-dark-hover);
 }
 
 #volume {
@@ -328,7 +339,7 @@ body{
     height: 20px;
     margin: 16px 0;
     -webkit-appearance: none;
-    background: #ddd;
+    background: var(--bs-dark-light);
     border-radius: 20px;
     outline: none;
     cursor: pointer;
