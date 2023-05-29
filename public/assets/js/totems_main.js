@@ -424,9 +424,8 @@ sidebarButtons.forEach(button => {
 
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
-            document.getElementById('container').innerHTML = "<h2>Melodía</h2><br>Volvé a escuchar la melodía<br>";
-            document.getElementById('container').appendChild(audio);
-            button.setAttribute('class', "active");
+            document.getElementById('container').innerHTML = '<iframe src="https://flat.io/embed/6474afb3fb0963ddfca032c4?locale=en-GB" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
+            button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
             document.getElementById('container').innerHTML = '<h2>Conceptos predominantes</h2><br>';
             document.getElementById('container').appendChild(wordCloud);
@@ -516,6 +515,31 @@ async function getModeSongsData(id_mode){
     object['id_melody_mode'] = id_melody_modes[id_mode]['id_melody_mode'];
     const modeJSON = JSON.stringify(object);
     const modeSongs = await get_mode_songs(modeJSON);
+    const modeSongsData = await modeSongs.json();
+    return modeSongsData;
+}
+
+async function get_mode_sheet_music(melody){
+    // melody should be a string that contains the id_melody_mode and melody number (1-7)
+    // this function maps the melody number to the corresponding sheet music URL
+    // define a dictionary object that maps melody numbers to sheet music URLs:
+    const sheetMusicURLs = {'jonico1': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+                            '': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+                            '3': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+                            '4': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+                            '5': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+                            '6': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
+                            '7': 'https://flat.io/score/5f9b0b7b1d0b1a0b}
+    // get the melody number from the melody string: 
+    const object = {}: 
+}
+
+async function getModeSheetData(id_mode){
+    // Get sheet music for selected mode 
+    const object = {};
+    object['id_melody_mode'] = id_melody_modes[id_mode]['id_melody_mode'];
+    const modeJSON = JSON.stringify(object);
+    const modeSheetMusic = await get_mode_sheet_music(modeJSON);
     const modeSongsData = await modeSongs.json();
     return modeSongsData;
 }
