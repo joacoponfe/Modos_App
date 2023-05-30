@@ -616,8 +616,8 @@ async function setData(id_mode){
     
     const sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melodies, id_mode), '?layout=track&locale=es');    // Set sheet music source
     // update the iframe src
-    document.getElementById('container').innerHTML =  "<h2>Melodía</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";;
-    document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
+    // document.getElementById('container').innerHTML =  "<h2>Melodía</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";;
+    // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
     
 
     words = word_list                                                                                       // Set word list
