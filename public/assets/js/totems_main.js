@@ -367,8 +367,8 @@ async function get_mode_songs(request) {
 };
 
 // create sheet music iframe
-const sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melodies, 'mode_1'), '?layout=track&locale=es');
-console.log(sheetURL);
+var sheetURL;
+var sheet_frame;
 
 // Create Word Cloud element
 const wordCloud = document.createElement("span");
@@ -427,10 +427,17 @@ sidebarButtons.forEach(button => {
 
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
-            console.log(sheetURL);
             // set iframe src to sheet music URL
-            document.getElementById('container').innerHTML =  "<h2>Melodía</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";;
-            document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
+            document.getElementById('container').innerHTML =  "<h2>Melodía</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";
+            document.getElementById('container').appendChild(sheet_frame);
+            sheet_frame.style.display = "block";
+            sheet_frame.setAttribute("src", sheetURL);
+            sheet_frame.setAttribute("height", "450");
+            sheet_frame.setAttribute("width", "100%");
+            sheet_frame.setAttribute("frameBorder", "0");
+            sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
+            sheet_frame.setAttribute("allow", "autoplay; midi");
+            // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
             document.getElementById('container').innerHTML = '<h2>Conceptos predominantes</h2><br>';
@@ -525,7 +532,7 @@ async function getModeSongsData(userData, id_mode){
     return modeSongsData;
 }
 
-async function getsheetMusicURLs(id_melodies, mode){
+function getsheetMusicURLs(id_melody){
     // this function maps the melody number to the corresponding sheet music URL
     // define a dictionary object that maps melody numbers to sheet music URLs:
     // define a dictionary that has 7 empty entries each written on a seperate line of code
@@ -544,48 +551,34 @@ async function getsheetMusicURLs(id_melodies, mode){
                             'lo2': '6474c8199ba7d68e053993a3',
                             'm2': '6474c81c5bdbfe13645be154',
                             'j3': '6474c8058acf87912684ecdd', 
-                            'd3': '6474c8058acf87912684ecdd',
-                            'e3': '6474c8058acf87912684ecdd',
-                            'f3': '6474c8058acf87912684ecdd',
-                            'li3': '6474c8058acf87912684ecdd',
-                            'lo3': '6474c8058acf87912684ecdd',
-                            'm3': '6474c8058acf87912684ecdd',
-                            'j4': '6474c8058acf87912684ecdd',
-                            'd4': '6474c8058acf87912684ecdd',
-                            'e4': '6474c8058acf87912684ecdd',
-                            'f4': '6474c8058acf87912684ecdd',
-                            'li4': '6474c8058acf87912684ecdd',
-                            'lo4': '6474c8058acf87912684ecdd',
-                            'm4': '6474c8058acf87912684ecdd',
-                            'j5': '6474c8058acf87912684ecdd',
-                            'd5': '6474c8058acf87912684ecdd',
-                            'e5': '6474c8058acf87912684ecdd',
-                            'f5': '6474c8058acf87912684ecdd',
-                            'li5': '6474c8058acf87912684ecdd',
-                            'lo5': '6474c8058acf87912684ecdd',
-                            'm5': '6474c8058acf87912684ecdd',
+                            'd3': '6474c805fd74836107c2b9d3',
+                            'e3': '6474c8165bdbfe13645be0a9',
+                            'f3': '6474c81009c5ae72a2732286',
+                            'li3': '6474c80bfd74836107c2ba82',
+                            'lo3': '6474c80b8acf87912684ed72',
+                            'm3': '6474c810bb924612e524371a',
+                            'j4': '6474c819bb924612e52437dd',
+                            'd4': '6474c816bb924612e52437a4',
+                            'e4': '6474c8211684fd086b6ed8b1',
+                            'f4': '6474c8215bdbfe13645be1ed',
+                            'li5': '6474c81c8acf87912684eee8',
+                            'lo5': '6474c8199ba7d68e053993a3',
+                            'm5': '6474c81c5bdbfe13645be154',
                             'j6': '6474c8058acf87912684ecdd',
-                            'd6': '6474c8058acf87912684ecdd',
-                            'e6': '6474c8058acf87912684ecdd',
-                            'f6': '6474c8058acf87912684ecdd',
-                            'li6': '6474c8058acf87912684ecdd',
-                            'lo6': '6474c8058acf87912684ecdd',
-                            'm6': '6474c8058acf87912684ecdd',
-                            'j7': '6474c8058acf87912684ecdd',
-                            'd7': '6474c8058acf87912684ecdd',
-                            'e7': '6474c8058acf87912684ecdd',
-                            'f7': '6474c8058acf87912684ecdd',
-                            'li7': '6474c8058acf87912684ecdd',
-                            'lo7': '6474c8058acf87912684ecdd',
-                            'm7': '6474c8058acf87912684ecdd'}
-
-    
-    if (mode === 'mode_1') {
-        var id_melody = id_melodies[0];
-    } else if (mode === 'mode_2') {
-        var id_melody = id_melodies[1];
-    };
-    console.log(id_melody);
+                            'd6': '6474c805fd74836107c2b9d3',
+                            'e6': '6474c8165bdbfe13645be0a9',
+                            'f6': '6474c81009c5ae72a2732286',
+                            'li6': '6474c80bfd74836107c2ba82',
+                            'lo6': '6474c80b8acf87912684ed72',
+                            'm6': '6474c810bb924612e524371a',
+                            'j7': '6474c819bb924612e52437dd',
+                            'd7': '6474c816bb924612e52437a4',
+                            'e7': '6474c8211684fd086b6ed8b1',
+                            'f7': '6474c8215bdbfe13645be1ed',
+                            'li7': '6474c81c8acf87912684eee8',
+                            'lo7': '6474c8199ba7d68e053993a3',
+                            'm7': '6474c81c5bdbfe13645be154',
+                        }
 
     return sheetMusicURLs[id_melody];
 }
@@ -613,12 +606,55 @@ async function setData(id_mode){
     
     //audio.src = 'music/'.concat(id_melody,'.mp3')                                                         // Set melody to be played
     
-    
-    const sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melodies, id_mode), '?layout=track&locale=es');    // Set sheet music source
-    // update the iframe src
-    // document.getElementById('container').innerHTML =  "<h2>Melodía</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";;
-    // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
-    
+    // sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?layout=track&locale=es');    // Set sheet music source
+    sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?layout=track&locale=es');    // Set sheet music source
+
+    console.log(id_melody);
+    console.log(sheetURL);
+
+    if (typeof sheet_frame != "undefined") {                                                            // If thermometer exists
+        sheet_frame.remove();                                                                           // Destroy it
+        sheet_frame = document.createElement('iframe');                                                 // And create new one
+        sheet_frame.setAttribute("src", sheetURL);
+        sheet_frame.setAttribute("height", "450");
+        sheet_frame.setAttribute("width", "100%");
+        sheet_frame.setAttribute("frameBorder", "0");
+        sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
+        sheet_frame.setAttribute("allow", "autoplay; midi");
+        // sheet_frame.addEventListener('load', function() {
+        //     var iframeDoc = container_frame.contentWindow.document;
+        //     setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg);
+        // });
+        
+        var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
+        sidebarButtons.forEach(function(button) {
+            if (button.getAttribute("class") === "active") {
+              activeButton = button.getAttribute("id");
+            }
+        });
+          
+        if (activeButton) {
+            console.log('The active button is:', activeButton);
+          } else {
+            console.log('No button is currently active.');
+          }
+        if (activeButton === "music"){
+            document.getElementById('container').appendChild(sheet_frame);
+        }
+        
+    } else {
+        sheet_frame = document.createElement('iframe');                                                 // And create new one
+        sheet_frame.setAttribute("src", sheetURL);
+        sheet_frame.setAttribute("height", "450");
+        sheet_frame.setAttribute("width", "100%");
+        sheet_frame.setAttribute("frameBorder", "0");
+        sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
+        sheet_frame.setAttribute("allow", "autoplay; midi");
+        // container_frame.addEventListener('load', function() {
+        //     var iframeDoc = container_frame.contentWindow.document;
+        //     setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg);
+        // });
+    };
 
     words = word_list                                                                                       // Set word list
     if (wordCloudButtonClicks >= 1) {
