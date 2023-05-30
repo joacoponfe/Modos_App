@@ -366,6 +366,9 @@ async function get_mode_songs(request) {
   return result;
 };
 
+// create sheet music iframe
+const sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melodies, 'mode_1'), '?layout=track&locale=es');
+console.log(sheetURL);
 
 // Create Word Cloud element
 const wordCloud = document.createElement("span");
@@ -424,7 +427,10 @@ sidebarButtons.forEach(button => {
 
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
-            document.getElementById('container').innerHTML = '<iframe src="https://flat.io/embed/6474afb3fb0963ddfca032c4?locale=en-GB" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
+            console.log(sheetURL);
+            // set iframe src to sheet music URL
+            document.getElementById('container').innerHTML =  "<h2>Melodía</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";;
+            document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
             document.getElementById('container').innerHTML = '<h2>Conceptos predominantes</h2><br>';
@@ -509,7 +515,7 @@ let modeSongsData = [];
 let currentSong = 0;
 //audio.src = playlist.children[currentSong].getAttribute("data-src");
 
-async function getModeSongsData(id_mode){
+async function getModeSongsData(userData, id_mode){
     // Get playlist songs for selected mode and their metadata
     const object = {};
     object['id_melody_mode'] = id_melody_modes[id_mode]['id_melody_mode'];
@@ -519,29 +525,69 @@ async function getModeSongsData(id_mode){
     return modeSongsData;
 }
 
-async function get_mode_sheet_music(melody){
-    // melody should be a string that contains the id_melody_mode and melody number (1-7)
+async function getsheetMusicURLs(id_melodies, mode){
     // this function maps the melody number to the corresponding sheet music URL
     // define a dictionary object that maps melody numbers to sheet music URLs:
-    const sheetMusicURLs = {'jonico1': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '3': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '4': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '5': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '6': 'https://flat.io/score/5f9b0b7b1d0b1a0b,
-                            '7': 'https://flat.io/score/5f9b0b7b1d0b1a0b}
-    // get the melody number from the melody string: 
-    const object = {}: 
-}
+    // define a dictionary that has 7 empty entries each written on a seperate line of code
+    const sheetMusicURLs = {'j1': '6474c8058acf87912684ecdd', 
+                            'd1': '6474c805fd74836107c2b9d3',
+                            'e1': '6474c8165bdbfe13645be0a9',
+                            'f1': '6474c81009c5ae72a2732286',
+                            'li1': '6474c80bfd74836107c2ba82',
+                            'lo1': '6474c80b8acf87912684ed72',
+                            'm1': '6474c810bb924612e524371a',
+                            'j2': '6474c819bb924612e52437dd', 
+                            'd2': '6474c816bb924612e52437a4',
+                            'e2': '6474c8211684fd086b6ed8b1',
+                            'f2': '6474c8215bdbfe13645be1ed',
+                            'li2': '6474c81c8acf87912684eee8',
+                            'lo2': '6474c8199ba7d68e053993a3',
+                            'm2': '6474c81c5bdbfe13645be154',
+                            'j3': '6474c8058acf87912684ecdd', 
+                            'd3': '6474c8058acf87912684ecdd',
+                            'e3': '6474c8058acf87912684ecdd',
+                            'f3': '6474c8058acf87912684ecdd',
+                            'li3': '6474c8058acf87912684ecdd',
+                            'lo3': '6474c8058acf87912684ecdd',
+                            'm3': '6474c8058acf87912684ecdd',
+                            'j4': '6474c8058acf87912684ecdd',
+                            'd4': '6474c8058acf87912684ecdd',
+                            'e4': '6474c8058acf87912684ecdd',
+                            'f4': '6474c8058acf87912684ecdd',
+                            'li4': '6474c8058acf87912684ecdd',
+                            'lo4': '6474c8058acf87912684ecdd',
+                            'm4': '6474c8058acf87912684ecdd',
+                            'j5': '6474c8058acf87912684ecdd',
+                            'd5': '6474c8058acf87912684ecdd',
+                            'e5': '6474c8058acf87912684ecdd',
+                            'f5': '6474c8058acf87912684ecdd',
+                            'li5': '6474c8058acf87912684ecdd',
+                            'lo5': '6474c8058acf87912684ecdd',
+                            'm5': '6474c8058acf87912684ecdd',
+                            'j6': '6474c8058acf87912684ecdd',
+                            'd6': '6474c8058acf87912684ecdd',
+                            'e6': '6474c8058acf87912684ecdd',
+                            'f6': '6474c8058acf87912684ecdd',
+                            'li6': '6474c8058acf87912684ecdd',
+                            'lo6': '6474c8058acf87912684ecdd',
+                            'm6': '6474c8058acf87912684ecdd',
+                            'j7': '6474c8058acf87912684ecdd',
+                            'd7': '6474c8058acf87912684ecdd',
+                            'e7': '6474c8058acf87912684ecdd',
+                            'f7': '6474c8058acf87912684ecdd',
+                            'li7': '6474c8058acf87912684ecdd',
+                            'lo7': '6474c8058acf87912684ecdd',
+                            'm7': '6474c8058acf87912684ecdd'}
 
-async function getModeSheetData(id_mode){
-    // Get sheet music for selected mode 
-    const object = {};
-    object['id_melody_mode'] = id_melody_modes[id_mode]['id_melody_mode'];
-    const modeJSON = JSON.stringify(object);
-    const modeSheetMusic = await get_mode_sheet_music(modeJSON);
-    const modeSongsData = await modeSongs.json();
-    return modeSongsData;
+    
+    if (mode === 'mode_1') {
+        var id_melody = id_melodies[0];
+    } else if (mode === 'mode_2') {
+        var id_melody = id_melodies[1];
+    };
+    console.log(id_melody);
+
+    return sheetMusicURLs[id_melody];
 }
 
 async function setData(id_mode){
@@ -560,13 +606,20 @@ async function setData(id_mode){
     var asco = userData['asco'][id_mode];                                                                   // Get "asco"
     var miedo = userData['miedo'][id_mode];                                                                 // Get "miedo"
     var enojo = userData['enojo'][id_mode];                                                                 // Get "enojo"
-    //var otro = userData['otro'][id_mode];                                                                   // Get "otro"
+    //var otro = userData['otro'][id_mode];                                                                 // Get "otro"
     var pos = userData['pos'][id_mode];                                                                     // Get "pos"
     var neu = userData['neu'][id_mode];                                                                     // Get "neu"
     var neg = userData['neg'][id_mode];                                                                     // Get "neg"
     
-    //audio.src = 'music/'.concat(id_melody,'.mp3')                                                     // Set melody to be played
+    //audio.src = 'music/'.concat(id_melody,'.mp3')                                                         // Set melody to be played
     
+    
+    const sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melodies, id_mode), '?layout=track&locale=es');    // Set sheet music source
+    // update the iframe src
+    document.getElementById('container').innerHTML =  "<h2>Melodía</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";;
+    document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
+    
+
     words = word_list                                                                                       // Set word list
     if (wordCloudButtonClicks >= 1) {
         if (typeof tagcloud != "undefined") {                                                               // If object exists
@@ -678,4 +731,4 @@ async function setData(id_mode){
     setMetadata(currentSong);
     setAudioFiles(id_melody_modes[id_mode]['id_melody_mode']);
     audio.src = playlist.children[currentSong].getAttribute("data-src");
-};
+}; 
