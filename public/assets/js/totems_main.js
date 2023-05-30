@@ -730,5 +730,4 @@ async function setData(id_mode){
     currentSong = 0;
     setMetadata(currentSong);
     setAudioFiles(id_melody_modes[id_mode]['id_melody_mode']);
-    audio.src = playlist.children[currentSong].getAttribute("data-src");
 }; 
