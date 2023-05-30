@@ -520,7 +520,7 @@ audio.autoplay = true;
 
 let modeSongsData = [];
 let currentSong = 0;
-//audio.src = playlist.children[currentSong].getAttribute("data-src");
+audio.src = playlist.children[currentSong].getAttribute("data-src");
 
 async function getModeSongsData(userData, id_mode){
     // Get playlist songs for selected mode and their metadata
