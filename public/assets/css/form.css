@@ -35,7 +35,7 @@ input[type="submit"]
 .form {
     display:flex;
     justify-content: center;
-  }
+}
 
 .likert {
     --likert-rows: 6;

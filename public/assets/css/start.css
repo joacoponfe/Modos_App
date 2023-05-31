@@ -40,7 +40,6 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 	font-family:'Rubik';
-	
 }
 
 ol, ul {
@@ -60,7 +59,6 @@ table {
 }
 
 h1 {
-  
   font-family:'Rubik';
   font-size: 3em;
   font-weight: 600;
@@ -68,12 +66,30 @@ h1 {
   color: #AEC90B;
   text-align: center;
   border-bottom: 3px dotted #AEC90B; 
-  padding-bottom: 20px; 
-
+  padding-bottom: 20px;
 }
 
-P {
-  
+h2 {
+  font-family:'Rubik';
+  font-size: 2em;
+  font-weight: 600;
+  letter-spacing: 0.1em;	
+  color: #AEC90B;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+h4 {
+  font-family:'Rubik';
+  font-size: 1.2em;
+  font-weight: 200;
+	line-height: 1.5em;
+  letter-spacing: 0.1em;	
+  color: #FFFFFF;
+  text-align: left;
+}
+
+P { 
   font-family:'Rubik';
   font-size: 1em;
   font-weight: 200;
@@ -81,24 +97,22 @@ P {
   letter-spacing: 0.1em;	
   color: #FFFFFF;
   text-align: center;
-
 }
 
-Span {
+span {
 	font-weight: 600;
-	}
-
+}
 
 /* estilos generales
 */
 
 .container {
-    display: flex;
+  display: flex;
 	width: auto;
 	height:100vh;
-    align-items: center;
-    justify-content: center;
-    background-color:#162331; 
+  align-items: center;
+  justify-content: center;
+  background-color:#162331; 
 	margin-left:auto;
 	margin-right:auto; 
 }
@@ -108,14 +122,15 @@ Span {
 	font-family:'Rubik';
 	width: 50%;
 	align-items: center;
-	
-	}
+  text-align: center;
+}
 
 .centered-element-2  {
 	
 	font-family:'Rubik';
 	width: 80%;
 	align-items: center;
+  text-align: center;
 	
 	}
 
@@ -127,7 +142,7 @@ Span {
 	
 	}
 
-input[type="btn-accion"] {
+.btn-accion {
   font-family:'Rubik';
   font-size: 2em;
   font-weight: 600;
@@ -142,13 +157,15 @@ input[type="btn-accion"] {
   text-decoration: none;
   display: inline-block;
   margin: 4px 2px;
+  min-width: 30%;
+  width:auto;
+  transition: background .2s ease-in-out;
 }
 
 .btn-accion:hover {
-  
--webkit-box-shadow: 1px 1px 26px 0px rgba(174,201,11,1);
--moz-box-shadow: 1px 1px 26px 0px rgba(174,201,11,1);
-box-shadow: 1px 1px 26px 0px rgba(174,201,11,1);
+  background: #f1f1f1;
+  border: medium solid lightgrey;
+  color: black;
 }
 
 .centered-element-30  {
@@ -158,6 +175,7 @@ box-shadow: 1px 1px 26px 0px rgba(174,201,11,1);
 	float: left; 
 	display: block; 
 	margin: 1em;
+  text-align: center;
 	
 	
 }
@@ -169,6 +187,7 @@ box-shadow: 1px 1px 26px 0px rgba(174,201,11,1);
 	float: left; 
 	display: block; 
 	margin: 1em;
+  text-align: center;
 	
 	
 }
@@ -187,36 +206,58 @@ ul.aclaracion li {
 
 }
 
-.form {
-	width:50%;
-	align-items: center;
-	float: left; 
-	margin: 1em;
+.form-center {
+  position: relative;
+  width:100%;
+  height:10em;
+  display:flex;
+  justify-content: center;
+}
+
+.form-center form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+
+input[type="number"]{
+  background-color: transparent;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-family:'Rubik';
+  font-size: 1.5em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border: medium solid #AEC90B;
+  color: #AEC90B;
+  padding: 20px;
+  text-align: left;
+  text-decoration: none;
+  margin: 10px 0px 10px;
 }
 
 input[type="text"]{
     background-color: transparent;
-    width: 100%;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 8px;
     font-family:'Rubik';
-    font-size: 1.4em;
+    font-size: 3em;
     font-weight: 600;
     letter-spacing: 0.1em;	
     text-transform:uppercase;
     border: medium solid #AEC90B;
-    border-radius: 8px;
     color: #AEC90B;
     padding: 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     margin: 4px 4px;
 }
 
 input[type="submit"]{
     font-family:'Rubik';
-	font-size: 1.4em;
+	  font-size: 1.4em;
     font-weight: 600;
     letter-spacing: 0.1em;	
     text-transform:uppercase; 
@@ -227,6 +268,151 @@ input[type="submit"]{
     padding: 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    margin: 4px 4px;
+    margin: 0px 0px;
+    width:auto;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
 }
+
+input[type="submit"]:hover {
+  background: #f1f1f1;
+  border: medium solid lightgrey;
+  color: black;
+}
+
+
+/* Customize the label (the container) */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 55px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+  letter-spacing: 0.1em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 100%;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 35px;
+  width: 35px;
+  background-color: transparent;
+  border: medium solid #AEC90B;
+  border-radius: 8px;
+  transition: background .2s ease-in-out;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background: #f1f1f1;
+  border: medium solid lightgrey;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #AEC90B;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 13px;
+  top: 9px;
+  width: 5px;
+  height: 12px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.likert {
+  --likert-rows: 6;
+  display: inline-grid;
+  max-width: 5000px;
+  grid-auto-rows: 1fr;
+  gap: 1em;
+  grid-template-columns: repeat(var(--likert-rows), minmax(0, 1fr));
+  margin: 10px 0px 20px;
+}
+
+@media only screen and (max-width: 500px) {
+  .likert {
+      grid-template-columns: minmax(0, 100px);
+      justify-content: left;
+  }
+}
+
+.likert input {
+  max-width: 250px;
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+.likert span {
+  color: #AEC90B;
+  border-radius: 8px;
+  font-size: 1.1em;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background: transparent;
+  outline: medium solid #AEC90B;
+  transition: background .2s ease-in-out;
+}
+
+.likert input:checked + span {
+  outline: -webkit-focus-ring-color auto 5px;
+  background: #AEC90B;
+  color: black;
+}
+
+.likert input:focus + span {
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.likert span:hover {
+  background: #f1f1f1;
+  outline: lightgrey auto 5px;
+  color: black;
+}
+

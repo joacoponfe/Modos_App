@@ -5,23 +5,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulario</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <link href="/css/form.css" rel="stylesheet" />
+  <link href="/css/start.css" rel="stylesheet" />
 </head>
-<body class="pt-5">
-  <h3 class="text-center">Por favor completá el siguiente cuestionario</h3>
+<body class="container">
+  <div class="centered-element" style="text-align:left">
+  <h1 class="text-center" style="font-size:2em">Completá el siguiente cuestionario</h1><br>
   <div class="form">
     <form id="form" autocomplete="off">
-        <label for="age">Edad:</label>
-        <input type="number" id="age" name="age" placeholder = "18" style="width: 100px" min="1" max="120" minlength="1" maxlength="3" pattern=".{1,3}" title="Ingresar una edad válida" required/><br>
-        <p align="left">¿Cuál es tu género?</p>
+        <h4>¿Cuántos años tenés?</h4>
+        <input type="number" id="age" name="age" placeholder="18" style="width: 125px" min="1" max="120" minlength="1" maxlength="3" pattern=".{1,3}" title="Ingrese su edad" required/><br>
+        <h4>¿Cuál es tu género?</h4>
         <div class="likert">
             <label><input id="sex" name="sex" type="radio" value="F" required/><span>Femenino</span></label>
             <label><input id="sex" name="sex" type="radio" value="M" required/><span>Masculino</span></label>
             <label><input id="sex" name="sex" type="radio" value="X" required/><span>Prefiero no decir</span></label>
         </div><br>
-        <p align="left">¿Cuál es el mayor nivel educativo que alcanzaste?</p>
+        <h4>¿Cuál es el mayor nivel educativo que alcanzaste?</h4>
         <div class="likert">
             <label><input id="education" name="education" type="radio" value="PI" required/><span>Primario incompleto</span></label>
             <label><input id="education" name="education" type="radio" value="P" required/><span>Primario completo</span></label>
@@ -30,7 +29,7 @@
             <label><input id="education" name="education" type="radio" value="U" required/><span>Universitario completo</span></label>
             <label><input id="education" name="education" type="radio" value="PG" required/><span>Posgrado completo</span></label>
         </div><br>
-        <p align="left">¿Qué nivel de formación tenés en armonía y escalas musicales?</p>
+        <h4>¿Qué nivel de formación tenés en armonía y escalas musicales?</h4>
         <div class="likert">
             <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="1" required/><span>Nulo</span></label>
             <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="2" required/><span>Bajo</span></label>
@@ -38,12 +37,12 @@
             <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="4" required/><span>Alto</span></label>
             <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="5" required/><span>Experto</span></label>
         </div><br>
-        <p align="left">¿Tocás algún instrumento?</p>
+        <h4>¿Tocás algún instrumento?</h4>
         <div class="likert">
           <label><input id="instrument" name="instrument" type="radio" value="no" required/><span>No</span></label>
           <label><input id="instrument" name="instrument" type="radio" value="yes" required/><span>Sí</span></label>
         </div><br>
-        <p align="left">¿Estás familiarizado/a con el concepto de modos en música?</p>
+        <h4>¿Estás familiarizado/a con el concepto de modos en música?</h4>
         <div class="likert">
             <label><input id="knows_modes" name="knows_modes" type="radio" value="1" required/><span>Nada</span></label>
             <label><input id="knows_modes" name="knows_modes" type="radio" value="2" required/><span>Poco</span></label>
@@ -51,10 +50,15 @@
             <label><input id="knows_modes" name="knows_modes" type="radio" value="4" required/><span>Bastante</span></label>
             <label><input id="knows_modes" name="knows_modes" type="radio" value="5" required/><span>Mucho</span></label>
         </div><br>
-        <input type="checkbox" id="consent" name="consent" required>
-        <label for="consent" style="max-width:700px">Doy mi consentimiento para que mis datos se recopilen y utilicen bajo estas condiciones.</label>
+        <!--<input type="checkbox" id="consent" name="consent" required><span style="color:white">Doy mi consentimiento para que mis datos se recopilen y utilicen bajo estas condiciones.</span>-->
+        <!--<label for="consent" style="max-width:700px">Doy mi consentimiento para que mis datos se recopilen y utilicen bajo estas condiciones.</label>-->
+        <label class="checkbox-container">Doy mi consentimiento para que mis datos se recopilen y utilicen bajo estas condiciones.
+          <input type="checkbox" id="consent" name="consent" required>
+          <span class="checkmark"></span>
+        </label>
         <input type="submit" id="sendButton" value="Siguiente">
     </form>
+  </div>
   <script src="/js/form.js" type="module"></script>  
   <script src="/js/cookies.js" type="module"></script>
   </div>
