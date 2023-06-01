@@ -384,7 +384,8 @@ var container_frame;
 // Create image element
 const image = document.createElement('img');
 //image.src = "https://i.pinimg.com/originals/3c/f8/41/3cf8412096f10f0847e6e689fde63775.jpg";
-image.style.maxWidth = "100%";
+image.style.width = "700px";
+image.style.borderRadius = "10px";
 image.alt = "No se encontró la imagen.";
 
 // Create QR code image element
