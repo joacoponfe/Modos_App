@@ -2,6 +2,11 @@ import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
 import { url } from "./config.js";
 
+const form = document.getElementById("form");
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    window.location.href = "start_dni.html";
+});
 
 fetch(url + "/profiles_api/hello/", {
     method: "GET",
@@ -13,7 +18,3 @@ fetch(url + "/profiles_api/hello/", {
       console.error('Error:', error);
       console.log("El servidor está caído.");
     });
-
-document.getElementById("sendButton").onclick = function () {
-    location.href = "start_dni.html";
-};

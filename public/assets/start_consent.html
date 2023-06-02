@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicio</title>
+  <title>Consentimiento</title>
   <link href="/css/start.css" rel="stylesheet" />
 </head>
 <body class="container">
@@ -13,13 +13,14 @@
     <p style="text-align:justify; max-width:700px; margin-left:auto; margin-right:auto"><span>Te pediremos que escuches melodías y
       escribas tus pensamientos.</span><br><br>Tu información y los textos podrán utilizarse exclusivamente con fines de
       investigación de forma anónima y confidencial, sin ningún fin de lucro. Los resultados podrán publicarse en revistas
-      científicas y otros medios conforme a las prácticas estándar del campo.<br><br>
-      <label class="checkbox-container">Doy mi consentimiento para que mis datos se recopilen y utilicen bajo estas condiciones.
+      científicas y otros medios conforme a las prácticas estándar del campo.<br><br></p>
+    <form id="form" autocomplete="off" style="max-width:700px; margin-left:auto; margin-right:auto">
+      <label class="checkbox-container" style="text-align: left;">Doy mi consentimiento para que mis datos se recopilen <br> y utilicen bajo estas condiciones.
         <input type="checkbox" id="consent" name="consent" required>
         <span class="checkmark"></span>
       </label>
-    </p>
       <br><br><input type="submit" id="sendButton" value="Siguiente">
+    </form>
     </div>
   </div>
 <script src="/js/start_consent.js" type="module"></script>

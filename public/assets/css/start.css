@@ -92,7 +92,7 @@ h4 {
 
 P { 
   font-family:'Rubik';
-  font-size: 1em;
+  font-size: 1.1em;
   font-weight: 200;
 	line-height: 1.5em;
   letter-spacing: 0.1em;	
@@ -115,7 +115,7 @@ span {
   background-color:#162331; 
 	margin-left:auto;
 	margin-right:auto;
-  margin-top: 100px;
+  margin-top: 175px;
 }
 
 .centered-element  {
@@ -167,7 +167,7 @@ span {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  margin: 4px 2px;
+  margin: 0px 0px;
   min-width: 30%;
   width:auto;
   cursor: pointer;
@@ -281,6 +281,7 @@ input[type="submit"]{
     text-align: center;
     text-decoration: none;
     margin: 0px 0px;
+    min-width: 40%;
     width:auto;
     cursor: pointer;
     transition: background .2s ease-in-out;
@@ -313,7 +314,7 @@ textarea {
   margin-top: 10px;
   margin-bottom: 30px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 1.1em;
   color: white;
   letter-spacing: 0.1em;
   -webkit-user-select: none;

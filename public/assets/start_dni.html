@@ -9,14 +9,16 @@
 </head>
 <body class="container">
   <div class="centered-element">
-    <h1 class="text-center">Para participar, escribí tus iniciales y los últimos tres números de tu DNI</h1><br>
-    <div class="form-center">
-      <form id="form" autocomplete="off">
-        <input type="text" name="initials" id="initials_input" placeholder = "AAA" style="width: 175px; height:125px" minlength="2" maxlength="3" oninput="this.value = this.value.replace(/[^aA-zZ]/g, '').toUpperCase();" pattern=".{2,3}" title="Ingresar 2 o 3 letras" required/>
-        <input type="text" name="DNI" id="DNI_input" placeholder = "000" style="width: 175px; height:125px" minlength="3" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern=".{3,3}" title="Ingresar 3 números" required/>
-        <br><br><input type="submit" id="sendButton" value="Siguiente">
+    <h1 class="text-center">Ingreso</h1><br>
+    <h2 class="text-center" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">Escribí tus iniciales <br> y los últimos tres números de tu DNI</h2>
+    <br>
+    <!-- <div class="form-center"> -->
+      <form id="form" autocomplete="off" style="max-width:700px; margin-left:auto; margin-right:auto">
+        <input type="text" name="initials" id="initials_input" placeholder = "AAA" style="width: 200px; height:125px" minlength="2" maxlength="3" oninput="this.value = this.value.replace(/[^aA-zZ]/g, '').toUpperCase();" pattern=".{2,3}" title="Ingresar 2 o 3 letras" required/>
+        <input type="text" name="DNI" id="DNI_input" placeholder = "000" style="width: 200px; height:125px" minlength="3" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern=".{3,4}" title="Ingresar 3 números" required/>
+        <br><br><br><input type="submit" id="sendButton" value="Siguiente">
       </form>
-    </div>
+    <!-- </div> -->
   </div>
 <script src="/js/start.js" type="module"></script>
 <script src="/js/jsonFormat.js"></script>
