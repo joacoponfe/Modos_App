@@ -5,7 +5,7 @@ const yesButton = document.getElementById("yesButton");
 const noButton = document.getElementById("noButton");
 
 document.getElementById("noButton").onclick = function () {
-    location.href = "consigna.html?" + id_participant;
+    location.href = "volume.html?" + id_participant;
 };
 
 document.getElementById("yesButton").onclick = function () {

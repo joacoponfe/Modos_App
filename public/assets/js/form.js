@@ -12,6 +12,7 @@ form.addEventListener('submit', function (e) {
     object['id_participant'] = getCookie('id_participant');
     formData.forEach(function(value, key){
         object[key] = value;
+    object['consent'] = 'on'; // hardcode consent, highly insecure and not recommended
     });
 
     const formJSON = JSON.stringify(object);
