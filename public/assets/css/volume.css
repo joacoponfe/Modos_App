@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f8f8f8;
+    width: auto;
+    margin: 20px auto;
+    padding: 0px;
+    background-color: transparent;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* border: 3px solid #AEC90B; */
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
   }
   
   #controls {
@@ -16,160 +17,42 @@
   }
   
   #play-pause {
-    margin-right:10px;
-    width: 50px;
-    height: 50px;
-    border: none;
+    margin-right: 25px;
+    width: 75px;
+    height: 75px;
+    border: 3px solid #AEC90B;
     border-radius: 50%;
-    background-color: #333;
-    color: #fff;
-    font-size: 20px;
+    background-color: transparent;
+    color: #AEC90B;
+    font-size: 60px;
     outline: none;
     cursor: pointer;
     transition: background-color 0.2s ease;
   }
   
   #play-pause:hover {
-    background-color: #444;
+    background-color: white;
+    border: medium solid lightgrey;
+    color: black;
   }
-  
-  #prev,
-  #next {
-    margin-left: 10px;
-    margin-right:10px;
-    width: 50px;
-    height: 50px;
-    border: none;
-    border-radius: 50%;
-    background-color: #ddd;
-    color: #333;
-    font-size: 20px;
-    outline: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  #prev:hover,
-  #next:hover {
-    background-color: #eee;
-  }
-  
-  #playlist {
-    width: 100%;
-    margin: 20px 0;
-  }
-  
-  #songs {
-    list-style: none;
-    padding: 0;
-  }
-  
-  #songs li {
-    display:inline-block;
-    vertical-align: top;
-    align-items: center;
-    width: 150px;
-    height: 150px;
-    padding: 20px;
-    background-color: #ddd;
-    margin: 10px 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  #songs li:hover {
-    background-color: #eee;
-  }
-  
-  #songs li.active-song {
-    background-color: lightblue;
-  }
-  
-  #progress-bar {
-    width: 100%;
-    height: 5px;
-    background-color: #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    margin: 20px 0;
-    cursor: pointer;
-  }
-  
-  #progress-bar .progress {
-    width: 0;
-    height: 100%;
-    background-color: #333;
-    border-radius: 5px;
-    transition: width 0.2s ease;
-    cursor: pointer;
-  }
-  
+
   #volume {
     width: 200px;
-    height: 20px;
+    height: 30px;
     margin: 20px 0;
     -webkit-appearance: none;
-    background-color: #ddd;
-    border-radius: 20px;
-    outline: none;
+    background-color: transparent;
+    border: 3px solid #AEC90B;
+    border-radius: 50px;
     cursor: pointer;
   }
   
   #volume::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    background-color: #333;
+    background-color: transparent;
+    outline: 3px solid #AEC90B;
     cursor: pointer;
-  }
-  
-  #time {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 25vh;
-  }
-  .metadata {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 600px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  .album-art {
-    flex: 0 0 150px;
-    height: 150px;
-    background-color: #f2f2f2;
-    margin-right: 20px;
-    border-radius: 5px;
-    background-image: url('https://upload.wikimedia.org/wikipedia/en/a/a2/Chvrches_-_Screen_Violence.png');
-    background-size: cover;
-    background-position: center;
-  }
-  .song-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .song-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
-  }
-  .artist-album-year {
-    font-size: 16px;
-    color: #999999;
-    margin: 5px 0 0 0;
   }

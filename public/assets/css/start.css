@@ -67,6 +67,7 @@ h1 {
   text-align: center;
   border-bottom: 3px dotted #AEC90B; 
   padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -97,6 +98,7 @@ P {
   letter-spacing: 0.1em;	
   color: #FFFFFF;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 span {
@@ -134,12 +136,22 @@ span {
 	}
 
 
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+  margin: 20px auto;
+  padding: 0px;
+  gap: 20px;
+}
+
 .text-center{
 	
 	width: auto;
 	text-align: center;
 	
-	}
+}
 
 .btn-accion {
   font-family:'Rubik';
