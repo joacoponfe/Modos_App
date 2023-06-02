@@ -1,19 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@font-face {
+  font-family: 'Rubik';
+  src: url('../fonts/Rubik-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
 
 body {
-  background-color: white;
+  background-color: #162331;
 }
 
 .tagcloud {
-    /*font-family: 'Poppins', sans-serif;*/  
-    font-size: 20px;
-    margin: left;
-    margin-left:100px;
-    width: 100%;
-  }
-  .tagcloud--item:hover {
-    color: #36454F;
-  }
+  font-family: 'Rubik'; 
+  font-size: 20px;
+  margin: left;
+  margin-left:100px;
+  width: 50%;
+  color: greenyellow;
+}
+
+.tagcloud--item:hover {
+  color: white;
+}
 
 .caja-padre{
   width: 30%;
@@ -25,21 +32,27 @@ body {
 }
 
 .contenedor{
+  font-family:'Rubik';
   width:100%;
   padding: 30px 30px 50px;
-  background: #f7f7f7;
+  background: transparent;
+  color: greenyellow;
   border-radius: 10px;
+  border: 3px solid greenyellow;
 }
 
 .container{
+  font-family:'Rubik';
   width: 100%;
   height: 70px;
   margin-bottom: 20px;
-  background-color: whitesmoke;
+  background-color: transparent;
+  border: 3px solid greenyellow;
   border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: greenyellow;
 }
 
 .participants-counter{
@@ -55,8 +68,9 @@ body {
 }
 
 h2{
+  font-family:'Rubik';
   text-align: left;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 img{  
