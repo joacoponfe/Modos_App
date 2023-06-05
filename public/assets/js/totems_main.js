@@ -369,6 +369,12 @@ async function get_mode_songs(request) {
 // create sheet music iframe
 var sheetURL;
 var sheet_frame;
+var mode_text;
+
+// create embeddings video iframe
+var video_frame;
+var video_path;
+var distance_text;
 
 // Create Word Cloud element
 const wordCloud = document.createElement("span");
@@ -438,6 +444,10 @@ sidebarButtons.forEach(button => {
             sheet_frame.setAttribute("frameBorder", "0");
             sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
             sheet_frame.setAttribute("allow", "autoplay; midi");
+            //mode text
+            var textContainer = document.createElement('div');
+            textContainer.innerHTML = mode_text;
+            sheet_frame.appendChild(textContainer);
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
@@ -458,7 +468,23 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
             document.getElementById('container').innerHTML = '<h2>Vos y el resto</h2><br>';
-            button.setAttribute('class', "active");
+            document.getElementById('container').appendChild(video_frame);
+            video_frame.style.display = "block";
+            var video = document.createElement('video');
+            video.setAttribute('src', video_path);
+            video.setAttribute('autoplay', 'autoplay');
+            video.setAttribute('loop', 'loop');
+            video.style.width = '80%'; // Adjust the width as needed
+            video.style.height = 'auto'; // Maintain aspect ratio
+            video_frame.appendChild(video);
+            //text
+            var textContainer = document.createElement('div');
+            textContainer.innerHTML = distance_text;
+            video_frame.appendChild(textContainer);
+
+            document.getElementById('container').appendChild(video_frame);
+            button.setAttribute('class', 'active');
+            
         } else if (content === 'songs') {
             document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
             document.getElementById('container').appendChild(playlist_frame);
@@ -591,8 +617,57 @@ function getsheetMusicURLs(id_melody){
     return sheetMusicURLs[id_melody];
 }
 
+function getVideoPath(id_melody_mode, distance){
+    // this function concatanates 'assets/videos/' with the mode and distance to get the video path
+    // if distance is less than 0.2, set distance to 0.2, else if distance is less than 0.4 set distance to 0.4
+    console.log('%%%%%%%distance%%%%%%%%%');
+    console.log(distance);
+
+    if (distance < 0.2){
+        distance = "0.2";
+    } else if (distance < 0.4){
+        distance = "0.4";
+    } else if (distance < 0.6){
+        distance = "0.6";
+    } else if (distance < 0.8){
+        distance = "0.8";
+    } else if (distance < 1.0){
+        distance = "1.0";
+    } else {
+        distance = "0.2";
+    }
+    console.log(distance);
+
+    return 'assets/videos/'.concat(id_melody_mode, '/line_embedding_',distance,'.mp4');
+
+}
+
+function getDistanceText(distance){
+    // this function returns the text to be displayed in the distance section
+    if (distance < 0.2){
+        return 'Tu mente refleja la conciencia musical colectiva.'
+    } else if (distance < 0.4){
+        return 'Tu mente se acerca a la conciencia musical colectiva.'
+    } else if (distance < 0.6){
+        return 'Tu experiencia musical es, a la vez, común y única.'
+    } else if (distance < 0.8){
+        return 'Vivís la música de manera particular.'
+    } else if (distance < 1.0){
+        return 'Vivís la música de forma totalmente única.'
+    } else {
+        return 'Tu mente refleja la conciencia musical colectiva.'
+    }
+
+}
+
+function getModeText(id_melody_mode){
+    // this function returns the text to be displayed in the mode section
+    // if mode = dorico ....
+    // if (id_melody_mode === 'dorico'){
+        return 'hello, world!'
+}; 
+
 async function setData(id_mode){
-    
     // Set id_melody_mode cookie (read by playlist.html)
     setCookie('id_melody_mode', id_melody_modes[id_mode]['id_melody_mode']);
     
@@ -611,28 +686,25 @@ async function setData(id_mode){
     var pos = userData['pos'][id_mode];                                                                     // Get "pos"
     var neu = userData['neu'][id_mode];                                                                     // Get "neu"
     var neg = userData['neg'][id_mode];                                                                     // Get "neg"
-    
+    var distance = userData['semantic_distance'][id_mode];                                                           // Get "distance"
     //audio.src = 'music/'.concat(id_melody,'.mp3')                                                         // Set melody to be played
     
-    // sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?layout=track&locale=es');    // Set sheet music source
     sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?layout=track&locale=es');    // Set sheet music source
-
-    console.log(id_melody);
-    console.log(sheetURL);
-
-    if (typeof sheet_frame != "undefined") {                                                            // If thermometer exists
-        sheet_frame.remove();                                                                           // Destroy it
-        sheet_frame = document.createElement('iframe');                                                 // And create new one
+    mode_text = getModeText(id_melody_modes[id_mode]['id_melody_mode']);                                    // Set mode text
+    
+    if (typeof sheet_frame != "undefined") {                                                                // If sheet music exists
+        sheet_frame.remove();                                                                               // Destroy it
+        sheet_frame = document.createElement('iframe');                                                     // And create new one
         sheet_frame.setAttribute("src", sheetURL);
         sheet_frame.setAttribute("height", "450");
         sheet_frame.setAttribute("width", "100%");
         sheet_frame.setAttribute("frameBorder", "0");
         sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
         sheet_frame.setAttribute("allow", "autoplay; midi");
-        // sheet_frame.addEventListener('load', function() {
-        //     var iframeDoc = container_frame.contentWindow.document;
-        //     setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg);
-        // });
+        //mode text
+        var textContainer = document.createElement('div');
+        textContainer.innerHTML = mode_text;
+        sheet_frame.appendChild(textContainer);
         
         var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
         sidebarButtons.forEach(function(button) {
@@ -658,6 +730,10 @@ async function setData(id_mode){
         sheet_frame.setAttribute("frameBorder", "0");
         sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
         sheet_frame.setAttribute("allow", "autoplay; midi");
+        //mode text
+        var textContainer = document.createElement('div');
+        textContainer.innerHTML = mode_text;
+        sheet_frame.appendChild(textContainer);
         // container_frame.addEventListener('load', function() {
         //     var iframeDoc = container_frame.contentWindow.document;
         //     setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg);
@@ -719,7 +795,60 @@ async function setData(id_mode){
     image.src = 'data:image/png;base64,'.concat(encoded_image);                                             // Set image source
 
     // Set embeddings
+    video_path = getVideoPath(id_melody_modes[id_mode]['id_melody_mode'], distance);
+    distance_text = getDistanceText(distance);
     
+    if (typeof video_frame != "undefined") {                                                            // If video exists
+        video_frame.remove();                                                                           // Destroy it
+        video_frame = document.createElement('div');                                                    // And create new one
+        var video = document.createElement('video');
+        video.setAttribute('src', video_path);
+        video.setAttribute('autoplay', 'autoplay');
+        video.setAttribute('loop', 'loop');
+        // video.style.width = '80%'; // Adjust the width as needed
+        video.style.width = '0%'; // Adjust the width as needed
+        video.style.height = 'auto'; // Maintain aspect ratio
+        video_frame.appendChild(video);
+        //text
+        var textContainer = document.createElement('div');
+        // textContainer.innerHTML = distance_text;
+        textContainer.innerHTML = '';
+        video_frame.appendChild(textContainer);
+
+        document.getElementById('container').appendChild(video_frame);
+        
+        var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
+        sidebarButtons.forEach(function(button) {
+            if (button.getAttribute("class") === "active") {
+              activeButton = button.getAttribute("id");
+            }
+        });
+          
+        if (activeButton) {
+            console.log('The active button is:', activeButton);
+          } else {
+            console.log('No button is currently active.');
+          }
+        if (activeButton === "you-and-others"){
+            document.getElementById('container').appendChild(video_frame);
+        }
+        
+    } else {
+        video_frame = document.createElement('div');                                                 // And create new one
+        var video = document.createElement('video');
+        video.setAttribute('src', video_path);
+        video.setAttribute('autoplay', 'autoplay');
+        video.setAttribute('loop', 'loop');
+        video.style.width = '80%'; // Adjust the width as needed
+        video.style.height = 'auto'; // Maintain aspect ratio
+        video_frame.appendChild(video);
+        //text
+        var textContainer = document.createElement('div');
+        textContainer.innerHTML = getDistanceText(distance);
+        // video_frame.appendChild(textContainer);
+        // document.getElementById('container').appendChild(video_frame);
+    };
+
     // Set playlist
     if (typeof playlist_frame != "undefined") {                                                             // If playlist exists
         playlist_frame.remove();                                                                            // destroy it
@@ -756,7 +885,7 @@ async function setData(id_mode){
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
         playlist_frame.style.display = "none";
-        //document.getElementById('container').appendChild(playlist_frame);
+        // document.getElementById('container').appendChild(playlist_frame);
 
     };
     
