@@ -98,7 +98,7 @@ img{
   position: relative;
   font-size: 0.25vmax;
   width: 100em;
-  border: 1px solid darkslategrey;
+  border: 3px solid greenyellow;
   border-radius: 20px;
   background-color: #f7f7f7;
 }
@@ -197,7 +197,7 @@ img{
   font-size: 0.25vmax;
   width: 100em;
   height: 30px;
-  border: 1px solid darkslategrey;
+  border: 3px solid greenyellow;
   border-radius: 20px;
   background-color: None;
   text-align: center;
@@ -205,15 +205,15 @@ img{
 
 .positive{
   width: 0%;
-  background-color: #c9c9c9;
+  background-color: transparent;
   float: left;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   font-size: 4em;
   line-height: 1.1em;
   border-right-style: solid;
-  border-right-width: 1px;
-  border-right-color: darkslategrey;
+  border-right-width: 3px;
+  border-right-color: greenyellow;
   animation: positive-bar 5s forwards;
 }
 
@@ -225,13 +225,13 @@ img{
 
 .neutral{
   width: 0%;
-  background-color: #c9c9c9;
+  background-color: transparent;
   float: left;
   font-size: 4em;
   line-height: 1.1em;
   border-right-style: solid;
-  border-right-width: 1px;
-  border-right-color: darkslategrey;
+  border-right-width: 3px;
+  border-right-color: greenyellow;
   animation: neutral-bar 5s forwards;
 }
 
@@ -243,7 +243,7 @@ img{
 
 .negative{
   width: 0%;
-  background-color: #c9c9c9;
+  background-color: transparent;
   float: left;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
