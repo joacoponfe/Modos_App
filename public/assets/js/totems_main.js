@@ -1,6 +1,6 @@
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
-import { url } from "./config.js";
+import { url, urlBack } from "./config.js";
 
 // Get cookies
 const id_participant = getCookie('id_participant');
@@ -301,7 +301,7 @@ function sendMetadata(currentSong) {
 
 // Listen for messages from the playlist iframe window (song change)
 window.addEventListener('message', function(event) {
-    if (event.origin === 'http://localhost:3000') {
+    if (event.origin === urlBack) {
       var index = event.data;
       //console.log('Received message from playlist_mini.html: ' + index['index']);
       currentSong = index['index'];
@@ -380,7 +380,7 @@ var distance_text;
 const wordCloud = document.createElement("span");
 wordCloud.classList.add('tagcloud');
 const tagContainer = '.tagcloud';
-const options = {radius:200, maxSpeed:'fast', initSpeed:'fast', direction:135, keep:true};
+const options = {radius:300, maxSpeed:'normal', initSpeed:'normal', direction:135, keep:true};
 var words = userData['word_lists'][0];
 var tagcloud;
 
@@ -435,7 +435,7 @@ sidebarButtons.forEach(button => {
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
             // set iframe src to sheet music URL
-            document.getElementById('container').innerHTML =  "<h2>Melodía</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";
+            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";
             document.getElementById('container').appendChild(sheet_frame);
             sheet_frame.style.display = "block";
             sheet_frame.setAttribute("src", sheetURL);
@@ -451,42 +451,49 @@ sidebarButtons.forEach(button => {
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
-            document.getElementById('container').innerHTML = '<h2>Conceptos predominantes</h2><br>';
+            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><br> Estas son las palabras que predominaron en tu respuesta ';
             document.getElementById('container').appendChild(wordCloud);
             if (typeof tagcloud === "undefined") { // If object does not already exist
                 tagcloud = TagCloud(tagContainer, words, options);  // Creates word cloud element 
              }
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
-            document.getElementById('container').innerHTML = '<h2>Termómetro emocional</h2>';
+            document.getElementById('container').innerHTML = '<h2>Emociones</h2><br> Este termometro mide la intensidad de las emociones que sentiste al escuchar la melodía';
             document.getElementById('container').appendChild(container_frame);
             container_frame.style.display = "block";
             button.setAttribute('class', "active");
         } else if (content === 'images') {
-            document.getElementById('container').innerHTML = '<h2>Imagen</h2><br>';
+            document.getElementById('container').innerHTML = '<h2>Imagen</h2><br> ¿Reconoces está imagen? Esto es lo que una inteligencia artificial se imaginó al leer tu texto.' + '<br>' ;
             document.getElementById('container').appendChild(image);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
-            document.getElementById('container').innerHTML = '<h2>Vos y el resto</h2><br>';
+            document.getElementById('container').innerHTML = '<h2>Singularidad</h2>' + '<br> Medimos la similtud entre tu respuesta y las del resto de las personas. ';
+            var refContainer = document.createElement('div');
+            refContainer.style.display = "flex";
+            refContainer.style.alignItems = "center";
+            refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px;" alt="Image 1"><label for="label1" style="margin-right:50px;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:10px;" alt="Image 2"><label for="label2">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
+            document.getElementById('container').appendChild(refContainer);
+
             document.getElementById('container').appendChild(video_frame);
             video_frame.style.display = "block";
             var video = document.createElement('video');
-            video.setAttribute('src', video_path);
+            video.setAttribute('src', 'assets/videos/jonico/embedding_distance_0.5.mp4');
             video.setAttribute('autoplay', 'autoplay');
             video.setAttribute('loop', 'loop');
             video.style.width = '80%'; // Adjust the width as needed
             video.style.height = 'auto'; // Maintain aspect ratio
-            video_frame.appendChild(video);
             //text
             var textContainer = document.createElement('div');
             textContainer.innerHTML = distance_text;
             video_frame.appendChild(textContainer);
+            video_frame.appendChild(video);
+
 
             document.getElementById('container').appendChild(video_frame);
             button.setAttribute('class', 'active');
             
         } else if (content === 'songs') {
-            document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
+            document.getElementById('container').innerHTML = '<h2>Canciones</h2> <br> Acá podes escuchar canciones de distintos generos que utilizan este modo';
             document.getElementById('container').appendChild(playlist_frame);
             playlist_frame.style.display = "block";
             playlist_frame.onload = function() {	
@@ -619,27 +626,36 @@ function getsheetMusicURLs(id_melody){
 
 function getVideoPath(id_melody_mode, distance){
     // this function concatanates 'assets/videos/' with the mode and distance to get the video path
-    // if distance is less than 0.2, set distance to 0.2, else if distance is less than 0.4 set distance to 0.4
+    // if distance is less than 0.2, set distance to 0.2, else if distance is less than 0.4 set distance to 0.4 etc
     console.log('%%%%%%%distance%%%%%%%%%');
     console.log(distance);
 
-    if (distance < 0.2){
+    if (distance < 0.1){
+        distance = "0.1";
+    } else if (distance < 0.2){
         distance = "0.2";
+    } else if (distance < 0.3){
+        distance = "0.3";
     } else if (distance < 0.4){
         distance = "0.4";
+    } else if (distance < 0.5){
+        distance = "0.5";
     } else if (distance < 0.6){
         distance = "0.6";
+    } else if (distance < 0.7){
+        distance = "0.7";
     } else if (distance < 0.8){
         distance = "0.8";
-    } else if (distance < 1.0){
+    } else if (distance < 0.9){
+        distance = "0.9"; 
+    } else if (distance <= 1.0){  
         distance = "1.0";
     } else {
-        distance = "0.2";
+        distance = "0.4";
     }
-    console.log(distance);
 
-    return 'assets/videos/'.concat(id_melody_mode, '/line_embedding_',distance,'.mp4');
-
+    // return 'assets/videos/'.concat(id_melody_mode, '/embedding_distance_',distance,'.mp4');
+    return 'assets/videos/'.concat('jonico', '/embedding_distance_',distance,'.mp4');
 }
 
 function getDistanceText(distance){
