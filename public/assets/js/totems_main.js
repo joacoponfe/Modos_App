@@ -1,6 +1,6 @@
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
-import { url, urlBack } from "./config.js";
+import { url, urlFront } from "./config.js";
 
 // Get cookies
 const id_participant = getCookie('id_participant');
@@ -293,7 +293,6 @@ function sendMetadata(currentSong) {
     // Sends metadata to playlist page.
     const metadata = {'index' : currentSong, 'title': modeSongsData['titulos'][currentSong], 'artist': modeSongsData['artistas'][currentSong], 'album': modeSongsData['albumes'][currentSong], 'year': modeSongsData['anios'][currentSong], 'album-art': 'data:image/png;base64,'.concat(modeSongsData['encoded_images'][currentSong])};
     console.log(metadata);
-    console.log(playlist_frame.contentWindow);
     if (playlist_frame.contentWindow != null) { 
         playlist_frame.contentWindow.postMessage(metadata, '*');
     }
@@ -301,7 +300,7 @@ function sendMetadata(currentSong) {
 
 // Listen for messages from the playlist iframe window (song change)
 window.addEventListener('message', function(event) {
-    if (event.origin === urlBack) {
+    if (event.origin === urlFront) {
       var index = event.data;
       //console.log('Received message from playlist_mini.html: ' + index['index']);
       currentSong = index['index'];
@@ -371,10 +370,14 @@ var sheetURL;
 var sheet_frame;
 var mode_text;
 
-// create embeddings video iframe
-var video_frame;
+// create embeddings video elements
 var video_path;
 var distance_text;
+const video = document.createElement('video');
+var distanceTextContainer = document.createElement('div');
+distanceTextContainer.style.marginTop = "20px";
+distanceTextContainer.style.fontSize = "20px";
+distanceTextContainer.style.fontWeight = "bold";
 
 // Create Word Cloud element
 const wordCloud = document.createElement("span");
@@ -463,33 +466,26 @@ sidebarButtons.forEach(button => {
             container_frame.style.display = "block";
             button.setAttribute('class', "active");
         } else if (content === 'images') {
-            document.getElementById('container').innerHTML = '<h2>Imagen</h2><br> ¿Reconoces está imagen? Esto es lo que una inteligencia artificial se imaginó al leer tu texto.' + '<br>' ;
+            document.getElementById('container').innerHTML = '<h2>Imagen</h2><br> ¿Reconoces está imagen? Esto es lo que una inteligencia artificial se imaginó al leer tu texto' + '<br>' ;
             document.getElementById('container').appendChild(image);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
-            document.getElementById('container').innerHTML = '<h2>Singularidad</h2>' + '<br> Medimos la similtud entre tu respuesta y las del resto de las personas. ';
+            document.getElementById('container').innerHTML = '<h2>Singularidad</h2>' + '<br> Medimos la similitud entre tu respuesta y las del resto de las personas' + '<br><br>';
+            // References
             var refContainer = document.createElement('div');
             refContainer.style.display = "flex";
-            refContainer.style.alignItems = "center";
+            refContainer.style.alignItems = "center"; 
             refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px;" alt="Image 1"><label for="label1" style="margin-right:50px;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:10px;" alt="Image 2"><label for="label2">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
             document.getElementById('container').appendChild(refContainer);
-
-            document.getElementById('container').appendChild(video_frame);
-            video_frame.style.display = "block";
-            var video = document.createElement('video');
-            video.setAttribute('src', 'assets/videos/jonico/embedding_distance_0.5.mp4');
-            video.setAttribute('autoplay', 'autoplay');
-            video.setAttribute('loop', 'loop');
-            video.style.width = '80%'; // Adjust the width as needed
-            video.style.height = 'auto'; // Maintain aspect ratio
-            //text
-            var textContainer = document.createElement('div');
-            textContainer.innerHTML = distance_text;
-            video_frame.appendChild(textContainer);
-            video_frame.appendChild(video);
-
-
-            document.getElementById('container').appendChild(video_frame);
+            // Text
+            //var distanceTextContainer = document.createElement('div');
+            distanceTextContainer.innerHTML = distance_text;
+            // distanceTextContainer.style.marginTop = "20px";
+            // distanceTextContainer.style.fontSize = "20px";
+            // distanceTextContainer.style.fontWeight = "bold";
+            document.getElementById('container').appendChild(distanceTextContainer);
+            // Video
+            document.getElementById('container').appendChild(video);
             button.setAttribute('class', 'active');
             
         } else if (content === 'songs') {
@@ -508,6 +504,7 @@ sidebarButtons.forEach(button => {
     });
 });
 
+// Redirect to playlist page when clicking on metadata section of miniplayer
 document.getElementById('metadata-section').addEventListener('click', event => {
     // Prevent the default link behavior   
     event.preventDefault();
@@ -515,6 +512,11 @@ document.getElementById('metadata-section').addEventListener('click', event => {
     document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
     document.getElementById('container').appendChild(playlist_frame);
     playlist_frame.style.display = "block";
+    // Set all buttons to "inactive" and then set playlist button to "active"
+    sidebarButtons.forEach(button => {
+        button.setAttribute('class', '');
+    });
+    document.getElementById("songs").setAttribute('class', 'active');
 });
 
 // Get references to the mode tabs in the sidebar menu
@@ -549,7 +551,7 @@ modeButtons.forEach(button => {
 
 // Set data according to selected mode
 setData(0); // Defaults to first mode
-// Autoplay
+// Autoplay audio
 audio.autoplay = true;
 
 let modeSongsData = [];
@@ -655,7 +657,7 @@ function getVideoPath(id_melody_mode, distance){
     }
 
     // return 'assets/videos/'.concat(id_melody_mode, '/embedding_distance_',distance,'.mp4');
-    return 'assets/videos/'.concat('jonico', '/embedding_distance_',distance,'.mp4');
+    return 'assets/videos/'.concat('jonico', '/embedding_distance_',distance,'.mp4'); // Hasta que Dani genere los videos que faltan
 }
 
 function getDistanceText(distance){
@@ -811,59 +813,16 @@ async function setData(id_mode){
     image.src = 'data:image/png;base64,'.concat(encoded_image);                                             // Set image source
 
     // Set embeddings
+    console.log(id_melody_modes[id_mode]['id_melody_mode']);
+    console.log(distance);
     video_path = getVideoPath(id_melody_modes[id_mode]['id_melody_mode'], distance);
     distance_text = getDistanceText(distance);
-    
-    if (typeof video_frame != "undefined") {                                                            // If video exists
-        video_frame.remove();                                                                           // Destroy it
-        video_frame = document.createElement('div');                                                    // And create new one
-        var video = document.createElement('video');
-        video.setAttribute('src', video_path);
-        video.setAttribute('autoplay', 'autoplay');
-        video.setAttribute('loop', 'loop');
-        // video.style.width = '80%'; // Adjust the width as needed
-        video.style.width = '0%'; // Adjust the width as needed
-        video.style.height = 'auto'; // Maintain aspect ratio
-        video_frame.appendChild(video);
-        //text
-        var textContainer = document.createElement('div');
-        // textContainer.innerHTML = distance_text;
-        textContainer.innerHTML = '';
-        video_frame.appendChild(textContainer);
-
-        document.getElementById('container').appendChild(video_frame);
-        
-        var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
-        sidebarButtons.forEach(function(button) {
-            if (button.getAttribute("class") === "active") {
-              activeButton = button.getAttribute("id");
-            }
-        });
-          
-        if (activeButton) {
-            console.log('The active button is:', activeButton);
-          } else {
-            console.log('No button is currently active.');
-          }
-        if (activeButton === "you-and-others"){
-            document.getElementById('container').appendChild(video_frame);
-        }
-        
-    } else {
-        video_frame = document.createElement('div');                                                 // And create new one
-        var video = document.createElement('video');
-        video.setAttribute('src', video_path);
-        video.setAttribute('autoplay', 'autoplay');
-        video.setAttribute('loop', 'loop');
-        video.style.width = '80%'; // Adjust the width as needed
-        video.style.height = 'auto'; // Maintain aspect ratio
-        video_frame.appendChild(video);
-        //text
-        var textContainer = document.createElement('div');
-        textContainer.innerHTML = getDistanceText(distance);
-        // video_frame.appendChild(textContainer);
-        // document.getElementById('container').appendChild(video_frame);
-    };
+    //console.log(video_path);
+    //console.log(distance_text);
+    video.setAttribute('src', video_path);
+    video.setAttribute('autoplay', 'autoplay');
+    video.setAttribute('loop', 'loop');
+    distanceTextContainer.innerHTML = distance_text;
 
     // Set playlist
     if (typeof playlist_frame != "undefined") {                                                             // If playlist exists

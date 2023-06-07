@@ -1,4 +1,4 @@
-import { urlBack } from "./config.js";
+import { urlFront } from "./config.js";
 import { getCookie } from "./cookies.js";
 
 const id_melody_mode = getCookie('id_melody_mode');
@@ -25,7 +25,8 @@ const qr_image = document.getElementById("qr_image");
 
 // Listen for messages from the parent window
 window.addEventListener('message', function(event) {
-  if (event.origin === urlBack) {
+  console.log(event.origin);
+  if (event.origin === urlFront) {
     var metadata = event.data;
     setMetadata(metadata);
     setActiveSong(metadata['index']);

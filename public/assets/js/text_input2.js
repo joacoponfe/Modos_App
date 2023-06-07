@@ -17,7 +17,7 @@ var downloadTimer = setInterval(function(){
     // tiempito
     //window.location.href = "finalize1.html";
   } else {
-    if(timeleft <= 60){
+    if(timeleft <= 30){
     document.getElementById("status").innerHTML = "Quedan " + timeleft + " segundos para escribir";
     }
   }
@@ -80,7 +80,7 @@ document.getElementById('sendButton').addEventListener('click', saveText);
 
 // Make default text "Me imaginé..."
 document.querySelector('#text_input').addEventListener('input', function(e){
-  var defaultText = 'Me imaginé ',
+  var defaultText = 'Imaginé ',
       defaultTextLength = defaultText.length;
   if(this.selectionStart === this.selectionEnd && this.selectionStart < defaultTextLength) {
       this.value = defaultText;
