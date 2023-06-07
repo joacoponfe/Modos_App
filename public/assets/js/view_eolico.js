@@ -85,7 +85,7 @@ document.getElementById('neu-value').innerHTML = (neu * 100).toFixed(0).toString
 document.getElementById('neg-value').innerHTML = (neg * 100).toFixed(0).toString().concat("%");
 
 // Get the style sheet containing the alegria-bar animation
-const stylesheet = document.styleSheets[1];
+const stylesheet = document.styleSheets[2];
 
 // Find the animation rule we want to modify
 const emotionRuleNames = ['alegria-bar', 'tristeza-bar', 'sorpresa-bar', 'asco-bar', 'miedo-bar', 'enojo-bar'];
