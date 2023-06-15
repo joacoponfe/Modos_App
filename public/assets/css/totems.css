@@ -48,7 +48,7 @@ body{
 
 .wrapper .sidebar .tab button{
     background-color: inherit;
-    color: #ffffff;
+    color: #AEC90B;
     margin: 10px 0 5px;
     float: left;
     font-size: 20px;
@@ -68,20 +68,20 @@ body{
 }
 
 .wrapper .sidebar .profile h3{
-    color: #ffffff;
+    color: #AEC90B;
     margin: 10px 0 5px;
 }
 
 .wrapper .sidebar ul li a{
     display: flex;
     padding: 20px 0px;
-    color: rgb(241, 237, 237);
+    color: white;
     font-size: 25px;
     position: relative;
 }
 
 .wrapper .sidebar ul li a .icon{
-    color: #dee4ec;
+    color: white;
     width: 80px;
     display: flex;
     justify-content: center;
@@ -297,10 +297,10 @@ body{
 #play-pause {
     width: 50px;
     height: 50px;
-    border: 2px solid white;
+    border: 2px solid #AEC90B;
     border-radius: 50%;
     background: none;
-    color: #fff;
+    color: #AEC90B;
     font-size: 20px;
     outline: none;
     cursor: pointer;
@@ -318,10 +318,10 @@ body{
     margin-right:10px;
     width: 50px;
     height: 50px;
-    border: 2px solid white;
+    border: 2px solid #AEC90B;
     border-radius: 50%;
     background: none;
-    color: white;
+    color: #AEC90B;
     font-size: 20px;
     outline: none;
     cursor: pointer;
@@ -350,6 +350,6 @@ body{
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: white;
+    background-color: #AEC90B;
     cursor: pointer;
   }

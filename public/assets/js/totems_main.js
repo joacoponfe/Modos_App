@@ -438,7 +438,7 @@ sidebarButtons.forEach(button => {
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
             // set iframe src to sheet music URL
-            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><br>Volvé a escuchar la melodía acompañada de su partitura<br>";
+            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><br>Transcribimos la melodía que escuchaste, acá podés volver a escucharla y conocer más sobre este modo<br>";
             document.getElementById('container').appendChild(sheet_frame);
             sheet_frame.style.display = "block";
             sheet_frame.setAttribute("src", sheetURL);
@@ -454,23 +454,23 @@ sidebarButtons.forEach(button => {
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
-            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><br> Estas son las palabras que predominaron en tu respuesta ';
+            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><br> Identificamos los conceptos clave de la respuesta ';
             document.getElementById('container').appendChild(wordCloud);
             if (typeof tagcloud === "undefined") { // If object does not already exist
                 tagcloud = TagCloud(tagContainer, words, options);  // Creates word cloud element 
              }
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
-            document.getElementById('container').innerHTML = '<h2>Emociones</h2><br> Este termometro mide la intensidad de las emociones que sentiste al escuchar la melodía';
+            document.getElementById('container').innerHTML = '<h2>Emociones</h2><br> Medimos la intensidad de las emociones que sentiste al escuchar la melodía';
             document.getElementById('container').appendChild(container_frame);
             container_frame.style.display = "block";
             button.setAttribute('class', "active");
         } else if (content === 'images') {
-            document.getElementById('container').innerHTML = '<h2>Imagen</h2><br> ¿Reconoces está imagen? Esto es lo que una inteligencia artificial se imaginó al leer tu texto' + '<br>' ;
+            document.getElementById('container').innerHTML = '<h2>Imagen</h2><br> Captamos esta imagen de tu cabeza. ¿Coincide con lo que te imaginaste?' + '<br>' ;
             document.getElementById('container').appendChild(image);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
-            document.getElementById('container').innerHTML = '<h2>Singularidad</h2>' + '<br> Medimos la similitud entre tu respuesta y las del resto de las personas' + '<br><br>';
+            document.getElementById('container').innerHTML = '<h2>Singularidad</h2>' + '<br> Calculamos la similitud entre tu respuesta y las del resto de las personas' + '<br><br>';
             // References
             var refContainer = document.createElement('div');
             refContainer.style.display = "flex";
@@ -489,7 +489,7 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', 'active');
             
         } else if (content === 'songs') {
-            document.getElementById('container').innerHTML = '<h2>Canciones</h2> <br> Acá podes escuchar canciones de distintos generos que utilizan este modo';
+            document.getElementById('container').innerHTML = '<h2>Canciones</h2> <br> Recopilamos canciones de distintos géneros que utilizan este modo';
             document.getElementById('container').appendChild(playlist_frame);
             playlist_frame.style.display = "block";
             playlist_frame.onload = function() {	
