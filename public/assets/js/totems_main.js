@@ -369,6 +369,7 @@ async function get_mode_songs(request) {
 var sheetURL;
 var sheet_frame;
 var mode_text;
+var textContainer;
 
 // create embeddings video elements
 var video_path;
@@ -447,10 +448,11 @@ sidebarButtons.forEach(button => {
             sheet_frame.setAttribute("frameBorder", "0");
             sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
             sheet_frame.setAttribute("allow", "autoplay; midi");
-            //mode text
-            var textContainer = document.createElement('div');
-            textContainer.innerHTML = mode_text;
-            sheet_frame.appendChild(textContainer);
+            // add text to the webpage below 
+            textContainer = document.createElement('div');
+            textContainer.innerHTML = "<br> " + mode_text;
+            document.getElementById('container').appendChild(textContainer);
+            
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
@@ -680,9 +682,23 @@ function getDistanceText(distance){
 
 function getModeText(id_melody_mode){
     // this function returns the text to be displayed in the mode section
-    // if mode = dorico ....
-    // if (id_melody_mode === 'dorico'){
-        return 'hello, world!'
+    if (id_melody_mode === 'jonico'){
+        return '-Muy empleado en la música occidental, en múltiples géneros. <br> -Único modo griego mayor con séptima mayor y cuarta natural. <br> -Históricamente vinculado con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.<br> -Suele emplearse para comunicar emociones positivas.';
+    } else if (id_melody_mode === 'dorico'){
+        return '-Muy común en el rock, el jazz, el funk y el pop. <br> -Único modo griego menor con sexta natural. <br> - Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’. <br> -Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.';
+    } else if (id_melody_mode === 'frigio'){
+        return '-Común en el metal y algunos subgéneros del flamenco. <br> -Único modo griego menor con segunda menor y quinta natural. <br> - Históricamente vinculado a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’. <br> -Muy utilizado para comunicar emociones negativas y para generar tensión.';
+    } else if (id_melody_mode === 'lidio'){
+        return '-Suele emplearse para generar climas particulares en el rock y la música de cine. <br> -Único modo griego mayor con séptima mayor y cuarta aumentada. <br> -Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ y ‘superación’. <br> -Muy utilizado para comunicar emociones positivas y sensaciones oníricas.';
+    } else if (id_melody_mode === 'mixolidio'){
+        return '-Común en el rock, el blues y el funk. <br> -Único modo griego mayor con séptima menor. <br> -Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’. <br> -Muchos artistas lo emplean para comunicar emociones positivas.';
+    } else if (id_melody_mode === 'eolico'){
+        return '-Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica. <br> -Único modo griego menor con segunda menor y sexta menor. <br> -Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’. <br> -Suele usarse para comunicar melancolía.';
+    } else if (id_melody_mode === 'locrio'){
+        return '-Es el modo menos utilizado en el mundo. <br> -Único modo griego con segunda menor y quinta disminuida. <br> -Históricamente vinculado a ‘miedo’, ‘peligro’ y ‘confusión’. <br> -Armónicamente es muy inestable y suele evocar incomodidad.';
+    } else {
+        return 'hello, world!' + Math.floor(Math.random() * 100);
+    }
 }; 
 
 async function setData(id_mode){
@@ -712,6 +728,8 @@ async function setData(id_mode){
     
     if (typeof sheet_frame != "undefined") {                                                                // If sheet music exists
         sheet_frame.remove();                                                                               // Destroy it
+        // also TRY to delete textContainer
+        textContainer.remove();
         sheet_frame = document.createElement('iframe');                                                     // And create new one
         sheet_frame.setAttribute("src", sheetURL);
         sheet_frame.setAttribute("height", "450");
@@ -719,10 +737,9 @@ async function setData(id_mode){
         sheet_frame.setAttribute("frameBorder", "0");
         sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
         sheet_frame.setAttribute("allow", "autoplay; midi");
-        //mode text
-        var textContainer = document.createElement('div');
-        textContainer.innerHTML = mode_text;
-        sheet_frame.appendChild(textContainer);
+        // add text to the webpage below 
+        textContainer = document.createElement('div');
+        textContainer.innerHTML = "<br> " + mode_text;
         
         var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
         sidebarButtons.forEach(function(button) {
@@ -738,9 +755,11 @@ async function setData(id_mode){
           }
         if (activeButton === "music"){
             document.getElementById('container').appendChild(sheet_frame);
+            document.getElementById('container').appendChild(textContainer);
         }
         
     } else {
+        
         sheet_frame = document.createElement('iframe');                                                 // And create new one
         sheet_frame.setAttribute("src", sheetURL);
         sheet_frame.setAttribute("height", "450");
@@ -748,14 +767,10 @@ async function setData(id_mode){
         sheet_frame.setAttribute("frameBorder", "0");
         sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
         sheet_frame.setAttribute("allow", "autoplay; midi");
-        //mode text
-        var textContainer = document.createElement('div');
-        textContainer.innerHTML = mode_text;
-        sheet_frame.appendChild(textContainer);
-        // container_frame.addEventListener('load', function() {
-        //     var iframeDoc = container_frame.contentWindow.document;
-        //     setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg);
-        // });
+        // add text to the webpage below 
+        textContainer = document.createElement('div');
+        textContainer.innerHTML = "";
+        document.getElementById('container').appendChild(textContainer);
     };
 
     words = word_list                                                                                       // Set word list
