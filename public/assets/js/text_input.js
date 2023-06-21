@@ -34,8 +34,8 @@ const saveText = (e) => {
   object['text_input'] = text;
   object['text_page_load'] = text_page_load;
   object['text_start'] = text_start;
-  if (text_start === undefined){ // if text_start is undefined, set text_start as text_submit
-    object['text_start'] = text_submit; 
+  if (text_start === undefined) { // if text_start is undefined, set text_start as text_submit
+    object['text_start'] = text_submit;
   };
   console.log(object['text_start']);
   object['text_submit'] = text_submit;
@@ -43,28 +43,31 @@ const saveText = (e) => {
   const textJSON = JSON.stringify(object);
   console.log(textJSON);
 
-  async function query(text_data) {
-    const response = await fetch(
+  if (text !== "Imaginé " || confirm("¿Estás seguro/a de que deseas enviar un texto vacío?")) {
+    async function query(text_data) {
+      const response = await fetch(
         url + "/profiles_api/receive_text/",
         {
-            headers: new Headers({ 'Content-type': 'application/json' }),
-            method: "POST",
-            body: text_data,
+          headers: new Headers({ 'Content-type': 'application/json' }),
+          method: "POST",
+          body: text_data,
         }
-    );
-    const result = await response;
-    return result;
-}
+      );
+      const result = await response;
+      return result;
+    }
 
-query(textJSON).then((response) => {
-    response.json().then(body => console.log(body))
-    .then(body => window.location.href = "finalize1.html")
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-    console.log("El servidor está caído.");
-    window.location.href = "server_down.html";   
-});
+    query(textJSON)
+      .then((response) => {
+        response.json().then(body => console.log(body))
+          .then(body => window.location.href = "finalize1.html")
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        console.log("El servidor está caído.");
+        window.location.href = "server_down.html";
+      });
+  }
 }
 
 var eventHandler = function(event){

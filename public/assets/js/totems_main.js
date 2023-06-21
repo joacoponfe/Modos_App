@@ -454,7 +454,7 @@ sidebarButtons.forEach(button => {
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
-            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><br> Identificamos los conceptos clave de la respuesta ';
+            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><br> Identificamos los conceptos clave de tu texto';
             document.getElementById('container').appendChild(wordCloud);
             if (typeof tagcloud === "undefined") { // If object does not already exist
                 tagcloud = TagCloud(tagContainer, words, options);  // Creates word cloud element 
