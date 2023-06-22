@@ -2,11 +2,13 @@
 function displayImageMosaic() {
     // Array of image URLs
     var imageUrls = [
-        "images/stable_diff/stable_diff.jpg",
-        "images/singularidad_star.png",
-        "images/locrio_QR.png",
-        "images/iconos_auriculares_solo.png",
+        "images/stable_diff/AMG555_lo1.jpg",
+        "images/stable_diff/ASW912_ej.jpg",
+        "images/stable_diff/BAM490_f2.jpg",
+        "images/stable_diff/RAG239_f5.jpg",
     ];
+    var initials = ['AMG', 'ASW', 'BAM','RAG'];
+
 
     // Container element for the mosaic
     var mosaicContainer = document.getElementById("imageMosaic");
@@ -28,7 +30,7 @@ function displayImageMosaic() {
 
         // Create the text element
         var text = document.createElement("p");
-        text.textContent = "Generado por la mente de las iniciales " + (i + 1);
+        text.textContent = "Generado por la mente de " + initials[i];
 
         // Append the image and text to the tile container
         tileContainer.appendChild(image);

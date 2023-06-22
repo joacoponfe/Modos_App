@@ -62,7 +62,7 @@ const saveText = (e) => {
     query(textJSON)
       .then((response) => {
         response.json().then(body => console.log(body))
-          .then(body => window.location.href = "finalize1.html")
+          .then(body => window.location.href = "finalize2.html")
       })
       .catch((error) => {
         console.error('Error:', error);
