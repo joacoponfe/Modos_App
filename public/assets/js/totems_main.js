@@ -35,7 +35,7 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
     neg_value.innerHTML = (neg_percentage * 100).toFixed(decimal_places).toString().concat("%");
 
     // Get the stylesheet containing the animation rules
-    var stylesheet = iframeDoc.styleSheets[1];
+    var stylesheet = iframeDoc.styleSheets[0];
     
     // Find the animation rule we want to modify
     const emotionRuleNames = ['alegria-bar', 'tristeza-bar', 'sorpresa-bar', 'asco-bar', 'miedo-bar', 'enojo-bar'];
@@ -164,8 +164,8 @@ for (let x in id_melody_modes_tildes){
     };
 };
 
-mode_1.innerHTML = "Modo " + id_melody_1_mode_tildes['id_melody_mode'];
-mode_2.innerHTML = "Modo " + id_melody_2_mode_tildes['id_melody_mode'];
+mode_1.innerHTML = id_melody_1_mode_tildes['id_melody_mode'];
+mode_2.innerHTML = id_melody_2_mode_tildes['id_melody_mode'];
 
 
 // Get playlist elements
@@ -394,7 +394,7 @@ var container_frame;
 // Create image element
 const image = document.createElement('img');
 //image.src = "https://i.pinimg.com/originals/3c/f8/41/3cf8412096f10f0847e6e689fde63775.jpg";
-image.style.width = "700px";
+image.style.width = "650px";
 image.style.borderRadius = "10px";
 image.alt = "No se encontró la imagen.";
 
@@ -439,7 +439,7 @@ sidebarButtons.forEach(button => {
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
             // set iframe src to sheet music URL
-            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><br>Transcribimos la melodía que escuchaste, acá podés volver a escucharla y conocer más sobre este modo<br>";
+            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><span>Transcribimos la melodía que escuchaste. Volvé a escucharla y conocé más sobre este modo<span>";
             document.getElementById('container').appendChild(sheet_frame);
             sheet_frame.style.display = "block";
             sheet_frame.setAttribute("src", sheetURL);
@@ -456,23 +456,23 @@ sidebarButtons.forEach(button => {
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
-            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><br> Identificamos los conceptos clave de tu texto';
+            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><span>Identificamos los conceptos clave de tu texto</span>';
             document.getElementById('container').appendChild(wordCloud);
             if (typeof tagcloud === "undefined") { // If object does not already exist
                 tagcloud = TagCloud(tagContainer, words, options);  // Creates word cloud element 
              }
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
-            document.getElementById('container').innerHTML = '<h2>Emociones</h2><br> Medimos la intensidad de las emociones que sentiste al escuchar la melodía';
+            document.getElementById('container').innerHTML = '<h2>Emociones</h2><span>Medimos la intensidad de las emociones que sentiste al escuchar la melodía</span>';
             document.getElementById('container').appendChild(container_frame);
             container_frame.style.display = "block";
             button.setAttribute('class', "active");
         } else if (content === 'images') {
-            document.getElementById('container').innerHTML = '<h2>Imagen</h2><br> Captamos esta imagen de tu cabeza. ¿Coincide con lo que te imaginaste?' + '<br>' ;
+            document.getElementById('container').innerHTML = '<h2>Imagen</h2><span>Captamos esta imagen de tu cabeza. ¿Coincide con lo que te imaginaste?</span>';
             document.getElementById('container').appendChild(image);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
-            document.getElementById('container').innerHTML = '<h2>Singularidad</h2>' + '<br> Calculamos la similitud entre tu respuesta y las del resto de las personas' + '<br><br>';
+            document.getElementById('container').innerHTML = '<h2>Singularidad</h2><span>Calculamos la similitud entre tu respuesta y las del resto de las personas</span>';
             // References
             var refContainer = document.createElement('div');
             refContainer.style.display = "flex";
@@ -491,7 +491,7 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', 'active');
             
         } else if (content === 'songs') {
-            document.getElementById('container').innerHTML = '<h2>Canciones</h2> <br> Recopilamos canciones de distintos géneros que utilizan este modo';
+            document.getElementById('container').innerHTML = '<h2>Canciones</h2><span>Recopilamos canciones de distintos géneros que utilizan este modo</span>';
             document.getElementById('container').appendChild(playlist_frame);
             playlist_frame.style.display = "block";
             playlist_frame.onload = function() {	
@@ -814,6 +814,7 @@ async function setData(id_mode){
     } else {
         container_frame = document.createElement('iframe');
         container_frame.setAttribute("src", "thermometer.html?cache-buster=123");
+        container_frame.setAttribute("allowtransparency", "true");
         container_frame.style.width = "100%";
         container_frame.style.height = "1000px";
         container_frame.style.border = "none";

@@ -10,10 +10,16 @@
     <title>Totem</title>
 </head>
 <body>
+    <div class="video-container">
+        <video autoplay width="1920" height="1080" loop="true" id="galaxy-background" muted>
+            <source type="video/mp4" src="videos/Galaxy-Background.mp4">
+        </video>
+    
+    <div class="overlay">
     <div class="wrapper">
         <div class="section">
             <div class="container" id="container">
-            Presioná uno de los botones de la izquierda para visualizar el contenido
+            <p>Presioná uno de los botones de la izquierda para visualizar el contenido</p>
             </div>
         </div>
         <!--Top menu -->
@@ -23,8 +29,8 @@
                 <h3 id="id_string">ABC000</h3>
             </div>
             <div class="tab">
-                <button id="mode_1"class="active">Modo jónico</button>
-                <button id="mode_2" class="">Modo locrio</button>
+                <button id="mode_1"class="active">jónico</button>
+                <button id="mode_2" class="">locrio</button>
             </div>            
             <!--menu item -->
             <ul>
@@ -69,7 +75,7 @@
         </div>
 
     </div>
-    <a href="totems_landing.html" class="float" id="exit">
+    <a href="totems_landing.html" class="btn-exit" id="exit">
         <p>Salir</p>
     </a>
 
@@ -114,7 +120,9 @@
       <li id="metalint" data-src="music/snippets/j_metalint.wav">Rock y metal internacional</li>
       <li id="pop" data-src="music/snippets/j_pop.wav">Pop</li>
     </ul>
-</div>
+</div> 
+</div> <!-- End of overlay -->
+</div> <!-- End of video-container -->
     
 <script src="/js/TagCloud.js"> </script>
 <script src="/js/thermometer.js" type="module"></script>

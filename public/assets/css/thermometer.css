@@ -1,29 +1,46 @@
+@font-face {
+  font-family: 'Rubik';
+  src: url('../fonts/Rubik-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  background-color : transparent;
+}
+
 .caja-padre{
   width: 30%;
   min-width: 300px;
   position: relative;
-  /*transform: translate(-25%,-100%);*/
   left: 0%;
   top: 0%;
 }
 
 .contenedor{
+  font-family:'Rubik';
   width:100%;
-  padding: 30px 30px 50px;
-  background: #f7f7f7;
+  padding: 10px 30px 50px;
+  background: transparent;
+  color: greenyellow;
   border-radius: 10px;
+  border: 3px solid greenyellow;
 }
 
 .container{
+  font-family:'Rubik';
   width: 100%;
   height: 70px;
   margin-bottom: 20px;
-  background-color: whitesmoke;
+  background-color: transparent;
+  border: 3px solid greenyellow;
   border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: greenyellow;
 }
+
 
 .participants-counter{
   display: flex;
@@ -67,7 +84,7 @@ img{
   position: relative;
   font-size: 0.25vmax;
   width: 100em;
-  border: 1px solid darkslategrey;
+  border: 3px solid greenyellow;
   border-radius: 20px;
   background-color: #f7f7f7;
 }
@@ -166,7 +183,7 @@ img{
   font-size: 0.25vmax;
   width: 100em;
   height: 30px;
-  border: 1px solid darkslategrey;
+  border: 3px solid greenyellow;
   border-radius: 20px;
   background-color: None;
   text-align: center;
@@ -174,15 +191,15 @@ img{
 
 .positive{
   width: 0%;
-  background-color: #c9c9c9;
+  background-color: transparent;
   float: left;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   font-size: 4em;
   line-height: 1.1em;
   border-right-style: solid;
-  border-right-width: 1px;
-  border-right-color: darkslategrey;
+  border-right-width: 3px;
+  border-right-color: greenyellow;
   animation: positive-bar 5s forwards;
 }
 
@@ -194,13 +211,13 @@ img{
 
 .neutral{
   width: 0%;
-  background-color: #c9c9c9;
+  background-color: transparent;
   float: left;
   font-size: 4em;
   line-height: 1.1em;
   border-right-style: solid;
-  border-right-width: 1px;
-  border-right-color: darkslategrey;
+  border-right-width: 3px;
+  border-right-color: greenyellow;;
   animation: neutral-bar 5s forwards;
 }
 
@@ -212,7 +229,7 @@ img{
 
 .negative{
   width: 0%;
-  background-color: #c9c9c9;
+  background-color: transparent;
   float: left;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
