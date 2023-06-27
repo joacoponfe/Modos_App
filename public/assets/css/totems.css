@@ -86,7 +86,7 @@ body{
 
 .wrapper .sidebar .tab button{
     background-color: inherit;
-    color: #AEC90B;
+    color: var(--main-color);
     margin: 10px 0 5px;
     float: left;
     font-size: 1.8em;
@@ -100,6 +100,93 @@ body{
     transition: 0.3s;
 }
 
+/* Switch button*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 466px;
+  height: 66px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--main-color);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 55px;
+    width: 233px;
+    left: 6px;
+    bottom: 6px;
+    background-color: var(--bs-light-transparent);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: var(--main-color);
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--main-color);
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(222px);
+    -ms-transform: translateX(222px);
+    transform: translateX(222px);
+}
+  
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 34px;
+}
+
+.toggle-label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-transform: uppercase;
+    font-size: 1.8em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+  
+.toggle-label.mode_1 {
+    color: var(--bs-dark);
+    left: 64px;
+}
+  
+.toggle-label.mode_2 {
+    color: var(--bs-dark);
+    right: 64px;
+}
+
+/* End switch button*/
+
 /* Change background color of buttons on hover and active*/
 .wrapper .sidebar .tab button:hover,
 .wrapper .sidebar .tab button.active {
@@ -109,15 +196,16 @@ body{
 }
 
 .wrapper .sidebar .profile h3{
-    color: #AEC90B;
-    margin: 10px 0 5px;
+    color: var(--main-color);
+    margin: 20px 0 20px;
     font-size: 2em;
 }
 
 .wrapper .sidebar ul li a{
     display: flex;
+    margin-top: 20px;
     padding: 20px 0px;
-    color: #AEC90B;
+    color: var(--main-color);
     font-size: 1.8em;
     font-weight: 600;
     letter-spacing: 0.05em;	
@@ -127,7 +215,7 @@ body{
 }
 
 .wrapper .sidebar ul li a .icon{
-    color: AEC90B;
+    color: var(--main-color);
     width: 80px;
     display: flex;
     justify-content: center;
@@ -159,7 +247,7 @@ body{
 .wrapper .section .container{
 	margin: 30px;
 	background: none;
-    border: 3px solid var(--bs-mustard-green);
+    border: 3px solid var(--main-color);
     border-radius: 6px;
     width:auto;
     height:100%;
@@ -173,7 +261,7 @@ body{
     font-weight: 600;
     letter-spacing: 0.1em;	
     text-transform:uppercase; 
-    color: #AEC90B;
+    color: var(--main-color);
     margin-bottom: 15px;
 }
 
@@ -213,11 +301,11 @@ body{
     --bs-white: #fff;
     --bs-gray: #6c757d;
     --bs-mustard-green: #aec90bff;
-    --bs-mustard-green-transparent: rgba(174,201,11,0.8);
+    --bs-mustard-green-transparent: rgba(192, 211, 85, 0.548);
     --bs-yellow: #f7cf0dff;
     --bs-yellow-transparent: rgba(247,207,13,0.8);
-    --bs-cyan: #00a2c5ff;
-    --bs-cyan-transparent: rgba(0,162,197,0.8);
+    --bs-cyan: #00a2c5ff; /* jonico */
+    --bs-cyan-transparent: rgba(0,162,197,0.8); /* jonico */
     --bs-purple: #6d3f90ff;
     --bs-purple-transparent: rgba(109,63,144,0.8);
     --bs-pink: #ce5392ff;
@@ -278,7 +366,7 @@ body{
     width: 100%;
     }
   .tagcloud--item:hover {
-    color: #AEC90B;
+    color: var(--main-color);
   }
 
 .float{
@@ -307,9 +395,9 @@ body{
     letter-spacing: 0.1em;	
     text-transform:uppercase; 
     background-color: #162331;
-    border: medium solid #AEC90B;
+    border: medium solid var(--main-color);
     border-radius: 8px;
-    color: #AEC90B;
+    color: var(--main-color);
     padding: 20px;
     text-align: center;
     text-decoration: none;
@@ -420,10 +508,10 @@ body{
 #play-pause {
     width: 50px;
     height: 50px;
-    border: 2px solid #AEC90B;
+    border: 2px solid var(--main-color);
     border-radius: 50%;
     background: none;
-    color: #AEC90B;
+    color: var(--main-color);
     font-size: 20px;
     outline: none;
     cursor: pointer;
@@ -441,10 +529,10 @@ body{
     margin-right:10px;
     width: 50px;
     height: 50px;
-    border: 2px solid #AEC90B;
+    border: 2px solid var(--main-color);
     border-radius: 50%;
     background: none;
-    color: #AEC90B;
+    color: var(--main-color);
     font-size: 20px;
     outline: none;
     cursor: pointer;
@@ -473,6 +561,6 @@ body{
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: #AEC90B;
+    background-color: var(--main-color);
     cursor: pointer;
   }

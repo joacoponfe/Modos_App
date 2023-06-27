@@ -7,6 +7,10 @@
   font-family: var(--bs-font-sans-serif);
 }
 
+body {
+  background-color : transparent;
+}
+
 @font-face {
   font-family: 'Rubik';
   src: url('../fonts/Rubik-Regular.ttf') format('truetype');
@@ -46,7 +50,9 @@
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
+  --bs-light-transparent: rgba(248, 249, 250, 0.8);
   --bs-dark: #162331;
+  --bs-dark-transparent: rgba(22, 35, 49, 0.8);
   --bs-dark-light: rgb(106, 150, 167);
   --bs-dark-hover: rgba(255, 255, 255, 0.1);
   --bs-primary-rgb: 13, 110, 253;
@@ -73,15 +79,15 @@
 }
 
 #player {
-    display: flex;
+    display: inline-block;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     width: 100%;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f8f8f8;
+    margin: auto auto;
+    padding: 10px;
+    background-color: transparent;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);*/
   }
   
   #controls {
@@ -143,20 +149,27 @@
     align-items: center;
     width: 150px;
     height: 150px;
-    padding: 20px;
-    background-color: #ddd;
-    margin: 10px 5px;
+    padding: 15px;
+    background-color: var(--bs-dark-transparent);
+    margin: 10px 10px;
     border-radius: 5px;
+    border: 3px solid #AEC90B;
+    color: #AEC90B;
+    font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.2s ease;
   }
   
   #songs li:hover {
-    background-color: #eee;
+    background: var(--bs-light-transparent);
+    border: medium solid lightgrey;
+    color: black;
   }
   
   #songs li.active-song {
-    background-color: lightblue;
+    background-color: var(--bs-light-transparent);
+    border: medium solid black;
+    color: black;
   }
   
   #progress-bar {
@@ -216,10 +229,11 @@
     align-items: center;
     justify-content: space-between;
     width: 600px;
-    background-color: #ffffff;
+    background-color: var(--bs-dark-transparent);
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border: medium solid var(--main-color);
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);*/
   }
   
   .qr_container {
@@ -227,11 +241,13 @@
     align-items: center;
     justify-content: space-between;
     width: 400px;
-    background-color: #ffffff;
+    background-color: white;
     padding: 20px;
     margin-left: 5px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border: 3px solid #AEC90B;
+    color: black;
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);*/
   }
   .album-art {
     flex: 0 0 150px;
@@ -253,10 +269,17 @@
   .song-title {
     font-size: 24px;
     font-weight: bold;
+    color: #AEC90B;
+    margin: 0;
+  }
+  .qr-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
     margin: 0;
   }
   .artist-album-year {
     font-size: 16px;
-    color: #333333;
+    color: #AEC90B;
     margin: 5px 0 0 0;
   }

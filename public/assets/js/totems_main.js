@@ -7,9 +7,30 @@ const id_participant = getCookie('id_participant');
 //const id_melody_mode = getCookie('id_melody_mode');
 
 // Get document elements, iframe and iframe document elements
-const mode_1 = document.getElementById("mode_1");
-const mode_2 = document.getElementById("mode_2");
+// const mode_1 = document.getElementById("mode_1");
+// const mode_2 = document.getElementById("mode_2");
 const id_string = document.getElementById("id_string");
+const toggleSwitch = document.getElementById("switch");
+const mode_1_text = document.getElementById("mode_1_text");
+const mode_2_text = document.getElementById("mode_2_text");
+
+// Get color themes
+const rootStyles = getComputedStyle(document.documentElement);
+const main_colors = {'jonico': rootStyles.getPropertyValue('--bs-cyan'), 'dorico': rootStyles.getPropertyValue('--bs-yellow'), 'frigio': rootStyles.getPropertyValue('--bs-pink'), 'lidio': rootStyles.getPropertyValue('--bs-purple'), 'mixolidio': '#F9D342', 'eolico': '#F9D342', 'locrio': rootStyles.getPropertyValue('--bs-mustard-green')};
+
+
+// Change information according to the selected mode
+toggleSwitch.addEventListener('change', async function() {
+    if (this.checked) {
+        console.log("Toggle switch is mode_2");
+        setData(1);
+        setCookie('id_melody_mode', id_melody_modes[0]['id_melody_mode']);
+    } else {
+        console.log("Toggle switch is mode_1");
+        setData(0);
+        setCookie('id_melody_mode', id_melody_modes[1]['id_melody_mode']);
+    }
+});
 
 function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage, sorpresa_percentage, asco_percentage, miedo_percentage, enojo_percentage, pos_percentage, neu_percentage, neg_percentage, decimal_places=0){
     var alegria_value = iframeDoc.getElementById('alegria-value');
@@ -164,8 +185,10 @@ for (let x in id_melody_modes_tildes){
     };
 };
 
-mode_1.innerHTML = id_melody_1_mode_tildes['id_melody_mode'];
-mode_2.innerHTML = id_melody_2_mode_tildes['id_melody_mode'];
+// mode_1.innerHTML = id_melody_1_mode_tildes['id_melody_mode'];
+// mode_2.innerHTML = id_melody_2_mode_tildes['id_melody_mode'];
+mode_1_text.innerHTML = id_melody_1_mode_tildes['id_melody_mode'];
+mode_2_text.innerHTML = id_melody_2_mode_tildes['id_melody_mode'];
 
 
 // Get playlist elements
@@ -196,7 +219,6 @@ const jazzTrack = document.getElementById("jazz");
 const metalargTrack = document.getElementById("metalarg");
 const metalintTrack = document.getElementById("metalint");
 const popTrack = document.getElementById("pop");
-
 
 
 // Playlist functions
@@ -521,35 +543,35 @@ document.getElementById('metadata-section').addEventListener('click', event => {
     document.getElementById("songs").setAttribute('class', 'active');
 });
 
-// Get references to the mode tabs in the sidebar menu
-const modeButtons = document.querySelectorAll('.sidebar button');
+// // Get references to the mode tabs in the sidebar menu
+// const modeButtons = document.querySelectorAll('.sidebar button');
 
-// Add a click event listener to each mode button
-modeButtons.forEach(button => {
-    button.addEventListener('click', event => {
+// // Add a click event listener to each mode button
+// modeButtons.forEach(button => {
+//     button.addEventListener('click', event => {
 
-        // Prevent the default link behavior
-        event.preventDefault();
+//         // Prevent the default link behavior
+//         event.preventDefault();
 
-        // Set all buttons to "inactive"
-        modeButtons.forEach(button => {
-            button.setAttribute('class', '');
-        });
+//         // Set all buttons to "inactive"
+//         modeButtons.forEach(button => {
+//             button.setAttribute('class', '');
+//         });
 
-        // Get the value of the "mode" attribute of the clicked button
-        const mode = button.getAttribute('id');
-        console.log(mode);
+//         // Get the value of the "mode" attribute of the clicked button
+//         const mode = button.getAttribute('id');
+//         console.log(mode);
         
-        // Update the content based on the selected mode
-        if (mode === 'mode_1') {
-            setData(0);
-            button.setAttribute('class', "active");
-        } else if (mode === 'mode_2') {
-            setData(1);
-            button.setAttribute('class', "active");
-        };
-    });
-});
+//         // Update the content based on the selected mode
+//         if (mode === 'mode_1') {
+//             setData(0);
+//             button.setAttribute('class', "active");
+//         } else if (mode === 'mode_2') {
+//             setData(1);
+//             button.setAttribute('class', "active");
+//         };
+//     });
+// });
 
 // Set data according to selected mode
 setData(0); // Defaults to first mode
@@ -702,6 +724,9 @@ function getModeText(id_melody_mode){
 }; 
 
 async function setData(id_mode){
+    // Change CSS color
+    document.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]);       // Set color theme
+    
     // Set id_melody_mode cookie (read by playlist.html)
     setCookie('id_melody_mode', id_melody_modes[id_mode]['id_melody_mode']);
     
@@ -845,6 +870,7 @@ async function setData(id_mode){
         playlist_frame.remove();                                                                            // destroy it
         playlist_frame = document.createElement('iframe');                                                  // and create new one
         playlist_frame.setAttribute("src", "playlist_mini.html");
+        playlist_frame.setAttribute("allowtransparency", "true");
         playlist_frame.style.width = "100%";
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
@@ -872,6 +898,7 @@ async function setData(id_mode){
     } else {
         playlist_frame = document.createElement('iframe');
         playlist_frame.setAttribute("src", "playlist_mini.html");
+        playlist_frame.setAttribute("allowtransparency", "true");
         playlist_frame.style.width = "100%";
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
