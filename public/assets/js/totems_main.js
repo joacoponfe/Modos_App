@@ -443,14 +443,14 @@ sidebarButtons.forEach(button => {
             document.getElementById('container').appendChild(sheet_frame);
             sheet_frame.style.display = "block";
             sheet_frame.setAttribute("src", sheetURL);
-            sheet_frame.setAttribute("height", "450");
+            sheet_frame.setAttribute("height", "350");
             sheet_frame.setAttribute("width", "100%");
             sheet_frame.setAttribute("frameBorder", "0");
             sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
             sheet_frame.setAttribute("allow", "autoplay; midi");
             // add text to the webpage below 
             textContainer = document.createElement('div');
-            textContainer.innerHTML = "<br> " + mode_text;
+            textContainer.innerHTML = "<h4> " + mode_text + "</h4> ";
             document.getElementById('container').appendChild(textContainer);
             
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
@@ -732,14 +732,14 @@ async function setData(id_mode){
         textContainer.remove();
         sheet_frame = document.createElement('iframe');                                                     // And create new one
         sheet_frame.setAttribute("src", sheetURL);
-        sheet_frame.setAttribute("height", "450");
+        sheet_frame.setAttribute("height", "350");
         sheet_frame.setAttribute("width", "100%");
         sheet_frame.setAttribute("frameBorder", "0");
         sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
         sheet_frame.setAttribute("allow", "autoplay; midi");
         // add text to the webpage below 
         textContainer = document.createElement('div');
-        textContainer.innerHTML = "<br> " + mode_text;
+        textContainer.innerHTML = "<h4> " + mode_text + "</h4>";
         
         var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
         sidebarButtons.forEach(function(button) {
@@ -762,7 +762,7 @@ async function setData(id_mode){
         
         sheet_frame = document.createElement('iframe');                                                 // And create new one
         sheet_frame.setAttribute("src", sheetURL);
-        sheet_frame.setAttribute("height", "450");
+        sheet_frame.setAttribute("height", "350");
         sheet_frame.setAttribute("width", "100%");
         sheet_frame.setAttribute("frameBorder", "0");
         sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
