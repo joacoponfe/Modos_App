@@ -306,11 +306,12 @@ input:checked + .slider:before {
     --bs-yellow-transparent: rgba(247,207,13,0.8);
     --bs-cyan: #00a2c5ff; /* jonico */
     --bs-cyan-transparent: rgba(0,162,197,0.8); /* jonico */
-    --bs-purple: #6d3f90ff;
+    --bs-purple: rgb(153, 90, 202);
     --bs-purple-transparent: rgba(109,63,144,0.8);
     --bs-pink: #ce5392ff;
     --bs-pink-transparent: rgba(206,83,146,0.8);
     --bs-gray-dark: #343a40;
+    --bs-beige: #cec6bb;
     --bs-gray-100: #f8f9fa;
     --bs-gray-200: #e9ecef;
     --bs-gray-300: #dee2e6;

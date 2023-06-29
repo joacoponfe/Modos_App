@@ -16,7 +16,7 @@ const mode_2_text = document.getElementById("mode_2_text");
 
 // Get color themes
 const rootStyles = getComputedStyle(document.documentElement);
-const main_colors = {'jonico': rootStyles.getPropertyValue('--bs-cyan'), 'dorico': rootStyles.getPropertyValue('--bs-yellow'), 'frigio': rootStyles.getPropertyValue('--bs-pink'), 'lidio': rootStyles.getPropertyValue('--bs-purple'), 'mixolidio': '#F9D342', 'eolico': '#F9D342', 'locrio': rootStyles.getPropertyValue('--bs-mustard-green')};
+const main_colors = {'jonico': rootStyles.getPropertyValue('--bs-cyan'), 'dorico': rootStyles.getPropertyValue('--bs-yellow'), 'frigio': rootStyles.getPropertyValue('--bs-pink'), 'lidio': rootStyles.getPropertyValue('--bs-purple'), 'mixolidio': rootStyles.getPropertyValue('--bs-beige'), 'eolico': rootStyles.getPropertyValue('--bs-orange'), 'locrio': rootStyles.getPropertyValue('--bs-mustard-green')};
 
 
 // Change information according to the selected mode
