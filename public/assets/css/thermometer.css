@@ -9,6 +9,7 @@ body {
   background-color : transparent;
 }
 
+
 .caja-padre{
   width: 30%;
   min-width: 300px;
@@ -22,9 +23,9 @@ body {
   width:100%;
   padding: 10px 30px 50px;
   background: transparent;
-  color: greenyellow;
+  color: var(--main-color);
   border-radius: 10px;
-  border: 3px solid greenyellow;
+  border: 3px solid var(--main-color);
 }
 
 .container{
@@ -33,12 +34,12 @@ body {
   height: 70px;
   margin-bottom: 20px;
   background-color: transparent;
-  border: 3px solid greenyellow;
+  border: 3px solid var(--main-color);
   border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: greenyellow;
+  color: var(--main-color);
 }
 
 
@@ -84,7 +85,7 @@ img{
   position: relative;
   font-size: 0.25vmax;
   width: 100em;
-  border: 3px solid greenyellow;
+  border: 3px solid var(--main-color);
   border-radius: 20px;
   background-color: #f7f7f7;
 }
@@ -183,7 +184,7 @@ img{
   font-size: 0.25vmax;
   width: 100em;
   height: 30px;
-  border: 3px solid greenyellow;
+  border: 3px solid var(--main-color);
   border-radius: 20px;
   background-color: None;
   text-align: center;
@@ -199,7 +200,7 @@ img{
   line-height: 1.1em;
   border-right-style: solid;
   border-right-width: 3px;
-  border-right-color: greenyellow;
+  border-right-color: var(--main-color);
   animation: positive-bar 5s forwards;
 }
 
@@ -217,7 +218,7 @@ img{
   line-height: 1.1em;
   border-right-style: solid;
   border-right-width: 3px;
-  border-right-color: greenyellow;;
+  border-right-color: var(--main-color);
   animation: neutral-bar 5s forwards;
 }
 

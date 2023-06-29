@@ -173,15 +173,14 @@ input:checked + .slider:before {
     font-size: 1.8em;
     font-weight: 600;
     letter-spacing: 0.05em;
+    color: var(--bs-dark);
 }
   
 .toggle-label.mode_1 {
-    color: var(--bs-dark);
     left: 64px;
 }
   
 .toggle-label.mode_2 {
-    color: var(--bs-dark);
     right: 64px;
 }
 
@@ -385,7 +384,7 @@ input:checked + .slider:before {
 }
 
 .btn-exit {
-    position:fixed;
+    position:flex;
 	width:200px;
 	height:80px;
 	bottom:175px;
@@ -432,6 +431,7 @@ input:checked + .slider:before {
     align-items: center;
     cursor: pointer;
     border-radius: 5px;
+    min-width: 300px;
 }
 
 #music-bar .metadata:hover{

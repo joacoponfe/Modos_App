@@ -29,6 +29,16 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
+video {
+  width: 40vw;
+  height: 40vh;
+  margin-bottom: 50px;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  align-self: center;
+}
+
 @font-face {
     font-family: 'Rubik';
     src: url('../fonts/Rubik-Regular.ttf') format('truetype');

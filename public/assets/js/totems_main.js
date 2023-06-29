@@ -524,6 +524,10 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
             console.log(currentSong);
             //sendMetadata(currentSong);
+        } else if (content === 'exit') {
+            document.getElementById('container').innerHTML = '<p>¿Seguro que querés salir?</p>';
+            document.getElementById('container').innerHTML += '<a id="exit-yes" class="btn-exit" href="totems_landing.html">Sí</a>';
+            document.getElementById('container').innerHTML += '<a id="exit-no" class="btn-exit" href="totems_main.html">No</a>';
         }
     });
 });
@@ -817,7 +821,9 @@ async function setData(id_mode){
         container_frame.style.display = "block";
         container_frame.addEventListener('load', function() {
             var iframeDoc = container_frame.contentWindow.document;
-            setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg);
+            setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg); // Set thermometer values
+            iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.getElementById("title").innerHTML = "VOS"; // Change title
         });
         
         var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "thermometer"
@@ -838,19 +844,22 @@ async function setData(id_mode){
         
     } else {
         container_frame = document.createElement('iframe');
+        container_frame.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]);
         container_frame.setAttribute("src", "thermometer.html?cache-buster=123");
         container_frame.setAttribute("allowtransparency", "true");
         container_frame.style.width = "100%";
         container_frame.style.height = "1000px";
         container_frame.style.border = "none";
-        container_frame.style.display = "none";
+        container_frame.style.display = "none";        
         container_frame.addEventListener('load', function() {
             var iframeDoc = container_frame.contentWindow.document;
-            setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg);
+            setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg); // Set thermometer values
+            iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.getElementById("title").innerHTML = "VOS"; // Change title
         });
     };
     
-
+    
     image.src = 'data:image/png;base64,'.concat(encoded_image);                                             // Set image source
 
     // Set embeddings
@@ -875,6 +884,10 @@ async function setData(id_mode){
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
         playlist_frame.style.display = "block";
+        playlist_frame.addEventListener('load', function() {
+            var iframeDoc = playlist_frame.contentWindow.document;
+            iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+        });
         
 
         var activeButton = null;                                                                            // Only render playlist if active sidebar button is "songs"
@@ -903,7 +916,10 @@ async function setData(id_mode){
         playlist_frame.style.height = "1200px";
         playlist_frame.style.border = "none";
         playlist_frame.style.display = "none";
-        // document.getElementById('container').appendChild(playlist_frame);
+        playlist_frame.addEventListener('load', function() {
+            var iframeDoc = playlist_frame.contentWindow.document;
+            iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+        });
 
     };
     
