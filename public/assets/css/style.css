@@ -129,21 +129,20 @@ span {
 }
 
 .centered-element  {
-	
-	font-family:'Rubik';
+	position:fixed;
+  top:25%;
+  font-family:'Rubik';
 	width: 50%;
 	align-items: center;
   text-align: center;
 }
 
 .centered-element-2  {
-	
 	font-family:'Rubik';
 	width: 80%;
 	align-items: center;
   text-align: center;
-	
-	}
+}
 
 
 .side-by-side {
@@ -157,13 +156,16 @@ span {
 }
 
 .text-center{
-	
 	width: auto;
 	text-align: center;
-	
 }
 
-.btn-accion {
+/* .btn-accion {
+  position: fixed;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
   font-family:'Rubik';
   font-size: 2em;
   font-weight: 600;
@@ -174,32 +176,25 @@ span {
   border-radius: 8px;
   color: #AEC90B;
   padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
   margin: 0px 0px;
-  min-width: 30%;
-  width:auto;
+  min-width: 15%;
   cursor: pointer;
   transition: background .2s ease-in-out;
-}
+} */
 
-.btn-accion:hover {
+/* .btn-accion:hover {
   background: #f1f1f1;
   border: medium solid lightgrey;
   color: black;
-}
+} */
 
 .centered-element-30  {
-
 	width:30%;
 	align-items: center;
 	float: left; 
 	display: block; 
 	margin: 1em;
   text-align: center;
-	
-	
 }
 
 .centered-element-20  {
@@ -277,7 +272,11 @@ input[type="text"]{
     margin: 4px 4px;
 }
 
-input[type="submit"]{
+input[type="submit"], .btn-accion {
+    position: fixed;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-family:'Rubik';
 	  font-size: 2em;
     font-weight: 600;
@@ -291,13 +290,39 @@ input[type="submit"]{
     text-align: center;
     text-decoration: none;
     margin: 0px 0px;
-    min-width: 40%;
+    min-width: 15%;
     width:auto;
     cursor: pointer;
     transition: background .2s ease-in-out;
 }
 
-input[type="submit"]:hover {
+.btn-accion-free {
+  font-family:'Rubik';
+	  font-size: 2em;
+    font-weight: 600;
+    letter-spacing: 0.1em;	
+    text-transform:uppercase; 
+    background-color: #162331;
+    border: medium solid #AEC90B;
+    border-radius: 8px;
+    color: #AEC90B;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    margin: 0px 0px;
+    min-width: 15%;
+    width:auto;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+
+.btn-accion-free:hover {
+  background: #f1f1f1;
+  border: medium solid lightgrey;
+  color: black;
+}
+
+input[type="submit"]:hover, .btn-accion:hover {
   background: #f1f1f1;
   border: medium solid lightgrey;
   color: black;

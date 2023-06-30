@@ -417,6 +417,7 @@ var container_frame;
 const image = document.createElement('img');
 //image.src = "https://i.pinimg.com/originals/3c/f8/41/3cf8412096f10f0847e6e689fde63775.jpg";
 image.style.width = "650px";
+image.style.marginTop = "20px";
 image.style.borderRadius = "10px";
 image.alt = "No se encontró la imagen.";
 
@@ -461,7 +462,7 @@ sidebarButtons.forEach(button => {
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
             // set iframe src to sheet music URL
-            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><span>Transcribimos la melodía que escuchaste. Volvé a escucharla y conocé más sobre este modo<span>";
+            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><span>Transcribimos la melodía que escuchaste. Volvé a oírla y conocé más sobre este modo<span>";
             document.getElementById('container').appendChild(sheet_frame);
             sheet_frame.style.display = "block";
             sheet_frame.setAttribute("src", sheetURL);
@@ -472,7 +473,7 @@ sidebarButtons.forEach(button => {
             sheet_frame.setAttribute("allow", "autoplay; midi");
             // add text to the webpage below 
             textContainer = document.createElement('div');
-            textContainer.innerHTML = "<h4> " + mode_text + "</h4> ";
+            textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4> ";
             document.getElementById('container').appendChild(textContainer);
             
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
@@ -525,9 +526,7 @@ sidebarButtons.forEach(button => {
             console.log(currentSong);
             //sendMetadata(currentSong);
         } else if (content === 'exit') {
-            document.getElementById('container').innerHTML = '<p>¿Seguro que querés salir?</p>';
-            document.getElementById('container').innerHTML += '<a id="exit-yes" class="btn-exit" href="totems_landing.html">Sí</a>';
-            document.getElementById('container').innerHTML += '<a id="exit-no" class="btn-exit" href="totems_main.html">No</a>';
+            document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">¿Querés salir?</p><a id="exit-yes" class="btn-exit" href="totems_landing.html">Sí</a><a id="exit-no" class="btn-exit" href="totems_main.html">No</a></div>'
         }
     });
 });
@@ -540,6 +539,9 @@ document.getElementById('metadata-section').addEventListener('click', event => {
     document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
     document.getElementById('container').appendChild(playlist_frame);
     playlist_frame.style.display = "block";
+    playlist_frame.onload = function() {	
+        sendMetadata(currentSong);
+    };
     // Set all buttons to "inactive" and then set playlist button to "active"
     sidebarButtons.forEach(button => {
         button.setAttribute('class', '');
@@ -768,7 +770,7 @@ async function setData(id_mode){
         sheet_frame.setAttribute("allow", "autoplay; midi");
         // add text to the webpage below 
         textContainer = document.createElement('div');
-        textContainer.innerHTML = "<h4> " + mode_text + "</h4>";
+        textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4>";
         
         var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
         sidebarButtons.forEach(function(button) {
