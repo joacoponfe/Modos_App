@@ -47,7 +47,7 @@ async function updateData() {
     var tagCloud = TagCloud('.content', myTags,{
 
     // radius in px
-    radius: 300,
+    radius: 400,
 
     // animation speed
     // slow, normal, fast
@@ -106,8 +106,10 @@ async function updateData() {
             for (var k = 0; k < keyframes.length; k++){
                 var keyframe = keyframes[k];
                 if (keyframe.keyText == '100%'){
-                    var shadow_inset = (1-emotionPercentage)*100;
-                    keyframe.style.boxShadow = `inset -${shadow_inset}em 0 0 0 #f7f7f7`;
+                //var shadow_inset = (1-emotionPercentage)*100;
+                var width = emotionPercentage*100;
+                keyframe.style.width = `${width}%`;
+                //keyframe.style.boxShadow = `inset -${shadow_inset}em 0 0 0 #f7f7f7`;
                 };
             };
         };

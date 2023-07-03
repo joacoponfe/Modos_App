@@ -8,7 +8,6 @@ const requestJSON = JSON.stringify(object);
 
 async function query(id_melody_mode) {
     const response = await fetch(
-        //"http://localhost:8000/profiles_api/mode_data/",
         url + "/profiles_api/mode_data/",
         {
             headers: new Headers({ 'Content-type': 'application/json' }),
@@ -108,8 +107,10 @@ for (var i = 0; i < emotionRuleNames.length; i++){
         for (var k = 0; k < keyframes.length; k++){
             var keyframe = keyframes[k];
             if (keyframe.keyText == '100%'){
-                var shadow_inset = (1-emotionPercentage)*100;
-                keyframe.style.boxShadow = `inset -${shadow_inset}em 0 0 0 #f7f7f7`;
+                var width = emotionPercentage*100;
+                keyframe.style.width = `${width}%`;
+                //var shadow_inset = (1-emotionPercentage)*100;
+                //keyframe.style.boxShadow = `inset -${shadow_inset}em 0 0 0 #f7f7f7`;
             };
         };
     };
