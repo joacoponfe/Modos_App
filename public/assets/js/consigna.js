@@ -6,6 +6,43 @@ document.getElementById("nextButton").onclick = function () {
     location.href = "listen.html";
 };
 
+const elements = document.querySelectorAll(".centered-element-30");
+const nextButton = document.getElementById("nextButton"); 
+nextButton.style.display = "none";
+let currentIndex = 0;
+
+function showNextButton() {
+    nextButton.classList.add("fade-in");
+    nextButton.style.display = "block";
+}
+
+// Function to show the next element and fade out the previous one
+function showNextElement() {
+    if (currentIndex < elements.length - 1){
+        elements[currentIndex].classList.add("fade-out");
+        currentIndex++;
+        elements[currentIndex].style.display = "block";
+        // elements[currentIndex].classList.remove("fade-out");
+        if (currentIndex == elements.length - 1) {
+            setTimeout(showNextElement, 5000); // Wait 5 seconds before showing the next element
+        } else {
+            setTimeout(showNextElement, 10000); // Wait 10 seconds before showing the next element
+        }
+    } else {
+        // If there are no more elements, show the "Next" button
+        elements[currentIndex].classList.add("fade-out");
+        showNextButton();
+    }
+}
+
+// Hide all elements except the first one
+for (let i = 1; i < elements.length; i++) {
+    elements[i].style.display = "none";
+}
+
+// Start showing elements after 5 seconds
+setTimeout(showNextElement, 5000);
+
 // We will use this page to retrieve information concerning the melody set and iteration value for the current participant.
 // Create request object
 const object = {};

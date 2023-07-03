@@ -49,7 +49,7 @@ numberElement.textContent = newNumber;
 var tagCloud = TagCloud('.content', myTags,{
 
   // radius in px
-  radius: 300,
+  radius: 400,
 
   // animation speed
   // slow, normal, fast

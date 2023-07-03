@@ -1,3 +1,12 @@
+*{
+  list-style: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--bs-font-sans-serif);
+}
+
 @font-face {
   font-family: 'Rubik';
   src: url('../fonts/Rubik-Regular.ttf') format('truetype');
@@ -9,11 +18,27 @@ body {
   background-color: #162331;
 }
 
+.watermark{
+  width:30%;
+  height:30%;
+}
+
+.container .watermark_and_mode{
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width:390px;
+}
+
 .tagcloud {
   font-family: 'Rubik'; 
   font-size: 20px;
   margin: left;
-  margin-left:100px;
+  margin-left:50px;
   width: 50%;
   color: greenyellow;
 }
@@ -23,18 +48,18 @@ body {
 }
 
 .caja-padre{
-  width: 30%;
+  width: 35%;
   min-width: 300px;
   position: relative;
   transform: translate(-25%,-130%);
   left: 70%;
-  top: 20%;
+  top: 10%;
 }
 
 .contenedor{
   font-family:'Rubik';
   width:100%;
-  padding: 30px 30px 50px;
+  padding: 30px 30px 30px;
   background: transparent;
   color: greenyellow;
   border-radius: 10px;
@@ -45,13 +70,15 @@ body {
   font-family:'Rubik';
   width: 100%;
   height: 70px;
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 35px;
   margin-top:40px;
+  margin-bottom:20px;
+  margin-left:50px;
+  margin-right:50px;
+  font-weight:bold;
+  font-size:35px;
   background-color: transparent;
   /*border: 3px solid greenyellow;*/
-  border-radius: 50px;
+  /* border-radius: 50px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,14 +86,15 @@ body {
 }
 
 .participants-counter{
-  display: flex;
-  align-items:center;
+  /* align-items:right;
+  align-self:right; */
+  margin-right: 150px;
 }
 
 .number{
-  margin-left: 5px;
-  margin-right: 10px;
-  font-size: 30px;
+  margin-left: 0px;
+  margin-right: 0px;
+  font-size: 40px;
   font-weight: bold;
 }
 
@@ -103,7 +131,8 @@ img{
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
+  font-size:25px;
 }
 
 .menu{
