@@ -30,9 +30,8 @@ body {
   text-align: center;
   align-items: center;
   display: flex;
-  justify-content: left;
-  min-width:390px;
-  max-width:600px;
+  justify-content: space-between;
+  width:390px;
 }
 
 .tagcloud {
@@ -112,7 +111,6 @@ h2{
   font-family:'Rubik';
   text-align: left;
   font-size: 30px;
-  margin-bottom:30px;
 }
 
 img{  
@@ -140,18 +138,18 @@ img{
 .menu{
   position: relative;
   font-size: 0.25vmax;
-  width: 100%;
-  outline: 3px solid greenyellow;
+  width: 100em;
+  border: 3px solid greenyellow;
   border-radius: 20px;
-  background-color: transparent;
+  background-color: #f7f7f7;
 }
 
 .menu div{
   position: relative;
-  /* box-shadow: inset -100em 0 0 0 #f7f7f7; */
-  width: 0%;
+  box-shadow: inset -100em 0 0 0 #f7f7f7;
+  width: 100%;
   height: 25px;
-  border-radius: 50px;
+  border-radius: 20px;
   /* background: linear-gradient(450deg, cyan, yellow, red); */
   background: linear-gradient(450deg, greenyellow, greenyellow);
   font-size: 0.25vmax;
@@ -163,6 +161,7 @@ img{
 
 @keyframes alegria-bar {
   100%{
+    box-shadow: inset -20em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -173,6 +172,7 @@ img{
 
 @keyframes tristeza-bar {
   100%{
+    box-shadow: inset -80em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -183,6 +183,7 @@ img{
 
 @keyframes sorpresa-bar {
   100%{
+    box-shadow: inset -90em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -193,6 +194,7 @@ img{
 
 @keyframes asco-bar {
   100%{
+    box-shadow: inset -80em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -203,6 +205,7 @@ img{
 
 @keyframes miedo-bar {
   100%{
+    box-shadow: inset -70em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -213,6 +216,7 @@ img{
 
 @keyframes enojo-bar {
   100%{
+    box-shadow: inset -85em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -223,6 +227,7 @@ img{
 
 @keyframes otro-bar {
   100%{
+    box-shadow: inset -95em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -232,7 +237,7 @@ img{
   justify-content: center;
   position: relative;
   font-size: 0.25vmax;
-  width: 100%;
+  width: 100em;
   height: 40px;
   border: 3px solid greenyellow;
   border-radius: 20px;
