@@ -1,9 +1,7 @@
 import { url } from "./config.js";
 
 // Create request object
-const object = {};
-object['id_melody_mode'] = 'locrio';
-
+const object = {'id_melody_mode':'locrio'};
 const requestJSON = JSON.stringify(object);
 
 async function query(id_melody_mode) {
@@ -23,7 +21,7 @@ async function updateData() {
     const response = await query(requestJSON);
     const modeData = await response.json();
     console.log(modeData);
-    console.log('me actualicé!')
+    console.log('¡Me actualicé!')
 
     
 ///Updates information displayed on website according to the selected mode.
@@ -47,22 +45,25 @@ numberElement.textContent = newNumber;
 
 var tagCloud = TagCloud('.content', myTags,{
 
-  // radius in px
-  radius: 400,
+    // font size in px
+    maxFontSize: 40,
+    
+    // radius in px
+    radius: 400,
 
-  // animation speed
-  // slow, normal, fast
-  maxSpeed: 'normal',
-  initSpeed: 'normal',
+    // animation speed
+    // slow, normal, fast
+    maxSpeed: 'normal',
+    initSpeed: 'normal',
 
-  // 0 = top
-  // 90 = left
-  // 135 = right-bottom
-  direction: 135,
-  
-  // interact with cursor move on mouse out
-  keep: true
-  
+    // 0 = top
+    // 90 = left
+    // 135 = right-bottom
+    direction: 135,
+    
+    // interact with cursor move on mouse out
+    keep: true
+    
 });
 
 // Change color of text

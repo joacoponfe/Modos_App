@@ -117,11 +117,11 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
 };
 
 // Pull info from database from user's last iteration (last two modes they listened to)
-const object = {};
-object['id_participant'] = id_participant;
+const object = {'id_participant': id_participant};
 const idJSON = JSON.stringify(object);
 console.log(idJSON);
 
+// Get individual data
 async function get_totems_data(id_data) {
     const response = await fetch(
         url + "/profiles_api/get_totems_data/",
@@ -135,10 +135,11 @@ async function get_totems_data(id_data) {
     return result;
 };
 
-const totemsData = await get_totems_data(idJSON);
-const userData = await totemsData.json();
+// Set user data
+const userData = await get_totems_data(idJSON).then(response => response.json());
 console.log(userData);
 
+// Get melody mode names
 async function get_melody_mode(id_melody) {
     const response = await fetch(
         url + "/profiles_api/get_melody_mode/",
@@ -152,6 +153,21 @@ async function get_melody_mode(id_melody) {
     return result;
 };
 
+// Get collective data
+async function get_collective_data(id_melody_mode) {
+    const response = await fetch(
+        url + "/profiles_api/mode_data/",
+        {
+            headers: new Headers({ 'Content-type': 'application/json' }),
+            method: "POST",
+            body: id_melody_mode,
+        }
+    );
+    const result = await response;
+    return result;
+}
+
+
 // Set participant ID in HTML page
 id_string.innerHTML = id_participant;
 
@@ -163,6 +179,12 @@ const response1 = await get_melody_mode(id_melody_1_JSON);
 const response2 = await get_melody_mode(id_melody_2_JSON);
 const id_melody_1_mode = await response1.json();
 const id_melody_2_mode = await response2.json();
+
+// Get collective data
+const collectiveData_1 = await get_collective_data(JSON.stringify(id_melody_1_mode)).then(response => response.json());
+const collectiveData_2 = await get_collective_data(JSON.stringify(id_melody_2_mode)).then(response => response.json());
+const collectiveData = [collectiveData_1, collectiveData_2];
+
 
 //const id_melody_modes = {'1': id_melody_1_mode, '2': id_melody_2_mode};
 const id_melody_modes = [id_melody_1_mode, id_melody_2_mode];
@@ -184,11 +206,9 @@ for (let x in id_melody_modes_tildes){
     };
 };
 
-// mode_1.innerHTML = id_melody_1_mode_tildes['id_melody_mode'];
-// mode_2.innerHTML = id_melody_2_mode_tildes['id_melody_mode'];
+// Set texts on toggle switch
 mode_1_text.innerHTML = id_melody_1_mode_tildes['id_melody_mode'];
 mode_2_text.innerHTML = id_melody_2_mode_tildes['id_melody_mode'];
-
 
 // Get playlist elements
 //const audioPlayer = document.createElement('audio');
@@ -400,25 +420,32 @@ embeddings_video_container.classList.add("embeddings_video_container");
 const embeddings_video = document.createElement('video');
 embeddings_video_container.appendChild(embeddings_video);
 
-
-// embeddings_video.style.position = "absolute";
-// embeddings_video.style.top = "0";
-// embeddings_video.style.left = "0";
-// embeddings_video.style.width = "100%";
-// embeddings_video.style.height = "100%";
-
 var distanceTextContainer = document.createElement('div');
 distanceTextContainer.classList.add("distanceText");
 
-// Create Word Cloud element
+// Create individual Word Cloud element
 const wordCloud = document.createElement("span");
 wordCloud.classList.add('tagcloud');
 const tagContainer = '.tagcloud';
-const options = {radius:300, maxSpeed:'normal', initSpeed:'normal', direction:135, keep:true};
-var words = userData['word_lists'][0];
+const options = {radius:300, maxSpeed:'normal', initSpeed:'normal', direction:135, keep:true, maxFontSize:50};
+var individualWords = userData['word_lists'][0];
 var tagcloud;
 
-// Create emotional thermometer element
+// Create collective Word Cloud element
+const collectiveWordCloud = document.createElement("span");
+collectiveWordCloud.classList.add('tagcloud2');
+const collectiveTagContainer = '.tagcloud2';
+const collectiveWordCloudOptions = {radius:200, maxSpeed:'normal', initSpeed:'normal', direction:135, keep:true, maxFontSize:20};
+var collectiveWords = collectiveData_1['word_lists'];
+var collectiveTagcloud;
+
+// Create container for both Word Clouds
+const wordClouds = document.createElement('div');
+wordClouds.classList.add('wordClouds');
+wordClouds.appendChild(wordCloud);
+wordClouds.appendChild(collectiveWordCloud);
+
+// Create individual emotional thermometer element
 var container_frame;
 
 // Create image element
@@ -483,10 +510,13 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
             document.getElementById('container').innerHTML = '<h2>Conceptos</h2><span>Identificamos los conceptos clave de tu texto</span>';
-            document.getElementById('container').appendChild(wordCloud);
+            document.getElementById('container').appendChild(wordClouds);
             if (typeof tagcloud === "undefined") { // If object does not already exist
-                tagcloud = TagCloud(tagContainer, words, options);  // Creates word cloud element 
-             }
+                tagcloud = TagCloud(tagContainer, individualWords, options);  // Creates word cloud element
+            }
+            if (typeof collectiveTagcloud === "undefined") { // If object does not already exist
+                collectiveTagcloud = TagCloud(collectiveTagContainer, collectiveWords, collectiveWordCloudOptions);  // Creates word cloud element
+            }
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
             document.getElementById('container').innerHTML = '<h2>Emociones</h2><span>Medimos la intensidad de las emociones que sentiste al escuchar la melodía</span>';
@@ -538,7 +568,7 @@ document.getElementById('metadata-section').addEventListener('click', event => {
     // Prevent the default link behavior   
     event.preventDefault();
     // Redirect to playlist page
-    document.getElementById('container').innerHTML = '<h2>Canciones representativas</h2>';
+    document.getElementById('container').innerHTML = '<h2>Canciones</h2><span>Recopilamos canciones de distintos géneros que utilizan este modo</span>';
     document.getElementById('container').appendChild(playlist_frame);
     playlist_frame.style.display = "block";
     playlist_frame.onload = function() {	
@@ -738,7 +768,8 @@ async function setData(id_mode){
     setCookie('id_melody_mode', id_melody_modes[id_mode]['id_melody_mode']);
     
     // Updates information displayed on website according to the selected mode.
-    var word_list = userData['word_lists'][id_mode];                                                        // Get word list
+    individualWords = userData['word_lists'][id_mode];                                                        // Get word list
+    collectiveWords = collectiveData[id_mode]['word_lists'];                                       // Get collective word list
     var encoded_image = userData['encoded_images'][id_mode];                                                // Get encoded image
     var embedding_path_folder = userData['embedding_path_folder'][id_mode];                                 // Get embeddings video
     var id_melody = userData['id_melody'][id_mode];                                                         // Get id_melody
@@ -805,12 +836,17 @@ async function setData(id_mode){
         document.getElementById('container').appendChild(textContainer);
     };
 
-    words = word_list                                                                                       // Set word list
+    //words = word_list;                                                                                      // Set word list
+    //collectiveWords = collective_word_list;                                                                 // Set collective word list
     if (wordCloudButtonClicks >= 1) {
         if (typeof tagcloud != "undefined") {                                                               // If object exists
             tagcloud.destroy();                                                                             // destroy it
         }
-        tagcloud = TagCloud(tagContainer, words, options);                                                  // and create new one
+        if (typeof collectiveTagcloud != "undefined") {                                                     // If object exists
+            collectiveTagcloud.destroy();                                                                   // destroy it
+        }
+        tagcloud = TagCloud(tagContainer, individualWords, options);                                                  // and create new one
+        collectiveTagcloud = TagCloud(collectiveTagContainer, collectiveWords, collectiveWordCloudOptions); // and create new one
     };
     
     // Set emotional thermometer
@@ -818,6 +854,7 @@ async function setData(id_mode){
         container_frame.remove();                                                                           // Destroy it
         container_frame = document.createElement('iframe');                                                 // And create new one
         container_frame.setAttribute("src", "thermometer.html?cache-buster=123");
+        container_frame.style.marginTop = "20px";
         container_frame.style.width = "100%";
         container_frame.style.height = "1000px";
         container_frame.style.border = "none";
@@ -850,6 +887,7 @@ async function setData(id_mode){
         container_frame.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]);
         container_frame.setAttribute("src", "thermometer.html?cache-buster=123");
         container_frame.setAttribute("allowtransparency", "true");
+        container_frame.style.marginTop = "20px";
         container_frame.style.width = "100%";
         container_frame.style.height = "1000px";
         container_frame.style.border = "none";
@@ -908,6 +946,7 @@ async function setData(id_mode){
             //console.log('No button is currently active.');
           }
         if (activeButton === "songs"){
+            document.getElementById('container').innerHTML = '<h2>Canciones</h2><span>Recopilamos canciones de distintos géneros que utilizan este modo</span>';
             document.getElementById('container').appendChild(playlist_frame);
             playlist_frame.style.display = "block";
             //sendMetadata(currentSong);

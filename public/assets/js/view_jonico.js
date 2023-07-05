@@ -46,22 +46,25 @@ async function updateData() {
 
     var tagCloud = TagCloud('.content', myTags,{
 
-    // radius in px
-    radius: 400,
-
-    // animation speed
-    // slow, normal, fast
-    maxSpeed: 'normal',
-    initSpeed: 'normal',
-
-    // 0 = top
-    // 90 = left
-    // 135 = right-bottom
-    direction: 135,
+        // font size in px
+        maxFontSize: 40,
+        
+        // radius in px
+        radius: 400,
     
-    // interact with cursor move on mouse out
-    keep: true
+        // animation speed
+        // slow, normal, fast
+        maxSpeed: 'normal',
+        initSpeed: 'normal',
     
+        // 0 = top
+        // 90 = left
+        // 135 = right-bottom
+        direction: 135,
+        
+        // interact with cursor move on mouse out
+        keep: true
+        
     });
 
     //To change the color of text randomly

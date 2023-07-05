@@ -48,24 +48,26 @@ numberElement.textContent = newNumber;
 
 var tagCloud = TagCloud('.content', myTags,{
 
-  // radius in px
-  radius: 400,
+    // font size in px
+    maxFontSize: 40,
+    
+    // radius in px
+    radius: 400,
 
-  // animation speed
-  // slow, normal, fast
-  maxSpeed: 'normal',
-  initSpeed: 'normal',
+    // animation speed
+    // slow, normal, fast
+    maxSpeed: 'normal',
+    initSpeed: 'normal',
 
-  // 0 = top
-  // 90 = left
-  // 135 = right-bottom
-  direction: 135,
-  
-  // interact with cursor move on mouse out
-  keep: true
-  
+    // 0 = top
+    // 90 = left
+    // 135 = right-bottom
+    direction: 135,
+    
+    // interact with cursor move on mouse out
+    keep: true
+    
 });
-
 // Change color of text
 const rootStyles = getComputedStyle(document.documentElement);
 const main_colors = {'jonico': rootStyles.getPropertyValue('--bs-cyan'), 'dorico': rootStyles.getPropertyValue('--bs-yellow'), 'frigio': rootStyles.getPropertyValue('--bs-pink'), 'lidio': rootStyles.getPropertyValue('--bs-purple'), 'mixolidio': rootStyles.getPropertyValue('--bs-beige'), 'eolico': rootStyles.getPropertyValue('--bs-orange'), 'locrio': rootStyles.getPropertyValue('--bs-mustard-green')};

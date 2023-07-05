@@ -371,17 +371,32 @@ input:checked + .slider:before {
     --bs-body-bg: #fff;
 }
 
-.tagcloud {
-/*font-family: 'Poppins', sans-serif;*/  
-    font-size: 20px;
+.wordClouds {
+    margin-top:25px;
+    display: flex;
+    gap: 175px;
+}
+
+.tagcloud { 
     color:white;
     margin: right;
-    margin-left:100px;
+    margin-left:0px;
     width: 100%;
-    }
-  .tagcloud--item:hover {
+}
+.tagcloud--item:hover {
     color: var(--main-color);
-  }
+}
+
+.tagcloud2 { 
+    color: white;
+    margin: right;
+    margin-left:0px;
+    width: 100%;
+}
+.tagcloud2--item:hover {
+    color: var(--main-color);
+}
+
 
 .float{
 	position:fixed;
