@@ -124,7 +124,6 @@ console.log(idJSON);
 
 async function get_totems_data(id_data) {
     const response = await fetch(
-        //"http://localhost:8000/profiles_api/receive_id/",
         url + "/profiles_api/get_totems_data/",
         {
             headers: new Headers({ 'Content-type': 'application/json' }),
@@ -396,11 +395,20 @@ var textContainer;
 // create embeddings video elements
 var video_path;
 var distance_text;
-const video = document.createElement('video');
+const embeddings_video_container = document.createElement('div');
+embeddings_video_container.classList.add("embeddings_video_container");
+const embeddings_video = document.createElement('video');
+embeddings_video_container.appendChild(embeddings_video);
+
+
+// embeddings_video.style.position = "absolute";
+// embeddings_video.style.top = "0";
+// embeddings_video.style.left = "0";
+// embeddings_video.style.width = "100%";
+// embeddings_video.style.height = "100%";
+
 var distanceTextContainer = document.createElement('div');
-distanceTextContainer.style.marginTop = "20px";
-distanceTextContainer.style.fontSize = "20px";
-distanceTextContainer.style.fontWeight = "bold";
+distanceTextContainer.classList.add("distanceText");
 
 // Create Word Cloud element
 const wordCloud = document.createElement("span");
@@ -415,7 +423,6 @@ var container_frame;
 
 // Create image element
 const image = document.createElement('img');
-//image.src = "https://i.pinimg.com/originals/3c/f8/41/3cf8412096f10f0847e6e689fde63775.jpg";
 image.style.width = "650px";
 image.style.marginTop = "20px";
 image.style.borderRadius = "10px";
@@ -428,10 +435,6 @@ qr_image.alt = "No se encontró el código QR.";
 
 // Create playlist element
 var playlist_frame;
-//const player = document.createElement("div");
-//const audio = document.createElement("audio");
-//const controls = document.createElement("div");
-//const progressBar = document.createElement("div");
 
 // Get references to the buttons in the sidebar menus
 const sidebarButtons = document.querySelectorAll('.sidebar a');
@@ -496,21 +499,20 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
             document.getElementById('container').innerHTML = '<h2>Singularidad</h2><span>Calculamos la similitud entre tu respuesta y las del resto de las personas</span>';
+            // Video
+            document.getElementById('container').appendChild(embeddings_video_container);
+            embeddings_video.play();
             // References
             var refContainer = document.createElement('div');
-            refContainer.style.display = "flex";
-            refContainer.style.alignItems = "center"; 
-            refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px;" alt="Image 1"><label for="label1" style="margin-right:50px;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:10px;" alt="Image 2"><label for="label2">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
+            refContainer.classList.add("refContainer");
+            // refContainer.style.display = "flex";
+            // refContainer.style.alignItems = "center"; 
+            refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px;" alt="Image 1"><label for="label1" style="margin-right:50px;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:10px;" alt="Image 2"><label for="label2" style="margin-right:50px">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
             document.getElementById('container').appendChild(refContainer);
             // Text
-            //var distanceTextContainer = document.createElement('div');
             distanceTextContainer.innerHTML = distance_text;
-            // distanceTextContainer.style.marginTop = "20px";
-            // distanceTextContainer.style.fontSize = "20px";
-            // distanceTextContainer.style.fontWeight = "bold";
             document.getElementById('container').appendChild(distanceTextContainer);
-            // Video
-            document.getElementById('container').appendChild(video);
+
             button.setAttribute('class', 'active');
             
         } else if (content === 'songs') {
@@ -681,29 +683,28 @@ function getVideoPath(id_melody_mode, distance){
     } else if (distance < 0.9){
         distance = "0.9"; 
     } else if (distance <= 1.0){  
-        distance = "1.0";
+        distance = "1";
     } else {
         distance = "0.4";
     }
 
-    // return 'assets/videos/'.concat(id_melody_mode, '/embedding_distance_',distance,'.mp4');
-    return 'assets/videos/'.concat('jonico', '/embedding_distance_',distance,'.mp4'); // Hasta que Dani genere los videos que faltan
+    return 'assets/videos/'.concat(id_melody_mode, '/distance_',distance,'.mp4');
 }
 
 function getDistanceText(distance){
     // this function returns the text to be displayed in the distance section
     if (distance < 0.2){
-        return 'Tu mente refleja la conciencia musical colectiva.'
+        return 'Tu mente refleja la conciencia musical colectiva'
     } else if (distance < 0.4){
-        return 'Tu mente se acerca a la conciencia musical colectiva.'
+        return 'Tu mente se acerca a la conciencia musical colectiva'
     } else if (distance < 0.6){
-        return 'Tu experiencia musical es, a la vez, común y única.'
+        return 'Tu experiencia musical es, a la vez, común y única'
     } else if (distance < 0.8){
-        return 'Vivís la música de manera particular.'
+        return 'Vivís la música de manera particular'
     } else if (distance < 1.0){
-        return 'Vivís la música de forma totalmente única.'
+        return 'Vivís la música de forma totalmente única'
     } else {
-        return 'Tu mente refleja la conciencia musical colectiva.'
+        return 'Tu mente refleja la conciencia musical colectiva'
     }
 
 }
@@ -871,9 +872,11 @@ async function setData(id_mode){
     distance_text = getDistanceText(distance);
     //console.log(video_path);
     //console.log(distance_text);
-    video.setAttribute('src', video_path);
-    video.setAttribute('autoplay', 'autoplay');
-    video.setAttribute('loop', 'loop');
+    embeddings_video.setAttribute('src', video_path);
+    embeddings_video.setAttribute('width', '650px');
+    embeddings_video.setAttribute('autoplay', 'autoplay');
+    embeddings_video.setAttribute('loop', 'loop');
+    embeddings_video.setAttribute('muted', 'muted');
     distanceTextContainer.innerHTML = distance_text;
 
     // Set playlist
