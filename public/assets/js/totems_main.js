@@ -167,7 +167,6 @@ async function get_collective_data(id_melody_mode) {
     return result;
 }
 
-
 // Set participant ID in HTML page
 id_string.innerHTML = id_participant;
 
@@ -209,6 +208,7 @@ for (let x in id_melody_modes_tildes){
 // Set texts on toggle switch
 mode_1_text.innerHTML = id_melody_1_mode_tildes['id_melody_mode'];
 mode_2_text.innerHTML = id_melody_2_mode_tildes['id_melody_mode'];
+
 
 // Get playlist elements
 //const audioPlayer = document.createElement('audio');
@@ -446,7 +446,16 @@ wordClouds.appendChild(wordCloud);
 wordClouds.appendChild(collectiveWordCloud);
 
 // Create individual emotional thermometer element
-var container_frame;
+var container_frame
+
+// Create collective emotional thermometer element
+var collectiveThermometerFrame
+
+// Create container for both thermometers
+const thermometers = document.createElement('div');
+thermometers.classList.add('thermometers');
+//thermometers.appendChild(container_frame);
+//thermometers.appendChild(collectiveThermometerFrame);
 
 // Create image element
 const image = document.createElement('img');
@@ -504,7 +513,7 @@ sidebarButtons.forEach(button => {
             // add text to the webpage below 
             textContainer = document.createElement('div');
             textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4> ";
-            document.getElementById('container').appendChild(textContainer);
+            document.getElementById('container').appendChild(textContainer);e
             
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
@@ -520,6 +529,7 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
             document.getElementById('container').innerHTML = '<h2>Emociones</h2><span>Medimos la intensidad de las emociones que sentiste al escuchar la melodía</span>';
+            //document.getElementById('container').appendChild(thermometers);
             document.getElementById('container').appendChild(container_frame);
             container_frame.style.display = "block";
             button.setAttribute('class', "active");
@@ -552,13 +562,23 @@ sidebarButtons.forEach(button => {
             playlist_frame.onload = function() {	
                 sendMetadata(currentSong);
             };
-            //playlist_frame.setAttribute("src", "playlist.html"); // Set iframe source as playlist.html
-            //playlist_frame.removeAttribute("hidden"); // Make iframe visible 
             button.setAttribute('class', "active");
             console.log(currentSong);
             //sendMetadata(currentSong);
         } else if (content === 'exit') {
+            button.setAttribute('class', "active"); 
             document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">¿Querés salir?</p><a id="exit-yes" class="btn-exit" href="totems_landing.html">Sí</a><a id="exit-no" class="btn-exit" href="totems_main.html">No</a></div>'
+            var countdown = document.createElement('div');
+            document.getElementById('container').appendChild(countdown);
+            var timeleft = 5;
+            setInterval(function(){
+                if(timeleft <= 0){
+                  window.location.href = "totems_landing.html";
+                } else {  
+                    countdown.innerHTML = '<p style="font-size:1.6em; text-align:center; margin-top:25px">Esta sesión se cerrará en ' + `${timeleft}` + ' segundos</p>'
+                }
+                timeleft -= 1;
+              }, 1000);
         }
     });
 });
@@ -580,36 +600,6 @@ document.getElementById('metadata-section').addEventListener('click', event => {
     });
     document.getElementById("songs").setAttribute('class', 'active');
 });
-
-// // Get references to the mode tabs in the sidebar menu
-// const modeButtons = document.querySelectorAll('.sidebar button');
-
-// // Add a click event listener to each mode button
-// modeButtons.forEach(button => {
-//     button.addEventListener('click', event => {
-
-//         // Prevent the default link behavior
-//         event.preventDefault();
-
-//         // Set all buttons to "inactive"
-//         modeButtons.forEach(button => {
-//             button.setAttribute('class', '');
-//         });
-
-//         // Get the value of the "mode" attribute of the clicked button
-//         const mode = button.getAttribute('id');
-//         console.log(mode);
-        
-//         // Update the content based on the selected mode
-//         if (mode === 'mode_1') {
-//             setData(0);
-//             button.setAttribute('class', "active");
-//         } else if (mode === 'mode_2') {
-//             setData(1);
-//             button.setAttribute('class', "active");
-//         };
-//     });
-// });
 
 // Set data according to selected mode
 setData(0); // Defaults to first mode
