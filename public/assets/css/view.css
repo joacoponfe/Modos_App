@@ -352,6 +352,7 @@ img{
   --bs-indigo: #6610f2;
   --bs-pink: #d63384;
   --bs-red: #dc3545;
+  --bs-red-transparent: rgba(220,53,69,0.8);
   --bs-orange: #fd7e14;
   --bs-green: #198754;
   --bs-teal: #20c997;

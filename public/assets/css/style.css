@@ -149,7 +149,7 @@ span {
 
 .centered-element-2  {
 	font-family:'Rubik';
-	width: 80%;
+	width: 95%;
 	align-items: center;
   text-align: center;
 }
@@ -200,6 +200,7 @@ span {
 
 .centered-element-30  {
 	width:33%;
+  font-size: 1.2em;
 	align-items: center;
 	float: left; 
 	display: block; 
@@ -373,10 +374,11 @@ textarea {
   display: block;
   position: relative;
   padding-left: 55px;
-  margin-top: 10px;
-  margin-bottom: 30px;
   cursor: pointer;
-  font-size: 1.1em;
+  font-size: 1.25em;
+  line-height: 1.3em;
+  letter-spacing: 0.1em;
+  text-align: left;
   color: white;
   letter-spacing: 0.1em;
   -webkit-user-select: none;

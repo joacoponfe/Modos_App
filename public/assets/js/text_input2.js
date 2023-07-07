@@ -45,7 +45,7 @@ const saveText = (e) => {
   const textJSON = JSON.stringify(object);
   console.log(textJSON);
 
-  if (text !== "Imaginé " || confirm("¿Estás seguro/a de que deseas enviar un texto vacío?")) {
+  if (text !== "Imaginé " || confirm("¿Querés enviar un texto vacío?")) {
     async function query(text_data) {
       const response = await fetch(
         url + "/profiles_api/receive_text/",

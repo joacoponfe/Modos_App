@@ -16,7 +16,7 @@ const mode_2_text = document.getElementById("mode_2_text");
 
 // Get color themes
 const rootStyles = getComputedStyle(document.documentElement);
-const main_colors = {'jonico': rootStyles.getPropertyValue('--bs-cyan'), 'dorico': rootStyles.getPropertyValue('--bs-yellow'), 'frigio': rootStyles.getPropertyValue('--bs-pink'), 'lidio': rootStyles.getPropertyValue('--bs-purple'), 'mixolidio': rootStyles.getPropertyValue('--bs-beige'), 'eolico': rootStyles.getPropertyValue('--bs-orange'), 'locrio': rootStyles.getPropertyValue('--bs-mustard-green')};
+const main_colors = {'jonico': rootStyles.getPropertyValue('--bs-cyan'), 'dorico': rootStyles.getPropertyValue('--bs-yellow'), 'frigio': rootStyles.getPropertyValue('--bs-pink'), 'lidio': rootStyles.getPropertyValue('--bs-purple'), 'mixolidio': rootStyles.getPropertyValue('--bs-red'), 'eolico': rootStyles.getPropertyValue('--bs-orange'), 'locrio': rootStyles.getPropertyValue('--bs-mustard-green')};
 
 
 // Change information according to the selected mode
@@ -446,14 +446,18 @@ wordClouds.appendChild(wordCloud);
 wordClouds.appendChild(collectiveWordCloud);
 
 // Create individual emotional thermometer element
-var container_frame
+//var container_frame;
+var container_frame = document.createElement('iframe'); 
 
 // Create collective emotional thermometer element
-var collectiveThermometerFrame
+//var collectiveThermometerFrame;
+var collectiveThermometerFrame = document.createElement('iframe');
 
 // Create container for both thermometers
 const thermometers = document.createElement('div');
 thermometers.classList.add('thermometers');
+thermometers.appendChild(container_frame);
+thermometers.appendChild(collectiveThermometerFrame);
 //thermometers.appendChild(container_frame);
 //thermometers.appendChild(collectiveThermometerFrame);
 
@@ -529,9 +533,11 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
             document.getElementById('container').innerHTML = '<h2>Emociones</h2><span>Medimos la intensidad de las emociones que sentiste al escuchar la melodía</span>';
-            //document.getElementById('container').appendChild(thermometers);
-            document.getElementById('container').appendChild(container_frame);
+            document.getElementById('container').appendChild(thermometers);
+            // document.getElementById('thermometers').appendChild(container_frame);
+            // document.getElementById('thermometers').appendChild(collectiveThermometerFrame);
             container_frame.style.display = "block";
+            collectiveThermometerFrame.style.display = "block";
             button.setAttribute('class', "active");
         } else if (content === 'images') {
             document.getElementById('container').innerHTML = '<h2>Imagen</h2><span>Captamos esta imagen de tu cabeza. ¿Coincide con lo que te imaginaste?</span>';
@@ -758,8 +764,8 @@ async function setData(id_mode){
     setCookie('id_melody_mode', id_melody_modes[id_mode]['id_melody_mode']);
     
     // Updates information displayed on website according to the selected mode.
-    individualWords = userData['word_lists'][id_mode];                                                        // Get word list
-    collectiveWords = collectiveData[id_mode]['word_lists'];                                       // Get collective word list
+    individualWords = userData['word_lists'][id_mode];                                                      // Get individual word list
+    collectiveWords = collectiveData[id_mode]['word_lists'];                                                // Get collective word list
     var encoded_image = userData['encoded_images'][id_mode];                                                // Get encoded image
     var embedding_path_folder = userData['embedding_path_folder'][id_mode];                                 // Get embeddings video
     var id_melody = userData['id_melody'][id_mode];                                                         // Get id_melody
@@ -773,11 +779,21 @@ async function setData(id_mode){
     var pos = userData['pos'][id_mode];                                                                     // Get "pos"
     var neu = userData['neu'][id_mode];                                                                     // Get "neu"
     var neg = userData['neg'][id_mode];                                                                     // Get "neg"
-    var distance = userData['semantic_distance'][id_mode];                                                           // Get "distance"
+    var distance = userData['semantic_distance'][id_mode];                                                  // Get "distance"
+    var alegria_collective = collectiveData[id_mode]['alegria'];                                            // Get collective "alegria"
+    var tristeza_collective = collectiveData[id_mode]['tristeza'];                                          // Get collective "tristeza"
+    var sorpresa_collective = collectiveData[id_mode]['sorpresa'];                                          // Get collective "sorpresa"
+    var asco_collective = collectiveData[id_mode]['asco'];                                                  // Get collective "asco"
+    var miedo_collective = collectiveData[id_mode]['miedo'];                                                // Get collective "miedo"
+    var enojo_collective = collectiveData[id_mode]['enojo'];                                                // Get collective "enojo"
+    //var otro_collective = collectiveData[id_mode]['otro'];                                                // Get collective "otro"
+    var pos_collective = collectiveData[id_mode]['pos'];                                                    // Get collective "pos"
+    var neu_collective = collectiveData[id_mode]['neu'];                                                    // Get collective "neu"
+    var neg_collective = collectiveData[id_mode]['neg'];                                                    // Get collective "neg"
     //audio.src = 'music/'.concat(id_melody,'.mp3')                                                         // Set melody to be played
     
-    sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?layout=track&locale=es');    // Set sheet music source
-    mode_text = getModeText(id_melody_modes[id_mode]['id_melody_mode']);                                    // Set mode text
+    sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?layout=track&locale=es');      // Set sheet music source
+    mode_text = getModeText(id_melody_modes[id_mode]['id_melody_mode']);                                            // Set mode text
     
     if (typeof sheet_frame != "undefined") {                                                                // If sheet music exists
         sheet_frame.remove();                                                                               // Destroy it
@@ -826,23 +842,24 @@ async function setData(id_mode){
         document.getElementById('container').appendChild(textContainer);
     };
 
-    //words = word_list;                                                                                      // Set word list
-    //collectiveWords = collective_word_list;                                                                 // Set collective word list
+    //words = word_list;                                                                                        // Set word list
+    //collectiveWords = collective_word_list;                                                                   // Set collective word list
     if (wordCloudButtonClicks >= 1) {
-        if (typeof tagcloud != "undefined") {                                                               // If object exists
-            tagcloud.destroy();                                                                             // destroy it
+        if (typeof tagcloud != "undefined") {                                                                   // If object exists
+            tagcloud.destroy();                                                                                 // destroy it
         }
-        if (typeof collectiveTagcloud != "undefined") {                                                     // If object exists
-            collectiveTagcloud.destroy();                                                                   // destroy it
+        if (typeof collectiveTagcloud != "undefined") {                                                         // If object exists
+            collectiveTagcloud.destroy();                                                                       // destroy it
         }
-        tagcloud = TagCloud(tagContainer, individualWords, options);                                                  // and create new one
-        collectiveTagcloud = TagCloud(collectiveTagContainer, collectiveWords, collectiveWordCloudOptions); // and create new one
+        tagcloud = TagCloud(tagContainer, individualWords, options);                                            // and create new one
+        collectiveTagcloud = TagCloud(collectiveTagContainer, collectiveWords, collectiveWordCloudOptions);     // and create new one
     };
     
     // Set emotional thermometer
     if (typeof container_frame != "undefined") {                                                            // If thermometer exists
         container_frame.remove();                                                                           // Destroy it
         container_frame = document.createElement('iframe');                                                 // And create new one
+        thermometers.appendChild(container_frame);
         container_frame.setAttribute("src", "thermometer.html?cache-buster=123");
         container_frame.style.marginTop = "20px";
         container_frame.style.width = "100%";
@@ -869,7 +886,7 @@ async function setData(id_mode){
             console.log('No button is currently active.');
           }
         if (activeButton === "thermometer"){
-            document.getElementById('container').appendChild(container_frame);
+            //document.getElementById('container').appendChild(container_frame);
         }
         
     } else {
@@ -890,7 +907,59 @@ async function setData(id_mode){
         });
     };
     
+    if (typeof collectiveThermometerFrame != "undefined") {                                                            // If collective thermometer exists
+        collectiveThermometerFrame.remove();                                                                           // Destroy it
+        collectiveThermometerFrame = document.createElement('iframe');                                                 // And create new one
+        thermometers.appendChild(collectiveThermometerFrame);
+        collectiveThermometerFrame.setAttribute("src", "thermometer.html?cache-buster=123");
+        collectiveThermometerFrame.style.marginTop = "20px";
+        collectiveThermometerFrame.style.width = "100%";
+        collectiveThermometerFrame.style.height = "1000px";
+        collectiveThermometerFrame.style.border = "none";
+        collectiveThermometerFrame.style.display = "block";
+        collectiveThermometerFrame.addEventListener('load', function() {
+            var iframeDoc = collectiveThermometerFrame.contentWindow.document;
+            setThermometerValues(iframeDoc, alegria_collective, tristeza_collective, sorpresa_collective, asco_collective, miedo_collective, enojo_collective, pos_collective, neu_collective, neg_collective); // Set thermometer values
+            iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.getElementById("title").innerHTML = "EL RESTO"; // Change title
+        });
+
+        var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "thermometer"
+        sidebarButtons.forEach(function(button) {
+            if (button.getAttribute("class") === "active") {
+                activeButton = button.getAttribute("id");
+            }
+        });
+
+        if (activeButton) {
+            console.log('The active button is:', activeButton);
+        } else {
+            console.log('No button is currently active.');
+        }
+        if (activeButton === "thermometer"){
+            //document.getElementById('thermometers').appendChild(collectiveThermometerFrame);
+            //document.getElementById('container').appendChild(thermometers);
+        }
     
+    } else {
+        collectiveThermometerFrame = document.createElement('iframe');
+        collectiveThermometerFrame.setAttribute("src", "thermometer.html?cache-buster=123");
+        collectiveThermometerFrame.setAttribute("allowtransparency", "true");
+        collectiveThermometerFrame.style.marginTop = "20px";
+        collectiveThermometerFrame.style.width = "100%";
+        collectiveThermometerFrame.style.height = "1000px";
+        collectiveThermometerFrame.style.border = "none";
+        collectiveThermometerFrame.style.display = "none";
+        collectiveThermometerFrame.addEventListener('load', function() {
+            var iframeDoc = collectiveThermometerFrame.contentWindow.document;
+            setThermometerValues(iframeDoc, collectiveData[id_mode]['alegria'], collectiveData[id_mode]['tristeza'], collectiveData[id_mode]['sorpresa'], collectiveData[id_mode]['asco'], collectiveData[id_mode]['miedo'], collectiveData[id_mode]['enojo'], collectiveData[id_mode]['pos'], collectiveData[id_mode]['neu'], collectiveData[id_mode]['neg']); // Set thermometer values
+            iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.getElementById("title").innerHTML = "EL RESTO"; // Change title
+        });
+    };
+
+
+
     image.src = 'data:image/png;base64,'.concat(encoded_image);                                             // Set image source
 
     // Set embeddings
