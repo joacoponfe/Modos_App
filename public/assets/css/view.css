@@ -81,6 +81,7 @@ body {
   font-weight:bold;
   font-size:35px;
   background-color: transparent;
+  text-shadow: 0px 0px 5px black;
   /*border: 3px solid greenyellow;*/
   /* border-radius: 50px; */
   display: flex;
@@ -94,6 +95,7 @@ body {
   align-self:right; */
   margin-right: 150px;
   background-color: var(--bs-dark-transparent);
+  text-shadow: 0px 0px 5px black;
   padding: 10px;
   border-radius: 50px;
   min-width: 175px;
@@ -116,7 +118,7 @@ h1{
   text-align: left;
   font-size: 45px;
   font-weight: 600;
-  letter-spacing: 0.05em;	
+  letter-spacing: 0.05em;
   text-transform:uppercase; 
 }
 
@@ -125,6 +127,7 @@ h2{
   text-align: left;
   font-size: 30px;
   margin-bottom:30px;
+  text-shadow: 0px 0px 5px black;
 }
 
 img{  
@@ -147,6 +150,7 @@ img{
   justify-content: space-between;
   margin-bottom: 5px;
   font-size:25px;
+  text-shadow: 0px 0px 5px black;
 }
 
 .menu{
@@ -251,15 +255,17 @@ img{
   border-radius: 20px;
   background-color: None;
   text-align: center;
+  margin-top: 50px;
 }
 
 .positive{
   width: 0%;
-  background-color: transparent;
+  background: linear-gradient(450deg, var(--main-color), var(--main-color));
   float: left;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   font-size: 5em;
+  text-shadow: 0px 0px 5px black;
   line-height: 1.4em;
   border-right-style: solid;
   border-right-width: 3px;
@@ -275,10 +281,11 @@ img{
 
 .neutral{
   width: 0%;
-  background-color: transparent;
+  background: linear-gradient(450deg, var(--main-color), var(--main-color));
   float: left;
   font-size: 5em;
   line-height: 1.4em;
+  text-shadow: 0px 0px 5px black;
   border-right-style: solid;
   border-right-width: 3px;
   border-right-color: white;
@@ -293,10 +300,11 @@ img{
 
 .negative{
   width: 0%;
-  background-color: transparent;
+  background: linear-gradient(450deg, var(--main-color), var(--main-color));
   float: left;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  text-shadow: 0px 0px 5px black;
   font-size: 5em;
   line-height: 1.4em;
   animation: negative-bar 5s forwards;

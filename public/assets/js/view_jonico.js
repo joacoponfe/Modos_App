@@ -1,8 +1,7 @@
 import { url } from "./config.js";
 
 // Create request object
-const object = {};
-object['id_melody_mode'] = 'jonico';
+const object = {'id_melody_mode':'jonico'};
 
 const requestJSON = JSON.stringify(object);
 
@@ -23,7 +22,9 @@ async function updateData() {
     const response = await query(requestJSON);
     const modeData = await response.json();
     console.log(modeData);
-    console.log('me actualicé!');
+    // Get current timestamp
+    var current_timestamp = new Date();
+    console.log('Datos actualizados exitosamente: '.concat(current_timestamp.toString()).concat('.'));
 
     ///Updates information displayed on website according to the selected mode.
     const myTags = modeData['word_lists'];                                                         // Get word list
@@ -67,24 +68,63 @@ async function updateData() {
         
     });
 
-    //To change the color of text randomly
-    //var colors = ['#34A853', '#FBBC05', '#4285F4', '#7FBC00', 'FFBA01', '01A6F0', '#F00105', '#AB0C76'];
-    //var colors = ['#044d59', '#59044f', '#ab0322', '#03ab87', '#abe305', '#49574a', '#d0e60e']
     // Change color of text
     const rootStyles = getComputedStyle(document.documentElement);
     const main_colors = {'jonico': rootStyles.getPropertyValue('--bs-cyan'), 'dorico': rootStyles.getPropertyValue('--bs-yellow'), 'frigio': rootStyles.getPropertyValue('--bs-pink'), 'lidio': rootStyles.getPropertyValue('--bs-purple'), 'mixolidio': rootStyles.getPropertyValue('--bs-beige'), 'eolico': rootStyles.getPropertyValue('--bs-orange'), 'locrio': rootStyles.getPropertyValue('--bs-mustard-green')};
     document.documentElement.style.setProperty('--main-color', main_colors['jonico']);
 
-    document.getElementById('alegria-value').innerHTML = (alegria * 100).toFixed(0).toString().concat("%");
-    document.getElementById('tristeza-value').innerHTML = (tristeza * 100).toFixed(0).toString().concat("%");
-    document.getElementById('sorpresa-value').innerHTML = (sorpresa * 100).toFixed(0).toString().concat("%");
-    document.getElementById('asco-value').innerHTML = (asco * 100).toFixed(0).toString().concat("%");
-    document.getElementById('miedo-value').innerHTML = (miedo * 100).toFixed(0).toString().concat("%");
-    document.getElementById('enojo-value').innerHTML = (enojo * 100).toFixed(0).toString().concat("%");
+    // Avoid percentage sum to be greater than 100%
+    var alegria_redondeado = parseInt((alegria * 100).toFixed(0));
+    var tristeza_redondeado = parseInt((tristeza * 100).toFixed(0));
+    var sorpresa_redondeado = parseInt((sorpresa * 100).toFixed(0));
+    var asco_redondeado = parseInt((asco * 100).toFixed(0));
+    var miedo_redondeado = parseInt((miedo * 100).toFixed(0));
+    var enojo_redondeado = parseInt((enojo * 100).toFixed(0));
+
+    var emotions_redondeados = [alegria_redondeado, tristeza_redondeado, sorpresa_redondeado, asco_redondeado, miedo_redondeado, enojo_redondeado];
+    var emotion_redondeado_sum = alegria_redondeado + tristeza_redondeado + sorpresa_redondeado + asco_redondeado + miedo_redondeado + enojo_redondeado;
+    
+    if (emotion_redondeado_sum > 100){
+        // Get minimum value
+        var min_value = Math.min(alegria, tristeza, sorpresa, asco, miedo, enojo);
+       // Get index of minimum value
+        var min_index = [alegria, tristeza, sorpresa, asco, miedo, enojo].indexOf(min_value);
+        var subtract = emotion_redondeado_sum - 100;
+        // Subtract from minimum value
+        emotions_redondeados[min_index] -= subtract;
+        // Update emotion_redondeado_sum
+        emotion_redondeado_sum = emotions_redondeados[0] + emotions_redondeados[1] + emotions_redondeados[2] + emotions_redondeados[3] + emotions_redondeados[4] + emotions_redondeados[5];
+    }
+
+    var pos_redondeado = parseInt((pos * 100).toFixed(0));
+    var neu_redondeado = parseInt((neu * 100).toFixed(0));
+    var neg_redondeado = parseInt((neg * 100).toFixed(0));
+
+    var valence_redondeados = [pos_redondeado, neu_redondeado, neg_redondeado];
+    var valence_redondeados_sum = pos_redondeado + neu_redondeado + neg_redondeado;
+
+    if (valence_redondeados_sum > 100){
+        // Get minimum value
+        var min_value = Math.min(pos, neu, neg);
+        // Get index of minimum value
+        var min_index = [pos, neu, neg].indexOf(min_value);
+        var subtract = valence_redondeados_sum - 100;
+        // Subtract from minimum value
+        valence_redondeados[min_index] -= subtract;
+        // Update valence_redondeados_sum
+        valence_redondeados_sum = valence_redondeados[0] + valence_redondeados[1] + valence_redondeados[2];
+    }
+    
+    document.getElementById('alegria-value').innerHTML = emotions_redondeados[0].toString().concat("%");
+    document.getElementById('tristeza-value').innerHTML = emotions_redondeados[1].toString().concat("%");
+    document.getElementById('sorpresa-value').innerHTML = emotions_redondeados[2].toString().concat("%");
+    document.getElementById('asco-value').innerHTML = emotions_redondeados[3].toString().concat("%");
+    document.getElementById('miedo-value').innerHTML = emotions_redondeados[4].toString().concat("%");
+    document.getElementById('enojo-value').innerHTML = emotions_redondeados[5].toString().concat("%");
     // document.getElementById('otro-value').innerHTML = (otro * 100).toFixed(0).toString().concat("%");
-    document.getElementById('pos-value').innerHTML = (pos * 100).toFixed(0).toString().concat("%");
-    document.getElementById('neu-value').innerHTML = (neu * 100).toFixed(0).toString().concat("%");
-    document.getElementById('neg-value').innerHTML = (neg * 100).toFixed(0).toString().concat("%");
+    document.getElementById('pos-value').innerHTML = valence_redondeados[0].toString().concat("%");
+    document.getElementById('neu-value').innerHTML = valence_redondeados[1].toString().concat("%");
+    document.getElementById('neg-value').innerHTML = valence_redondeados[2].toString().concat("%");
 
     // Get the style sheet containing the alegria-bar animation
     const stylesheet = document.styleSheets[2];
@@ -152,7 +192,7 @@ async function updateData() {
 
 // Call updateData function initially
 updateData().then((response) => {
-    console.log('Datos actualizados exitosamente.');
+    //console.log('Datos actualizados exitosamente.');
 })
 .catch((error) => {
     console.log("El servidor está caído.");

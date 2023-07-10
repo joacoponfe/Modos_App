@@ -79,6 +79,7 @@ document.getElementById('pos-value').innerHTML = (pos * 100).toFixed(0).toString
 document.getElementById('neu-value').innerHTML = (neu * 100).toFixed(0).toString().concat("%");
 document.getElementById('neg-value').innerHTML = (neg * 100).toFixed(0).toString().concat("%");
 
+
 // Get the style sheet containing the alegria-bar animation
 const stylesheet = document.styleSheets[1];
 
