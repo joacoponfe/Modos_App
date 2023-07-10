@@ -308,19 +308,21 @@ input:checked + .slider:before {
     --bs-indigo: #6610f2;
     --bs-pink: #d63384;
     --bs-red: #dc3545;
+    --bs-red-transparent: rgba(220,53,69,0.8);
     --bs-orange: #fd7e14;
+    --bs-orange-transparent: rgba(253,126,20,0.8);
     --bs-green: #198754;
     --bs-teal: #20c997;
     --bs-white: #fff;
     --bs-gray: #6c757d;
     --bs-mustard-green: #aec90bff;
-    --bs-mustard-green-transparent: rgba(192, 211, 85, 0.548);
+    --bs-mustard-green-transparent: rgba(181, 211, 13, 0.8);
     --bs-yellow: #f7cf0dff;
-    --bs-yellow-transparent: rgba(247,207,13,0.8);
+    --bs-yellow-transparent: rgba(247,207,13,0.75);
     --bs-cyan: #00a2c5ff; /* jonico */
     --bs-cyan-transparent: rgba(0,162,197,0.8); /* jonico */
     --bs-purple: rgb(153, 90, 202);
-    --bs-purple-transparent: rgba(109,63,144,0.8);
+    --bs-purple-transparent: rgba(153, 90, 202, 0.8);
     --bs-pink: #ce5392ff;
     --bs-pink-transparent: rgba(206,83,146,0.8);
     --bs-gray-dark: #343a40;
@@ -369,12 +371,12 @@ input:checked + .slider:before {
     --bs-body-line-height: 1.5;
     --bs-body-color: #212529;
     --bs-body-bg: #fff;
-}
+  }
 
 .thermometers {
-    margin-top: 25px;
+    margin-top: 20px;
     display: flex;
-    gap: 175px;
+    gap: auto;
 }
 
 .wordClouds {

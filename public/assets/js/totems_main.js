@@ -17,6 +17,7 @@ const mode_2_text = document.getElementById("mode_2_text");
 // Get color themes
 const rootStyles = getComputedStyle(document.documentElement);
 const main_colors = {'jonico': rootStyles.getPropertyValue('--bs-cyan'), 'dorico': rootStyles.getPropertyValue('--bs-yellow'), 'frigio': rootStyles.getPropertyValue('--bs-pink'), 'lidio': rootStyles.getPropertyValue('--bs-purple'), 'mixolidio': rootStyles.getPropertyValue('--bs-red'), 'eolico': rootStyles.getPropertyValue('--bs-orange'), 'locrio': rootStyles.getPropertyValue('--bs-mustard-green')};
+const main_colors_transparent = {'jonico': rootStyles.getPropertyValue('--bs-cyan-transparent'), 'dorico': rootStyles.getPropertyValue('--bs-yellow-transparent'), 'frigio': rootStyles.getPropertyValue('--bs-pink-transparent'), 'lidio': rootStyles.getPropertyValue('--bs-purple-transparent'), 'mixolidio': rootStyles.getPropertyValue('--bs-red-transparent'), 'eolico': rootStyles.getPropertyValue('--bs-orange-transparent'), 'locrio': rootStyles.getPropertyValue('--bs-mustard-green-transparent')};
 
 
 // Change information according to the selected mode
@@ -79,8 +80,10 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
             for (var k = 0; k < keyframes.length; k++){
                 var keyframe = keyframes[k];
                 if (keyframe.keyText == '100%'){
-                    var shadow_inset = (1-emotionPercentage)*100;
-                    keyframe.style.boxShadow = `inset -${shadow_inset}em 0 0 0 #f7f7f7`;
+                    // var shadow_inset = (1-emotionPercentage)*100;
+                    // keyframe.style.boxShadow = `inset -${shadow_inset}em 0 0 0 #f7f7f7`;
+                    var width = emotionPercentage*100;
+                    keyframe.style.width = `${width}%`;
                 };
             };
         };
@@ -758,8 +761,9 @@ function getModeText(id_melody_mode){
 
 async function setData(id_mode){
     // Change CSS color
-    document.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]);       // Set color theme
-    
+    document.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]);                             // Set color theme
+    document.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);     // Set color theme (transparent)
+
     // Set id_melody_mode cookie (read by playlist.html)
     setCookie('id_melody_mode', id_melody_modes[id_mode]['id_melody_mode']);
     
@@ -861,7 +865,7 @@ async function setData(id_mode){
         container_frame = document.createElement('iframe');                                                 // And create new one
         thermometers.appendChild(container_frame);
         container_frame.setAttribute("src", "thermometer.html?cache-buster=123");
-        container_frame.style.marginTop = "20px";
+        container_frame.style.marginTop = "0px";
         container_frame.style.width = "100%";
         container_frame.style.height = "1000px";
         container_frame.style.border = "none";
@@ -870,6 +874,7 @@ async function setData(id_mode){
             var iframeDoc = container_frame.contentWindow.document;
             setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg); // Set thermometer values
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
             iframeDoc.getElementById("title").innerHTML = "VOS"; // Change title
         });
         
@@ -892,9 +897,10 @@ async function setData(id_mode){
     } else {
         container_frame = document.createElement('iframe');
         container_frame.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]);
+        container_frame.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
         container_frame.setAttribute("src", "thermometer.html?cache-buster=123");
         container_frame.setAttribute("allowtransparency", "true");
-        container_frame.style.marginTop = "20px";
+        container_frame.style.marginTop = "0px";
         container_frame.style.width = "100%";
         container_frame.style.height = "1000px";
         container_frame.style.border = "none";
@@ -903,6 +909,7 @@ async function setData(id_mode){
             var iframeDoc = container_frame.contentWindow.document;
             setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg); // Set thermometer values
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
             iframeDoc.getElementById("title").innerHTML = "VOS"; // Change title
         });
     };
@@ -912,7 +919,7 @@ async function setData(id_mode){
         collectiveThermometerFrame = document.createElement('iframe');                                                 // And create new one
         thermometers.appendChild(collectiveThermometerFrame);
         collectiveThermometerFrame.setAttribute("src", "thermometer.html?cache-buster=123");
-        collectiveThermometerFrame.style.marginTop = "20px";
+        collectiveThermometerFrame.style.marginTop = "0px";
         collectiveThermometerFrame.style.width = "100%";
         collectiveThermometerFrame.style.height = "1000px";
         collectiveThermometerFrame.style.border = "none";
@@ -921,6 +928,7 @@ async function setData(id_mode){
             var iframeDoc = collectiveThermometerFrame.contentWindow.document;
             setThermometerValues(iframeDoc, alegria_collective, tristeza_collective, sorpresa_collective, asco_collective, miedo_collective, enojo_collective, pos_collective, neu_collective, neg_collective); // Set thermometer values
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
             iframeDoc.getElementById("title").innerHTML = "EL RESTO"; // Change title
         });
 
@@ -945,7 +953,7 @@ async function setData(id_mode){
         collectiveThermometerFrame = document.createElement('iframe');
         collectiveThermometerFrame.setAttribute("src", "thermometer.html?cache-buster=123");
         collectiveThermometerFrame.setAttribute("allowtransparency", "true");
-        collectiveThermometerFrame.style.marginTop = "20px";
+        collectiveThermometerFrame.style.marginTop = "0px";
         collectiveThermometerFrame.style.width = "100%";
         collectiveThermometerFrame.style.height = "1000px";
         collectiveThermometerFrame.style.border = "none";
@@ -954,6 +962,7 @@ async function setData(id_mode){
             var iframeDoc = collectiveThermometerFrame.contentWindow.document;
             setThermometerValues(iframeDoc, collectiveData[id_mode]['alegria'], collectiveData[id_mode]['tristeza'], collectiveData[id_mode]['sorpresa'], collectiveData[id_mode]['asco'], collectiveData[id_mode]['miedo'], collectiveData[id_mode]['enojo'], collectiveData[id_mode]['pos'], collectiveData[id_mode]['neu'], collectiveData[id_mode]['neg']); // Set thermometer values
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
             iframeDoc.getElementById("title").innerHTML = "EL RESTO"; // Change title
         });
     };
@@ -989,6 +998,7 @@ async function setData(id_mode){
         playlist_frame.addEventListener('load', function() {
             var iframeDoc = playlist_frame.contentWindow.document;
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']])
         });
         
 
@@ -1022,6 +1032,7 @@ async function setData(id_mode){
         playlist_frame.addEventListener('load', function() {
             var iframeDoc = playlist_frame.contentWindow.document;
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
+            iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
         });
 
     };
