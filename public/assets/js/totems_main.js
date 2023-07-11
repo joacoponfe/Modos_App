@@ -33,7 +33,7 @@ toggleSwitch.addEventListener('change', async function() {
     }
 });
 
-function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage, sorpresa_percentage, asco_percentage, miedo_percentage, enojo_percentage, pos_percentage, neu_percentage, neg_percentage, decimal_places=0){
+function setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg, decimal_places=0){
     var alegria_value = iframeDoc.getElementById('alegria-value');
     var tristeza_value = iframeDoc.getElementById("tristeza-value");
     var sorpresa_value = iframeDoc.getElementById("sorpresa-value");
@@ -45,23 +45,84 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
     var neu_value = iframeDoc.getElementById("neu-value");
     var neg_value = iframeDoc.getElementById("neg-value");
 
-    alegria_value.innerHTML = (alegria_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    tristeza_value.innerHTML = (tristeza_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    sorpresa_value.innerHTML = (sorpresa_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    asco_value.innerHTML = (asco_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    miedo_value.innerHTML = (miedo_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    enojo_value.innerHTML = (enojo_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    //otro_value.innerHTML = (otro_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    pos_value.innerHTML = (pos_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    neu_value.innerHTML = (neu_percentage * 100).toFixed(decimal_places).toString().concat("%");
-    neg_value.innerHTML = (neg_percentage * 100).toFixed(decimal_places).toString().concat("%");
+    // Avoid percentage sum to be greater or smaller than 100%
+    var alegria_redondeado = parseInt((alegria * 100).toFixed(decimal_places));
+    var tristeza_redondeado = parseInt((tristeza * 100).toFixed(decimal_places));
+    var sorpresa_redondeado = parseInt((sorpresa * 100).toFixed(decimal_places));
+    var asco_redondeado = parseInt((asco * 100).toFixed(decimal_places));
+    var miedo_redondeado = parseInt((miedo * 100).toFixed(decimal_places));
+    var enojo_redondeado = parseInt((enojo * 100).toFixed(decimal_places));
+
+    var emotions_redondeados = [alegria_redondeado, tristeza_redondeado, sorpresa_redondeado, asco_redondeado, miedo_redondeado, enojo_redondeado];
+    var emotion_redondeado_sum = alegria_redondeado + tristeza_redondeado + sorpresa_redondeado + asco_redondeado + miedo_redondeado + enojo_redondeado;
+
+    if (emotion_redondeado_sum > 100){
+        // Get minimum value
+        var min_value = Math.min(alegria, tristeza, sorpresa, asco, miedo, enojo);
+        // Get index of minimum value
+        var min_index = [alegria, tristeza, sorpresa, asco, miedo, enojo].indexOf(min_value);
+        var subtract = emotion_redondeado_sum - 100;
+        // Subtract from minimum value
+        emotions_redondeados[min_index] -= subtract;
+        // Update emotion_redondeado_sum
+        emotion_redondeado_sum = emotions_redondeados[0] + emotions_redondeados[1] + emotions_redondeados[2] + emotions_redondeados[3] + emotions_redondeados[4] + emotions_redondeados[5];
+    } if (emotion_redondeado_sum < 100){
+        // Get maximum value
+        var max_value = Math.max(alegria, tristeza, sorpresa, asco, miedo, enojo);
+        // Get index of maximum value
+        var max_index = [alegria, tristeza, sorpresa, asco, miedo, enojo].indexOf(max_value);
+        var add = 100 - emotion_redondeado_sum;
+        // Add to maximum value
+        emotions_redondeados[max_index] += add;
+        // Update emotion_redondeado_sum
+        emotion_redondeado_sum = emotions_redondeados[0] + emotions_redondeados[1] + emotions_redondeados[2] + emotions_redondeados[3] + emotions_redondeados[4] + emotions_redondeados[5];
+    };
+
+    var pos_redondeado = parseInt((pos * 100).toFixed(decimal_places));
+    var neu_redondeado = parseInt((neu * 100).toFixed(decimal_places));
+    var neg_redondeado = parseInt((neg * 100).toFixed(decimal_places));
+
+    var valence_redondeados = [pos_redondeado, neu_redondeado, neg_redondeado];
+    var valence_redondeados_sum = pos_redondeado + neu_redondeado + neg_redondeado;
+
+    if (valence_redondeados_sum > 100){
+        // Get minimum value
+        var min_value = Math.min(pos, neu, neg);
+        // Get index of minimum value
+        var min_index = [pos, neu, neg].indexOf(min_value);
+        var subtract = valence_redondeados_sum - 100;
+        // Subtract from minimum value
+        valence_redondeados[min_index] -= subtract;
+        // Update valence_redondeados_sum
+        valence_redondeados_sum = valence_redondeados[0] + valence_redondeados[1] + valence_redondeados[2];
+    } if (valence_redondeados_sum < 100){
+        // Get maximum value
+        var max_value = Math.max(pos, neu, neg);
+        // Get index of maximum value
+        var max_index = [pos, neu, neg].indexOf(max_value);
+        var add = 100 - valence_redondeados_sum;
+        // Add to maximum value
+        valence_redondeados[max_index] += add;
+        // Update valence_redoneados_sum
+        valence_redondeados_sum = valence_redondeados[0] + valence_redondeados[1] + valence_redondeados[2];
+    };
+
+    alegria_value.innerHTML = emotions_redondeados[0].toString().concat("%");
+    tristeza_value.innerHTML = emotions_redondeados[1].toString().concat("%");
+    sorpresa_value.innerHTML = emotions_redondeados[2].toString().concat("%");
+    asco_value.innerHTML = emotions_redondeados[3].toString().concat("%");
+    miedo_value.innerHTML = emotions_redondeados[4].toString().concat("%");
+    enojo_value.innerHTML = emotions_redondeados[5].toString().concat("%");
+    pos_value.innerHTML = valence_redondeados[0].toString().concat("%");
+    neu_value.innerHTML = valence_redondeados[1].toString().concat("%");
+    neg_value.innerHTML = valence_redondeados[2].toString().concat("%");
 
     // Get the stylesheet containing the animation rules
     var stylesheet = iframeDoc.styleSheets[0];
     
     // Find the animation rule we want to modify
     const emotionRuleNames = ['alegria-bar', 'tristeza-bar', 'sorpresa-bar', 'asco-bar', 'miedo-bar', 'enojo-bar'];
-    const emotionPercentages = [alegria_percentage, tristeza_percentage, sorpresa_percentage, asco_percentage, miedo_percentage, enojo_percentage];
+    const emotionPercentages = [alegria, tristeza, sorpresa, asco, miedo, enojo];
     for (var i = 0; i < emotionRuleNames.length; i++){
         var emotionRuleName = emotionRuleNames[i];
         var emotionPercentage = emotionPercentages[i];
@@ -91,7 +152,7 @@ function setThermometerValues(iframeDoc, alegria_percentage, tristeza_percentage
     };
 
     const sentimentRuleNames = ['positive-bar', 'neutral-bar', 'negative-bar'];
-    const sentimentPercentages = [pos_percentage, neu_percentage, neg_percentage];
+    const sentimentPercentages = [pos, neu, neg];
     for (var i = 0; i < sentimentRuleNames.length; i++){
         var sentimentRuleName = sentimentRuleNames[i];
         var sentimentPercentage = sentimentPercentages[i];
