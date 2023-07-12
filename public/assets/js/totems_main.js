@@ -503,6 +503,16 @@ const collectiveWordCloudOptions = {radius:200, maxSpeed:'normal', initSpeed:'no
 var collectiveWords = collectiveData_1['word_lists'];
 var collectiveTagcloud;
 
+// Create container for 'VOS' and 'EL RESTO' labels
+const vosElResto = document.createElement('div');
+const vos = document.createElement('h3');
+const elResto = document.createElement('h3');
+vos.innerHTML = 'VOS';
+elResto.innerHTML = 'EL RESTO';
+vosElResto.classList.add('vosElResto');
+vosElResto.appendChild(vos);
+vosElResto.appendChild(elResto);
+
 // Create container for both Word Clouds
 const wordClouds = document.createElement('div');
 wordClouds.classList.add('wordClouds');
@@ -587,6 +597,7 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
             document.getElementById('container').innerHTML = '<h2>Conceptos</h2><span>Identificamos los conceptos clave de tu texto</span>';
+            document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(wordClouds);
             if (typeof tagcloud === "undefined") { // If object does not already exist
                 tagcloud = TagCloud(tagContainer, individualWords, options);  // Creates word cloud element
@@ -605,6 +616,7 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
         } else if (content === 'images') {
             document.getElementById('container').innerHTML = '<h2>Imagen</h2><span>Captamos esta imagen de tu cabeza. ¿Coincide con lo que te imaginaste?</span>';
+            document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(image);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
