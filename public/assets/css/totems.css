@@ -389,16 +389,17 @@ input:checked + .slider:before {
     gap: 175px;
 }
 
+
 .wordClouds {
     margin-top:25px;
     display: flex;
-    gap:175px;
+    gap: 175px;
 }
 
 .vosElResto {
     margin-top: 25px;
     display: flex;
-    gap:675px;
+    gap: 675px;
 }
 
 
@@ -620,16 +621,45 @@ input:checked + .slider:before {
     cursor: pointer;
   }
 
+.embeddings_container {
+    margin-top: 20px;
+    /* display: flex;
+    gap: 20px; */
+    display: grid;
+    grid-template-areas: 
+    'embeddings_video_container refContainer'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText'
+    'embeddings_video_container distanceText';
+    gap: 20px;
+    /* grid-template-columns: 1fr 2fr;
+    grid-gap: 20px; */
+    
+}
+
 .embeddings_video_container {
+    grid-area: embeddings_video_container;
     position: relative;
     overflow: hidden;
     width: 650px;
     height: 650px;
     border-radius: 10px;
-    margin-top: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    /*padding-bottom: 56.25%;
-    margin-bottom: 20px; */
 }
 
 .embeddings_video_container embeddings_video {
@@ -643,26 +673,37 @@ input:checked + .slider:before {
 }
 
 .refContainer {
-    position: fixed;
+    grid-area: refContainer;
     display: flex;
     align-items: center;
-    left: 1250px;
-    top: 175px;
+    justify-content: center;
+    width: 100%;
+    height: 135px;
     background-color: var(--bs-dark-transparent);
     border-radius: 10px;
     padding: 20px;
     color: white;
-    font-size: 20px;
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.05em;
 }
 
 .distanceText{
-    position: fixed;
-    width: 650px;
+    grid-area: distanceText;
+    display: flex;
+    width: 100%;
+    height: 135px;
     text-align: center;
-    bottom: 15%;
-    font-size: 26px;
+    align-items: center;
     font-weight: bold;
     letter-spacing: 0.05em;
-    color: white;
+    background-color: var(--bs-dark-transparent);
+    border-radius: 10px;
+    padding: 20px;
+    color: var(--main-color);
+    font-size: 30px;
+    line-break: normal;
+    line-height: normal;
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
 }

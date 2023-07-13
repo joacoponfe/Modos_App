@@ -487,6 +487,19 @@ embeddings_video_container.appendChild(embeddings_video);
 var distanceTextContainer = document.createElement('div');
 distanceTextContainer.classList.add("distanceText");
 
+var refContainer = document.createElement('div');
+refContainer.classList.add("refContainer");
+refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px; margin-right:0px" alt="Image 1"><label for="label1" style="margin-right:auto;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:30px;" alt="Image 2"><label for="label2" style="margin-right:50px">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
+//document.getElementById('container').appendChild(refContainer);
+
+// Create container for embeddings, references and phrases
+const embeddings_container = document.createElement('div');
+embeddings_container.classList.add('embeddings_container');
+embeddings_container.appendChild(embeddings_video_container);
+embeddings_container.appendChild(refContainer);
+embeddings_container.appendChild(distanceTextContainer);
+
+
 // Create individual Word Cloud element
 const wordCloud = document.createElement("span");
 wordCloud.classList.add('tagcloud');
@@ -591,8 +604,7 @@ sidebarButtons.forEach(button => {
             // add text to the webpage below 
             textContainer = document.createElement('div');
             textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4> ";
-            document.getElementById('container').appendChild(textContainer);e
-            
+            document.getElementById('container').appendChild(textContainer);
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
@@ -621,22 +633,19 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
             document.getElementById('container').innerHTML = '<h2>Singularidad</h2><span>Calculamos la similitud entre tu respuesta y las del resto de las personas</span>';
+            document.getElementById('container').appendChild(embeddings_container);
             // Video
-            document.getElementById('container').appendChild(embeddings_video_container);
+            //document.getElementById('container').appendChild(embeddings_video_container);
             embeddings_video.play();
             // References
-            var refContainer = document.createElement('div');
-            refContainer.classList.add("refContainer");
-            // refContainer.style.display = "flex";
-            // refContainer.style.alignItems = "center"; 
-            refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px;" alt="Image 1"><label for="label1" style="margin-right:50px;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:10px;" alt="Image 2"><label for="label2" style="margin-right:50px">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
-            document.getElementById('container').appendChild(refContainer);
+            //var refContainer = document.createElement('div');
+            //refContainer.classList.add("refContainer");
+            //refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px;" alt="Image 1"><label for="label1" style="margin-right:50px;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:10px;" alt="Image 2"><label for="label2" style="margin-right:50px">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
+            //document.getElementById('container').appendChild(refContainer);
             // Text
-            distanceTextContainer.innerHTML = distance_text;
-            document.getElementById('container').appendChild(distanceTextContainer);
-
+            //distanceTextContainer.innerHTML = distance_text;
+            //document.getElementById('container').appendChild(distanceTextContainer);
             button.setAttribute('class', 'active');
-            
         } else if (content === 'songs') {
             document.getElementById('container').innerHTML = '<h2>Canciones</h2><span>Recopilamos canciones de distintos géneros que utilizan este modo</span>';
             document.getElementById('container').appendChild(playlist_frame);
