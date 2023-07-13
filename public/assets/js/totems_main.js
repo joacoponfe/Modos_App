@@ -793,7 +793,7 @@ function getVideoPath(id_melody_mode, distance){
         distance = "0.8";
     } else if (distance < 0.9){
         distance = "0.9"; 
-    } else if (distance <= 1.0){  
+    } else if (distance <= 2.0){  
         distance = "1";
     } else {
         distance = "0.4";
