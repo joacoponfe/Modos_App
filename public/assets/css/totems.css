@@ -1,5 +1,5 @@
 *{
-    list-style: none;
+    list-style-type: disc;
     text-decoration: none;
     margin: 0;
     padding: 0;
@@ -402,6 +402,11 @@ input:checked + .slider:before {
     gap: 675px;
 }
 
+.images_container {
+    margin-top: 25px;
+    display: flex;
+    gap: 20px;
+}
 
 .tagcloud { 
     color:white;
@@ -620,6 +625,20 @@ input:checked + .slider:before {
     background-color: var(--main-color);
     cursor: pointer;
   }
+
+.collective_images_container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-areas:
+    'collective_image_1 collective_image_2'
+    'collective_image_3 collective_image_4';
+    gap: 20px;
+}
+
+.collective_image {
+    width:300px;
+    border-radius: 10px;
+}
 
 .embeddings_container {
     margin-top: 20px;

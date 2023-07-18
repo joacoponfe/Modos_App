@@ -247,7 +247,7 @@ const id_melody_2_mode = await response2.json();
 const collectiveData_1 = await get_collective_data(JSON.stringify(id_melody_1_mode)).then(response => response.json());
 const collectiveData_2 = await get_collective_data(JSON.stringify(id_melody_2_mode)).then(response => response.json());
 const collectiveData = [collectiveData_1, collectiveData_2];
-
+console.log(collectiveData);
 
 //const id_melody_modes = {'1': id_melody_1_mode, '2': id_melody_2_mode};
 const id_melody_modes = [id_melody_1_mode, id_melody_2_mode];
@@ -555,6 +555,30 @@ image.style.marginTop = "20px";
 image.style.borderRadius = "10px";
 image.alt = "No se encontró la imagen.";
 
+// Create collective image elements
+const collective_image_1 = document.createElement('img');
+const collective_image_2 = document.createElement('img');
+const collective_image_3 = document.createElement('img');
+const collective_image_4 = document.createElement('img');
+collective_image_1.classList.add('collective_image');
+collective_image_2.classList.add('collective_image');
+collective_image_3.classList.add('collective_image');
+collective_image_4.classList.add('collective_image');
+
+// Create container for images (individual and collective)
+const collective_images_container = document.createElement('div');
+collective_images_container.classList.add('collective_images_container');
+collective_images_container.appendChild(collective_image_1);
+collective_images_container.appendChild(collective_image_2);
+collective_images_container.appendChild(collective_image_3);
+collective_images_container.appendChild(collective_image_4);
+
+const images_container = document.createElement('div');
+images_container.classList.add('images_container');
+images_container.appendChild(image);
+images_container.appendChild(collective_images_container);
+
+
 // Create QR code image element
 const qr_image = document.createElement('img');
 qr_image.style.maxWidth = "100%";
@@ -629,7 +653,9 @@ sidebarButtons.forEach(button => {
         } else if (content === 'images') {
             document.getElementById('container').innerHTML = '<h2>Imagen</h2><span>Captamos esta imagen de tu cabeza. ¿Coincide con lo que te imaginaste?</span>';
             document.getElementById('container').appendChild(vosElResto);
-            document.getElementById('container').appendChild(image);
+            document.getElementById('container').appendChild(images_container);
+            //document.getElementById('container').appendChild(image);
+            //document.getElementById('container').appendChild(collective_images_container);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
             document.getElementById('container').innerHTML = '<h2>Singularidad</h2><span>Calculamos la similitud entre tu respuesta y las del resto de las personas</span>';
@@ -805,17 +831,17 @@ function getVideoPath(id_melody_mode, distance){
 function getDistanceText(distance){
     // this function returns the text to be displayed in the distance section
     if (distance < 0.2){
-        return 'Tu mente refleja la conciencia musical colectiva'
+        return '¡Tu mente refleja la conciencia musical colectiva!'
     } else if (distance < 0.4){
-        return 'Tu mente se acerca a la conciencia musical colectiva'
+        return '¡Tu mente se acerca a la conciencia musical colectiva!'
     } else if (distance < 0.6){
-        return 'Tu experiencia musical es, a la vez, común y única'
+        return '¡Tu experiencia musical es, a la vez, común y única!'
     } else if (distance < 0.8){
-        return 'Vivís la música de manera particular'
+        return '¡Vivís la música de manera particular!'
     } else if (distance < 1.0){
-        return 'Vivís la música de forma totalmente única'
+        return '¡Vivís la música de forma totalmente única!'
     } else {
-        return 'Tu mente refleja la conciencia musical colectiva'
+        return '¡Tu mente refleja la conciencia musical colectiva!'
     }
 
 }
@@ -823,19 +849,19 @@ function getDistanceText(distance){
 function getModeText(id_melody_mode){
     // this function returns the text to be displayed in the mode section
     if (id_melody_mode === 'jonico'){
-        return '-Muy empleado en la música occidental, en múltiples géneros. <br> -Único modo griego mayor con séptima mayor y cuarta natural. <br> -Históricamente vinculado con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.<br> -Suele emplearse para comunicar emociones positivas.';
+        return '<ul><li>Muy empleado en la música occidental, en múltiples géneros.</li><li>Único modo griego mayor con séptima mayor y cuarta natural.</li><li>Históricamente vinculado con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.</li><li>Suele emplearse para comunicar emociones positivas.</li></ul>';
     } else if (id_melody_mode === 'dorico'){
-        return '-Muy común en el rock, el jazz, el funk y el pop. <br> -Único modo griego menor con sexta natural. <br> - Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’. <br> -Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.';
+        return '<ul><li>Muy común en el rock, el jazz, el funk y el pop.</li><li>Único modo griego menor con sexta natural.</li><li>Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.</li></ul>';
     } else if (id_melody_mode === 'frigio'){
-        return '-Común en el metal y algunos subgéneros del flamenco. <br> -Único modo griego menor con segunda menor y quinta natural. <br> - Históricamente vinculado a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’. <br> -Muy utilizado para comunicar emociones negativas y para generar tensión.';
+        return '<ul><li>Común en el metal y algunos subgéneros del flamenco.</li><li>Único modo griego menor con segunda menor y quinta natural.</li><li>Históricamente vinculado a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’.</li><li>Muy utilizado para comunicar emociones negativas y para generar tensión.</li></ul>';
     } else if (id_melody_mode === 'lidio'){
-        return '-Suele emplearse para generar climas particulares en el rock y la música de cine. <br> -Único modo griego mayor con séptima mayor y cuarta aumentada. <br> -Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ y ‘superación’. <br> -Muy utilizado para comunicar emociones positivas y sensaciones oníricas.';
+        return '<ul><li>Suele emplearse para generar climas particulares en el rock y la música de cine.</li><li>Único modo griego mayor con séptima mayor y cuarta aumentada.</li><li>Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ y ‘superación’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones oníricas.</li></ul>';
     } else if (id_melody_mode === 'mixolidio'){
-        return '-Común en el rock, el blues y el funk. <br> -Único modo griego mayor con séptima menor. <br> -Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’. <br> -Muchos artistas lo emplean para comunicar emociones positivas.';
+        return '<ul><li>Común en el rock, el blues y el funk.</li><li>Único modo griego mayor con séptima menor.</li><li>Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.</li><li>Muchos artistas lo emplean para comunicar emociones positivas.</li></ul>';
     } else if (id_melody_mode === 'eolico'){
-        return '-Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica. <br> -Único modo griego menor con segunda menor y sexta menor. <br> -Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’. <br> -Suele usarse para comunicar melancolía.';
+        return '<ul><li>Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica.</li><li>Único modo griego menor con segunda menor y sexta menor.</li><li>Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’.</li><li>Suele usarse para comunicar melancolía.</li></ul>';
     } else if (id_melody_mode === 'locrio'){
-        return '-Es el modo menos utilizado en el mundo. <br> -Único modo griego con segunda menor y quinta disminuida. <br> -Históricamente vinculado a ‘miedo’, ‘peligro’ y ‘confusión’. <br> -Armónicamente es muy inestable y suele evocar incomodidad.';
+        return '<ul><li>Es el modo menos utilizado en el mundo.</li><li>Único modo griego con segunda menor y quinta disminuida.</li><li>Históricamente vinculado a ‘miedo’, ‘peligro’ y ‘confusión’.</li><li>Armónicamente es muy inestable y suele evocar incomodidad.</li></ul>';
     } else {
         return 'hello, world!' + Math.floor(Math.random() * 100);
     }
@@ -1052,6 +1078,19 @@ async function setData(id_mode){
 
 
     image.src = 'data:image/png;base64,'.concat(encoded_image);                                             // Set image source
+
+    // Check if encoded_image is in image_list, and if so, remove it
+    if (collectiveData[id_mode]['image_list'].includes(encoded_image)){
+        var index = collectiveData[id_mode]['image_list'].indexOf(encoded_image);
+        if (index > -1) {
+            collectiveData[id_mode]['image_list'].splice(index, 1);
+        }
+    }
+    
+    collective_image_1.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][0]);     // Set collective image 1 source
+    collective_image_2.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][1]);     // Set collective image 2 source
+    collective_image_3.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][2]);     // Set collective image 3 source
+    collective_image_4.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][3]);     // Set collective image 4 source
 
     // Set embeddings
     console.log(id_melody_modes[id_mode]['id_melody_mode']);
