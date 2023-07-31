@@ -786,6 +786,7 @@ input:checked + .slider:before {
     height: 135px;
     text-align: center;
     align-items: center;
+    justify-content: center;
     font-weight: bold;
     letter-spacing: 0.05em;
     background-color: var(--bs-dark-transparent);

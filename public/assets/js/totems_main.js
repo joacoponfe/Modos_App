@@ -931,17 +931,17 @@ function getVideoPath(id_melody_mode, distance){
 function getDistanceText(distance){
     // this function returns the text to be displayed in the distance section
     if (distance < 0.2){
-        return '¡Tu mente refleja la conciencia musical colectiva!'
+        return '¡Tu mente refleja la <br> conciencia musical colectiva!'
     } else if (distance < 0.4){
-        return '¡Tu mente se acerca a la conciencia musical colectiva!'
+        return '¡Tu mente se acerca a la <br> conciencia musical colectiva!'
     } else if (distance < 0.6){
-        return '¡Tu experiencia musical es, a la vez, común y única!'
+        return '¡Tu experiencia musical es, <br> a la vez, común y única!'
     } else if (distance < 0.8){
-        return '¡Vivís la música de manera particular!'
+        return '¡Vivís la música <br> de manera particular!'
     } else if (distance < 1.0){
-        return '¡Vivís la música de forma totalmente única!'
+        return '¡Vivís la música de forma <br> totalmente única!'
     } else {
-        return '¡Tu mente refleja la conciencia musical colectiva!'
+        return '¡Tu mente refleja la <br> conciencia musical colectiva!'
     }
 
 }
