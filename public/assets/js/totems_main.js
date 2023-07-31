@@ -475,6 +475,10 @@ var sheetURL;
 var sheet_frame;
 var mode_text;
 var textContainer;
+var mode_text_0 = document.createElement('h5');
+var mode_text_1 = document.createElement('h5');
+var mode_text_2 = document.createElement('h5');
+var mode_text_3 = document.createElement('h5');
 
 // create embeddings video elements
 var video_path;
@@ -548,22 +552,107 @@ thermometers.appendChild(collectiveThermometerFrame);
 //thermometers.appendChild(container_frame);
 //thermometers.appendChild(collectiveThermometerFrame);
 
+// Create flip card element for individual image
+const flip_card = document.createElement('div');
+flip_card.classList.add('flip-card');
+const flip_card_inner = document.createElement('div');
+flip_card_inner.classList.add('flip-card-inner');
+const flip_card_front = document.createElement('div');
+flip_card_front.classList.add('flip-card-front');
+const flip_card_back = document.createElement('div');
+flip_card_back.classList.add('flip-card-back');
+flip_card_inner.appendChild(flip_card_front);
+flip_card_inner.appendChild(flip_card_back);
+flip_card.appendChild(flip_card_inner);
+
+// Create back of card element
+const back_image = document.createElement('img');
+back_image.src = "assets/images/flip_card_back.png";
+back_image.style.width = "625px";
+back_image.style.borderRadius = "10px";
+flip_card_back.appendChild(back_image);
+
 // Create image element
 const image = document.createElement('img');
-image.style.width = "650px";
-image.style.marginTop = "20px";
+image.classList.add('image');
+image.style.width = "625px";
 image.style.borderRadius = "10px";
 image.alt = "No se encontró la imagen.";
+flip_card_front.appendChild(image);
 
-// Create collective image elements
+// Create collective image elements and flip cards
 const collective_image_1 = document.createElement('img');
 const collective_image_2 = document.createElement('img');
 const collective_image_3 = document.createElement('img');
 const collective_image_4 = document.createElement('img');
-collective_image_1.classList.add('collective_image');
-collective_image_2.classList.add('collective_image');
-collective_image_3.classList.add('collective_image');
-collective_image_4.classList.add('collective_image');
+
+const flip_card_1 = document.createElement('div');
+const flip_card_2 = document.createElement('div');
+const flip_card_3 = document.createElement('div');
+const flip_card_4 = document.createElement('div');
+
+const flip_card_inner_1 = document.createElement('div');
+const flip_card_inner_2 = document.createElement('div');
+const flip_card_inner_3 = document.createElement('div');
+const flip_card_inner_4 = document.createElement('div');
+
+const flip_card_front_1 = document.createElement('div');
+const flip_card_front_2 = document.createElement('div');
+const flip_card_front_3 = document.createElement('div');
+const flip_card_front_4 = document.createElement('div');
+
+const flip_card_back_1 = document.createElement('div');
+const flip_card_back_2 = document.createElement('div');
+const flip_card_back_3 = document.createElement('div');
+const flip_card_back_4 = document.createElement('div');
+
+const collective_images = [collective_image_1, collective_image_2, collective_image_3, collective_image_4];
+const flip_cards = [flip_card_1, flip_card_2, flip_card_3, flip_card_4];
+const flip_card_inners = [flip_card_inner_1, flip_card_inner_2, flip_card_inner_3, flip_card_inner_4];
+const flip_card_fronts = [flip_card_front_1, flip_card_front_2, flip_card_front_3, flip_card_front_4];
+const flip_card_backs = [flip_card_back_1, flip_card_back_2, flip_card_back_3, flip_card_back_4];
+
+for (let i = 0; i < collective_images.length; i++){
+    collective_images[i].classList.add('collective_image');
+    flip_cards[i].classList.add('flip-card');
+    flip_card_inners[i].classList.add('flip-card-inner');
+    flip_card_fronts[i].classList.add('flip-card-front');
+    flip_card_backs[i].classList.add('flip-card-back');
+    flip_card_inners[i].appendChild(flip_card_fronts[i]);
+    flip_card_inners[i].appendChild(flip_card_backs[i]);
+    flip_cards[i].appendChild(flip_card_inners[i]);
+    flip_card_fronts[i].appendChild(collective_images[i]);
+};
+
+// collective_image_1.classList.add('collective_image');
+// collective_image_2.classList.add('collective_image');
+// collective_image_3.classList.add('collective_image');
+// collective_image_4.classList.add('collective_image');
+
+// flip_card_1.classList.add('flip-card');
+// flip_card_2.classList.add('flip-card');
+// flip_card_3.classList.add('flip-card');
+// flip_card_4.classList.add('flip-card');
+
+// flip_card_inner_1.classList.add('flip-card-inner');
+// flip_card_inner_2.classList.add('flip-card-inner');
+// flip_card_inner_3.classList.add('flip-card-inner');
+// flip_card_inner_4.classList.add('flip-card-inner');
+
+// flip_card_front_1.classList.add('flip-card-front');
+// flip_card_front_2.classList.add('flip-card-front');
+// flip_card_front_3.classList.add('flip-card-front');
+// flip_card_front_4.classList.add('flip-card-front');
+
+// flip_card_back_1.classList.add('flip-card-back');
+// flip_card_back_2.classList.add('flip-card-back');
+// flip_card_back_3.classList.add('flip-card-back');
+// flip_card_back_4.classList.add('flip-card-back');
+
+// flip_card_inner_1.appendChild(flip_card_front_1);
+// flip_card_inner_1.appendChild(flip_card_back_1);
+// flip_card_1.appendChild(flip_card_inner_1);
+// flip_card_front_1.appendChild(collective_image_1);
 
 // Create container for images (individual and collective)
 const collective_images_container = document.createElement('div');
@@ -572,12 +661,17 @@ collective_images_container.appendChild(collective_image_1);
 collective_images_container.appendChild(collective_image_2);
 collective_images_container.appendChild(collective_image_3);
 collective_images_container.appendChild(collective_image_4);
+// collective_images_container.appendChild(flip_card_1);
+// collective_images_container.appendChild(flip_card_2);
+// collective_images_container.appendChild(flip_card_3);
+// collective_images_container.appendChild(flip_card_4);
+
 
 const images_container = document.createElement('div');
 images_container.classList.add('images_container');
 images_container.appendChild(image);
+//images_container.appendChild(flip_card);
 images_container.appendChild(collective_images_container);
-
 
 // Create QR code image element
 const qr_image = document.createElement('img');
@@ -616,9 +710,9 @@ sidebarButtons.forEach(button => {
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
             // set iframe src to sheet music URL
-            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><span>Transcribimos la melodía que escuchaste. Volvé a oírla y conocé más sobre este modo<span>";
+            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><span style='padding-bottom:20px'>Transcribimos la melodía que escuchaste. Volvé a oírla y conocé más sobre este modo<span>";
             document.getElementById('container').appendChild(sheet_frame);
-            sheet_frame.style.display = "block";
+            //sheet_frame.style.display = "block";
             sheet_frame.setAttribute("src", sheetURL);
             sheet_frame.setAttribute("height", "350");
             sheet_frame.setAttribute("width", "100%");
@@ -627,7 +721,12 @@ sidebarButtons.forEach(button => {
             sheet_frame.setAttribute("allow", "autoplay; midi");
             // add text to the webpage below 
             textContainer = document.createElement('div');
-            textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4> ";
+            textContainer.classList.add('mode_text_container');
+            textContainer.appendChild(mode_text_0);
+            textContainer.appendChild(mode_text_1);
+            textContainer.appendChild(mode_text_2);
+            textContainer.appendChild(mode_text_3);
+            //textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4> ";
             document.getElementById('container').appendChild(textContainer);
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
@@ -644,6 +743,7 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
             document.getElementById('container').innerHTML = '<h2>Emociones</h2><span>Medimos la intensidad de las emociones que sentiste al escuchar la melodía</span>';
+            document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(thermometers);
             // document.getElementById('thermometers').appendChild(container_frame);
             // document.getElementById('thermometers').appendChild(collectiveThermometerFrame);
@@ -849,19 +949,26 @@ function getDistanceText(distance){
 function getModeText(id_melody_mode){
     // this function returns the text to be displayed in the mode section
     if (id_melody_mode === 'jonico'){
-        return '<ul><li>Muy empleado en la música occidental, en múltiples géneros.</li><li>Único modo griego mayor con séptima mayor y cuarta natural.</li><li>Históricamente vinculado con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.</li><li>Suele emplearse para comunicar emociones positivas.</li></ul>';
+        //return '<ul><li>Muy empleado en la música occidental, en múltiples géneros.</li><li>Único modo griego mayor con séptima mayor y cuarta natural.</li><li>Históricamente vinculado con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.</li><li>Suele emplearse para comunicar emociones positivas.</li></ul>';
+        return ['Muy empleado en la música occidental, en múltiples géneros.', 'Único modo griego mayor con séptima mayor y cuarta natural.', 'Históricamente vinculado con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.', 'Suele emplearse para comunicar emociones positivas.'];
     } else if (id_melody_mode === 'dorico'){
-        return '<ul><li>Muy común en el rock, el jazz, el funk y el pop.</li><li>Único modo griego menor con sexta natural.</li><li>Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.</li></ul>';
+        //return '<ul><li>Muy común en el rock, el jazz, el funk y el pop.</li><li>Único modo griego menor con sexta natural.</li><li>Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.</li></ul>';
+        return ['Muy común en el rock, el jazz, el funk y el pop.', 'Único modo griego menor con sexta natural.', 'Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.', 'Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.'];
     } else if (id_melody_mode === 'frigio'){
-        return '<ul><li>Común en el metal y algunos subgéneros del flamenco.</li><li>Único modo griego menor con segunda menor y quinta natural.</li><li>Históricamente vinculado a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’.</li><li>Muy utilizado para comunicar emociones negativas y para generar tensión.</li></ul>';
+        //return '<ul><li>Común en el metal y algunos subgéneros del flamenco.</li><li>Único modo griego menor con segunda menor y quinta natural.</li><li>Históricamente vinculado a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’.</li><li>Muy utilizado para comunicar emociones negativas y para generar tensión.</li></ul>';
+        return ['Común en el metal y algunos subgéneros del flamenco.', 'Único modo griego menor con segunda menor y quinta natural.', 'Históricamente vinculado a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’.', 'Muy utilizado para comunicar emociones negativas y para generar tensión.'];
     } else if (id_melody_mode === 'lidio'){
-        return '<ul><li>Suele emplearse para generar climas particulares en el rock y la música de cine.</li><li>Único modo griego mayor con séptima mayor y cuarta aumentada.</li><li>Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ y ‘superación’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones oníricas.</li></ul>';
+        //return '<ul><li>Suele emplearse para generar climas particulares en el rock y la música de cine.</li><li>Único modo griego mayor con séptima mayor y cuarta aumentada.</li><li>Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ y ‘superación’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones oníricas.</li></ul>';
+        return ['Suele emplearse para generar climas particulares en el rock y la música de cine.', 'Único modo griego mayor con séptima mayor y cuarta aumentada.', 'Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ y ‘superación’.', 'Muy utilizado para comunicar emociones positivas y sensaciones oníricas.'];
     } else if (id_melody_mode === 'mixolidio'){
-        return '<ul><li>Común en el rock, el blues y el funk.</li><li>Único modo griego mayor con séptima menor.</li><li>Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.</li><li>Muchos artistas lo emplean para comunicar emociones positivas.</li></ul>';
+        //return '<ul><li>Común en el rock, el blues y el funk.</li><li>Único modo griego mayor con séptima menor.</li><li>Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.</li><li>Muchos artistas lo emplean para comunicar emociones positivas.</li></ul>';
+        return ['Común en el rock, el blues y el funk.', 'Único modo griego mayor con séptima menor.', 'Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.', 'Muchos artistas lo emplean para comunicar emociones positivas.'];
     } else if (id_melody_mode === 'eolico'){
-        return '<ul><li>Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica.</li><li>Único modo griego menor con segunda menor y sexta menor.</li><li>Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’.</li><li>Suele usarse para comunicar melancolía.</li></ul>';
+        //return '<ul><li>Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica.</li><li>Único modo griego menor con segunda menor y sexta menor.</li><li>Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’.</li><li>Suele usarse para comunicar melancolía.</li></ul>';
+        return ['Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica.', 'Único modo griego menor con segunda menor y sexta menor.', 'Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’.', 'Suele usarse para comunicar melancolía.'];
     } else if (id_melody_mode === 'locrio'){
-        return '<ul><li>Es el modo menos utilizado en el mundo.</li><li>Único modo griego con segunda menor y quinta disminuida.</li><li>Históricamente vinculado a ‘miedo’, ‘peligro’ y ‘confusión’.</li><li>Armónicamente es muy inestable y suele evocar incomodidad.</li></ul>';
+        //return '<ul><li>Es el modo menos utilizado en el mundo.</li><li>Único modo griego con segunda menor y quinta disminuida.</li><li>Históricamente vinculado a ‘miedo’, ‘peligro’ y ‘confusión’.</li><li>Armónicamente es muy inestable y suele evocar incomodidad.</li></ul>';
+        return ['Es el modo menos utilizado en el mundo.', 'Único modo griego con segunda menor y quinta disminuida.', 'Históricamente vinculado a ‘miedo’, ‘peligro’ y ‘confusión’.', 'Armónicamente es muy inestable y suele evocar incomodidad.'];
     } else {
         return 'hello, world!' + Math.floor(Math.random() * 100);
     }
@@ -906,7 +1013,12 @@ async function setData(id_mode){
     
     sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?layout=track&locale=es');      // Set sheet music source
     mode_text = getModeText(id_melody_modes[id_mode]['id_melody_mode']);                                            // Set mode text
-    
+
+    mode_text_0.innerHTML = '<span class="emoji">&#127925</span>' +  mode_text[0];
+    mode_text_1.innerHTML = '<span class="emoji">&#127929</span>' + mode_text[1];
+    mode_text_2.innerHTML = '<span class="emoji">&#128173</span>' + mode_text[2];
+    mode_text_3.innerHTML = '<span class="emoji">&#127917</span>' + mode_text[3];
+
     if (typeof sheet_frame != "undefined") {                                                                // If sheet music exists
         sheet_frame.remove();                                                                               // Destroy it
         // also TRY to delete textContainer
@@ -920,7 +1032,13 @@ async function setData(id_mode){
         sheet_frame.setAttribute("allow", "autoplay; midi");
         // add text to the webpage below 
         textContainer = document.createElement('div');
-        textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4>";
+        textContainer.classList.add('mode_text_container');
+        //textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4>";
+        textContainer.appendChild(mode_text_0);
+        textContainer.appendChild(mode_text_1);
+        textContainer.appendChild(mode_text_2);
+        textContainer.appendChild(mode_text_3);
+        
         
         var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
         sidebarButtons.forEach(function(button) {
@@ -950,7 +1068,11 @@ async function setData(id_mode){
         sheet_frame.setAttribute("allow", "autoplay; midi");
         // add text to the webpage below 
         textContainer = document.createElement('div');
-        textContainer.innerHTML = "";
+        //textContainer.innerHTML = "";
+        // textContainer.appendChild(mode_text_0);
+        // textContainer.appendChild(mode_text_1);
+        // textContainer.appendChild(mode_text_2);
+        // textContainer.appendChild(mode_text_3);
         document.getElementById('container').appendChild(textContainer);
     };
 
@@ -983,7 +1105,7 @@ async function setData(id_mode){
             setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg); // Set thermometer values
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
             iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
-            iframeDoc.getElementById("title").innerHTML = "VOS"; // Change title
+            //iframeDoc.getElementById("title").innerHTML = "VOS"; // Change title
         });
         
         var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "thermometer"
@@ -1018,7 +1140,7 @@ async function setData(id_mode){
             setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, miedo, enojo, pos, neu, neg); // Set thermometer values
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
             iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
-            iframeDoc.getElementById("title").innerHTML = "VOS"; // Change title
+            //iframeDoc.getElementById("title").innerHTML = "VOS"; // Change title
         });
     };
     
@@ -1037,7 +1159,7 @@ async function setData(id_mode){
             setThermometerValues(iframeDoc, alegria_collective, tristeza_collective, sorpresa_collective, asco_collective, miedo_collective, enojo_collective, pos_collective, neu_collective, neg_collective); // Set thermometer values
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
             iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
-            iframeDoc.getElementById("title").innerHTML = "EL RESTO"; // Change title
+            //iframeDoc.getElementById("title").innerHTML = "EL RESTO"; // Change title
         });
 
         var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "thermometer"
@@ -1071,7 +1193,7 @@ async function setData(id_mode){
             setThermometerValues(iframeDoc, collectiveData[id_mode]['alegria'], collectiveData[id_mode]['tristeza'], collectiveData[id_mode]['sorpresa'], collectiveData[id_mode]['asco'], collectiveData[id_mode]['miedo'], collectiveData[id_mode]['enojo'], collectiveData[id_mode]['pos'], collectiveData[id_mode]['neu'], collectiveData[id_mode]['neg']); // Set thermometer values
             iframeDoc.documentElement.style.setProperty('--main-color', main_colors[id_melody_modes[id_mode]['id_melody_mode']]); // Change color
             iframeDoc.documentElement.style.setProperty('--main-color-transparent', main_colors_transparent[id_melody_modes[id_mode]['id_melody_mode']]);
-            iframeDoc.getElementById("title").innerHTML = "EL RESTO"; // Change title
+            //iframeDoc.getElementById("title").innerHTML = "EL RESTO"; // Change title
         });
     };
 
