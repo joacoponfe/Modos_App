@@ -171,10 +171,20 @@ input:checked + .slider:before {
     border-radius: 34px;
 }
 
-.toggle-label {
+.toggle-labels{
     position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 45%;
+    flex-wrap: nowrap;
+}
+
+.toggle-label {
+    /* position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%); */
     text-transform: uppercase;
     font-size: 1.8em;
     font-weight: 600;
@@ -183,11 +193,11 @@ input:checked + .slider:before {
 }
   
 .toggle-label.mode_1 {
-    left: 64px;
+    /*left: 64px;*/
 }
   
 .toggle-label.mode_2 {
-    right: 64px;
+    /*right: 64px;*/
 }
 
 /* End switch button*/
@@ -315,23 +325,23 @@ input:checked + .slider:before {
 
 .wrapper .section .container h5{
     position: relative;
-    /*padding-left: 1.5rem;*/
-    font-size: 1.5em;
+    font-size: 1.6em;
     font-weight: 400;
     letter-spacing: 0.05em;
     color: white;
-    margin-bottom: 15px;
-    border: solid 1px white;
+    /*border: solid 2px white;*/
+    background-color: var(--bs-dark-transparent-2);
     border-radius: 5px;
     text-align: center;
-    padding: 40px;
+    padding: 60px;
 }
 
 .wrapper .section .container h5 .emoji {
     position: absolute;
     top: 10px;
-    left: 5px;
-    font-size: 2rem;
+    left: 10px;
+    width: 40px;
+    height: 40px;
 }
 
 :root {
@@ -379,6 +389,7 @@ input:checked + .slider:before {
     --bs-light-transparent: rgba(248, 249, 250, 0.8);
     --bs-dark: #162331;
     --bs-dark-transparent: rgba(22, 35, 49, 0.8);
+    --bs-dark-transparent-2: rgba(22, 35, 49, 0.6);
     --bs-dark-light: rgb(106, 150, 167);
     --bs-dark-hover: rgba(255, 255, 255, 0.1);
     --bs-primary-rgb: 13, 110, 253;
@@ -806,4 +817,18 @@ input:checked + .slider:before {
     'mode_text_0 mode_text_1'
     'mode_text_2 mode_text_3';
     gap: 20px;
+}
+
+.sheet_frame_container {
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+#timer {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    letter-spacing: 0.05em;
+    margin-top: 70px;
 }

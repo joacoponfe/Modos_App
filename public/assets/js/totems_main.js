@@ -7,8 +7,6 @@ const id_participant = getCookie('id_participant');
 //const id_melody_mode = getCookie('id_melody_mode');
 
 // Get document elements, iframe and iframe document elements
-// const mode_1 = document.getElementById("mode_1");
-// const mode_2 = document.getElementById("mode_2");
 const id_string = document.getElementById("id_string");
 const toggleSwitch = document.getElementById("switch");
 const mode_1_text = document.getElementById("mode_1_text");
@@ -53,29 +51,55 @@ function setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, mied
     var miedo_redondeado = parseInt((miedo * 100).toFixed(decimal_places));
     var enojo_redondeado = parseInt((enojo * 100).toFixed(decimal_places));
 
-    var emotions_redondeados = [alegria_redondeado, tristeza_redondeado, sorpresa_redondeado, asco_redondeado, miedo_redondeado, enojo_redondeado];
+    var emotions_redondeados = {'alegria': alegria_redondeado,'tristeza': tristeza_redondeado, 'sorpresa': sorpresa_redondeado, 'asco': asco_redondeado, 'miedo': miedo_redondeado, 'enojo': enojo_redondeado};
     var emotion_redondeado_sum = alegria_redondeado + tristeza_redondeado + sorpresa_redondeado + asco_redondeado + miedo_redondeado + enojo_redondeado;
 
     if (emotion_redondeado_sum > 100){
-        // Get minimum value
-        var min_value = Math.min(alegria, tristeza, sorpresa, asco, miedo, enojo);
-        // Get index of minimum value
-        var min_index = [alegria, tristeza, sorpresa, asco, miedo, enojo].indexOf(min_value);
+        // Get list of keys from emotions_redondeados sorted from smallest to largest value
+        var emotions_redondeados_sorted_keys = Object.keys(emotions_redondeados).sort(function(a,b){return emotions_redondeados[a]-emotions_redondeados[b]});
+        var emotions_redondeados_sorted_values = emotions_redondeados_sorted_keys.map(function(x){return emotions_redondeados[x]});
+        // Subtract from each value in emotions_redondeados_sorted_values, starting from the smallest to the largest, until sum is exactly 100, and never go below 0 for any emotion
         var subtract = emotion_redondeado_sum - 100;
-        // Subtract from minimum value
-        emotions_redondeados[min_index] -= subtract;
+        for (var i = 0; i < emotions_redondeados_sorted_values.length; i++){
+            var emotion = emotions_redondeados_sorted_values[i];
+            if (emotion - subtract >= 0){
+                emotions_redondeados_sorted_values[i] -= subtract;
+                break;
+            } else {
+                subtract -= emotion;
+                emotions_redondeados_sorted_values[i] = 0;
+            };
+        };
+        // Update emotions_redondeados
+        for (var i = 0; i < emotions_redondeados_sorted_keys.length; i++){
+            var key = emotions_redondeados_sorted_keys[i];
+            emotions_redondeados[key] = emotions_redondeados_sorted_values[i];
+        };
         // Update emotion_redondeado_sum
-        emotion_redondeado_sum = emotions_redondeados[0] + emotions_redondeados[1] + emotions_redondeados[2] + emotions_redondeados[3] + emotions_redondeados[4] + emotions_redondeados[5];
+        emotion_redondeado_sum = emotions_redondeados['alegria'] + emotions_redondeados['tristeza'] + emotions_redondeados['sorpresa'] + emotions_redondeados['asco'] + emotions_redondeados['miedo'] + emotions_redondeados['enojo'];
     } if (emotion_redondeado_sum < 100){
-        // Get maximum value
-        var max_value = Math.max(alegria, tristeza, sorpresa, asco, miedo, enojo);
-        // Get index of maximum value
-        var max_index = [alegria, tristeza, sorpresa, asco, miedo, enojo].indexOf(max_value);
+        // Get list of keys from emotions_redondeados sorted from largest to smallest value
+        var emotions_redondeados_sorted_keys = Object.keys(emotions_redondeados).sort(function(a,b){return emotions_redondeados[b]-emotions_redondeados[a]});
+        var emotions_redondeados_sorted_values = emotions_redondeados_sorted_keys.map(function(x){return emotions_redondeados[x]});
+        // Add to each value in emotions_redondeados_sorted_values, starting from the largest to the smallest, until sum is exactly 100, and never go above 100 for any emotion
         var add = 100 - emotion_redondeado_sum;
-        // Add to maximum value
-        emotions_redondeados[max_index] += add;
+        for (var i = 0; i < emotions_redondeados_sorted_values.length; i++){
+            var emotion = emotions_redondeados_sorted_values[i];
+            if (emotion + add <= 100){
+                emotions_redondeados_sorted_values[i] += add;
+                break;
+            } else {
+                add -= (100 - emotion);
+                emotions_redondeados_sorted_values[i] = 100;
+            };
+        };
+        // Update emotions_redondeados
+        for (var i = 0; i < emotions_redondeados_sorted_keys.length; i++){
+            var key = emotions_redondeados_sorted_keys[i];
+            emotions_redondeados[key] = emotions_redondeados_sorted_values[i];
+        };
         // Update emotion_redondeado_sum
-        emotion_redondeado_sum = emotions_redondeados[0] + emotions_redondeados[1] + emotions_redondeados[2] + emotions_redondeados[3] + emotions_redondeados[4] + emotions_redondeados[5];
+        emotion_redondeado_sum = emotions_redondeados['alegria'] + emotions_redondeados['tristeza'] + emotions_redondeados['sorpresa'] + emotions_redondeados['asco'] + emotions_redondeados['miedo'] + emotions_redondeados['enojo'];
     };
 
     var pos_redondeado = parseInt((pos * 100).toFixed(decimal_places));
@@ -107,15 +131,31 @@ function setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, mied
         valence_redondeados_sum = valence_redondeados[0] + valence_redondeados[1] + valence_redondeados[2];
     };
 
-    alegria_value.innerHTML = emotions_redondeados[0].toString().concat("%");
-    tristeza_value.innerHTML = emotions_redondeados[1].toString().concat("%");
-    sorpresa_value.innerHTML = emotions_redondeados[2].toString().concat("%");
-    asco_value.innerHTML = emotions_redondeados[3].toString().concat("%");
-    miedo_value.innerHTML = emotions_redondeados[4].toString().concat("%");
-    enojo_value.innerHTML = emotions_redondeados[5].toString().concat("%");
+    alegria_value.innerHTML = emotions_redondeados['alegria'].toString().concat("%");
+    tristeza_value.innerHTML = emotions_redondeados['tristeza'].toString().concat("%");
+    sorpresa_value.innerHTML = emotions_redondeados['sorpresa'].toString().concat("%");
+    asco_value.innerHTML = emotions_redondeados['asco'].toString().concat("%");
+    miedo_value.innerHTML = emotions_redondeados['miedo'].toString().concat("%");
+    enojo_value.innerHTML = emotions_redondeados['enojo'].toString().concat("%");
+
     pos_value.innerHTML = valence_redondeados[0].toString().concat("%");
     neu_value.innerHTML = valence_redondeados[1].toString().concat("%");
     neg_value.innerHTML = valence_redondeados[2].toString().concat("%");
+
+    // If any of the three valence values is below 5%, do not display the text or the label
+    if (valence_redondeados[0] < 5){
+        pos_value.innerHTML = "";
+        var pos_label = iframeDoc.getElementById("pos-label");
+        pos_label.innerHTML = "";
+    } else if (valence_redondeados[1] < 5){
+        neu_value.innerHTML = "";
+        var neu_label = iframeDoc.getElementById("neu-label");
+        neu_label.innerHTML = "";
+    } else if (valence_redondeados[2] < 5){
+        neg_value.innerHTML = "";
+        var neg_label = iframeDoc.getElementById("neg-label");
+        neg_label.innerHTML = "";
+    };
 
     // Get the stylesheet containing the animation rules
     var stylesheet = iframeDoc.styleSheets[0];
@@ -202,6 +242,28 @@ async function get_totems_data(id_data) {
 // Set user data
 const userData = await get_totems_data(idJSON).then(response => response.json());
 console.log(userData);
+
+// If no data is found, change intro-text
+if (userData['id_melody'].length === 0){
+    const intro_text = document.getElementById("intro-text");
+    intro_text.innerHTML = "No registramos suficientes palabras en tu texto <br> para hacer el análisis <br><br> Te invitamos a participar de nuevo";
+    // Display text "Esta página se cerrará dentro de X segundos"
+    var timer = document.createElement("div");
+    timer.id = "timer";
+    document.getElementById('container').appendChild(timer);
+    var seconds = 15;
+    var x = setInterval(function() {
+        seconds -= 1;
+        if (seconds <= 10) {
+            document.getElementById("timer").innerHTML = "Esta página se cerrará dentro de ".concat(seconds.toString(), " segundos");
+        }
+        if (seconds < 0) {
+            clearInterval(x);
+            window.location.href = "totems_access.html";
+        }
+    }
+    , 1000);
+};
 
 // Get melody mode names
 async function get_melody_mode(id_melody) {
@@ -480,6 +542,10 @@ var mode_text_1 = document.createElement('h5');
 var mode_text_2 = document.createElement('h5');
 var mode_text_3 = document.createElement('h5');
 
+const sheet_frame_container = document.createElement('div');
+sheet_frame_container.classList.add('sheet_frame_container');
+
+
 // create embeddings video elements
 var video_path;
 var distance_text;
@@ -710,8 +776,10 @@ sidebarButtons.forEach(button => {
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
             // set iframe src to sheet music URL
-            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><span style='padding-bottom:20px'>Transcribimos la melodía que escuchaste. Volvé a oírla y conocé más sobre este modo<span>";
-            document.getElementById('container').appendChild(sheet_frame);
+            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><span>Transcribimos la melodía que escuchaste. Volvé a oírla y conocé más sobre este modo.<span>";
+            sheet_frame_container.appendChild(sheet_frame);
+            document.getElementById('container').appendChild(sheet_frame_container);
+            //document.getElementById('container').appendChild(sheet_frame);
             //sheet_frame.style.display = "block";
             sheet_frame.setAttribute("src", sheetURL);
             sheet_frame.setAttribute("height", "350");
@@ -731,7 +799,7 @@ sidebarButtons.forEach(button => {
             // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
-            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><span>Identificamos los conceptos clave de tu texto</span>';
+            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><span>Identificamos los conceptos clave de tu texto.</span>';
             document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(wordClouds);
             if (typeof tagcloud === "undefined") { // If object does not already exist
@@ -742,7 +810,7 @@ sidebarButtons.forEach(button => {
             }
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
-            document.getElementById('container').innerHTML = '<h2>Emociones</h2><span>Medimos la intensidad de las emociones que sentiste al escuchar la melodía</span>';
+            document.getElementById('container').innerHTML = '<h2>Emociones</h2><span>Medimos la intensidad de las emociones que sentiste al escuchar la melodía.</span>';
             document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(thermometers);
             // document.getElementById('thermometers').appendChild(container_frame);
@@ -758,7 +826,7 @@ sidebarButtons.forEach(button => {
             //document.getElementById('container').appendChild(collective_images_container);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
-            document.getElementById('container').innerHTML = '<h2>Singularidad</h2><span>Calculamos la similitud entre tu respuesta y las del resto de las personas</span>';
+            document.getElementById('container').innerHTML = '<h2>Singularidad</h2><span>Calculamos la similitud entre tu respuesta y las del resto de las personas.</span>';
             document.getElementById('container').appendChild(embeddings_container);
             // Video
             //document.getElementById('container').appendChild(embeddings_video_container);
@@ -773,7 +841,7 @@ sidebarButtons.forEach(button => {
             //document.getElementById('container').appendChild(distanceTextContainer);
             button.setAttribute('class', 'active');
         } else if (content === 'songs') {
-            document.getElementById('container').innerHTML = '<h2>Canciones</h2><span>Recopilamos canciones de distintos géneros que utilizan este modo</span>';
+            document.getElementById('container').innerHTML = '<h2>Canciones</h2><span>Recopilamos canciones de distintos géneros que utilizan este modo.</span>';
             document.getElementById('container').appendChild(playlist_frame);
             playlist_frame.style.display = "block";
             playlist_frame.onload = function() {	
@@ -788,14 +856,20 @@ sidebarButtons.forEach(button => {
             var countdown = document.createElement('div');
             document.getElementById('container').appendChild(countdown);
             var timeleft = 5;
-            setInterval(function(){
-                if(timeleft <= 0){
-                  window.location.href = "totems_landing.html";
-                } else {  
-                    countdown.innerHTML = '<p style="font-size:1.6em; text-align:center; margin-top:25px">Esta sesión se cerrará en ' + `${timeleft}` + ' segundos</p>'
+            if (button.getAttribute('class')==='active'){
+                setInterval(function(){
+                    if(timeleft <= 0 && button.getAttribute('class')==='active'){
+                        window.location.href = "totems_landing.html";
+                    } else {  
+                        countdown.innerHTML = '<p style="font-size:1.6em; text-align:center; margin-top:25px">Esta sesión se cerrará en ' + `${timeleft}` + ' segundos</p>'
+                    }
+                    if (button.getAttribute('class')==='active'){
+                        timeleft -= 1;
+                    } else {
+                        timeleft = 5;
+                    }
+                  }, 1000);
                 }
-                timeleft -= 1;
-              }, 1000);
         }
     });
 });
@@ -950,25 +1024,25 @@ function getModeText(id_melody_mode){
     // this function returns the text to be displayed in the mode section
     if (id_melody_mode === 'jonico'){
         //return '<ul><li>Muy empleado en la música occidental, en múltiples géneros.</li><li>Único modo griego mayor con séptima mayor y cuarta natural.</li><li>Históricamente vinculado con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.</li><li>Suele emplearse para comunicar emociones positivas.</li></ul>';
-        return ['Muy empleado en la música occidental, en múltiples géneros.', 'Único modo griego mayor con séptima mayor y cuarta natural.', 'Históricamente vinculado con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.', 'Suele emplearse para comunicar emociones positivas.'];
+        return ['Muy empleado en la música occidental, en múltiples géneros.', 'Único modo griego mayor con séptima mayor y cuarta natural.', 'Históricamente vinculado con <br> ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.', 'Suele emplearse para comunicar emociones positivas.'];
     } else if (id_melody_mode === 'dorico'){
         //return '<ul><li>Muy común en el rock, el jazz, el funk y el pop.</li><li>Único modo griego menor con sexta natural.</li><li>Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.</li></ul>';
-        return ['Muy común en el rock, el jazz, el funk y el pop.', 'Único modo griego menor con sexta natural.', 'Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.', 'Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.'];
+        return ['Muy común en el rock, el jazz, el funk y el pop.', 'Único modo griego menor con sexta natural.', 'Históricamente vinculado con <br> ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.', 'Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.'];
     } else if (id_melody_mode === 'frigio'){
         //return '<ul><li>Común en el metal y algunos subgéneros del flamenco.</li><li>Único modo griego menor con segunda menor y quinta natural.</li><li>Históricamente vinculado a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’.</li><li>Muy utilizado para comunicar emociones negativas y para generar tensión.</li></ul>';
-        return ['Común en el metal y algunos subgéneros del flamenco.', 'Único modo griego menor con segunda menor y quinta natural.', 'Históricamente vinculado a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’.', 'Muy utilizado para comunicar emociones negativas y para generar tensión.'];
+        return ['Común en el metal y algunos subgéneros del flamenco.', 'Único modo griego menor con segunda menor y quinta natural.', 'Históricamente vinculado a <br> ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’.', 'Muy utilizado para comunicar emociones negativas y para generar tensión.'];
     } else if (id_melody_mode === 'lidio'){
         //return '<ul><li>Suele emplearse para generar climas particulares en el rock y la música de cine.</li><li>Único modo griego mayor con séptima mayor y cuarta aumentada.</li><li>Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ y ‘superación’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones oníricas.</li></ul>';
-        return ['Suele emplearse para generar climas particulares en el rock y la música de cine.', 'Único modo griego mayor con séptima mayor y cuarta aumentada.', 'Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ y ‘superación’.', 'Muy utilizado para comunicar emociones positivas y sensaciones oníricas.'];
+        return ['Suele emplearse para generar <br> climas particulares en el rock <br> y la música de cine.', 'Único modo griego mayor con séptima mayor y cuarta aumentada.', 'Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ <br> y ‘superación’.', 'Muy utilizado para comunicar emociones positivas <br> y sensaciones oníricas.'];
     } else if (id_melody_mode === 'mixolidio'){
         //return '<ul><li>Común en el rock, el blues y el funk.</li><li>Único modo griego mayor con séptima menor.</li><li>Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.</li><li>Muchos artistas lo emplean para comunicar emociones positivas.</li></ul>';
         return ['Común en el rock, el blues y el funk.', 'Único modo griego mayor con séptima menor.', 'Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.', 'Muchos artistas lo emplean para comunicar emociones positivas.'];
     } else if (id_melody_mode === 'eolico'){
         //return '<ul><li>Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica.</li><li>Único modo griego menor con segunda menor y sexta menor.</li><li>Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’.</li><li>Suele usarse para comunicar melancolía.</li></ul>';
-        return ['Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica.', 'Único modo griego menor con segunda menor y sexta menor.', 'Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’.', 'Suele usarse para comunicar melancolía.'];
+        return ['Común en occidente, en géneros <br> como el rock, el pop, el jazz <br> y la música clásica.', 'Único modo griego menor con <br> segunda menor y sexta menor.', 'Históricamente vinculado a <br> ‘calma’, ‘tristeza’, ‘pesadez’ y ‘añoranza’.', 'Suele usarse para comunicar melancolía.'];
     } else if (id_melody_mode === 'locrio'){
         //return '<ul><li>Es el modo menos utilizado en el mundo.</li><li>Único modo griego con segunda menor y quinta disminuida.</li><li>Históricamente vinculado a ‘miedo’, ‘peligro’ y ‘confusión’.</li><li>Armónicamente es muy inestable y suele evocar incomodidad.</li></ul>';
-        return ['Es el modo menos utilizado en el mundo.', 'Único modo griego con segunda menor y quinta disminuida.', 'Históricamente vinculado a ‘miedo’, ‘peligro’ y ‘confusión’.', 'Armónicamente es muy inestable y suele evocar incomodidad.'];
+        return ['Es el modo menos utilizado <br> en el mundo.', 'Único modo griego con <br> segunda menor y quinta disminuida.', 'Históricamente vinculado a <br> ‘miedo’, ‘peligro’ y ‘confusión’.', 'Armónicamente es muy inestable <br> y suele evocar incomodidad.'];
     } else {
         return 'hello, world!' + Math.floor(Math.random() * 100);
     }
@@ -1014,10 +1088,10 @@ async function setData(id_mode){
     sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?layout=track&locale=es');      // Set sheet music source
     mode_text = getModeText(id_melody_modes[id_mode]['id_melody_mode']);                                            // Set mode text
 
-    mode_text_0.innerHTML = '<span class="emoji">&#127925</span>' +  mode_text[0];
-    mode_text_1.innerHTML = '<span class="emoji">&#127929</span>' + mode_text[1];
-    mode_text_2.innerHTML = '<span class="emoji">&#128173</span>' + mode_text[2];
-    mode_text_3.innerHTML = '<span class="emoji">&#127917</span>' + mode_text[3];
+    mode_text_0.innerHTML = '<img class="emoji" src="assets/images/icons/notas.png">' + mode_text[0];
+    mode_text_1.innerHTML = '<img class="emoji" src="assets/images/icons/piano.png">' + mode_text[1];
+    mode_text_2.innerHTML = '<img class="emoji" src="assets/images/icons/nube.png">' + mode_text[2];
+    mode_text_3.innerHTML = '<img class="emoji" src="assets/images/icons/caretas.png">' + mode_text[3];
 
     if (typeof sheet_frame != "undefined") {                                                                // If sheet music exists
         sheet_frame.remove();                                                                               // Destroy it
@@ -1053,7 +1127,9 @@ async function setData(id_mode){
             console.log('No button is currently active.');
           }
         if (activeButton === "music"){
-            document.getElementById('container').appendChild(sheet_frame);
+            sheet_frame_container.appendChild(sheet_frame);
+            document.getElementById('container').appendChild(sheet_frame_container);
+            // document.getElementById('container').appendChild(sheet_frame);
             document.getElementById('container').appendChild(textContainer);
         }
         

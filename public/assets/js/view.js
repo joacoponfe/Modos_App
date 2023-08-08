@@ -83,30 +83,56 @@ async function updateData() {
     var miedo_redondeado = parseInt((miedo * 100).toFixed(0));
     var enojo_redondeado = parseInt((enojo * 100).toFixed(0));
 
-    var emotions_redondeados = [alegria_redondeado, tristeza_redondeado, sorpresa_redondeado, asco_redondeado, miedo_redondeado, enojo_redondeado];
+    var emotions_redondeados = {'alegria': alegria_redondeado,'tristeza': tristeza_redondeado, 'sorpresa': sorpresa_redondeado, 'asco': asco_redondeado, 'miedo': miedo_redondeado, 'enojo': enojo_redondeado};
     var emotion_redondeado_sum = alegria_redondeado + tristeza_redondeado + sorpresa_redondeado + asco_redondeado + miedo_redondeado + enojo_redondeado;
     
     if (emotion_redondeado_sum > 100){
-        // Get minimum value
-        var min_value = Math.min(alegria, tristeza, sorpresa, asco, miedo, enojo);
-        // Get index of minimum value
-        var min_index = [alegria, tristeza, sorpresa, asco, miedo, enojo].indexOf(min_value);
+        // Get list of keys from emotions_redondeados sorted from smallest to largest value
+        var emotions_redondeados_sorted_keys = Object.keys(emotions_redondeados).sort(function(a,b){return emotions_redondeados[a]-emotions_redondeados[b]});
+        var emotions_redondeados_sorted_values = emotions_redondeados_sorted_keys.map(function(x){return emotions_redondeados[x]});
+        // Subtract from each value in emotions_redondeados_sorted_values, starting from the smallest to the largest, until sum is exactly 100, and never go below 0 for any emotion
         var subtract = emotion_redondeado_sum - 100;
-        // Subtract from minimum value
-        emotions_redondeados[min_index] -= subtract;
+        for (var i = 0; i < emotions_redondeados_sorted_values.length; i++){
+            var emotion = emotions_redondeados_sorted_values[i];
+            if (emotion - subtract >= 0){
+                emotions_redondeados_sorted_values[i] -= subtract;
+                break;
+            } else {
+                subtract -= emotion;
+                emotions_redondeados_sorted_values[i] = 0;
+            };
+        };
+        // Update emotions_redondeados
+        for (var i = 0; i < emotions_redondeados_sorted_keys.length; i++){
+            var key = emotions_redondeados_sorted_keys[i];
+            emotions_redondeados[key] = emotions_redondeados_sorted_values[i];
+        };
         // Update emotion_redondeado_sum
-        emotion_redondeado_sum = emotions_redondeados[0] + emotions_redondeados[1] + emotions_redondeados[2] + emotions_redondeados[3] + emotions_redondeados[4] + emotions_redondeados[5];
+        emotion_redondeado_sum = emotions_redondeados['alegria'] + emotions_redondeados['tristeza'] + emotions_redondeados['sorpresa'] + emotions_redondeados['asco'] + emotions_redondeados['miedo'] + emotions_redondeados['enojo'];
     } if (emotion_redondeado_sum < 100){
-        // Get maximum value
-        var max_value = Math.max(alegria, tristeza, sorpresa, asco, miedo, enojo);
-        // Get index of maximum value
-        var max_index = [alegria, tristeza, sorpresa, asco, miedo, enojo].indexOf(max_value);
+        // Get list of keys from emotions_redondeados sorted from largest to smallest value
+        var emotions_redondeados_sorted_keys = Object.keys(emotions_redondeados).sort(function(a,b){return emotions_redondeados[b]-emotions_redondeados[a]});
+        var emotions_redondeados_sorted_values = emotions_redondeados_sorted_keys.map(function(x){return emotions_redondeados[x]});
+        // Add to each value in emotions_redondeados_sorted_values, starting from the largest to the smallest, until sum is exactly 100, and never go above 100 for any emotion
         var add = 100 - emotion_redondeado_sum;
-        // Add to maximum value
-        emotions_redondeados[max_index] += add;
+        for (var i = 0; i < emotions_redondeados_sorted_values.length; i++){
+            var emotion = emotions_redondeados_sorted_values[i];
+            if (emotion + add <= 100){
+                emotions_redondeados_sorted_values[i] += add;
+                break;
+            } else {
+                add -= (100 - emotion);
+                emotions_redondeados_sorted_values[i] = 100;
+            };
+        };
+        // Update emotions_redondeados
+        for (var i = 0; i < emotions_redondeados_sorted_keys.length; i++){
+            var key = emotions_redondeados_sorted_keys[i];
+            emotions_redondeados[key] = emotions_redondeados_sorted_values[i];
+        };
         // Update emotion_redondeado_sum
-        emotion_redondeado_sum = emotions_redondeados[0] + emotions_redondeados[1] + emotions_redondeados[2] + emotions_redondeados[3] + emotions_redondeados[4] + emotions_redondeados[5];
-    }
+        emotion_redondeado_sum = emotions_redondeados['alegria'] + emotions_redondeados['tristeza'] + emotions_redondeados['sorpresa'] + emotions_redondeados['asco'] + emotions_redondeados['miedo'] + emotions_redondeados['enojo'];
+    };
 
     var pos_redondeado = parseInt((pos * 100).toFixed(0));
     var neu_redondeado = parseInt((neu * 100).toFixed(0));
@@ -137,18 +163,33 @@ async function updateData() {
         valence_redondeados_sum = valence_redondeados[0] + valence_redondeados[1] + valence_redondeados[2];
     }
     
-    document.getElementById('alegria-value').innerHTML = emotions_redondeados[0].toString().concat("%");
-    document.getElementById('tristeza-value').innerHTML = emotions_redondeados[1].toString().concat("%");
-    document.getElementById('sorpresa-value').innerHTML = emotions_redondeados[2].toString().concat("%");
-    document.getElementById('asco-value').innerHTML = emotions_redondeados[3].toString().concat("%");
-    document.getElementById('miedo-value').innerHTML = emotions_redondeados[4].toString().concat("%");
-    document.getElementById('enojo-value').innerHTML = emotions_redondeados[5].toString().concat("%");
+    document.getElementById('alegria-value').innerHTML = emotions_redondeados['alegria'].toString().concat("%");
+    document.getElementById('tristeza-value').innerHTML = emotions_redondeados['tristeza'].toString().concat("%");
+    document.getElementById('sorpresa-value').innerHTML = emotions_redondeados['sorpresa'].toString().concat("%");
+    document.getElementById('asco-value').innerHTML = emotions_redondeados['asco'].toString().concat("%");
+    document.getElementById('miedo-value').innerHTML = emotions_redondeados['miedo'].toString().concat("%");
+    document.getElementById('enojo-value').innerHTML = emotions_redondeados['enojo'].toString().concat("%");
     // document.getElementById('otro-value').innerHTML = (otro * 100).toFixed(0).toString().concat("%");
     document.getElementById('pos-value').innerHTML = valence_redondeados[0].toString().concat("%");
     document.getElementById('neu-value').innerHTML = valence_redondeados[1].toString().concat("%");
     document.getElementById('neg-value').innerHTML = valence_redondeados[2].toString().concat("%");
 
-    // Get the style sheet containing the alegria-bar animation
+    // If any of the three valence values is below 5%, do not display the text or the label
+    if (valence_redondeados[0] < 5){
+        pos_value.innerHTML = "";
+        var pos_label = document.getElementById("pos-label");
+        pos_label.innerHTML = "";
+    } else if (valence_redondeados[1] < 5){
+        neu_value.innerHTML = "";
+        var neu_label = document.getElementById("neu-label");
+        neu_label.innerHTML = "";
+    } else if (valence_redondeados[2] < 5){
+        neg_value.innerHTML = "";
+        var neg_label = document.getElementById("neg-label");
+        neg_label.innerHTML = "";
+    };
+
+    // Get the stylesheet containing the animation rules
     const stylesheet = document.styleSheets[2];
 
     // Find the animation rule we want to modify
