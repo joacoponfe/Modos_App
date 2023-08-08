@@ -562,12 +562,17 @@ refContainer.classList.add("refContainer");
 refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px; margin-right:0px" alt="Image 1"><label for="label1" style="margin-right:auto;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:30px;" alt="Image 2"><label for="label2" style="margin-right:50px">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
 //document.getElementById('container').appendChild(refContainer);
 
+var refBars = document.createElement('div');
+refBars.classList.add("refBars");
+refBars.innerHTML = '<img src="assets/images/barras_ref.png">';
+
 // Create container for embeddings, references and phrases
 const embeddings_container = document.createElement('div');
 embeddings_container.classList.add('embeddings_container');
 embeddings_container.appendChild(embeddings_video_container);
 embeddings_container.appendChild(refContainer);
 embeddings_container.appendChild(distanceTextContainer);
+embeddings_container.appendChild(refBars);
 
 
 // Create individual Word Cloud element
@@ -1036,7 +1041,7 @@ function getModeText(id_melody_mode){
         return ['Suele emplearse para generar <br> climas particulares en el rock <br> y la música de cine.', 'Único modo griego mayor con séptima mayor y cuarta aumentada.', 'Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ <br> y ‘superación’.', 'Muy utilizado para comunicar emociones positivas <br> y sensaciones oníricas.'];
     } else if (id_melody_mode === 'mixolidio'){
         //return '<ul><li>Común en el rock, el blues y el funk.</li><li>Único modo griego mayor con séptima menor.</li><li>Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.</li><li>Muchos artistas lo emplean para comunicar emociones positivas.</li></ul>';
-        return ['Común en el rock, el blues y el funk.', 'Único modo griego mayor con séptima menor.', 'Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.', 'Muchos artistas lo emplean para comunicar emociones positivas.'];
+        return ['Común en el rock, el blues y el funk.', 'Único modo griego mayor con séptima menor.', 'Históricamente vinculado a <br> ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.', 'Muchos artistas lo emplean para comunicar emociones positivas.'];
     } else if (id_melody_mode === 'eolico'){
         //return '<ul><li>Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica.</li><li>Único modo griego menor con segunda menor y sexta menor.</li><li>Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’.</li><li>Suele usarse para comunicar melancolía.</li></ul>';
         return ['Común en occidente, en géneros <br> como el rock, el pop, el jazz <br> y la música clásica.', 'Único modo griego menor con <br> segunda menor y sexta menor.', 'Históricamente vinculado a <br> ‘calma’, ‘tristeza’, ‘pesadez’ y ‘añoranza’.', 'Suele usarse para comunicar melancolía.'];
@@ -1085,7 +1090,7 @@ async function setData(id_mode){
     var neg_collective = collectiveData[id_mode]['neg'];                                                    // Get collective "neg"
     //audio.src = 'music/'.concat(id_melody,'.mp3')                                                         // Set melody to be played
     
-    sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?layout=track&locale=es');      // Set sheet music source
+    sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?branding=false&themeScoreBackground=transparent&appId=64c7f55e192e39aaabfb5b43&layout=track&themeControlsBackground=%23162331&locale=es');      // Set sheet music source
     mode_text = getModeText(id_melody_modes[id_mode]['id_melody_mode']);                                            // Set mode text
 
     mode_text_0.innerHTML = '<img class="emoji" src="assets/images/icons/notas.png">' + mode_text[0];
