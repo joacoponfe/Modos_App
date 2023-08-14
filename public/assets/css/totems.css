@@ -331,7 +331,7 @@ input:checked + .slider:before {
 
 .wrapper .section .container h5{
     position: relative;
-    font-size: 1.6em;
+    font-size: 1.5em;
     font-weight: 400;
     letter-spacing: 0.05em;
     color: white;
@@ -339,7 +339,7 @@ input:checked + .slider:before {
     background-color: var(--bs-dark-transparent-2);
     border-radius: 5px;
     text-align: center;
-    padding: 60px;
+    padding: 50px;
 }
 
 .wrapper .section .container h5 .emoji {
@@ -836,6 +836,7 @@ input:checked + .slider:before {
 .mode_text_container{
     margin-top: 0px;
     display: grid;
+    grid-template-columns: 50%;
     grid-template-areas:
     'mode_text_0 mode_text_1'
     'mode_text_2 mode_text_3';
