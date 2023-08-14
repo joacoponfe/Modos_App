@@ -375,6 +375,12 @@ playPause.addEventListener("click", () => {
       audio.pause();
       playPause.innerHTML = '<i class="bi bi-play-fill"></i>';
     }
+    // If sheet music is playing, send message to parent window to stop sheet music playback
+    try {
+        sheet_frame.contentWindow.postMessage({'message': 'stopScore'}, '*');
+    } catch (error) {
+        // Nothing
+    }
 });
 
 prev.addEventListener("click", () => {
@@ -385,6 +391,12 @@ prev.addEventListener("click", () => {
     audio.src = playlist.children[currentSong].getAttribute("data-src");
     audio.play();
     setActiveSong(currentSong);
+    // If sheet music is playing, send message to parent window to stop sheet music playback
+    try {
+        sheet_frame.contentWindow.postMessage({'message': 'stopScore'}, '*');
+    } catch (error) {
+        // Nothing
+    }
 });
   
 next.addEventListener("click", () => {
@@ -395,6 +407,12 @@ next.addEventListener("click", () => {
     audio.src = playlist.children[currentSong].getAttribute("data-src");
     audio.play();
     setActiveSong(currentSong);
+    // If sheet music is playing, send message to parent window to stop sheet music playback
+    try {
+        sheet_frame.contentWindow.postMessage({'message': 'stopScore'}, '*');
+    } catch (error) {
+        // Nothing
+    }
 });
 
 volume.addEventListener("input", (e) => {
@@ -465,17 +483,23 @@ function sendMetadata(currentSong) {
     }
 };
 
-// Listen for messages from the playlist iframe window (song change)
+// Listen for messages from the iframes (song change from playlist iframe or play, pause, stop events from sheet iframe)
 window.addEventListener('message', function(event) {
     if (event.origin === urlFront) {
-      var index = event.data;
-      //console.log('Received message from playlist_mini.html: ' + index['index']);
-      currentSong = index['index'];
-      audio.src = playlist.children[currentSong].getAttribute("data-src");
-      audio.play();
-      setActiveSong(currentSong);
-    } 
-  });
+      console.log(event.data['message']);
+        if (event.data['message'] === 'songChange'){
+        currentSong = event.data['currentSong'];
+        audio.src = playlist.children[currentSong].getAttribute("data-src");
+        audio.play();
+        setActiveSong(currentSong);
+      } else if (event.data['message'] === 'play') {
+        console.log('User has played audio on sheet music iframe.')
+        // Stop music from playlist
+        audio.pause();
+        playPause.innerHTML = '<i class="bi bi-play-fill"></i>';
+    }
+    }
+});
 
 function setAudioFiles(id_mode) {
     var id_mode_letter;
@@ -534,7 +558,8 @@ async function get_mode_songs(request) {
 
 // create sheet music iframe
 var sheetURL;
-var sheet_frame;
+var sheetID;
+var sheet_frame = document.createElement('iframe'); 
 var mode_text;
 var textContainer;
 var mode_text_0 = document.createElement('h5');
@@ -542,9 +567,19 @@ var mode_text_1 = document.createElement('h5');
 var mode_text_2 = document.createElement('h5');
 var mode_text_3 = document.createElement('h5');
 
+
 const sheet_frame_container = document.createElement('div');
 sheet_frame_container.classList.add('sheet_frame_container');
-
+// var embed = new Flat.Embed(sheet_frame_container, {
+//     embedParams: {
+//         appId: '64c7f55e192e39aaabfb5b43',
+//         branding: false,
+//         themeScoreBackground: 'transparent',
+//         layout: 'track',
+//         themeControlsBackground: '#162331',
+//         locale: 'es',
+//         }
+// });
 
 // create embeddings video elements
 var video_path;
@@ -782,16 +817,67 @@ sidebarButtons.forEach(button => {
         if (content === 'music') {
             // set iframe src to sheet music URL
             document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><span>Transcribimos la melodía que escuchaste. Volvé a oírla y conocé más sobre este modo.<span>";
-            sheet_frame_container.appendChild(sheet_frame);
-            document.getElementById('container').appendChild(sheet_frame_container);
-            //document.getElementById('container').appendChild(sheet_frame);
+            sheet_frame.setAttribute('src', 'score.html');
+            sheet_frame.setAttribute("allowtransparency", "true");
+            sheet_frame.style.width = "100%";
+            sheet_frame.style.height = "360px";
+            sheet_frame.style.marginTop = "20px";
+            sheet_frame.style.border = "none";
+            sheet_frame.style.display = "block";
+            // Send sheet ID to iframe
+            sheet_frame.onload = function() {
+                sheet_frame.contentWindow.postMessage({'message': 'changeScore', 'sheetID': sheetID}, '*');
+            };
+
+            
+            //sheet_frame_container.appendChild(sheet_frame);
+            // var embed = new Flat.Embed(sheet_frame_container, {
+            //     score: sheetID,
+            //     embedParams: {
+            //         appId: '64c7f55e192e39aaabfb5b43',
+            //         branding: false,
+            //         themeScoreBackground: 'transparent',
+            //         layout: 'track',
+            //         themeControlsBackground: '#162331',
+            //         locale: 'es',
+            //         }
+            // });
+
+            // console.log(embed);
+            // embed.on('play', function () {
+            //     console.log('User has started playing audio.');
+            // });
+            
+
+            // // Set embed element style border radius to 10 px
+            // embed.element.style.borderRadius = "10px";
+
+            // embed.element.onplay = function () {
+            //     // The score is playing
+            //     alert('the score is playing');
+            //     // Pause the music from playlist
+            //     playlist_frame.contentWindow.postMessage('pause', '*');
+            // };
+
+
+            //iframe.setAttribute('style', 'borderRadius: 10px;');
+            // embed.play().then(function () {
+            //     // The score is playing
+            //     alert('the score is playing');
+            // });
+
+            //document.getElementById('container').appendChild(sheet_frame_container);
+            document.getElementById('container').appendChild(sheet_frame);
             //sheet_frame.style.display = "block";
-            sheet_frame.setAttribute("src", sheetURL);
-            sheet_frame.setAttribute("height", "350");
-            sheet_frame.setAttribute("width", "100%");
-            sheet_frame.setAttribute("frameBorder", "0");
-            sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
-            sheet_frame.setAttribute("allow", "autoplay; midi");
+
+            // sheet_frame.setAttribute("src", sheetURL);
+            // sheet_frame.setAttribute("height", "350");
+            // sheet_frame.setAttribute("width", "100%");
+            // sheet_frame.setAttribute("style", "border-radius: 10px;");
+            // sheet_frame.setAttribute("frameBorder", "0");
+            // sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
+            // sheet_frame.setAttribute("allow", "autoplay; midi");
+
             // add text to the webpage below 
             textContainer = document.createElement('div');
             textContainer.classList.add('mode_text_container');
@@ -854,7 +940,7 @@ sidebarButtons.forEach(button => {
             };
             button.setAttribute('class', "active");
             console.log(currentSong);
-            //sendMetadata(currentSong);
+            
         } else if (content === 'exit') {
             button.setAttribute('class', "active"); 
             document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">¿Querés salir?</p><a id="exit-yes" class="btn-exit" href="totems_landing.html">Sí</a><a id="exit-no" class="btn-exit" href="totems_main.html">No</a></div>'
@@ -1090,72 +1176,75 @@ async function setData(id_mode){
     var neg_collective = collectiveData[id_mode]['neg'];                                                    // Get collective "neg"
     //audio.src = 'music/'.concat(id_melody,'.mp3')                                                         // Set melody to be played
     
-    sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?branding=false&themeScoreBackground=transparent&appId=64c7f55e192e39aaabfb5b43&layout=track&themeControlsBackground=%23162331&locale=es');      // Set sheet music source
-    mode_text = getModeText(id_melody_modes[id_mode]['id_melody_mode']);                                            // Set mode text
+    sheetURL = 'https://flat.io/embed/'.concat(await getsheetMusicURLs(id_melody), '?branding=false&themePrimary=%23162331&themeScoreBackground=transparent&appId=64c7f55e192e39aaabfb5b43&layout=track&themeControlsBackground=%23162331&locale=es');      // Set sheet music source
+    sheetID = await getsheetMusicURLs(id_melody);
 
+    mode_text = getModeText(id_melody_modes[id_mode]['id_melody_mode']);                                            // Set mode text
     mode_text_0.innerHTML = '<img class="emoji" src="assets/images/icons/notas.png">' + mode_text[0];
     mode_text_1.innerHTML = '<img class="emoji" src="assets/images/icons/piano.png">' + mode_text[1];
     mode_text_2.innerHTML = '<img class="emoji" src="assets/images/icons/nube.png">' + mode_text[2];
     mode_text_3.innerHTML = '<img class="emoji" src="assets/images/icons/caretas.png">' + mode_text[3];
 
-    if (typeof sheet_frame != "undefined") {                                                                // If sheet music exists
-        sheet_frame.remove();                                                                               // Destroy it
+    //if (typeof sheet_frame != "undefined") {                                                                  // If sheet music exists
+    if (sheet_frame.contentWindow != null) {                                                                    // If sheet music exists
+        sheet_frame.contentWindow.postMessage({'message': 'stopScore'}, '*');
+        sheet_frame.contentWindow.postMessage({'message': 'changeScore', 'sheetID': sheetID}, '*');                                                   // Update sheet music
+    };                                                                                                            
+        //sheet_frame.remove();                                                                                 // Destroy it
         // also TRY to delete textContainer
-        textContainer.remove();
-        sheet_frame = document.createElement('iframe');                                                     // And create new one
-        sheet_frame.setAttribute("src", sheetURL);
-        sheet_frame.setAttribute("height", "350");
-        sheet_frame.setAttribute("width", "100%");
-        sheet_frame.setAttribute("frameBorder", "0");
-        sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
-        sheet_frame.setAttribute("allow", "autoplay; midi");
+        //textContainer.remove();
+        // sheet_frame = document.createElement('iframe');                                                      // And create new one
+        // sheet_frame.setAttribute("src", sheetURL);
+        // sheet_frame.setAttribute("height", "350");
+        // sheet_frame.setAttribute("width", "100%");
+        // sheet_frame.setAttribute("frameBorder", "0");
+        // sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
+        // sheet_frame.setAttribute("allow", "autoplay; midi");
         // add text to the webpage below 
-        textContainer = document.createElement('div');
-        textContainer.classList.add('mode_text_container');
+        // textContainer = document.createElement('div');
+        // textContainer.classList.add('mode_text_container');
         //textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4>";
-        textContainer.appendChild(mode_text_0);
-        textContainer.appendChild(mode_text_1);
-        textContainer.appendChild(mode_text_2);
-        textContainer.appendChild(mode_text_3);
-        
-        
-        var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
-        sidebarButtons.forEach(function(button) {
-            if (button.getAttribute("class") === "active") {
-              activeButton = button.getAttribute("id");
-            }
-        });
-          
-        if (activeButton) {
-            console.log('The active button is:', activeButton);
-          } else {
-            console.log('No button is currently active.');
-          }
-        if (activeButton === "music"){
-            sheet_frame_container.appendChild(sheet_frame);
-            document.getElementById('container').appendChild(sheet_frame_container);
-            // document.getElementById('container').appendChild(sheet_frame);
-            document.getElementById('container').appendChild(textContainer);
-        }
-        
-    } else {
-        
-        sheet_frame = document.createElement('iframe');                                                 // And create new one
-        sheet_frame.setAttribute("src", sheetURL);
-        sheet_frame.setAttribute("height", "350");
-        sheet_frame.setAttribute("width", "100%");
-        sheet_frame.setAttribute("frameBorder", "0");
-        sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
-        sheet_frame.setAttribute("allow", "autoplay; midi");
-        // add text to the webpage below 
-        textContainer = document.createElement('div');
-        //textContainer.innerHTML = "";
         // textContainer.appendChild(mode_text_0);
         // textContainer.appendChild(mode_text_1);
         // textContainer.appendChild(mode_text_2);
         // textContainer.appendChild(mode_text_3);
-        document.getElementById('container').appendChild(textContainer);
-    };
+        
+        // var activeButton = null;                                                                            // Only render thermometer if active sidebar button is "music"
+        // sidebarButtons.forEach(function(button) {
+        //     if (button.getAttribute("class") === "active") {
+        //       activeButton = button.getAttribute("id");
+        //     }
+        // });
+          
+        // if (activeButton) {
+        //     console.log('The active button is:', activeButton);
+        //   } else {
+        //     console.log('No button is currently active.');
+        //   }
+        // if (activeButton === "music"){
+        //     // sheet_frame_container.appendChild(sheet_frame);
+        //     //document.getElementById('container').appendChild(sheet_frame_container);
+        //     //document.getElementById('container').appendChild(sheet_frame);
+        //     //document.getElementById('container').appendChild(textContainer);
+        // }
+        
+    // } else {
+    //     // sheet_frame = document.createElement('iframe');                                                 // And create new one
+    //     // sheet_frame.setAttribute("src", sheetURL);
+    //     // sheet_frame.setAttribute("height", "350");
+    //     // sheet_frame.setAttribute("width", "100%");
+    //     // sheet_frame.setAttribute("frameBorder", "0");
+    //     // sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
+    //     // sheet_frame.setAttribute("allow", "autoplay; midi");
+    //     // // add text to the webpage below 
+    //     // //textContainer = document.createElement('div');
+    //     // //textContainer.innerHTML = "";
+    //     // // textContainer.appendChild(mode_text_0);
+    //     // // textContainer.appendChild(mode_text_1);
+    //     // // textContainer.appendChild(mode_text_2);
+    //     // // textContainer.appendChild(mode_text_3);
+    //     // document.getElementById('container').appendChild(textContainer);
+    // };
 
     //words = word_list;                                                                                        // Set word list
     //collectiveWords = collective_word_list;                                                                   // Set collective word list
@@ -1361,7 +1450,7 @@ async function setData(id_mode){
 
     };
     
-    console.log(playlist_frame.contentWindow);
+    //console.log(playlist_frame.contentWindow);
     
     // Get playlist songs for selected mode
     const object = {};

@@ -845,6 +845,8 @@ input:checked + .slider:before {
 .sheet_frame_container {
     margin-top: 20px;
     margin-bottom:20px;
+    border-radius: 10px;
+    height: 350px;
 }
 
 #timer {
