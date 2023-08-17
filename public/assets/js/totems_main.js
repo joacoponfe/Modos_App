@@ -962,9 +962,9 @@ sidebarButtons.forEach(button => {
             };
             button.setAttribute('class', "active");
             console.log(currentSong);
-        } else if (content === 'souvenir') {
+        } else if (content === 'share') {
             button.setAttribute('class', "active");
-            document.getElementById('container').innerHTML = '<h2>Souvenir</h2><span>Generamos un gráfico que podés compartir en tus redes sociales.</span><br>';
+            document.getElementById('container').innerHTML = '<h2>Compartir</h2><span>Generamos un souvenir que podés compartir en tus redes sociales.</span><br>';
             const souvenirData = await get_souvenir(idJSON).then(response => response.json());
             console.log(souvenirData);
             const encoded_image = souvenirData['encoded_image'];
