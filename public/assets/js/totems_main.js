@@ -239,6 +239,20 @@ async function get_totems_data(id_data) {
     return result;
 };
 
+// Function to get souvenir (image + QR)
+async function get_souvenir(id_data) {
+    const response = await fetch(
+        url + "/profiles_api/get_souvenir/",
+        {
+            headers: new Headers({ 'Content-type': 'application/json' }),
+            method: "POST",
+            body: id_data,
+        }
+    );
+    const result = await response;
+    return result;
+};
+
 // Set user data
 const userData = await get_totems_data(idJSON).then(response => response.json());
 console.log(userData);
@@ -784,6 +798,14 @@ const qr_image = document.createElement('img');
 qr_image.style.maxWidth = "100%";
 qr_image.alt = "No se encontró el código QR.";
 
+// Create souvenir image and QR elements
+const souvenir_image = document.createElement('img');
+souvenir_image.style.maxWidth = "30%";
+souvenir_image.alt = "No se encontró la imagen.";
+const souvenir_qr = document.createElement('img');
+souvenir_qr.style.maxWidth = "20%";
+souvenir_qr.alt = "No se encontró el código QR.";
+
 // Create playlist element
 var playlist_frame;
 
@@ -795,7 +817,7 @@ var wordCloudButtonClicks = 0;
 
 // Add a click event listener to each button on the sidebar
 sidebarButtons.forEach(button => {
-    button.addEventListener('click', event => {
+    button.addEventListener('click', async event => {
 
         // Prevent the default link behavior
         event.preventDefault();
@@ -940,7 +962,21 @@ sidebarButtons.forEach(button => {
             };
             button.setAttribute('class', "active");
             console.log(currentSong);
+        } else if (content === 'souvenir') {
+            button.setAttribute('class', "active");
+            document.getElementById('container').innerHTML = '<h2>Souvenir</h2><span>Generamos un gráfico que podés compartir en tus redes sociales.</span><br>';
+            const souvenirData = await get_souvenir(idJSON).then(response => response.json());
+            console.log(souvenirData);
+            const encoded_image = souvenirData['encoded_image'];
+            const encoded_qr = souvenirData['encoded_qr'];
             
+            souvenir_image.src = 'data:image/png;base64,'.concat(encoded_image);
+            souvenir_qr.src = 'data:image/png;base64,'.concat(encoded_qr);
+            
+            document.getElementById('container').appendChild(souvenir_image);
+            document.getElementById('container').appendChild(souvenir_qr);
+            
+
         } else if (content === 'exit') {
             button.setAttribute('class', "active"); 
             document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">¿Querés salir?</p><a id="exit-yes" class="btn-exit" href="totems_landing.html">Sí</a><a id="exit-no" class="btn-exit" href="totems_main.html">No</a></div>'
