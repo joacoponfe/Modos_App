@@ -798,13 +798,21 @@ const qr_image = document.createElement('img');
 qr_image.style.maxWidth = "100%";
 qr_image.alt = "No se encontró el código QR.";
 
-// Create souvenir image and QR elements
+// Create souvenir text, image and QR elements
 const souvenir_image = document.createElement('img');
-souvenir_image.style.maxWidth = "30%";
+souvenir_image.classList.add('souvenir_image');
 souvenir_image.alt = "No se encontró la imagen.";
+
 const souvenir_qr = document.createElement('img');
-souvenir_qr.style.maxWidth = "20%";
+souvenir_qr.classList.add('souvenir_qr');
 souvenir_qr.alt = "No se encontró el código QR.";
+
+var souvenir_text_0 = document.createElement('h6');
+souvenir_text_0.innerHTML = '<img class="number" src="assets/images/numbers/1_white.png">' + '<b>Escaneá</b>&nbspel código QR para acceder a tu souvenir.';
+var souvenir_text_1 = document.createElement('h6');
+souvenir_text_1.innerHTML = '<img class="number" src="assets/images/numbers/2_white.png">' + '<b>Descargá</b>&nbspla imagen en tu teléfono.';
+var souvenir_text_2 = document.createElement('h6');
+souvenir_text_2.innerHTML = '<img class="number" src="assets/images/numbers/3_white.png">' + '<b>Compartí</b>&nbsptu souvenir en redes sociales.';
 
 // Create playlist element
 var playlist_frame;
@@ -834,7 +842,6 @@ sidebarButtons.forEach(button => {
         if (content === 'wordcloud') {
             wordCloudButtonClicks++;
         }
-
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
             // set iframe src to sheet music URL
@@ -850,56 +857,7 @@ sidebarButtons.forEach(button => {
             sheet_frame.onload = function() {
                 sheet_frame.contentWindow.postMessage({'message': 'changeScore', 'sheetID': sheetID}, '*');
             };
-
-            
-            //sheet_frame_container.appendChild(sheet_frame);
-            // var embed = new Flat.Embed(sheet_frame_container, {
-            //     score: sheetID,
-            //     embedParams: {
-            //         appId: '64c7f55e192e39aaabfb5b43',
-            //         branding: false,
-            //         themeScoreBackground: 'transparent',
-            //         layout: 'track',
-            //         themeControlsBackground: '#162331',
-            //         locale: 'es',
-            //         }
-            // });
-
-            // console.log(embed);
-            // embed.on('play', function () {
-            //     console.log('User has started playing audio.');
-            // });
-            
-
-            // // Set embed element style border radius to 10 px
-            // embed.element.style.borderRadius = "10px";
-
-            // embed.element.onplay = function () {
-            //     // The score is playing
-            //     alert('the score is playing');
-            //     // Pause the music from playlist
-            //     playlist_frame.contentWindow.postMessage('pause', '*');
-            // };
-
-
-            //iframe.setAttribute('style', 'borderRadius: 10px;');
-            // embed.play().then(function () {
-            //     // The score is playing
-            //     alert('the score is playing');
-            // });
-
-            //document.getElementById('container').appendChild(sheet_frame_container);
             document.getElementById('container').appendChild(sheet_frame);
-            //sheet_frame.style.display = "block";
-
-            // sheet_frame.setAttribute("src", sheetURL);
-            // sheet_frame.setAttribute("height", "350");
-            // sheet_frame.setAttribute("width", "100%");
-            // sheet_frame.setAttribute("style", "border-radius: 10px;");
-            // sheet_frame.setAttribute("frameBorder", "0");
-            // sheet_frame.setAttribute("allowfullscreen", "allowfullscreen");
-            // sheet_frame.setAttribute("allow", "autoplay; midi");
-
             // add text to the webpage below 
             textContainer = document.createElement('div');
             textContainer.classList.add('mode_text_container');
@@ -907,9 +865,7 @@ sidebarButtons.forEach(button => {
             textContainer.appendChild(mode_text_1);
             textContainer.appendChild(mode_text_2);
             textContainer.appendChild(mode_text_3);
-            //textContainer.innerHTML = "<br> <h4> " + mode_text + "</h4> ";
             document.getElementById('container').appendChild(textContainer);
-            // document.getElementById('container').innerHTML += '<iframe src="' + sheetURL + '" height="450" width="100%" frameBorder="0" allowfullscreen allow="autoplay; midi"></iframe>';
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
             document.getElementById('container').innerHTML = '<h2>Conceptos</h2><span>Identificamos los conceptos clave de tu texto.</span>';
@@ -926,8 +882,6 @@ sidebarButtons.forEach(button => {
             document.getElementById('container').innerHTML = '<h2>Emociones</h2><span>Medimos la intensidad de las emociones que sentiste al escuchar la melodía.</span>';
             document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(thermometers);
-            // document.getElementById('thermometers').appendChild(container_frame);
-            // document.getElementById('thermometers').appendChild(collectiveThermometerFrame);
             container_frame.style.display = "block";
             collectiveThermometerFrame.style.display = "block";
             button.setAttribute('class', "active");
@@ -935,23 +889,11 @@ sidebarButtons.forEach(button => {
             document.getElementById('container').innerHTML = '<h2>Imagen</h2><span>Captamos esta imagen de tu cabeza. ¿Coincide con lo que te imaginaste?</span>';
             document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(images_container);
-            //document.getElementById('container').appendChild(image);
-            //document.getElementById('container').appendChild(collective_images_container);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
             document.getElementById('container').innerHTML = '<h2>Singularidad</h2><span>Calculamos la similitud entre tu respuesta y las del resto de las personas.</span>';
             document.getElementById('container').appendChild(embeddings_container);
-            // Video
-            //document.getElementById('container').appendChild(embeddings_video_container);
             embeddings_video.play();
-            // References
-            //var refContainer = document.createElement('div');
-            //refContainer.classList.add("refContainer");
-            //refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px;" alt="Image 1"><label for="label1" style="margin-right:50px;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:10px;" alt="Image 2"><label for="label2" style="margin-right:50px">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
-            //document.getElementById('container').appendChild(refContainer);
-            // Text
-            //distanceTextContainer.innerHTML = distance_text;
-            //document.getElementById('container').appendChild(distanceTextContainer);
             button.setAttribute('class', 'active');
         } else if (content === 'songs') {
             document.getElementById('container').innerHTML = '<h2>Canciones</h2><span>Recopilamos canciones de distintos géneros que utilizan este modo.</span>';
@@ -973,8 +915,18 @@ sidebarButtons.forEach(button => {
             souvenir_image.src = 'data:image/png;base64,'.concat(encoded_image);
             souvenir_qr.src = 'data:image/png;base64,'.concat(encoded_qr);
             
-            document.getElementById('container').appendChild(souvenir_image);
-            document.getElementById('container').appendChild(souvenir_qr);
+            // document.getElementById('container').appendChild(souvenir_image);
+            // document.getElementById('container').appendChild(souvenir_qr);
+
+            // add text to the webpage below 
+            var souvenirTextContainer = document.createElement('div');
+            souvenirTextContainer.classList.add('souvenir_text_container');
+            souvenirTextContainer.appendChild(souvenir_text_0);
+            souvenirTextContainer.appendChild(souvenir_qr);
+            souvenirTextContainer.appendChild(souvenir_text_1);
+            souvenirTextContainer.appendChild(souvenir_image);
+            souvenirTextContainer.appendChild(souvenir_text_2);
+            document.getElementById('container').appendChild(souvenirTextContainer);
             
 
         } else if (content === 'exit') {
