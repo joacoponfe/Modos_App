@@ -3,6 +3,17 @@ import { setCookie } from "./cookies.js";
 import { url } from "./config.js";
 
 const form = document.getElementById("form");
+
+
+document.getElementById("sendButton").onclick = function () {
+    if (document.getElementById("consent").checked) {
+        //alert("checked");
+    } else {
+        alert("Por favor, acepte los términos y condiciones para continuar.");
+
+    };
+};
+
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     window.location.href = "start_dni.html";

@@ -10,22 +10,40 @@
     <title>Totem</title>
 </head>
 <body>
+    <div class="video-container">
+        <video autoplay width="1920" height="1080" loop="true" id="galaxy-background" muted>
+            <source type="video/mp4" src="videos/Galaxy-Background.mp4">
+        </video>
+    <div class="overlay">
     <div class="wrapper">
         <div class="section">
             <div class="container" id="container">
-            Presioná uno de los botones de la izquierda para visualizar el contenido
+                <div class="centered-text">
+                    <p class="intro-text" id="intro-text">Presioná uno de los botones de la izquierda<br>para visualizar el contenido</p>
+                </div>
             </div>
         </div>
         <!--Top menu -->
         <div class="sidebar">
             <div class="profile">
                 <!--<img src="https://1.bp.blogspot.com/-vhmWFWO2r8U/YLjr2A57toI/AAAAAAAACO4/0GBonlEZPmAiQW4uvkCTm5LvlJVd_-l_wCNcBGAsYHQ/s16000/team-1-2.jpg" alt="profile_picture">-->
+                <video class="watermark" src="assets/videos/MDM_watermark.webm" muted autoplay loop playsinline disablePictureInPicture></video>
                 <h3 id="id_string">ABC000</h3>
             </div>
-            <div class="tab">
-                <button id="mode_1"class="active">Modo jónico</button>
-                <button id="mode_2" class="">Modo locrio</button>
-            </div>            
+            <!-- <div class="tab">
+                <button id="mode_1"class="active">jónico</button>
+                <button id="mode_2" class="">locrio</button>
+            </div>             -->
+            <label class="switch">
+                <input type="checkbox" id="switch">
+                <span class="slider round"></span>
+                <div class="toggle-labels">
+                    <span class="toggle-label mode_1" id="mode_1_text">jónico</span>
+                    <span class="toggle-label mode_2" id="mode_2_text">locrio</span>
+                </div>
+                <!-- <span class="toggle-label mode_1" id="mode_1_text">jónico</span>
+                <span class="toggle-label mode_2" id="mode_2_text">locrio</span> -->
+            </label>
             <!--menu item -->
             <ul>
                 <li>
@@ -64,14 +82,26 @@
                         <span class="item">Canciones</span>
                     </a>
                 </li>
+                <li>
+                    <a href="#" id="share" class="" data-content="share">
+                        <span class="icon"><i class="fa fa-paper-plane"></i></span>
+                        <span class="item">Compartir</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="exit" class="" data-content="exit">
+                        <span class="icon"><i class="fa fa-times-circle"></i></span>
+                        <span class="item">Salir</span>
+                    </a>
+                </li>
             </ul>
         </div>
         </div>
 
     </div>
-    <a href="totems_landing.html" class="float" id="exit">
+    <!-- <a href="totems_landing.html" class="btn-exit" id="exit">
         <p>Salir</p>
-    </a>
+    </a> -->
 
     <!-- Add the music bar at the bottom of the page -->
 <div>
@@ -114,12 +144,14 @@
       <li id="metalint" data-src="music/snippets/j_metalint.wav">Rock y metal internacional</li>
       <li id="pop" data-src="music/snippets/j_pop.wav">Pop</li>
     </ul>
-</div>
+</div> 
+</div> <!-- End of overlay -->
+</div> <!-- End of video-container -->
     
 <script src="/js/TagCloud.js"> </script>
 <script src="/js/thermometer.js" type="module"></script>
 <script src="/js/totems_main.js" type="module"></script>
 <script src="/js/cookies.js" type="module"></script>
-<!--<script src="/js/playlist.js" type="module"></script>-->
+<script src="https://prod.flat-cdn.com/embed-js/v1.5.0/embed.min.js" type="module"></script>
 </body>
 </html>

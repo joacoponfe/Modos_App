@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Score</title>
+  <link href="/css/score.css" rel="stylesheet" />
+</head>
+<body>
+<div id="embed-container"></div>
+<script src="https://prod.flat-cdn.com/embed-js/v1.5.1/embed.min.js"></script>
+<script>
+  var container = document.getElementById('embed-container');
+  var embed = new Flat.Embed(container, {
+    embedParams: {
+        appId: '64c7f55e192e39aaabfb5b43',
+        branding: false,
+        controlsFullscreen: false,
+        controlsPanel: false,
+        controlsZoom: false,
+        controlsPrint: false,
+        themeScoreBackground: 'transparent',
+        layout: 'track',
+        themeControlsBackground: '#162331',
+        locale: 'es',
+    }
+  });
+</script>
+<script src="/js/score.js" type="module"></script>
+</body>
+</html>

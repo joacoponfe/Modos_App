@@ -1,29 +1,50 @@
+@font-face {
+  font-family: 'Rubik';
+  src: url('../fonts/Rubik-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  background-color : transparent;
+}
+
+
 .caja-padre{
-  width: 30%;
+  width: 80%;
   min-width: 300px;
   position: relative;
-  /*transform: translate(-25%,-100%);*/
   left: 0%;
   top: 0%;
 }
 
 .contenedor{
+  font-family:'Rubik';
   width:100%;
-  padding: 30px 30px 50px;
-  background: #f7f7f7;
+  padding: 0px 0px 0px;
+  background: transparent;
+  color: white;
   border-radius: 10px;
+  /*border: 3px solid var(--main-color);*/
 }
 
 .container{
+  font-family:'Rubik';
   width: 100%;
   height: 70px;
   margin-bottom: 20px;
-  background-color: whitesmoke;
-  border-radius: 50px;
+  font-weight: bold;
+  font-size:35px;
+  background-color: transparent;
+  text-shadow: 0px 0px 5px black;
+  /* border: 3px solid var(--main-color);
+  border-radius: 50px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: var(--main-color);
 }
+
 
 .participants-counter{
   display: flex;
@@ -39,7 +60,15 @@
 
 h2{
   text-align: left;
-  font-size: 20px;
+  font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0px 0px 5px black;
+}
+
+p{
+  margin-top: 10px;
+  line-height: 10px;
 }
 
 img{  
@@ -60,26 +89,30 @@ img{
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
+  font-size:20px;
+  text-shadow: 0px 0px 5px black;
 }
 
 .menu{
   position: relative;
   font-size: 0.25vmax;
-  width: 100em;
-  border: 1px solid darkslategrey;
+  width: 100%;
+  border: 3px solid white;
   border-radius: 20px;
-  background-color: #f7f7f7;
+  background-color: transparent;
 }
 
 .menu div{
   position: relative;
-  box-shadow: inset -100em 0 0 0 #f7f7f7;
-  width: 100%;
-  height: 20px;
-  border-radius: 20px;
-  background: linear-gradient(450deg, cyan, yellow, red);
+  /* box-shadow: inset -100em 0 0 0 #f7f7f7; */
+  width: 0%;
+  height: 25px;
+  border-radius: 50px;
+  /* background: linear-gradient(450deg, cyan, yellow, red); */
+  background: linear-gradient(450deg, var(--main-color), var(--main-color));
   font-size: 0.25vmax;
+  opacity: 0.75;
 }
 
 #alegria-menu{
@@ -88,7 +121,6 @@ img{
 
 @keyframes alegria-bar {
   100%{
-    box-shadow: inset -20em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -99,7 +131,6 @@ img{
 
 @keyframes tristeza-bar {
   100%{
-    box-shadow: inset -80em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -110,7 +141,6 @@ img{
 
 @keyframes sorpresa-bar {
   100%{
-    box-shadow: inset -90em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -121,7 +151,6 @@ img{
 
 @keyframes asco-bar {
   100%{
-    box-shadow: inset -80em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -132,7 +161,6 @@ img{
 
 @keyframes miedo-bar {
   100%{
-    box-shadow: inset -70em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -143,7 +171,6 @@ img{
 
 @keyframes enojo-bar {
   100%{
-    box-shadow: inset -85em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -154,7 +181,6 @@ img{
 
 @keyframes otro-bar {
   100%{
-    box-shadow: inset -95em 0 0 0 #f7f7f7; /* acá va el porcentaje */
     width: 100%;
   }
 }
@@ -164,25 +190,27 @@ img{
   justify-content: center;
   position: relative;
   font-size: 0.25vmax;
-  width: 100em;
+  width: 100%;
   height: 30px;
-  border: 1px solid darkslategrey;
+  border: 3px solid white;
   border-radius: 20px;
   background-color: None;
   text-align: center;
+  margin-top: 50px;
 }
 
 .positive{
   width: 0%;
-  background-color: #c9c9c9;
+  background-color: var(--main-color-transparent);
   float: left;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  font-size: 4em;
-  line-height: 1.1em;
+  line-height:0px;
+  font-size: 20px;
+  text-shadow: 0px 0px 5px black;
   border-right-style: solid;
-  border-right-width: 1px;
-  border-right-color: darkslategrey;
+  border-right-width: 3px;
+  border-right-color: white;
   animation: positive-bar 5s forwards;
 }
 
@@ -194,13 +222,14 @@ img{
 
 .neutral{
   width: 0%;
-  background-color: #c9c9c9;
+  background-color: var(--main-color-transparent);
   float: left;
-  font-size: 4em;
-  line-height: 1.1em;
+  font-size: 20px;
+  line-height: 0px;
+  text-shadow: 0px 0px 5px black;
   border-right-style: solid;
-  border-right-width: 1px;
-  border-right-color: darkslategrey;
+  border-right-width: 3px;
+  border-right-color: white;
   animation: neutral-bar 5s forwards;
 }
 
@@ -212,12 +241,13 @@ img{
 
 .negative{
   width: 0%;
-  background-color: #c9c9c9;
+  background-color: var(--main-color-transparent);
   float: left;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  font-size: 4em;
-  line-height: 1.1em;
+  text-shadow: 0px 0px 5px black;
+  font-size: 20px;
+  line-height: 0px;
   animation: negative-bar 5s forwards;
 }
 

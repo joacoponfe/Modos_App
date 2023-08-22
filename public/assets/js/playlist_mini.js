@@ -74,7 +74,7 @@ playlist.addEventListener("click", (e) => {
     setActiveSong(currentSong);
     console.log(currentSong);
     // send to parent window
-    const index = {'index': currentSong};
-    window.parent.postMessage(index, '*');
+    const message = {'message': 'songChange', 'currentSong': currentSong};
+    window.parent.postMessage(message, '*');
   }
 });

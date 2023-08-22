@@ -180,13 +180,7 @@
 
       // Assign font sizes to each word
       self.fontSizes = {};
-      var maxSize = 40; // in px
-
-      for (let wordCount in wordCounts){
-        const freq = wordCounts[wordCount];
-        const fontSize = freq/maxFreq * maxSize;
-        self.fontSizes[wordCount] = fontSize;
-      }
+      //var maxSize = 30; // in px
 
       //console.log('Font sizes: ', self.fontSizes);
 
@@ -206,11 +200,19 @@
 
       self.keep = self.config.keep; // whether to keep rolling after mouse out area
 
+      self.maxFontSize = self.config.maxFontSize; // max font size in px
+
       self.paused = false; // keep state to pause the animation
+      
+
+      for (let wordCount in wordCounts){
+        const freq = wordCounts[wordCount];
+        const fontSize = freq/maxFreq * self.maxFontSize;
+        self.fontSizes[wordCount] = fontSize;
+      }
+      
       // create element
-
       self._createElment(); // init
-
 
       self._init(); // set elements and instances
 

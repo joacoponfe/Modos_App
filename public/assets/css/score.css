@@ -1,0 +1,11 @@
+body {
+  margin: 0px;
+}
+
+#embed-container {
+    height: 350px;
+}
+
+#embed-container iframe {
+  border-radius: 10px;
+}

@@ -59,6 +59,6 @@ function checkID(id_exists) {
     if (id_exists) {
         window.location.href = "checkID.html?" + getCookie('id_participant');
     } else {
-        window.location.href = "form.html?" + getCookie('id_participant');
+        window.location.href = "form_dynamic.html?" + getCookie('id_participant');
     }
 };
