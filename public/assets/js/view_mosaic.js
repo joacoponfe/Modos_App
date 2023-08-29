@@ -71,6 +71,7 @@ async function updateData() {
 
         // Create the text element
         var text = document.createElement("p");
+        text.classList.add("img-caption");
         text.textContent = "Generado por la mente de " + imageUrls[i]['user'];
 
         // Append the image and text to the tile container
@@ -82,8 +83,7 @@ async function updateData() {
     }
     // // Append the mosaic grid to the mosaic container
     // mosaicContainer.appendChild(mosaicGrid);
-    
-    
+
     // Get current timestamp
     var current_timestamp = new Date();
     console.log('Datos actualizados exitosamente: '.concat(current_timestamp.toString()).concat('.'));

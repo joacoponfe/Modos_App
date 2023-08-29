@@ -808,11 +808,11 @@ souvenir_qr.classList.add('souvenir_qr');
 souvenir_qr.alt = "No se encontró el código QR.";
 
 var souvenir_text_0 = document.createElement('h6');
-souvenir_text_0.innerHTML = '<img class="number" src="assets/images/numbers/1_white.png">' + '<b>Escaneá</b>&nbspel código QR para acceder a tu souvenir.';
+souvenir_text_0.innerHTML = '<img class="number" src="assets/images/numbers/1_white.png">' + 'Escaneá el código QR para acceder a tu souvenir.';
 var souvenir_text_1 = document.createElement('h6');
-souvenir_text_1.innerHTML = '<img class="number" src="assets/images/numbers/2_white.png">' + '<b>Descargá</b>&nbspla imagen en tu teléfono.';
+souvenir_text_1.innerHTML = '<img class="number" src="assets/images/numbers/2_white.png">' + 'Descargá la imagen en tu teléfono.';
 var souvenir_text_2 = document.createElement('h6');
-souvenir_text_2.innerHTML = '<img class="number" src="assets/images/numbers/3_white.png">' + '<b>Compartí</b>&nbsptu souvenir en redes sociales.';
+souvenir_text_2.innerHTML = '<img class="number" src="assets/images/numbers/3_white.png">' + 'Compartí tu souvenir en redes sociales.';
 
 // Create playlist element
 var playlist_frame;
@@ -822,6 +822,7 @@ const sidebarButtons = document.querySelectorAll('.sidebar a');
 
 // Add a counter for word cloud button clicks (to avoid rendering more than once)
 var wordCloudButtonClicks = 0;
+var shareButtonClicks = 0;
 
 // Add a click event listener to each button on the sidebar
 sidebarButtons.forEach(button => {
@@ -905,12 +906,14 @@ sidebarButtons.forEach(button => {
             button.setAttribute('class', "active");
             console.log(currentSong);
         } else if (content === 'share') {
+            shareButtonClicks++;
             button.setAttribute('class', "active");
             document.getElementById('container').innerHTML = '<h2>Compartir</h2><span>Generamos un souvenir que podés compartir en tus redes sociales.</span><br>';
             const souvenirData = await get_souvenir(idJSON).then(response => response.json());
             console.log(souvenirData);
             const encoded_image = souvenirData['encoded_image'];
             const encoded_qr = souvenirData['encoded_qr'];
+            const souvenir_url = souvenirData['url'];
             
             souvenir_image.src = 'data:image/png;base64,'.concat(encoded_image);
             souvenir_qr.src = 'data:image/png;base64,'.concat(encoded_qr);
@@ -921,8 +924,13 @@ sidebarButtons.forEach(button => {
             // add text to the webpage below 
             var souvenirTextContainer = document.createElement('div');
             souvenirTextContainer.classList.add('souvenir_text_container');
+            if (shareButtonClicks === 1) {
+                souvenir_text_0.insertAdjacentHTML('beforeend', `<figure><img class=souvenir_qr src=${souvenir_qr.src}><figcaption>${souvenir_url}</figcaption></figure>`);
+            };
+            //souvenir_text_0.appendChild(souvenir_qr);
+            //document.getElementById('souvenir_qr_img').setAttribute('src', souvenir_qr.src);
             souvenirTextContainer.appendChild(souvenir_text_0);
-            souvenirTextContainer.appendChild(souvenir_qr);
+            //souvenirTextContainer.appendChild(souvenir_qr);
             souvenirTextContainer.appendChild(souvenir_text_1);
             souvenirTextContainer.appendChild(souvenir_image);
             souvenirTextContainer.appendChild(souvenir_text_2);
@@ -1367,10 +1375,10 @@ async function setData(id_mode){
         }
     }
     
-    collective_image_1.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][0]);     // Set collective image 1 source
-    collective_image_2.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][1]);     // Set collective image 2 source
-    collective_image_3.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][2]);     // Set collective image 3 source
-    collective_image_4.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][3]);     // Set collective image 4 source
+    collective_image_1.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][0]['image']);     // Set collective image 1 source
+    collective_image_2.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][1]['image']);     // Set collective image 2 source
+    collective_image_3.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][2]['image']);     // Set collective image 3 source
+    collective_image_4.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][3]['image']);     // Set collective image 4 source
 
     // Set embeddings
     console.log(id_melody_modes[id_mode]['id_melody_mode']);

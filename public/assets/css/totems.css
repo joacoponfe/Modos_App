@@ -356,9 +356,10 @@ input:checked + .slider:before {
     border-radius: 5px;
     /* text-align: left; */
     display: flex; /* Use flexbox */
-    justify-content: center; /* Center content horizontally */
+    justify-content: left; /* Center content horizontally */
     align-items: center; /* Center content vertically */
     padding: 40px;
+    min-height: 180px;
 }
 
 .wrapper .section .container h6 .number {
@@ -876,23 +877,23 @@ input:checked + .slider:before {
     display: grid;
     grid-template-columns: 60%;
     grid-template-areas:
-    'souvenir_text_0 souvenir_qr'
+    'souvenir_text_0 souvenir_image'
     'souvenir_text_1 souvenir_image'
     'souvenir_text_2 souvenir_image';
     gap: 20px;
 }
 
 .souvenir_qr{
-    grid-area: souvenir_qr;
-    display: flex;
-    max-width: 55%;
+    /*grid-area: souvenir_qr;*/
+    /*display: flex;*/
+    max-width: 80%;
     border-radius: 5px;
 }
 
 .souvenir_image{
     grid-area: souvenir_image;
     display: flex;
-    max-width: 55%;
+    max-width: 88%;
     border-radius: 5px;
 }
 
@@ -910,4 +911,19 @@ input:checked + .slider:before {
     font-size: 1.5em;
     letter-spacing: 0.05em;
     margin-top: 70px;
+}
+
+figure{
+    display: inline-block;
+    text-align: center;
+}
+figure img {
+    vertical-align: top;
+}
+
+figure figcaption {
+    text-align: center;
+    color: white;
+    font-size: .65em;
+    margin-top: 8px;
 }
