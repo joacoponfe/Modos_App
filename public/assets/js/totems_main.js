@@ -808,7 +808,7 @@ souvenir_qr.classList.add('souvenir_qr');
 souvenir_qr.alt = "No se encontró el código QR.";
 
 var souvenir_text_0 = document.createElement('h6');
-souvenir_text_0.innerHTML = '<img class="number" src="assets/images/numbers/1_white.png">' + 'Escaneá el código QR para acceder a tu souvenir.';
+souvenir_text_0.innerHTML = '<img class="number" src="assets/images/numbers/1_white.png">' + 'Escaneá el código QR <br>para acceder a tu souvenir.';
 var souvenir_text_1 = document.createElement('h6');
 souvenir_text_1.innerHTML = '<img class="number" src="assets/images/numbers/2_white.png">' + 'Descargá la imagen en tu teléfono.';
 var souvenir_text_2 = document.createElement('h6');
@@ -925,7 +925,7 @@ sidebarButtons.forEach(button => {
             var souvenirTextContainer = document.createElement('div');
             souvenirTextContainer.classList.add('souvenir_text_container');
             if (shareButtonClicks === 1) {
-                souvenir_text_0.insertAdjacentHTML('beforeend', `<figure><img class=souvenir_qr src=${souvenir_qr.src}><figcaption>${souvenir_url}</figcaption></figure>`);
+                souvenir_text_0.insertAdjacentHTML('beforeend', `<figure><img class=souvenir_qr src=${souvenir_qr.src}><figcaption>${souvenir_url.slice(8)}</figcaption></figure>`);
             };
             //souvenir_text_0.appendChild(souvenir_qr);
             //document.getElementById('souvenir_qr_img').setAttribute('src', souvenir_qr.src);

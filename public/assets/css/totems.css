@@ -886,7 +886,7 @@ input:checked + .slider:before {
 .souvenir_qr{
     /*grid-area: souvenir_qr;*/
     /*display: flex;*/
-    max-width: 80%;
+    max-width:75%;
     border-radius: 5px;
 }
 
