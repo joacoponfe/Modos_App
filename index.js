@@ -14,20 +14,26 @@ import bodyParser from "body-parser";
 import favicon from "serve-favicon";
 import path from "path";
 import fs from "fs";
+import i18n from "i18n-express";
+import i18next from "i18next";
+import Backend from "i18next-http-backend";
+import i18nextMiddleware, { LanguageDetector } from "i18next-express-middleware";
+import enTranslations from './locales/en.json' assert { type: "json" };
+import esTranslations from './locales/es.json' assert { type: "json" };
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename(req, file, cb) {
-    const fileNameArr = file.originalname.split('.');
-    cb(null, `${Date.now()}.${fileNameArr[fileNameArr.length - 1]}`);
-  },
-});
-const upload = multer({ storage });
+// const storage = multer.diskStorage({
+//   destination(req, file, cb) {
+//     cb(null, 'uploads/');
+//   },
+//   filename(req, file, cb) {
+//     const fileNameArr = file.originalname.split('.');
+//     cb(null, `${Date.now()}.${fileNameArr[fileNameArr.length - 1]}`);
+//   },
+// });
+// const upload = multer({ storage });
 
 
 import express from "express";
@@ -63,10 +69,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
   });
 
+// app.use(express.static('uploads'));
 
-app.use(express.static('uploads'));
-
-app.post('/record', upload.single('audio'), (req, res) => res.json({ success: true }));
+// app.post('/record', upload.single('audio'), (req, res) => res.json({ success: true }));
 
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
@@ -83,6 +88,47 @@ app.use(function(req, res, next){
   res.status(404).sendFile(path.join(__dirname, 'public/404_page.html'));
 });
 
+
+// // Initialize i18next and add middleware
+// i18next
+//   .init({
+//     lang: 'es',
+//     resources: {
+//       en: {
+//         translation: enTranslations,
+//       },
+//       es: {
+//         translation: esTranslations,
+//       },
+//     },
+//   });
+
+// app.use(i18nextMiddleware.handle(i18next));
+
+// // Middleware to inject the `t` function into res.locals
+// app.use((req, res, next) => {
+//   res.locals.t = req.t;
+//   next();
+// });
+
+// // Set EJS as the template engine
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+
+// app.get('/', (req, res) => {
+//   res.render('index');
+// });
+
+
+// // LANGUAGE SWITCHING
+// app.get('/change-language/:lng', (req, res) => {
+//   const { lng } = req.params;
+//   req.i18n.changeLanguage(lng);
+//   res.redirect('/');
+// });
+
+
+
 // app.listen(port, () => {
 //   console.log(`App listening at http://localhost:${port}`);
 // });
@@ -93,14 +139,3 @@ app.listen(3000, '0.0.0.0', function() {
 
 //module.exports = app;
 export {app};
-
-// // include and initialize the rollbar library with your access token
-// var Rollbar = require('rollbar')
-// var rollbar = new Rollbar({
-//   accessToken: '26d5a5b7fc81436d8d00d2615067e63a',
-//   captureUncaught: true,
-//   captureUnhandledRejections: true,
-// })
-
-// // record a generic message and send it to Rollbar
-// rollbar.log('Hello world!')
