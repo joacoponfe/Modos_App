@@ -917,6 +917,17 @@ sidebarButtons.forEach(button => {
             
             souvenir_image.src = 'data:image/png;base64,'.concat(encoded_image);
             souvenir_qr.src = 'data:image/png;base64,'.concat(encoded_qr);
+
+            const phone_frame = document.createElement('div');
+            phone_frame.classList.add('phone_frame');
+            const phone_frame_img = document.createElement('img');
+            phone_frame_img.src = 'assets/images/phone-frame.png';
+            phone_frame.appendChild(phone_frame_img);
+            const screen_content = document.createElement('div');
+            screen_content.classList.add('screen_content');
+            screen_content.appendChild(souvenir_image);
+            phone_frame.appendChild(screen_content);
+
             
             // document.getElementById('container').appendChild(souvenir_image);
             // document.getElementById('container').appendChild(souvenir_qr);
@@ -932,7 +943,8 @@ sidebarButtons.forEach(button => {
             souvenirTextContainer.appendChild(souvenir_text_0);
             //souvenirTextContainer.appendChild(souvenir_qr);
             souvenirTextContainer.appendChild(souvenir_text_1);
-            souvenirTextContainer.appendChild(souvenir_image);
+            //souvenirTextContainer.appendChild(souvenir_image);
+            souvenirTextContainer.appendChild(phone_frame);
             souvenirTextContainer.appendChild(souvenir_text_2);
             document.getElementById('container').appendChild(souvenirTextContainer);
             
