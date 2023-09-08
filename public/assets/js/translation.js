@@ -1,44 +1,36 @@
-const i18next = require('i18next');
-const Backend = require('i18next-http-backend');
-//import i18next from '/i18next';
-// Initialize i18next
+import { language } from "./config.js";
+import esTranslations from '../locales/es.json' assert { type: "json" };
+import enTranslations from '../locales/en.json' assert { type: "json" };
 
-i18next
-  .use(Backend)
-  .init({
-    lng: 'es', // Default language
-    backend: {
-      loadPath: 'locales/{{lng}}.json', // Path to translation files
-    },
-  })
-  .then(() => {
-    // Translation resources are loaded and i18next is ready
+// Set dictionary for translation
+const translations = {
+  es: esTranslations,
+  en: enTranslations,
+};
 
-    // Function to change the language
-    function changeLanguage(lang) {
-      i18next.changeLanguage(lang, (err, t) => {
-        if (err) return console.error('Error loading translation:', err);
-        // Call a function to update the UI with the new language
-        updateUIWithTranslation();
-      });
+// Get all elements with an ID attribute
+const elementsWithId = document.querySelectorAll("[id]");
+// elementsWithId is a NodeList, you can convert it to an array if needed
+const elementsArray = Array.from(elementsWithId);
+
+// Loop through the elements and set the text content acccording to the translation in JSON file
+elementsArray.forEach(element => {
+  console.log("Element ID:", element.id);
+  // Check if the element has a translation in the JSON file
+  if (translations[language][page_id][element.id] === undefined) {
+    console.log("No translation found for element ID:", element.id);
+    return;
+  } else {
+    // If element is of input type, change its value
+    if (element.tagName === "INPUT") {
+      element.value = translations[language][page_id][element.id];
+    } else if (element.tagName === "OPTION") {
+      element.textContent = translations[language][page_id][element.id];
+    } else if (element.tagName === "BUTTON") {
+      element.textContent = translations[language][page_id][element.id];
+    } else {
+      // If element is of any other type, change its text content
+      element.textContent = translations[language][page_id][element.id];
     }
-
-    // Function to update the UI with translations
-    function updateUIWithTranslation() {
-      document.getElementById('nextButton').textContent = i18next.t('index:start');
-    //   document.getElementById('description').textContent = i18next.t('home:description');
-      // Add more UI elements as needed
-    }
-
-    // Event listener for language selection (e.g., a dropdown)
-    document.getElementById('language-dropdown').addEventListener('change', (event) => {
-      const selectedLanguage = event.target.value;
-      changeLanguage(selectedLanguage);
-    });
-
-    // Initial UI update with translations
-    updateUIWithTranslation();
-  })
-  .catch((err) => {
-    console.error('Error initializing i18next:', err);
-  });
+  } 
+});

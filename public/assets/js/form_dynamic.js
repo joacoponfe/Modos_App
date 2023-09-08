@@ -5,7 +5,7 @@ import { url } from "./config.js";
 document.addEventListener("DOMContentLoaded", function() {
     // Get references to all the questions
     const questions = document.querySelectorAll(".question");
-    const nextButton = document.getElementById("nextButton");
+    const nextButton = document.getElementById("next");
     const form = document.getElementById("form");
     let currentQuestionIndex = 0;
 

@@ -3,7 +3,7 @@ import { setCookie } from "./cookies.js";
 
 const audio = document.getElementById("audio");
 const playPause = document.getElementById("play-pause");
-const volume = document.getElementById("volume");
+const volume = document.getElementById("volume_slider");
 
 audio.src = "music/calibrate2.mp3";
 
@@ -22,7 +22,7 @@ volume.addEventListener("input", (e) => {
     audio.volume = e.target.value;
 });
 
-document.getElementById("nextButton").onclick = function () {
+document.getElementById("next").onclick = function () {
     // Save volume setting
     const userVolume = audio.volume;
     setCookie("userVolume", userVolume);

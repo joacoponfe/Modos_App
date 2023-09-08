@@ -7,6 +7,6 @@ setCookie("id_participant", new_ID);
 
 document.getElementById("newID").innerHTML = new_ID;
 
-document.getElementById("nextButton").onclick = function () {
+document.getElementById("next").onclick = function () {
     location.href = "form_dynamic.html?" + getCookie("id_participant");
 };

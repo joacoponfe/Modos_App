@@ -4,27 +4,29 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consentimiento</title>
+  <title id="title">Consentimiento</title>
   <link href="/css/style.css" rel="stylesheet" />
 </head>
 <body class="container">
   <div class="centered-element">
-    <h1 class="text-center">Leé con atención</h1><br>
-    <p style="text-align:justify; font-size:1.25em; max-width:700px; margin-left:auto; margin-right:auto"><span>Te pediremos que escuches melodías y
-      escribas tus pensamientos.</span><br><br>Tu información y los textos podrán utilizarse exclusivamente con fines de
-      investigación de forma anónima y confidencial, sin ningún fin de lucro. Los resultados podrán publicarse en revistas
-      científicas y otros medios conforme a las prácticas estándar del campo.<br><br></p>
+    <h1 class="text-center" id="read_carefully">Leé con atención</h1><br>
+    <p style="text-align:justify; font-size:1.25em; max-width:700px; margin-left:auto; margin-right:auto"><span id="consent_explanation_1">Te pediremos que escuches melodías y
+      escribas tus pensamientos.</span><br><br><p style="text-align:justify; font-size:1.25em; max-width:700px; margin-left:auto; margin-right:auto" id="consent_explanation_2">
+      Tu información y los textos podrán utilizarse exclusivamente con fines de investigación de forma anónima y confidencial, sin ningún fin de lucro. Los resultados podrán publicarse en revistas
+      científicas y otros medios conforme a las prácticas estándar del campo.</p><br><br></p>
     <form id="form" autocomplete="off" style="max-width:700px; margin-left:auto; margin-right:auto">
-      <label class="checkbox-container">Doy mi consentimiento para que mis datos se recopilen <br> y utilicen bajo estas condiciones.
+      <label class="checkbox-container"><span id="consent_agreement" style="font-weight: 100">Doy mi consentimiento para que mis datos se recopilen <br> y utilicen bajo estas condiciones.</span>
         <input type="checkbox" id="consent" name="consent" required>
         <span class="checkmark"></span>
       </label>
-      <br><br><input type="submit" id="sendButton" value="Siguiente">
+      <br><br><input type="submit" id="next" value="Siguiente">Siguiente
     </form>
     </div>
   </div>
 <script src="/js/start_consent.js" type="module"></script>
 <script src="/js/jsonFormat.js"></script>
 <script src="/js/cookies.js" type="module"></script>
+<script src="/js/translation.js" type="module"></script>
+<script>page_id="start_consent"; type="module"</script>
 </body>
 </html>

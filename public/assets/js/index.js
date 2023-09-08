@@ -1,5 +1,3 @@
-const nextButton = document.getElementById("nextButton");
-
-document.getElementById("nextButton").onclick = function () {
+document.getElementById("start").onclick = function () {
     location.href = "start_consent.html";
 };

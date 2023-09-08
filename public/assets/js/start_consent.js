@@ -5,7 +5,7 @@ import { url } from "./config.js";
 const form = document.getElementById("form");
 
 
-document.getElementById("sendButton").onclick = function () {
+document.getElementById("next").onclick = function () {
     if (document.getElementById("consent").checked) {
         //alert("checked");
     } else {

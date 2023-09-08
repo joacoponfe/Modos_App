@@ -4,23 +4,25 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicio</title>
+  <title id="title">Inicio</title>
   <link href="/css/style.css" rel="stylesheet" />
 </head>
 <body class="container">
   <div class="centered-element">
-    <h1 class="text-center">Ingreso</h1><br>
-    <h2 class="text-center" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">Escribí tus iniciales <br> y los últimos tres números de tu DNI</h2>
+    <h1 id="header" class="text-center">Ingreso</h1><br>
+    <h2 id="enter_ID" class="text-center" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">Escribí tus iniciales <br> y los últimos tres números de tu DNI</h2>
     <br>
       <form id="form" autocomplete="off" style="max-width:700px; margin-left:auto; margin-right:auto">
         <input type="text" name="initials" id="initials_input" placeholder = "AAA" style="width: 200px; height:125px" minlength="2" maxlength="3" oninput="this.value = this.value.replace(/[^aA-zZ]/g, '').toUpperCase();" pattern=".{2,3}" title="Ingresar 2 o 3 letras" required/>
         <input type="text" name="DNI" id="DNI_input" placeholder = "000" style="width: 200px; height:125px" minlength="3" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern=".{3,4}" title="Ingresar 3 números" required/>
-        <br><br><br><input type="submit" id="sendButton" value="Siguiente">
+        <br><br><br><input type="submit" id="next" value="Siguiente">
       </form>
     <!-- </div> -->
   </div>
 <script src="/js/start.js" type="module"></script>
 <script src="/js/jsonFormat.js"></script>
 <script src="/js/cookies.js" type="module"></script>
+<script src="/js/translation.js" type="module"></script>
+<script>page_id="start_dni"; type="module"</script>
 </body>
 </html>

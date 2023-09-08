@@ -24,28 +24,35 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// const storage = multer.diskStorage({
-//   destination(req, file, cb) {
-//     cb(null, 'uploads/');
-//   },
-//   filename(req, file, cb) {
-//     const fileNameArr = file.originalname.split('.');
-//     cb(null, `${Date.now()}.${fileNameArr[fileNameArr.length - 1]}`);
-//   },
-// });
-// const upload = multer({ storage });
-
-
 import express from "express";
 const port = process.env.PORT || 3000;
 
 const app = express();
+
+// View engine setup
+// Set EJS as the template engine
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+
+// app.use(session({
+//   secret: 'secret',
+//   saveUnitialized: true,
+//   resave: true
+// }));
+
+// app.use(i18n({
+//   translationsPath: path.join(__dirname, 'i18n'),
+//   siteLangs: ["es", "en"],
+//   textsVarName: 'translation'
+// }));
+
+// app.use('/', indexRoutes);
+
 // parse requests of content-type - application/json
 app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 app.use(express.static('public/assets'));
 
@@ -57,7 +64,6 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {
 app.use(logger('combined', { stream: accessLogStream }));
 export {accessLogStream};
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use('/api/nlp', nlpRouter);
@@ -69,12 +75,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
   });
 
-// app.use(express.static('uploads'));
-
-// app.post('/record', upload.single('audio'), (req, res) => res.json({ success: true }));
 
 app.use(express.static("public"));
-app.use(express.json({ limit: "1mb" }));
+// app.use(express.json({ limit: "1mb" }));
 
 app.post("/api", (request, response) => {
   console.log("I got a request!");
@@ -91,6 +94,7 @@ app.use(function(req, res, next){
 
 // // Initialize i18next and add middleware
 // i18next
+//   .use(Backend)
 //   .init({
 //     lang: 'es',
 //     resources: {
@@ -111,11 +115,8 @@ app.use(function(req, res, next){
 //   next();
 // });
 
-// // Set EJS as the template engine
-// app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, 'views'));
 
-// app.get('/', (req, res) => {
+// app.get('/index', (req, res) => {
 //   res.render('index');
 // });
 
@@ -126,7 +127,6 @@ app.use(function(req, res, next){
 //   req.i18n.changeLanguage(lng);
 //   res.redirect('/');
 // });
-
 
 
 // app.listen(port, () => {
