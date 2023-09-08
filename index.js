@@ -18,8 +18,6 @@ import i18n from "i18n-express";
 import i18next from "i18next";
 import Backend from "i18next-http-backend";
 import i18nextMiddleware, { LanguageDetector } from "i18next-express-middleware";
-import enTranslations from './locales/en.json' assert { type: "json" };
-import esTranslations from './locales/es.json' assert { type: "json" };
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
