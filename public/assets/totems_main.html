@@ -19,7 +19,7 @@
         <div class="section">
             <div class="container" id="container">
                 <div class="centered-text">
-                    <p class="intro-text" id="intro-text">Presioná uno de los botones de la izquierda<br>para visualizar el contenido</p>
+                    <p class="intro-text" id="click">Presioná uno de los botones de la izquierda<br>para visualizar el contenido</p>
                 </div>
             </div>
         </div>
@@ -49,49 +49,49 @@
                 <li>
                     <a href="#" id="wordcloud" class="" data-content="wordcloud">
                         <span class="icon"><i class="fa fa-cloud"></i></span>
-                        <span class="item">Conceptos</span>
+                        <span class="item" id="concepts">Conceptos</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="thermometer" class="" data-content="thermometer">
                         <span class="icon"><i class="fa fa-thermometer-three-quarters"></i></span>
-                        <span class="item">Emociones</span>
+                        <span class="item" id="emotions">Emociones</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="images" class="" data-content="images">
                         <span class="icon"><i class="fas fa-image"></i></span>
-                        <span class="item">Imagen</span>
+                        <span class="item" id="image">Imagen</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="you-and-others" class="" data-content="you-and-others">
                         <span class="icon"><i class="fas fa-users"></i></span>
-                        <span class="item">Singularidad</span>
+                        <span class="item" id="singularity">Singularidad</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="music" class="" data-content="music">
                         <span class="icon"><i class="fa fa-music"></i></span>
-                        <span class="item">Acerca del modo</span>
+                        <span class="item" id="about_the_mode">Acerca del modo</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="songs" class="" data-content="songs">
                         <span class="icon"><i class="fa fa-play-circle"></i></span>
-                        <span class="item">Canciones</span>
+                        <span class="item" id="songs_text">Canciones</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="share" class="" data-content="share">
                         <span class="icon"><i class="fa fa-paper-plane"></i></span>
-                        <span class="item">Compartir</span>
+                        <span class="item" id="share_text">Compartir</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" id="exit" class="" data-content="exit">
                         <span class="icon"><i class="fa fa-times-circle"></i></span>
-                        <span class="item">Salir</span>
+                        <span class="item" id="exit_text">Salir</span>
                     </a>
                 </li>
             </ul>
@@ -153,5 +153,7 @@
 <script src="/js/totems_main.js" type="module"></script>
 <script src="/js/cookies.js" type="module"></script>
 <script src="https://prod.flat-cdn.com/embed-js/v1.5.0/embed.min.js" type="module"></script>
+<script src="/js/translation.js" type="module"></script>
+<script>page_id="totems_main"; type="module"</script>
 </body>
 </html>

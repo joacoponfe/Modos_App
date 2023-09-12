@@ -1,5 +1,5 @@
 const nextButton = document.getElementById("nextButton");
 
-document.getElementById("nextButton").onclick = function () {
+document.getElementById("next").onclick = function () {
     location.href = "listen2.html";
 };

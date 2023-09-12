@@ -48,6 +48,6 @@ function checkID(id_participant, id_exists) {
         window.location.href = "totems_main.html?" + getCookie('id_participant');
     } else {
         //window.location.href = "totems_main.html?" + getCookie('id_participant')
-        alert('Parece que este ID no existe.');
+        alert('Parece que este ID no existe.'); // TODO translate
     }
   }

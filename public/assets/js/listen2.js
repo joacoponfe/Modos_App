@@ -1,5 +1,14 @@
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
+import { language } from "./config.js";
+import esTranslations from '../locales/es.json' assert { type: "json" };
+import enTranslations from '../locales/en.json' assert { type: "json" };
+
+// Set dictionary for translation
+const translations = {
+  es: esTranslations,
+  en: enTranslations,
+};
 
 const id_melody_set = getCookie('id_melody_set');
 const iteration = getCookie('iteration');
@@ -28,12 +37,12 @@ var timeleft = 3;
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
-    document.getElementById("countdown").innerHTML = "Reproduciendo...";
+    document.getElementById("countdown").innerHTML = translations[language]['listen']['playing'];
     // play audio
     sound.load()
     sound.play()
   } else {
-    document.getElementById("countdown").innerHTML = "La melodía comienza en " + timeleft + " segundos";
+    document.getElementById("countdown").innerHTML = translations[language]['listen']['dynamic_1'] + timeleft + translations[language]['listen']['dynamic_2'];
   }
   timeleft -= 1;
 }, 1000);

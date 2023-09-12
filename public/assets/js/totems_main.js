@@ -259,8 +259,8 @@ console.log(userData);
 
 // If no data is found, change intro-text
 if (userData['id_melody'].length === 0){
-    const intro_text = document.getElementById("intro-text");
-    intro_text.innerHTML = "No registramos suficientes palabras en tu texto <br> para hacer el análisis <br><br> Te invitamos a participar de nuevo";
+    const intro_text = document.getElementById("click");
+    intro_text.innerHTML = "No registramos suficientes palabras en tu texto <br> para hacer el análisis <br><br> Te invitamos a participar de nuevo"; // TODO transalte
     // Display text "Esta página se cerrará dentro de X segundos"
     var timer = document.createElement("div");
     timer.id = "timer";

@@ -2,18 +2,18 @@ import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
 import { url } from "./config.js";
 
-document.getElementById("nextButton").onclick = function () {
+document.getElementById("start").onclick = function () {
     location.href = "listen.html";
 };
 
 const elements = document.querySelectorAll(".centered-element-30");
-const nextButton = document.getElementById("nextButton"); 
-nextButton.style.display = "none";
+const start = document.getElementById("start"); 
+start.style.display = "none";
 let currentIndex = 0;
 
-function showNextButton() {
-    nextButton.classList.add("fade-in");
-    nextButton.style.display = "block";
+function showstart() {
+    start.classList.add("fade-in");
+    start.style.display = "block";
 }
 
 // Function to show the next element and fade out the previous one
@@ -31,7 +31,7 @@ function showNextElement() {
     } else {
         // If there are no more elements, show the "Next" button
         elements[currentIndex].classList.add("fade-out");
-        showNextButton();
+        showstart();
     }
 }
 
