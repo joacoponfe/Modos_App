@@ -105,7 +105,7 @@ function saveRecording () {
       alert("La grabación fue guardada. ¡Gracias por tu colaboración!");
       //reset for next recording
       resetRecording();
-      //TODO fetch recordings
+      // fetch recordings
     })
     .catch((err) => {
       console.error(err);

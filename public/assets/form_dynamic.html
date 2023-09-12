@@ -17,50 +17,50 @@
         <input type="number" id="age" name="age" placeholder="18" style="width: 200px; height:125px" min="1" max="120" minlength="1" maxlength="3" pattern=".{1,3}" title="Ingrese su edad"/>
       </div>  
       <div class="question" id="genreQuestion">
-        <h2 class="text-center" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Cuál es tu género?</h2>
+        <h2 class="text-center" id="gender" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Cuál es tu género?</h2>
         <div class="likert">
-            <label><input id="sex" name="sex" type="radio" value="F"/><span>Femenino</span></label>
-            <label><input id="sex" name="sex" type="radio" value="M"/><span>Masculino</span></label>
-            <label><input id="sex" name="sex" type="radio" value="O"/><span>Otro</span></label>
-            <label><input id="sex" name="sex" type="radio" value="X"/><span>Prefiero no decir</span></label>
+            <label><input id="sex" name="sex" type="radio" value="F"/><span id="female">Femenino</span></label>
+            <label><input id="sex" name="sex" type="radio" value="M"/><span id="male">Masculino</span></label>
+            <label><input id="sex" name="sex" type="radio" value="O"/><span id="other">Otro</span></label>
+            <label><input id="sex" name="sex" type="radio" value="X"/><span id="rather_not_say">Prefiero no decir</span></label>
         </div>
       </div>
       <div class="question" id="educationQuestion">
-        <h2 class="text-center" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Cuál es el mayor nivel educativo <br> que alcanzaste?</h2>
+        <h2 class="text-center" id="education" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Cuál es el mayor nivel educativo <br> que alcanzaste?</h2>
         <div class="likert">
-            <label><input id="education" name="education" type="radio" value="PI"/><span>Primario incompleto</span></label>
-            <label><input id="education" name="education" type="radio" value="P"/><span>Primario completo</span></label>
-            <label><input id="education" name="education" type="radio" value="S"/><span>Secundario completo</span></label>
-            <label><input id="education" name="education" type="radio" value="T"/><span>Terciario completo</span></label>
-            <label><input id="education" name="education" type="radio" value="U"/><span>Universitario completo</span></label>
-            <label><input id="education" name="education" type="radio" value="PG"/><span>Posgrado completo</span></label>
+            <label><input id="education" name="education" type="radio" value="PI"/><span id="primary_incomplete">Primario incompleto</span></label>
+            <label><input id="education" name="education" type="radio" value="P"/><span id="primary_complete">Primario completo</span></label>
+            <label><input id="education" name="education" type="radio" value="S"/><span id="secondary_complete">Secundario completo</span></label>
+            <label><input id="education" name="education" type="radio" value="T"/><span id="terciary_complete">Terciario completo</span></label>
+            <label><input id="education" name="education" type="radio" value="U"/><span id="university_complete">Universitario completo</span></label>
+            <label><input id="education" name="education" type="radio" value="PG"/><span id="postgrad_complete">Posgrado completo</span></label>
         </div>
       </div>
       <div class="question" id="musicQuestion">
-        <h2 class="text-center" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Qué nivel de formación tenés <br> en armonía y escalas musicales?</h2>
+        <h2 class="text-center"  id="training" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Qué nivel de formación tenés <br> en armonía y escalas musicales?</h2>
         <div class="likert">
-            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="1"/><span>Nulo</span></label>
-            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="2"/><span>Bajo</span></label>
-            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="3"/><span>Medio</span></label>
-            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="4"/><span>Alto</span></label>
-            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="5"/><span>Experto</span></label>
+            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="1"/><span id="none">Nulo</span></label>
+            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="2"/><span id="low">Bajo</span></label>
+            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="3"/><span id="medium">Medio</span></label>
+            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="4"/><span id="high">Alto</span></label>
+            <label><input id="musical_knowledge" name="musical_knowledge" type="radio" value="5"/><span id="expert">Experto</span></label>
         </div>
       </div>
       <div class="question" id="instrumentQuestion">
-        <h2 class="text-center" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Tocás algún instrumento?</h2>
+        <h2 class="text-center" id="instruments" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Tocás algún instrumento?</h2>
         <div class="likert">
-          <label><input id="instrument" name="instrument" type="radio" value="no"/><span>No</span></label>
-          <label><input id="instrument" name="instrument" type="radio" value="yes"/><span>Sí</span></label>
+          <label><input id="instrument" name="instrument" type="radio" value="no"/><span id="no" >No</span></label>
+          <label><input id="instrument" name="instrument" type="radio" value="yes"/><span id="yes" >Sí</span></label>
         </div><br>
       </div>
       <div class="question" id="modesQuestion">
-        <h2 class="text-center" style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Qué tan familiar te resulta el concepto de modos en música?</h2>
+        <h2 class="text-center" id="familiarity"  style="text-align:center; max-width:700px; margin-left:auto; margin-right:auto; color:white">¿Qué tan familiar te resulta el concepto de modos en música?</h2>
         <div class="likert">
-            <label><input id="knows_modes" name="knows_modes" type="radio" value="1"/><span>Nada</span></label>
-            <label><input id="knows_modes" name="knows_modes" type="radio" value="2"/><span>Poco</span></label>
-            <label><input id="knows_modes" name="knows_modes" type="radio" value="3"/><span>Medio</span></label>
-            <label><input id="knows_modes" name="knows_modes" type="radio" value="4"/><span>Bastante</span></label>
-            <label><input id="knows_modes" name="knows_modes" type="radio" value="5"/><span>Mucho</span></label>
+          <label><input id="knows_modes" name="knows_modes" type="radio" value="1"/><span id="not_at_all" >Nada</span></label>
+          <label><input id="knows_modes" name="knows_modes" type="radio" value="2"/><span id="a_little" >Poco</span></label>
+          <label><input id="knows_modes" name="knows_modes" type="radio" value="3"/><span id="somewhat" >Medio</span></label>
+          <label><input id="knows_modes" name="knows_modes" type="radio" value="4"/><span id="fairly" >Bastante</span></label>
+          <label><input id="knows_modes" name="knows_modes" type="radio" value="5"/><span id="very" >Mucho</span></label>
         </div><br>
       </div>
       <!-- <input type="submit" id="sendButton" value="Siguiente"> -->

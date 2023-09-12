@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Error del servidor</title>
+  <title id="server_error">Error del servidor</title>
   <link href="/css/style.css" rel="stylesheet" />
 </head>
 <body class="container">
     <div class="centered-element">
-      <h1 class="text-center"> Estamos teniendo problemas con nuestros servidores</h1><br>
-      <h2 class="text-center"> Por favor, avisale a alguno de nuestros guías</h2><br><br>
+      <h1 class="text-center" id="server_trouble"> Estamos teniendo problemas con nuestros servidores</h1><br>
+      <h2 class="text-center" id="server_guide"> Por favor, avisale a alguno de nuestros guías</h2><br><br>
       <div class="text-center">
         <button class="btn-accion" id="nextButton" onclick="window.location.href='index.html'">Volver</button>
       </div>
     </div>
 </body>
+<script src="/js/translation.js" type="module"></script>
+<script>page_id="error"; type="module"</script>
 </html>

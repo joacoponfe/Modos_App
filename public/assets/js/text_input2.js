@@ -1,24 +1,33 @@
 import { getCookie } from "./cookies.js";
 import { url } from "./config.js";
+import { language } from "./config.js";
+import esTranslations from '../locales/es.json' assert { type: "json" };
+import enTranslations from '../locales/en.json' assert { type: "json" };
+
+// Set dictionary for translation
+const translations = {
+  es: esTranslations,
+  en: enTranslations,
+};
 
 console.log(getCookie("id_participant"));
 
 var text_page_load = new Date().toISOString().slice(0, 19).replace('T', ' ');
 var text_start;
 
-const sendButton = document.getElementById("sendButton");
+const send = document.getElementById("send");
 
 var timeleft = 180; // 3 minutos
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
-    document.getElementById("status").innerHTML = "Tiempo finalizado.";
-    document.getElementById('text_input').disabled = true;
+    document.getElementById("limit").innerHTML = translations[language]['text_input']['time_up'];
+    document.getElementById('imagined').disabled = true;
     // tiempito
     //window.location.href = "finalize1.html";
   } else {
     if(timeleft <= 30){
-    document.getElementById("status").innerHTML = "Quedan " + timeleft + " segundos para escribir";
+      document.getElementById("limit").innerHTML = translations[language]['text_input']['time_left_1'] + timeleft + translations[language]['text_input']['time_left_2'];
     }
   }
   timeleft -= 1;
@@ -27,7 +36,7 @@ var downloadTimer = setInterval(function(){
 const saveText = (e) => {
   e.preventDefault();
   const text_submit = new Date().toISOString().slice(0, 19).replace('T', ' ');
-  const text = document.getElementById('text_input').value;
+  const text = document.getElementById('imagined').value;
   const object = {};
   object['id_participant'] = getCookie('id_participant');
   object['id_melody'] = getCookie('id_melody');
@@ -45,7 +54,7 @@ const saveText = (e) => {
   const textJSON = JSON.stringify(object);
   console.log(textJSON);
 
-  if (text !== "Imaginé " || confirm("¿Querés enviar un texto vacío?")) {
+  if (text !== "Imaginé " || confirm(translations[language]['text_input']['empty_text'])) {
     async function query(text_data) {
       const response = await fetch(
         url + "/profiles_api/receive_text/",
@@ -75,14 +84,14 @@ const saveText = (e) => {
 var eventHandler = function(event){
   text_start = new Date().toISOString().slice(0, 19).replace('T', ' ');
   //alert(`Text start timestamp: ${text_start}`);
-  document.getElementById('text_input').removeEventListener('keypress', eventHandler);
+  document.getElementById('imagined').removeEventListener('keypress', eventHandler);
 }
 
-document.getElementById('text_input').addEventListener('keypress', eventHandler);
-document.getElementById('sendButton').addEventListener('click', saveText);
+document.getElementById('imagined').addEventListener('keypress', eventHandler);
+document.getElementById('send').addEventListener('click', saveText);
 
 // Make default text "Me imaginé..."
-document.querySelector('#text_input').addEventListener('input', function(e){
+document.querySelector('#imagined').addEventListener('input', function(e){
   var defaultText = 'Imaginé ',
       defaultTextLength = defaultText.length;
   if(this.selectionStart === this.selectionEnd && this.selectionStart < defaultTextLength) {

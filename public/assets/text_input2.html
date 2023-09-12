@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escribir</title>
+  <title id="write">Escribir</title>
   <link href="/css/style.css" rel="stylesheet" />
   <style>
     .centered-element {
@@ -20,14 +20,16 @@
 </head>
 <body class="container">
   <div class="centered-element" style="top:15%">
-    <h1 id="prompt" class="text-center">Ahora escribí todo <br> lo que pasó por tu mente</h1><br>
-    <h2 id="status" class="text-center">Tenés un máximo de tres minutos</h2>
+    <h1 id="now" class="text-center">Ahora escribí todo <br> lo que pasó por tu mente</h1><br>
+    <h2 id="limit" class="text-center">Tenés un máximo de tres minutos</h2>
     <div class="text-center">
-      <textarea id="text_input" rows="12" cols="70" wrap="hard" maxlength="800" >Imaginé </textarea> <br>
-      <button class="btn-accion" id="sendButton">Enviar</button>
+      <textarea id="imagined" rows="12" cols="70" wrap="hard" maxlength="800" >Imaginé </textarea> <br>
+      <button class="btn-accion" id="send">Enviar</button>
     </div>
   </div>
 <script src="/js/text_input2.js" type="module"></script>
 <script src="/js/cookies.js" type="module"></script>
+<script src="/js/translation.js" type="module"></script>
+<script>page_id="text_input"; type="module"</script>
 </body>
 </html>
