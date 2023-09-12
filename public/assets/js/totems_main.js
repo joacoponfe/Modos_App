@@ -1379,18 +1379,24 @@ async function setData(id_mode){
 
     image.src = 'data:image/png;base64,'.concat(encoded_image);                                             // Set image source
 
-    // Check if encoded_image is in image_list, and if so, remove it
-    if (collectiveData[id_mode]['image_list'].includes(encoded_image)){
-        var index = collectiveData[id_mode]['image_list'].indexOf(encoded_image);
+    // Create an array of encoded images from collectiveData[id_mode]['image_list']['image']
+    var collective_encoded_images = [];
+    for (var i = 0; i < collectiveData[id_mode]['image_list'].length; i++) {
+        collective_encoded_images.push(collectiveData[id_mode]['image_list'][i]['image']);
+    }
+
+    // Check if encoded_image is in image_list, and if so, remove it (so that individual image is not displayed in collective image list)
+    if (collective_encoded_images.includes(encoded_image)){
+        var index = collective_encoded_images.indexOf(encoded_image);
         if (index > -1) {
-            collectiveData[id_mode]['image_list'].splice(index, 1);
+            collective_encoded_images.splice(index, 1);
         }
     }
     
-    collective_image_1.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][0]['image']);     // Set collective image 1 source
-    collective_image_2.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][1]['image']);     // Set collective image 2 source
-    collective_image_3.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][2]['image']);     // Set collective image 3 source
-    collective_image_4.src = 'data:image/png;base64,'.concat(collectiveData[id_mode]['image_list'][3]['image']);     // Set collective image 4 source
+    collective_image_1.src = 'data:image/png;base64,'.concat(collective_encoded_images[0]);     // Set collective image 1 source
+    collective_image_2.src = 'data:image/png;base64,'.concat(collective_encoded_images[1]);     // Set collective image 2 source
+    collective_image_3.src = 'data:image/png;base64,'.concat(collective_encoded_images[2]);     // Set collective image 3 source
+    collective_image_4.src = 'data:image/png;base64,'.concat(collective_encoded_images[3]);     // Set collective image 4 source
 
     // Set embeddings
     console.log(id_melody_modes[id_mode]['id_melody_mode']);
