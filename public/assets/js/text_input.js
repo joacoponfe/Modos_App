@@ -52,7 +52,7 @@ const saveText = (e) => {
   const textJSON = JSON.stringify(object);
   console.log(textJSON);
 
-  if (text !== "Imaginé " || confirm(translations[language]['text_input']['empty_text'])) {
+  if (text !== translations[language]['text_input']['imagined'] || confirm(translations[language]['text_input']['empty_text'])) {
     async function query(text_data) {
       const response = await fetch(
         url + "/profiles_api/receive_text/",
@@ -88,11 +88,14 @@ var eventHandler = function(event){
 document.getElementById('imagined').addEventListener('keypress', eventHandler);
 document.getElementById('send').addEventListener('click', saveText);
 
-// Make default text "Me imaginé..."
+// Make default text "Me imaginé " or "I imagined "
 document.querySelector('#imagined').addEventListener('input', function(e){
-  var defaultText = 'Imaginé ',
+  var defaultText = translations[language]['text_input']['imagined'],
+  //var defaultText = 'Imaginé ',
       defaultTextLength = defaultText.length;
   if(this.selectionStart === this.selectionEnd && this.selectionStart < defaultTextLength) {
       this.value = defaultText;
   }
 });
+
+console.log(translations[language]['text_input']['imagined']);

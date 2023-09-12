@@ -13,5 +13,5 @@ const urlFront = "http://172.22.0.68:3000"; // WiFi Suipacha
 //const url = "http://168.195.52.130:8000"; // Wifi Udesa
 //const urlFront = "http://168.195.52.130:3000" // Wifi Udesa
 //const url = "http://192.168.245.58:8000"; // Ethernet C3
-const language = "es";
+const language = "en";
 export { url, urlFront, language };
