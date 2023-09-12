@@ -3,13 +3,13 @@ import { setCookie } from "./cookies.js";
 import { url } from "./config.js";
 
 const form = document.getElementById("form");
-
+const alert_conditions = document.getElementById("alert_conditions");
 
 document.getElementById("next").onclick = function () {
     if (document.getElementById("consent").checked) {
         //alert("checked");
     } else {
-        alert("Por favor, acepte los términos y condiciones para continuar.");
+        alert(alert_conditions.textContent);
 
     };
 };
