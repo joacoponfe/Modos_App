@@ -1,6 +1,15 @@
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
 import { url, urlFront } from "./config.js";
+import { language } from "./config.js";
+import esTranslations from '../locales/es.json' assert { type: "json" };
+import enTranslations from '../locales/en.json' assert { type: "json" };
+
+// Set dictionary for translation
+const translations = {
+  es: esTranslations,
+  en: enTranslations,
+};
 
 // Get cookies
 const id_participant = getCookie('id_participant');
@@ -644,8 +653,8 @@ var collectiveTagcloud;
 const vosElResto = document.createElement('div');
 const vos = document.createElement('h3');
 const elResto = document.createElement('h3');
-vos.innerHTML = 'VOS';
-elResto.innerHTML = 'EL RESTO';
+vos.innerHTML = translations[language]['totems_main']['you']
+elResto.innerHTML = translations[language]['totems_main']['the_rest']
 vosElResto.classList.add('vosElResto');
 vosElResto.appendChild(vos);
 vosElResto.appendChild(elResto);
@@ -846,7 +855,7 @@ sidebarButtons.forEach(button => {
         // Update the content in the "container" div based on the value of the "data-content" attribute
         if (content === 'music') {
             // set iframe src to sheet music URL
-            document.getElementById('container').innerHTML =  "<h2>Acerca del modo</h2><span>Transcribimos la melodía que escuchaste. Volvé a oírla y conocé más sobre este modo.<span>";
+            document.getElementById('container').innerHTML =  '<h2>' + translations[language]['about_the_mode']['title']+ '</h2><span>' + translations[language]['about_the_mode']['subtitle']+ '<span>';
             sheet_frame.setAttribute('src', 'score.html');
             sheet_frame.setAttribute("allowtransparency", "true");
             sheet_frame.style.width = "100%";
@@ -869,7 +878,7 @@ sidebarButtons.forEach(button => {
             document.getElementById('container').appendChild(textContainer);
             button.setAttribute('class', 'active');
         } else if (content === 'wordcloud') {
-            document.getElementById('container').innerHTML = '<h2>Conceptos</h2><span>Identificamos los conceptos clave de tu texto.</span>';
+            document.getElementById('container').innerHTML = '<h2>' + translations[language]['concepts']['title'] + '</h2><span>' + translations[language]['concepts']['subtitle'] + '</span>';
             document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(wordClouds);
             if (typeof tagcloud === "undefined") { // If object does not already exist
@@ -880,24 +889,24 @@ sidebarButtons.forEach(button => {
             }
             button.setAttribute('class', "active");
         } else if (content === 'thermometer') {
-            document.getElementById('container').innerHTML = '<h2>Emociones</h2><span>Medimos la intensidad de las emociones que sentiste al escuchar la melodía.</span>';
+            document.getElementById('container').innerHTML = '<h2>' + translations[language]['emotions']['title']+ '</h2><span>' + translations[language]['emotions']['subtitle']+ '</span>';
             document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(thermometers);
             container_frame.style.display = "block";
             collectiveThermometerFrame.style.display = "block";
             button.setAttribute('class', "active");
         } else if (content === 'images') {
-            document.getElementById('container').innerHTML = '<h2>Imagen</h2><span>Captamos esta imagen de tu cabeza. ¿Coincide con lo que te imaginaste?</span>';
+            document.getElementById('container').innerHTML = '<h2>' + translations[language]['image']['title']+ '</h2><span>' + translations[language]['image']['subtitle']+ '</span>';
             document.getElementById('container').appendChild(vosElResto);
             document.getElementById('container').appendChild(images_container);
             button.setAttribute('class', "active");
         } else if (content === 'you-and-others') {
-            document.getElementById('container').innerHTML = '<h2>Singularidad</h2><span>Calculamos la similitud entre tu respuesta y las del resto de las personas.</span>';
+            document.getElementById('container').innerHTML = '<h2>' + translations[language]['singularity']['title']+ '</h2><span>' + translations[language]['singularity']['subtitle']+ '</span>';
             document.getElementById('container').appendChild(embeddings_container);
             embeddings_video.play();
             button.setAttribute('class', 'active');
         } else if (content === 'songs') {
-            document.getElementById('container').innerHTML = '<h2>Canciones</h2><span>Recopilamos canciones de distintos géneros que utilizan este modo.</span>';
+            document.getElementById('container').innerHTML = '<h2>' + translations[language]['songs']['title']+ '</h2><span>' + translations[language]['songs']['subtitle']+ '</span>';
             document.getElementById('container').appendChild(playlist_frame);
             playlist_frame.style.display = "block";
             playlist_frame.onload = function() {	
@@ -908,7 +917,7 @@ sidebarButtons.forEach(button => {
         } else if (content === 'share') {
             shareButtonClicks++;
             button.setAttribute('class', "active");
-            document.getElementById('container').innerHTML = '<h2>Compartir</h2><span>Generamos un souvenir que podés compartir en tus redes sociales.</span><br>';
+            document.getElementById('container').innerHTML = '<h2>' + translations[language]['share']['title']+ '</h2><span>' + translations[language]['share']['subtitle']+ '</span><br>';
             const souvenirData = await get_souvenir(idJSON).then(response => response.json());
             console.log(souvenirData);
             const encoded_image = souvenirData['encoded_image'];
@@ -951,7 +960,7 @@ sidebarButtons.forEach(button => {
 
         } else if (content === 'exit') {
             button.setAttribute('class', "active"); 
-            document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">¿Querés salir?</p><a id="exit-yes" class="btn-exit" href="totems_landing.html">Sí</a><a id="exit-no" class="btn-exit" href="totems_main.html">No</a></div>'
+            document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">' + translations[language]['exit']['subtitle']+ '</p><a id="exit-yes" class="btn-exit" href="totems_landing.html">Sí</a><a id="exit-no" class="btn-exit" href="totems_main.html">No</a></div>'
             var countdown = document.createElement('div');
             document.getElementById('container').appendChild(countdown);
             var timeleft = 5;
@@ -960,7 +969,7 @@ sidebarButtons.forEach(button => {
                     if(timeleft <= 0 && button.getAttribute('class')==='active'){
                         window.location.href = "totems_landing.html";
                     } else {  
-                        countdown.innerHTML = '<p style="font-size:1.6em; text-align:center; margin-top:25px">Esta sesión se cerrará en ' + `${timeleft}` + ' segundos</p>'
+                        countdown.innerHTML = '<p style="font-size:1.6em; text-align:center; margin-top:25px">' + translations[language]['exit']['automatic_close_1'] + `${timeleft}` + translations[language]['exit']['automatic_close_2']+ '</p>'
                     }
                     if (button.getAttribute('class')==='active'){
                         timeleft -= 1;
