@@ -617,7 +617,7 @@ distanceTextContainer.classList.add("distanceText");
 
 var refContainer = document.createElement('div');
 refContainer.classList.add("refContainer");
-refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px; margin-right:0px" alt="Image 1"><label for="label1" style="margin-right:auto;">Vos</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:30px;" alt="Image 2"><label for="label2" style="margin-right:50px">El resto</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
+refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="width:100px; height:100px; margin-right:0px" alt="Image 1"><label for="label1" style="margin-right:auto;">'+ translations[language]['totems_main']['you'] +'</label>  <img src="assets/images/singularidad_constelacion.png" style="width:100px; height:100px; margin-right:30px;" alt="Image 2"><label for="label2" style="margin-right:50px">'+ translations[language]['totems_main']['the_rest'] +'</label> <br> <img src="assets/images/singularidad_star.png" style="width:100px; height:100px"' 
 //document.getElementById('container').appendChild(refContainer);
 
 var refBars = document.createElement('div');
@@ -1113,17 +1113,17 @@ function getVideoPath(id_melody_mode, distance){
 function getDistanceText(distance){
     // this function returns the text to be displayed in the distance section
     if (distance < 0.2){
-        return '¡Tu mente refleja la <br> conciencia musical colectiva!'
+        return translations[language]['singularity']['singularity_text_1']
     } else if (distance < 0.4){
-        return '¡Tu mente se acerca a la <br> conciencia musical colectiva!'
+        return translations[language]['singularity']['singularity_text_2']
     } else if (distance < 0.6){
-        return '¡Tu experiencia musical es, <br> a la vez, común y única!'
+        return translations[language]['singularity']['singularity_text_3']
     } else if (distance < 0.8){
-        return '¡Vivís la música <br> de manera particular!'
+        return translations[language]['singularity']['singularity_text_4']
     } else if (distance < 1.0){
-        return '¡Vivís la música de forma <br> totalmente única!'
+        return translations[language]['singularity']['singularity_text_5']
     } else {
-        return '¡Tu mente refleja la <br> conciencia musical colectiva!'
+        return translations[language]['singularity']['singularity_text_1']
     }
 
 }
@@ -1132,7 +1132,7 @@ function getModeText(id_melody_mode){
     // this function returns the text to be displayed in the mode section
     if (id_melody_mode === 'jonico'){
         //return '<ul><li>Muy empleado en la música occidental, en múltiples géneros.</li><li>Único modo griego mayor con séptima mayor y cuarta natural.</li><li>Históricamente vinculado con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.</li><li>Suele emplearse para comunicar emociones positivas.</li></ul>';
-        return ['Muy empleado en la música occidental, <br> en múltiples géneros.', 'Único modo griego mayor <br> con séptima mayor y cuarta natural.', 'Históricamente vinculado <br> con ‘dulzura’, ‘encanto’, ‘alegría’ y ‘placer’.', 'Suele emplearse <br> para comunicar emociones positivas.'];
+        return [translations[language]['mode']['ionian_text_1'], translations[language]['mode']['ionian_text_2'], translations[language]['mode']['ionian_text_3'],  translations[language]['mode']['ionian_text_4']];
     } else if (id_melody_mode === 'dorico'){
         //return '<ul><li>Muy común en el rock, el jazz, el funk y el pop.</li><li>Único modo griego menor con sexta natural.</li><li>Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.</li></ul>';
         return ['Muy común en el rock, el jazz, el funk <br> y el pop.', 'Único modo griego menor <br> con sexta natural.', 'Históricamente vinculado <br> con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.', 'Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.'];
