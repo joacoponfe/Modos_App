@@ -25,12 +25,12 @@ elementsArray.forEach(element => {
     if (element.tagName === "INPUT") {
       element.value = translations[language][page_id][element.id];
     } else if (element.tagName === "OPTION") {
-      element.textContent = translations[language][page_id][element.id];
+      element.innerHTML = translations[language][page_id][element.id];
     } else if (element.tagName === "BUTTON") {
-      element.textContent = translations[language][page_id][element.id];
+      element.innerHTML = translations[language][page_id][element.id];
     } else {
       // If element is of any other type, change its text content
-      element.textContent = translations[language][page_id][element.id];
+      element.innerHTML = translations[language][page_id][element.id];
     }
   } 
 });

@@ -622,7 +622,7 @@ refContainer.innerHTML = '<img src="assets/images/singularidad_star.png" style="
 
 var refBars = document.createElement('div');
 refBars.classList.add("refBars");
-refBars.innerHTML = '<img src="assets/images/barras_ref.png">';
+refBars.innerHTML = `<img src="assets/images/barras_ref_${language}.png">`;
 
 // Create container for embeddings, references and phrases
 const embeddings_container = document.createElement('div');

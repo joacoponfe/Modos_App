@@ -71,6 +71,10 @@ p{
   line-height: 10px;
 }
 
+p#joy, p#sadness, p#surprise, p#disgust, p#fear, p#anger, p#other{
+  margin-bottom: 5px;
+}
+
 img{  
   height: 40px;  
   width: 40px; 
