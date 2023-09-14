@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>No encontrado</title>
+  <title id="title">No encontrado</title>
   <link href="/css/style.css" rel="stylesheet" />
 </head>
 <body class="container">
     <div class="centered-element">
-      <h1 class="text-center"> Esta página no existe</h1><br>
+      <h1 class="text-center" id="does_not_exist"> Esta página no existe</h1><br>
       <div class="text-center">
-        <button class="btn-accion-free" id="nextButton" onclick="window.location.href='index.html'">Inicio de la experiencia</button>
-        <button class="btn-accion-free" id="nextButton" onclick="window.location.href='totems_landing.html'">Acceso a totems</button>
+        <button id="start_of_experience" class="btn-accion-free" id="nextButton" onclick="window.location.href='index.html'">Inicio de la experiencia</button>
+        <button id="totems_access" class="btn-accion-free" id="nextButton" onclick="window.location.href='totems_landing.html'">Acceso a totems</button>
       </div>
     </div>
+<script src="/js/translation.js" type="module"></script>
+<script>page_id="404_page"; type="module"</script>
 </body>
 </html>
