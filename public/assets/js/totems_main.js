@@ -1135,22 +1135,22 @@ function getModeText(id_melody_mode){
         return [translations[language]['mode']['ionian_text_1'], translations[language]['mode']['ionian_text_2'], translations[language]['mode']['ionian_text_3'],  translations[language]['mode']['ionian_text_4']];
     } else if (id_melody_mode === 'dorico'){
         //return '<ul><li>Muy común en el rock, el jazz, el funk y el pop.</li><li>Único modo griego menor con sexta natural.</li><li>Históricamente vinculado con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.</li></ul>';
-        return ['Muy común en el rock, el jazz, el funk <br> y el pop.', 'Único modo griego menor <br> con sexta natural.', 'Históricamente vinculado <br> con ‘seriedad’, ‘brillantez’, ‘constancia’ y ‘virtud’.', 'Muy utilizado para comunicar emociones positivas y sensaciones lúdicas.'];
+        return [translations[language]['mode']['dorian_text_1'], translations[language]['mode']['dorian_text_2'], translations[language]['mode']['dorian_text_3'],  translations[language]['mode']['dorian_text_4']];
     } else if (id_melody_mode === 'frigio'){
         //return '<ul><li>Común en el metal y algunos subgéneros del flamenco.</li><li>Único modo griego menor con segunda menor y quinta natural.</li><li>Históricamente vinculado a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’.</li><li>Muy utilizado para comunicar emociones negativas y para generar tensión.</li></ul>';
-        return ['Común en el metal <br> y algunos subgéneros del flamenco.', 'Único modo griego menor <br> con segunda menor y quinta natural.', 'Históricamente vinculado <br> a ‘dureza, ‘ira’, ‘crueldad’ y ‘lamento’.', 'Muy utilizado para comunicar emociones negativas y para generar tensión.'];
+        return [translations[language]['mode']['phrygian_text_1'], translations[language]['mode']['phrygian_text_2'], translations[language]['mode']['phrygian_text_3'],  translations[language]['mode']['phrygian_text_4']];
     } else if (id_melody_mode === 'lidio'){
         //return '<ul><li>Suele emplearse para generar climas particulares en el rock y la música de cine.</li><li>Único modo griego mayor con séptima mayor y cuarta aumentada.</li><li>Históricamente vinculado a ‘simplicidad’, ‘modestia’, ‘suavidad’ y ‘superación’.</li><li>Muy utilizado para comunicar emociones positivas y sensaciones oníricas.</li></ul>';
-        return ['Suele emplearse para generar <br> climas particulares en el rock <br> y la música de cine.', 'Único modo griego mayor <br> con séptima mayor y cuarta aumentada.', 'Históricamente vinculado <br> a ‘simplicidad’, ‘modestia’, ‘suavidad’ <br> y ‘superación’.', 'Muy utilizado para comunicar <br> emociones positivas y sensaciones oníricas.'];
+        return [translations[language]['mode']['lydian_text_1'], translations[language]['mode']['lydian_text_2'], translations[language]['mode']['lydian_text_3'],  translations[language]['mode']['lydian_text_4']];
     } else if (id_melody_mode === 'mixolidio'){
         //return '<ul><li>Común en el rock, el blues y el funk.</li><li>Único modo griego mayor con séptima menor.</li><li>Históricamente vinculado a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.</li><li>Muchos artistas lo emplean para comunicar emociones positivas.</li></ul>';
-        return ['Común en el rock, el blues y el funk.', 'Único modo griego mayor <br> con séptima menor.', 'Históricamente vinculado <br> a ‘entusiasmo’, ‘suavidad’ y ‘lujuria’.', 'Muchos artistas lo emplean <br> para comunicar emociones positivas.'];
+        return [translations[language]['mode']['mixolydian_text_1'], translations[language]['mode']['mixolydian_text_2'], translations[language]['mode']['mixolydian_text_3'],  translations[language]['mode']['mixolydian_text_4']];
     } else if (id_melody_mode === 'eolico'){
         //return '<ul><li>Común en occidente, en géneros como el rock, el pop, el jazz y la música clásica.</li><li>Único modo griego menor con segunda menor y sexta menor.</li><li>Históricamente vinculado a ‘calma’, ‘tristeza’, y ‘pesadez’ y ‘añoranza’.</li><li>Suele usarse para comunicar melancolía.</li></ul>';
-        return ['Común en occidente, en géneros <br> como el rock, el pop, el jazz <br> y la música clásica.', 'Único modo griego menor <br> con segunda menor y sexta menor.', 'Históricamente vinculado <br> a ‘calma’, ‘tristeza’, ‘pesadez’ y ‘añoranza’.', 'Suele usarse para comunicar melancolía.'];
+        return [translations[language]['mode']['aeolian_text_1'], translations[language]['mode']['aeolian_text_2'], translations[language]['mode']['aeolian_text_3'],  translations[language]['mode']['aeolian_text_4']];
     } else if (id_melody_mode === 'locrio'){
         //return '<ul><li>Es el modo menos utilizado en el mundo.</li><li>Único modo griego con segunda menor y quinta disminuida.</li><li>Históricamente vinculado a ‘miedo’, ‘peligro’ y ‘confusión’.</li><li>Armónicamente es muy inestable y suele evocar incomodidad.</li></ul>';
-        return ['Es el modo menos utilizado <br> en el mundo.', 'Único modo griego <br> con segunda menor y quinta disminuida.', 'Históricamente vinculado <br> a ‘miedo’, ‘peligro’ y ‘confusión’.', 'Armónicamente es muy inestable <br> y suele evocar incomodidad.'];
+        return [translations[language]['mode']['locrian_text_1'], translations[language]['mode']['locrian_text_2'], translations[language]['mode']['locrian_text_3'],  translations[language]['mode']['locrian_text_4']];
     } else {
         return 'hello, world!' + Math.floor(Math.random() * 100);
     }
