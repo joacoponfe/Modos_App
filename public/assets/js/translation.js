@@ -16,6 +16,7 @@ const elementsArray = Array.from(elementsWithId);
 // Loop through the elements and set the text content acccording to the translation in JSON file
 elementsArray.forEach(element => {
   console.log("Element ID:", element.id);
+  console.log("Tag Name:", element.tagName);
   // Check if the element has a translation in the JSON file
   if (translations[language][page_id][element.id] === undefined) {
     console.log("No translation found for element ID:", element.id);
@@ -28,6 +29,8 @@ elementsArray.forEach(element => {
       element.innerHTML = translations[language][page_id][element.id];
     } else if (element.tagName === "BUTTON") {
       element.innerHTML = translations[language][page_id][element.id];
+    } else if (element.tagName === "VIDEO") {
+      element.src = translations[language][page_id][element.id];
     } else {
       // If element is of any other type, change its text content
       element.innerHTML = translations[language][page_id][element.id];

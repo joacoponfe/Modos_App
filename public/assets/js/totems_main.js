@@ -355,8 +355,11 @@ for (let x in id_melody_modes_tildes){
 };
 
 // Set texts on toggle switch
-mode_1_text.innerHTML = id_melody_1_mode_tildes['id_melody_mode'];
-mode_2_text.innerHTML = id_melody_2_mode_tildes['id_melody_mode'];
+// mode_1_text.innerHTML = id_melody_1_mode_tildes['id_melody_mode'];
+// mode_2_text.innerHTML = id_melody_2_mode_tildes['id_melody_mode'];
+
+mode_1_text.innerHTML = translations[language]['totems_main'][id_melody_1_mode['id_melody_mode']];
+mode_2_text.innerHTML = translations[language]['totems_main'][id_melody_2_mode['id_melody_mode']];
 
 
 // Get playlist elements
@@ -960,7 +963,7 @@ sidebarButtons.forEach(button => {
 
         } else if (content === 'exit') {
             button.setAttribute('class', "active"); 
-            document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">' + translations[language]['exit']['subtitle']+ '</p><a id="exit-yes" class="btn-exit" href="totems_landing.html">Sí</a><a id="exit-no" class="btn-exit" href="totems_main.html">No</a></div>'
+            document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">' + translations[language]['exit']['subtitle']+ '</p><a id="exit-yes" class="btn-exit" href="totems_landing.html">' + translations[language]['checkID']['yes']+ '</a><a id="exit-no" class="btn-exit" href="totems_main.html">' + translations[language]['checkID']['no']+ '</a></div>'
             var countdown = document.createElement('div');
             document.getElementById('container').appendChild(countdown);
             var timeleft = 5;
@@ -1115,13 +1118,13 @@ function getDistanceText(distance){
     if (distance < 0.2){
         return translations[language]['singularity']['singularity_text_1']
     } else if (distance < 0.4){
-        return translations[language]['singularity']['singularity_text_2']
+        return translations[language]['singularity']['singularity_text_0_25']
     } else if (distance < 0.6){
-        return translations[language]['singularity']['singularity_text_3']
+        return translations[language]['singularity']['singularity_text_0_5']
     } else if (distance < 0.8){
-        return translations[language]['singularity']['singularity_text_4']
+        return translations[language]['singularity']['singularity_text_0_75']
     } else if (distance < 1.0){
-        return translations[language]['singularity']['singularity_text_5']
+        return translations[language]['singularity']['singularity_text_1']
     } else {
         return translations[language]['singularity']['singularity_text_1']
     }
