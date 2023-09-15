@@ -1,4 +1,13 @@
 import { url } from "./config.js";
+import { language } from "./config.js";
+import esTranslations from '../locales/es.json' assert { type: "json" };
+import enTranslations from '../locales/en.json' assert { type: "json" };
+
+// Set dictionary for translation
+const translations = {
+    es: esTranslations,
+    en: enTranslations,
+  };
 
 // Create request object
 const object = {'id_melody_mode':id_melody_mode};
@@ -72,7 +81,8 @@ async function updateData() {
         // Create the text element
         var text = document.createElement("p");
         text.classList.add("img-caption");
-        text.textContent = "Generado por la mente de " + imageUrls[i]['user'];
+        //text.textContent = "Generado por la mente de " + imageUrls[i]['user'];
+        text.textContent = translations[language]['view_mosaic']['generated_by'] + imageUrls[i]['user'];
 
         // Append the image and text to the tile container
         tileContainer.appendChild(image);

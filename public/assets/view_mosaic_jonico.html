@@ -9,7 +9,7 @@
     <link href="/css/view.css" rel="stylesheet" />
     <script src="/js/view_mosaic.js" type="module"></script>
     <script>id_melody_mode="jonico"; type="module"</script>
-    <title>Mosaico jónico</title>
+    <title id="title_ionian">Mosaico jónico</title>
 </head>
 <body>
     <div class="video-container">
@@ -20,7 +20,7 @@
         <div class="container">
             <div class="watermark_and_mode">
                 <video class="watermark" src="assets/videos/MDM_watermark.webm" muted autoplay loop playsinline disablePictureInPicture></video>
-                <h1 class="text-center">Modo jónico</h1>
+                <h1 class="text-center" id="ionian_mode">Modo jónico</h1>
             </div>
             <span class="participants-counter">
                 <i class="fas fa-users"></i>
@@ -29,6 +29,7 @@
         </div>
         <div id="imageMosaic" class="mosaic-grid"></div>
     </div>
-    
+<script src="/js/translation.js" type="module"></script>
+<script>page_id="view"; type="module"</script>
 </body>
 </html>
