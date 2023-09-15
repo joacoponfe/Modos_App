@@ -817,11 +817,11 @@ souvenir_qr.classList.add('souvenir_qr');
 souvenir_qr.alt = "No se encontró el código QR.";
 
 var souvenir_text_0 = document.createElement('h6');
-souvenir_text_0.innerHTML = '<img class="number" src="assets/images/numbers/1_white.png">' + 'Escaneá el código QR <br>para acceder a tu souvenir.';
+souvenir_text_0.innerHTML = '<img class="number" src="assets/images/numbers/1_white.png">' + translations[language]['share']['scan'];
 var souvenir_text_1 = document.createElement('h6');
-souvenir_text_1.innerHTML = '<img class="number" src="assets/images/numbers/2_white.png">' + 'Descargá la imagen en tu teléfono.';
+souvenir_text_1.innerHTML = '<img class="number" src="assets/images/numbers/2_white.png">' + translations[language]['share']['download'];
 var souvenir_text_2 = document.createElement('h6');
-souvenir_text_2.innerHTML = '<img class="number" src="assets/images/numbers/3_white.png">' + 'Compartí tu souvenir en redes sociales.';
+souvenir_text_2.innerHTML = '<img class="number" src="assets/images/numbers/3_white.png">' + translations[language]['share']['social'];
 
 // Create playlist element
 var playlist_frame;
