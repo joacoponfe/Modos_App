@@ -1,9 +1,17 @@
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
 import { url, urlFront } from "./config.js";
-import { language } from "./config.js";
+import { language, songs_version } from "./config.js";
 import esTranslations from '../locales/es.json' assert { type: "json" };
 import enTranslations from '../locales/en.json' assert { type: "json" };
+
+
+// Get a reference to the <link> element
+const stylesheetLink = document.getElementById('totems-stylesheet');
+if (songs_version == 'on') {
+    // Update the href attribute to change the stylesheet
+    stylesheetLink.href = "/css/totems_songs.css"
+}
 
 // Set dictionary for translation
 const translations = {
@@ -230,7 +238,8 @@ function setThermometerValues(iframeDoc, alegria, tristeza, sorpresa, asco, mied
 };
 
 // Pull info from database from user's last iteration (last two modes they listened to)
-const object = {'id_participant': id_participant};
+const object = {'id_participant': id_participant, 'songs_version': songs_version};
+//const object = {'id_participant': id_participant};
 const idJSON = JSON.stringify(object);
 console.log(idJSON);
 
@@ -321,8 +330,12 @@ id_string.innerHTML = id_participant;
 
 // Get melody mode strings and update texts in html page
 const id_melodies = userData['id_melody'];
-const id_melody_1_JSON = JSON.stringify({"id_melody": id_melodies[0]});
-const id_melody_2_JSON = JSON.stringify({"id_melody": id_melodies[1]});
+var id_melody_1_JSON = JSON.stringify({"id_melody": id_melodies[0]});
+var id_melody_2_JSON = JSON.stringify({"id_melody": id_melodies[1]});
+if (songs_version == 'on'){
+    id_melody_1_JSON = JSON.stringify({'id_melody': 'm1'});
+    id_melody_2_JSON = JSON.stringify({'id_melody': 'f1'});
+}
 const response1 = await get_melody_mode(id_melody_1_JSON);
 const response2 = await get_melody_mode(id_melody_2_JSON);
 const id_melody_1_mode = await response1.json();
@@ -360,6 +373,10 @@ for (let x in id_melody_modes_tildes){
 
 mode_1_text.innerHTML = translations[language]['totems_main'][id_melody_1_mode['id_melody_mode']];
 mode_2_text.innerHTML = translations[language]['totems_main'][id_melody_2_mode['id_melody_mode']];
+if (songs_version == 'on'){
+    mode_1_text.innerHTML = 'Summer Song';
+    mode_2_text.innerHTML = 'War';
+};
 
 
 // Get playlist elements
@@ -707,7 +724,7 @@ flip_card_back.appendChild(back_image);
 // Create image element
 const image = document.createElement('img');
 image.classList.add('image');
-image.style.width = "625px";
+image.style.width = "605px";
 image.style.borderRadius = "10px";
 image.alt = "No se encontró la imagen.";
 flip_card_front.appendChild(image);
@@ -1005,12 +1022,13 @@ document.getElementById('metadata-section').addEventListener('click', event => {
 
 // Set data according to selected mode
 setData(0); // Defaults to first mode
-// Autoplay audio
-audio.autoplay = true;
 
 let modeSongsData = [];
 let currentSong = 0;
-audio.src = playlist.children[currentSong].getAttribute("data-src");
+// audio.src = playlist.children[currentSong].getAttribute("data-src");
+// console.log(audio.src);
+// //Autoplay audio
+// audio.autoplay = true;
 
 async function getModeSongsData(userData, id_mode){
     // Get playlist songs for selected mode and their metadata
@@ -1488,6 +1506,13 @@ async function setData(id_mode){
     
     // Initialization parameters
     currentSong = 0;
+    if (songs_version == 'on'){
+        currentSong = 3;
+    }
     setMetadata(currentSong);
     setAudioFiles(id_melody_modes[id_mode]['id_melody_mode']);
+    audio.src = playlist.children[currentSong].getAttribute("data-src");
+    console.log(audio.src); 
+    //Autoplay audio
+    audio.autoplay = true;
 }; 

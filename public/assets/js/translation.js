@@ -15,11 +15,11 @@ const elementsArray = Array.from(elementsWithId);
 
 // Loop through the elements and set the text content acccording to the translation in JSON file
 elementsArray.forEach(element => {
-  console.log("Element ID:", element.id);
-  console.log("Tag Name:", element.tagName);
+  // console.log("Element ID:", element.id);
+  // console.log("Tag Name:", element.tagName);
   // Check if the element has a translation in the JSON file
   if (translations[language][page_id][element.id] === undefined) {
-    console.log("No translation found for element ID:", element.id);
+    // console.log("No translation found for element ID:", element.id);
     return;
   } else {
     // If element is of input type, change its value

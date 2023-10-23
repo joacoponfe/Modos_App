@@ -1,6 +1,6 @@
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
-import { language } from "./config.js";
+import { language, songs_version } from "./config.js";
 import esTranslations from '../locales/es.json' assert { type: "json" };
 import enTranslations from '../locales/en.json' assert { type: "json" };
 
@@ -25,6 +25,11 @@ fetch('melody_set.csv')
     const id_melody = data[row_number][column_name];
     setCookie('id_melody', id_melody);
     sound.src = "music/".concat(id_melody,".mp3");
+    if(songs_version == 'on'){
+      const id_melody = 'm1';
+      setCookie('id_melody', id_melody);
+      sound.src = 'music/m_metalint.wav';
+    };
     console.log(sound.src);
   });
 
@@ -32,6 +37,8 @@ const sound = document.createElement('audio');
 sound.id       = 'audio-player';
 sound.type     = 'audio/mpeg';
 sound.volume   = getCookie("userVolume");
+
+
 
 var timeleft = 3;
 var downloadTimer = setInterval(function(){
