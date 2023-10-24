@@ -14,6 +14,7 @@ import bodyParser from "body-parser";
 import favicon from "serve-favicon";
 import path from "path";
 import fs from "fs";
+import KioskBoard from 'kioskboard';
 import i18n from "i18n-express";
 import i18next from "i18next";
 import Backend from "i18next-http-backend";
@@ -52,7 +53,13 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static assets from node_modules
+// app.use('/scripts', express.static(path.join(__dirname, '/node_modules/')));
+
+// Serve static assets from public/assets
+// app.use(express.static('node_modules'));
 app.use(express.static('public/assets'));
+
 
 // Logger
 // create a write stream (in append mode)
@@ -89,6 +96,9 @@ app.use(function(req, res, next){
   res.status(404).sendFile(path.join(__dirname, 'public/404_page.html'));
 });
 
+// KioskBoard.run('.js-kioskboard-input', {
+//   // ...init options
+// });
 
 // // Initialize i18next and add middleware
 // i18next

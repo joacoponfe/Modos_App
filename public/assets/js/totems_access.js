@@ -1,6 +1,9 @@
 import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
 import { url } from "./config.js";
+import { language, songs_version } from "./config.js";
+import esTranslations from '../locales/es.json' assert { type: "json" };
+import enTranslations from '../locales/en.json' assert { type: "json" };
 
 const form = document.getElementById("form");
 
