@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="/css/view_cycle.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/TagCloud.js"> </script>
+    <script src="/js/view_cycle.js" type="module"></script>
+    <script>id_melody_mode="jonico"; type="module"</script>
+    <title id="title_ionian">Jónico</title>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay width="1920" height="1080" loop="true" id="galaxy-background" muted>
+            <source type="video/mp4" src="videos/Galaxy-Background.mp4">
+        </video>
+    <div class="overlay">
+    <div class="container">
+        <div class="watermark_and_mode">
+            <video class="watermark" src="assets/videos/MDM_watermark.webm" muted autoplay loop playsinline disablePictureInPicture></video>
+            <h1 class="text-center" id="ionian_mode">Modo jónico</h1>
+        </div>
+        <span class="participants-counter">
+            <i class="fas fa-users"></i>
+            <span class="number" id="num">284</span> 
+        </span>
+    </div>
+    <span class="content"></span>
+    <div class="caja-padre">
+        <div class="contenedor">
+            <h2 id="emotional_thermometer">Termómetro emocional</h2>
+            <div class="emotions">
+                <div class="details">
+                    <p id="joy">Alegría</p>
+                    <span id="alegria-value">50%</span>
+                </div>
+                <div class="menu">
+                    <div id="alegria-menu"></div>
+                </div>
+            </div>
+            <div class="emotions">
+                <div class="details">
+                    <p id="sadness">Tristeza</p>
+                    <span id="tristeza-value">20%</span>
+                </div>
+                <div class="menu">
+                    <div id="tristeza-menu"></div>
+                </div>
+            </div>
+            <div class="emotions">
+                <div class="details">
+                    <p id="surprise">Sorpresa</p>
+                    <span id="sorpresa-value">10%</span>
+                </div>
+                <div class="menu">
+                    <div id="sorpresa-menu"></div>
+                </div>
+            </div>
+            <div class="emotions">
+                <div class="details">
+                    <p id="disgust">Asco</p>
+                    <span id="asco-value">20%</span>
+                </div>
+                <div class="menu">
+                    <div id="asco-menu"></div>
+                </div>
+            </div>
+            <div class="emotions">
+                <div class="details">
+                    <p id="fear">Miedo</p>
+                    <span id="miedo-value">30%</span>
+                </div>
+                <div class="menu">
+                    <div id="miedo-menu"></div>
+                </div>
+            </div>
+            <div class="emotions">
+                <div class="details">
+                    <p id="anger">Enojo</p>
+                    <span id="enojo-value">15%</span>
+                </div>
+                <div class="menu">
+                    <div id="enojo-menu"></div>
+                </div>
+            </div>
+            <!-- <div class="emotions">
+                <div class="details">
+                    <span>Otro</span>
+                    <span id="otro-value">5%</span>
+                </div>
+                <div class="menu">
+                    <div id="otro-menu"></div>
+                </div>
+            </div> -->
+            <div class="valence">
+                <div class="bar-wrap">
+                    <div class="positive">
+                        <p id="pos-value">50%</p>
+                        <p id="pos-label">Positivo</p>
+                    </div>
+                    <div class="neutral">
+                        <p id="neu-value">25%</p>
+                        <p id="neu-label">Neutro</p>
+                    </div>
+                    <div class="negative">
+                        <p id="neg-value">25%</p>
+                        <p id="neg-label">Negativo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- <script src="/js/translation.js" type="module"></script> -->
+<script>page_id="view"; type="module"</script>
+</body>
+</html>
