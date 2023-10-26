@@ -507,3 +507,59 @@ textarea {
   color: black;
 }
 
+/*QUIZ*/
+
+.trivia-question {
+  font-size: 3em;
+  margin-bottom: 30px;
+}
+
+.options {
+  font-size: 30px;
+  color:white;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  margin-bottom: 20px;
+}
+
+.options input {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.options span {
+  color: #AEC90B;
+  border-radius: 8px;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 230px;
+  padding: 10px;
+  background: transparent;
+  outline: medium solid #AEC90B;
+  transition: background .2s ease-in-out;
+  font-weight: 600;
+}
+
+.options input:checked + span {
+  outline: -webkit-focus-ring-color auto 5px;
+  background: #AEC90B;
+  color: black;
+}
+
+.options input:focus + span {
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.options span:hover {
+  background: #f1f1f1;
+  outline: lightgrey auto 5px;
+  color: black;
+}
