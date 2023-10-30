@@ -8,18 +8,21 @@
   <link href="/css/style.css" rel="stylesheet" />
 </head>
 <body class="container">
-    <div class="centered-element" style="top:18%">
+    <div id="centered-element" class="centered-element" style="top:10%">
       <!-- <h1>Trivia</h1> -->
       <h1 class="trivia-question" id="ques"></h1>
-      <h2 id="timer">Tenés 20 segundos para responder</h2>
+      <h2 id="timer" style="color:white;font-size: 1.8em;">Tenés 20 segundos para responder</h2>
       <div class="options" id="opt"></div>
       <p class="explanation" id="exp"></p>
       <!-- <button onclick="checkAns()" id="btn">SUBMIT</button> -->
-      <div id="score"></div>
+      <h1 id="score" style="display:none"></h1>
+      <!-- <h2 id="thank-you" style="color:white; display:none"> ¡Gracias por jugar! Te pedimos que esperes hasta que el guía te indique de pasar a la siguiente sala.</h2> -->
       <!-- <img src="assets/images/logo-melodias-mente.svg"> -->
       <!-- <video id="video_logo" src="assets/videos/LOGO_LOOP_32sec_Alpha_VP9_es.webm" muted autoplay loop playsinline disablePictureInPicture></video> -->
       <!-- <button class="btn-accion" id="access" onclick="location.href = 'totems_access.html'">Ingresar</button> -->
+      <h2 class="current-score" id="current-score">Puntaje:</h3>
     </div>
+    
 </body>
 <script src="/js/trivia.js" type="module"></script>
 <script src="/js/translation.js" type="module"></script>
