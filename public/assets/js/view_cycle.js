@@ -48,11 +48,11 @@ contentElement.style.opacity = 1;
 }
 // Function to update the "h1" (Titulo de la página) text
 function updateTitleText(mode) {
-    const ionianModeElement = document.getElementById('ionian_mode');
-    ionianModeElement.style.opacity = 0; // Start the fade-out effect
+    const ModeElement = document.getElementById('ionian_mode');
+    ModeElement.style.opacity = 0; // Start the fade-out effect
     setTimeout(() => {
-      ionianModeElement.textContent = `Modo ${mode}`; // Update the text
-      ionianModeElement.style.opacity = 1; // Start the fade-in effect
+      ModeElement.textContent = `Modo ${mode}`; // Update the text
+      ModeElement.style.opacity = 1; // Start the fade-in effect
     }, 700); // Adjust the duration to match your CSS transition (0.5s in this example)
   }
 
@@ -333,4 +333,4 @@ setInterval(() => {
     updateMelodyMode(); // Update id_melody_mode
     updateData().then((response) => {
     })
-  }, 5 * 1000); // 60 seconds = 1 minute
+  }, 3 * 1000); // 60 seconds = 1 minute

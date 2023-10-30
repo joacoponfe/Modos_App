@@ -21,36 +21,29 @@ function updateMelodyMode() {
 
 // Function to update the "h1" (Titulo de la página) text
 function updateTitleText(mode) {
-    const ionianModeElement = document.getElementById('dorian_mode');
-    ionianModeElement.style.opacity = 0; // Start the fade-out effect
+    const ModeElement = document.getElementById('ionian_mode');
+    ModeElement.style.opacity = 0; // Start the fade-out effect
     setTimeout(() => {
-      ionianModeElement.textContent = `Modo ${mode}`; // Update the text
-      ionianModeElement.style.opacity = 1; // Start the fade-in effect
+      ModeElement.textContent = `Modo ${mode}`; // Update the text
+      ModeElement.style.opacity = 1; // Start the fade-in effect
     }, 700); // Adjust the duration to match your CSS transition (0.5s in this example)
   }
 
   function updateNumberText(Number) {
     const num = document.getElementById('num');
-    num.style.transition = "opacity 1s"; // Add a CSS transition property
-  
-    // Start the fade-out effect
-    num.style.opacity = 0;
-  
+    num.style.opacity = 0; // Start the fade-out effect
     setTimeout(() => {
-      num.textContent = Number.toString(); // Update the text
-  
-      // Start the fade-in effect
-      num.style.opacity = 1;
-    }, 1000); // Adjust the duration to match your CSS transition (0.5s in this example)
+        num.textContent = Number.toString(); // Update the text
+        num.style.opacity = 1; // Start the fade-in effect
+    }, 700); // Adjust the duration to match your CSS transition (0.5s in this example)
   }
 
 
 
 // Function to fetch local images and display them as a mosaic
 async function updateData() {
-     // Define id_melody_mode locally
-     let id_melody_mode = modes[currentIndex];
-
+  let id_melody_mode = modes[currentIndex];
+  // Function to make a POST request to the server
     async function query(id_melody_mode) {
         const response = await fetch(
             url + "/profiles_api/mode_data/",
@@ -64,35 +57,35 @@ async function updateData() {
         return result;
     }
 
-
      // Create request object
      const object = { 'id_melody_mode': id_melody_mode };
      const requestJSON = JSON.stringify(object);
 
-     const response = await query(requestJSON);
+    const response = await query(requestJSON);
     const modeData = await response.json();
     console.log(modeData);
+    
+    // Update the title with the current mode
+    updateTitleText(id_melody_mode);
 
     // Get array of images in base64 format
     const imageUrls = modeData['image_list'];
     
     var num_participants = modeData['num_participants'];
     // Set the new value for the element
-     var newNumber = num_participants;
-     updateNumberText(newNumber);
-
-     // Update the title with the current mode
-    updateTitleText(id_melody_mode);
+    var newNumber = num_participants;
+    updateNumberText(newNumber);
 
 
-    // Clear existing image tiles
+    // // Clear existing image tiles
     var mosaicGrid = document.getElementById("imageMosaic");
-     // Apply a brief timeout before fading out the mosaic container
-    mosaicGrid.style.transition = "opacity 1s"; // Add a CSS transition property
+    mosaicGrid.style.transition = "opacity 0.35s"; // Add a CSS transition property
     mosaicGrid.style.opacity = 0;
-    mosaicGrid.innerHTML = ""; // Clear the container
 
     // Change color of text
+    // sleep for 350 miliseconds
+    await new Promise(r => setTimeout(r, 350));
+    mosaicGrid.innerHTML = ""; // Clear the container
     const rootStyles = getComputedStyle(document.documentElement);
     const main_colors = {'jonico': rootStyles.getPropertyValue('--bs-cyan'), 'dorico': rootStyles.getPropertyValue('--bs-yellow'), 'frigio': rootStyles.getPropertyValue('--bs-pink'), 'lidio': rootStyles.getPropertyValue('--bs-purple'), 'mixolidio': rootStyles.getPropertyValue('--bs-red'), 'eolico': rootStyles.getPropertyValue('--bs-orange'), 'locrio': rootStyles.getPropertyValue('--bs-mustard-green')};
     const main_colors_transparent = {'jonico': rootStyles.getPropertyValue('--bs-cyan-transparent'), 'dorico': rootStyles.getPropertyValue('--bs-yellow-transparent'), 'frigio': rootStyles.getPropertyValue('--bs-pink-transparent'), 'lidio': rootStyles.getPropertyValue('--bs-purple-transparent'), 'mixolidio': rootStyles.getPropertyValue('--bs-red-transparent'), 'eolico': rootStyles.getPropertyValue('--bs-orange-transparent'), 'locrio': rootStyles.getPropertyValue('--bs-mustard-green-transparent')};
@@ -109,7 +102,7 @@ async function updateData() {
         // Create the image element
         var image = document.createElement("img");
         //image.src = imageUrls[i];
-        image.src = 'data:image/png;base64,'.concat(imageUrls[i]['image']); 
+        image.src = 'data:image/png;base64,'.concat(imageUrls[i]['image']);
         image.alt = "Image " + (i + 1);
         image.style.borderRadius = "10px";
 
@@ -125,15 +118,12 @@ async function updateData() {
 
         // Append the tile container to the mosaic container
         mosaicGrid.appendChild(tileContainer);
-    }
-    
-     // Apply a brief timeout before fading in the mosaic container
-     setTimeout(() => {
-        // Fade in the mosaic container
-        mosaicGrid.style.opacity = 1;
-    }, 350); // Adjust the duration to match your CSS transition (0.5s in this example)
-}
-
+      } // Apply a brief timeout before fading in the mosaic container
+      setTimeout(() => {
+         // Fade in the mosaic container
+         mosaicGrid.style.opacity = 1;
+     }, 350); // Adjust the duration to match your CSS transition (0.5s in this example)
+ }
 
 // Call updateData function initially
 updateMelodyMode(); // Update the initial mode
@@ -151,4 +141,4 @@ setInterval(() => {
     console.log(id_melody_mode);
     updateData().then((response) => {
     });
-}, 5 * 1000); // 60 seconds = 1 minute
+}, 60 * 1000); // 60 seconds = 1 minute
