@@ -1,4 +1,7 @@
 // Questions that will be asked
+
+document.body.style.zoom = "67%"
+
 const Questions = [{
     q: "Al día de hoy, ¿cuál es la canción más escuchada en la plataforma musical Spotify?",
     a: [{ text: "Blinding Lights <br> (The Weeknd)", isCorrect: true },

@@ -55,9 +55,7 @@ form_dynamic,next,Siguiente,Next,
 volume,title,Calibración,Calibration,
 volume,volume,Volumen,Volume,
 volume,instructions,"Ponete los auriculares, reproducí el audio, <br> y fijá el volumen de escucha que te quede más cómodo.","Put your headphones on,<br> play the audio,<br> and set the volume to a comfortable level.",
-volume,satisfied,"Cuando estés conforme con tu nivel, presioná el botón ""Siguiente"".
-
-","Once you are satisfied, press ""Next"".",
+volume,satisfied,"Cuando estés conforme con tu nivel, <br> presioná el botón ""Siguiente"".","Once you are satisfied, press ""Next"".",
 instructions,title,Consigna,Instructions,
 instructions,instructions_1,Vas a escuchar dos melodías distintas.,You will hear two different melodies.,
 instructions,instructions_2,"Mientras escuchás, cerrá los ojos <br> e imaginá un lugar específico <br> y todos los detalles que puedas.<br><br>¿Qué lugar es? ¿Cómo es el clima? ¿Qué objetos hay? ¿Ves formas o colores? ¿Hay gente? ¿Quiénes son y qué hacen? ¿Qué sonidos y aromas percibís? ¿Cómo te sentís? Dejá correr tu imaginación.<br>No hay respuestas correctas o incorrectas.","While you listen, close your eyes <br> and imagine a specific place <br> with as much detail as you can.<br><br>What place is it? What is the weather like? What objects are present there? Do you see shapes or colors? Is there anyone around? Who are they and what are they doing? What sounds and aromas do you perceive? How do you feel? Let your imagination flow. There are no right or wrong answers.",

@@ -1,3 +1,5 @@
+document.body.style.zoom = "67%"
+
 const countdown = document.getElementById("countdown");
 
 let timeLeft = 4;
