@@ -132,7 +132,7 @@ function updateScore() {
     currentScore.textContent = `Puntaje: ${score} de ${questionCounter}`;
 }
 
-// Set a countdown timer for 20 seconds
+// Set a countdown timer for 15 seconds
 // let timeLeft = 5;
 let elem = document.getElementById('timer');
 let explanation = document.getElementById('exp');
@@ -140,7 +140,7 @@ let explanation = document.getElementById('exp');
 
 function loadQues() {
     // Reset timer
-    let timeLeft = 19;
+    let timeLeft = 14;
     let timerId = setInterval(countdown, 1000);
     
     hideExplanation();
@@ -260,12 +260,12 @@ function checkAns() {
     // Wait 10 seconds before showing the next question
     //let nextQuestionWaitTime = 20;
     //let nextQuestionTimeLeft = nextQuestionWaitTime;
-    let nextQuestionTimeLeft = 19;
+    let nextQuestionTimeLeft = 14;
     let nextQuestionTimerId = setInterval(nextQuestionCountdown, 1000);
 
     function nextQuestionCountdown() {
         if (nextQuestionTimeLeft == 0) {
-            elem.innerHTML = "Tenés 20 segundos para responder";
+            elem.innerHTML = "Tenés 15 segundos para responder";
             clearTimeout(nextQuestionTimerId);
             nextQuestion();
         } else {

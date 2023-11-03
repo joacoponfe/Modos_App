@@ -23,6 +23,13 @@ function updateMelodyMode() {
 function updateTitleText(mode) {
     const ModeElement = document.getElementById('ionian_mode');
     ModeElement.style.opacity = 0; // Start the fade-out effect
+      if (mode === "jonico"){
+        mode = "jónico";
+      }   else if (mode=== "dorico"){
+        mode = "dórico";
+      }   else if (mode === "eolico"){
+        mode = 'eólico';
+  };
     setTimeout(() => {
       ModeElement.textContent = `Modo ${mode}`; // Update the text
       ModeElement.style.opacity = 1; // Start the fade-in effect
@@ -141,4 +148,4 @@ setInterval(() => {
     console.log(id_melody_mode);
     updateData().then((response) => {
     });
-}, 60 * 1000); // 60 seconds = 1 minute
+}, 3 * 1000); // 60 seconds = 1 minute
