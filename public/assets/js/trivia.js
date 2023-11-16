@@ -1,4 +1,7 @@
 // Questions that will be asked
+
+document.body.style.zoom = "67%"
+
 const Questions = [{
     q: "Al día de hoy, ¿cuál es la canción más escuchada en la plataforma musical Spotify?",
     a: [{ text: "Blinding Lights <br> (The Weeknd)", isCorrect: true },
@@ -108,7 +111,7 @@ const Questions = [{
     e: "Apodada “Lady Ella, la Reina del jazz y la Primera dama de la canción”, Ella Fitzgerald ganó 13 premios Grammy, además de un Grammy por su trayectoria artística, entre varios otros premios y un doctorado honorario en Música en la Universidad de Harvard. Las otras opciones hacen referencia a Aretha Franklin, Charlie Parker y Louis Armstrong, otros íconos del género."
 },
 {
-    q: "¿Por lo general, cuántas teclas tiene un piano de cola?",
+    q: "¿Por lo general, cuántas teclas tiene un piano <br> de cola?",
     a: [
         {text: "36", isCorrect: false},
         {text: "88", isCorrect: true},

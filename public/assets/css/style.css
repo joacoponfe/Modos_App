@@ -160,7 +160,7 @@ span {
   flex-direction: row;
   align-items: center;
   width: 50%;
-  margin: 20px auto;
+  margin: 0px auto;
   padding: 0px;
   gap: 20px;
 }
