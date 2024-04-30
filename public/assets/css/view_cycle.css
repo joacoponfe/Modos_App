@@ -59,6 +59,10 @@ p#joy, p#sadness, p#surprise, p#disgust, p#fear, p#anger, p#other{
 
 
 .watermark{
+  display: block;
+  top: 15px;
+  left:10px;
+  z-index: 999; /* Ensure watermark is above other content */
   width:30%;
   height:30%;
 }
@@ -364,7 +368,7 @@ img{
   width: 100%;
   height: 100%;
   overflow: hidden;
-  video {
+  .video {
     /* Make video to at least 100% wide and tall */
     min-width: 100%; 
     min-height: 100%; 
