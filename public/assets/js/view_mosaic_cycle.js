@@ -148,4 +148,4 @@ setInterval(() => {
     console.log(id_melody_mode);
     updateData().then((response) => {
     });
-}, 3 * 1000); // 60 seconds = 1 minute
+}, 20 * 1000); // 60 seconds = 1 minute
