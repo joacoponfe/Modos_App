@@ -2,8 +2,8 @@ import { getCookie } from "./cookies.js";
 import { setCookie } from "./cookies.js";
 import { url, urlFront } from "./config.js";
 import { language, songs_version } from "./config.js";
-import esTranslations from '../locales/es.json' assert { type: "json" };
-import enTranslations from '../locales/en.json' assert { type: "json" };
+import esTranslations from '../locales/es.json' with { type: "json" };
+import enTranslations from '../locales/en.json' with { type: "json" };
 
 
 // Get a reference to the <link> element

@@ -1,14 +1,14 @@
 import { getCookie } from "./cookies.js";
 import { url } from "./config.js";
 import { language } from "./config.js";
-import esTranslations from '../locales/es.json' assert { type: "json" };
-import enTranslations from '../locales/en.json' assert { type: "json" };
+// import esTranslations from '../locales/es.json' assert { type: "json" };
+// import enTranslations from '../locales/en.json' assert { type: "json" };
 
-// Set dictionary for translation
-const translations = {
-  es: esTranslations,
-  en: enTranslations,
-};
+// // Set dictionary for translation
+// const translations = {
+//   es: esTranslations,
+//   en: enTranslations,
+// };
 
 var text_page_load = new Date().toISOString().slice(0, 19).replace('T', ' ');
 var text_start;
@@ -19,13 +19,13 @@ var timeleft = 180; // 3 minutos
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
-    document.getElementById("limit").innerHTML = translations[language]['text_input']['time_up'];
+    document.getElementById("limit").innerHTML = 'Tiempo finalizado.';
     document.getElementById('imagined').disabled = true;
     // tiempito
     //window.location.href = "finalize1.html";
   } else {
     if(timeleft <= 30){
-    document.getElementById("limit").innerHTML = translations[language]['text_input']['time_left_1'] + timeleft + translations[language]['text_input']['time_left_2'];
+      document.getElementById("limit").innerHTML = 'Quedan ' + timeleft + ' segundos para escribir';
     }
   }
   timeleft -= 1;
@@ -52,7 +52,7 @@ const saveText = (e) => {
   const textJSON = JSON.stringify(object);
   console.log(textJSON);
 
-  if (text !== translations[language]['text_input']['imagined'] || confirm(translations[language]['text_input']['empty_text'])) {
+  if (text !== 'Imaginé ' || confirm('¿Querés enviar un texto vacío?')) {
     async function query(text_data) {
       const response = await fetch(
         url + "/profiles_api/receive_text/",
@@ -90,7 +90,7 @@ document.getElementById('send').addEventListener('click', saveText);
 
 // Make default text "Me imaginé " or "I imagined "
 document.querySelector('#imagined').addEventListener('input', function(e){
-  var defaultText = translations[language]['text_input']['imagined'],
+  var defaultText = 'Imaginé ',
   //var defaultText = 'Imaginé ',
       defaultTextLength = defaultText.length;
   if(this.selectionStart === this.selectionEnd && this.selectionStart < defaultTextLength) {
@@ -98,4 +98,4 @@ document.querySelector('#imagined').addEventListener('input', function(e){
   }
 });
 
-console.log(translations[language]['text_input']['imagined']);
+console.log('Imaginé ');

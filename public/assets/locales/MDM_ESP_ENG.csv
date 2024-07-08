@@ -11,7 +11,9 @@ start_consent,alert_conditions,"Por favor, acepte los términos y condiciones pa
 start_consent,next,Siguiente,Next,
 start_dni,title,Ingreso,Access,
 start_dni,header,Ingreso,Access,
-start_dni,enter_ID,"Escribí tus iniciales <br> y los últimos tres números de tu DNI","Please enter your initials <br> and the last three digits of your ID",
+start_dni,enter_ID,"Escribí las iniciales de tu nombre<br> y los últimos tres números de tu DNI","Please enter your initials <br> and the last three digits of your ID",
+start_dni,example,"Por ejemplo, si tu nombre es Juan Carlos y tu DNI es 12.345.678, tu código sería JC 678.","For example, if your name is John Smith and your ID is 123.456.789, your code would be JS 789."
+start_dni,other_option,"Si preferís usar otro conjunto de letras y números, también podés hacerlo.","If you'd rather use any other combination of letters and numbers, you can also do that."
 start_dni,next,Siguiente,Next,
 checkID,title,Ingreso,Access,
 checkID,question,¿Es tu primera vez haciendo la experiencia?,Is this your first time completing this survey?,

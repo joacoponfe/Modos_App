@@ -3,7 +3,13 @@ import { setCookie } from "./cookies.js";
 import { url } from "./config.js";
 //import { winstonLogger } from "../../../index.js";
 
+const id_participant = getCookie('id_participant');
+// Pull info from database from user's last iteration (last two modes they listened to)
+const object = {'id_participant': id_participant, 'songs_version': songs_version};
+
 const form = document.getElementById("form");
+const mode_1_text = document.getElementById("mode_1_text");
+const mode_2_text = document.getElementById("mode_2_text");
 
 fetch(url + "/profiles_api/hello/", {
     method: "GET",
