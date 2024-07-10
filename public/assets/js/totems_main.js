@@ -980,14 +980,14 @@ sidebarButtons.forEach(button => {
 
         } else if (content === 'exit') {
             button.setAttribute('class', "active"); 
-            document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">' + translations[language]['exit']['subtitle']+ '</p><a id="exit-yes" class="btn-exit" href="totems_landing.html">' + translations[language]['checkID']['yes']+ '</a><a id="exit-no" class="btn-exit" href="totems_main.html">' + translations[language]['checkID']['no']+ '</a></div>'
+            document.getElementById('container').innerHTML = '<div style="margin-top:300px; text-align:center"><p style="font-size:2em; text-align:center">' + translations[language]['exit']['subtitle']+ '</p><a id="exit-yes" class="btn-exit" href="index.html">' + translations[language]['checkID']['yes']+ '</a><a id="exit-no" class="btn-exit" href="totems_main.html">' + translations[language]['checkID']['no']+ '</a></div>'
             var countdown = document.createElement('div');
             document.getElementById('container').appendChild(countdown);
             var timeleft = 5;
             if (button.getAttribute('class')==='active'){
                 setInterval(function(){
                     if(timeleft <= 0 && button.getAttribute('class')==='active'){
-                        window.location.href = "totems_landing.html";
+                        window.location.href = "index.html";
                     } else {  
                         countdown.innerHTML = '<p style="font-size:1.6em; text-align:center; margin-top:25px">' + translations[language]['exit']['automatic_close_1'] + `${timeleft}` + translations[language]['exit']['automatic_close_2']+ '</p>'
                     }
